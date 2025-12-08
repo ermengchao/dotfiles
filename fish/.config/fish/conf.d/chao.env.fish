@@ -23,6 +23,7 @@ if test (uname -s) = Linux
         set -gx http_proxy "http://127.0.0.1:6152"
         set -gx https_proxy "http://127.0.0.1:6152"
     end
+    set -gx TERM xterm-256color
     set -gx HOMEBREW_BUNDLE_FILE "$HOME/.config/brew/Brewfile_Linux"
     set -gx XDG_DATA_DIRS "/home/chao/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share"
 end
