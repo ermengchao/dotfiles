@@ -140,7 +140,7 @@ whole_word = false
 # - "gruvbox-light"
 # - "nord"
 # - "nord-light".
-theme = "nord-light"
+theme = "default"
 
 #[styles.cpu]
 #all_entry_color = "green"
