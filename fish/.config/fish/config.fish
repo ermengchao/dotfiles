@@ -10,7 +10,8 @@ if test (uname -s) = Darwin
     abbr keychain-add "/usr/bin/ssh-add --apple-use-keychain"
 
     # Abbreviation
-    alias cat "bat --theme auto:system --theme-dark default --theme-light GitHub --style='numbers,changes,header'"
+    # alias cat "bat --theme auto:system --theme-dark default --theme-light GitHub --style='numbers,changes,header'"
+    alias cat "bat --style='numbers,changes,header'"
     abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
     abbr xcode "open -a Xcode"
 
@@ -42,27 +43,27 @@ if test (uname -s) = Linux
     alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
 
     # Functions
-    function sys_color_scheme_is_dark
-        set -l condition (gsettings get org.gnome.desktop.interface color-scheme \
-          | string trim \
-          | string trim -c "'")
-
-        if test "$condition" = prefer-dark
-            return 0
-        else
-            return 1
-        end
-    end
-
-    function bat_alias_wrapper
-        if sys_color_scheme_is_dark
-            bat --theme=default $argv
-        else
-            bat --theme=GitHub $argv
-        end
-    end
-
-    alias cat="bat_alias_wrapper --style='numbers,changes,header'"
+    # function sys_color_scheme_is_dark
+    #     set -l condition (gsettings get org.gnome.desktop.interface color-scheme \
+    #       | string trim \
+    #       | string trim -c "'")
+    #
+    #     if test "$condition" = prefer-dark
+    #         return 0
+    #     else
+    #         return 1
+    #     end
+    # end
+    #
+    # function bat_alias_wrapper
+    #     if sys_color_scheme_is_dark
+    #         bat --theme=default $argv
+    #     else
+    #         bat --theme=GitHub $argv
+    #     end
+    # end
+    #
+    alias cat="bat --style='numbers,changes,header'"
 end
 
 if status is-interactive
