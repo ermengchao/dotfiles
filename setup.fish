@@ -9,12 +9,18 @@ if test (uname -s) = Darwin
 
     rm -rf $HOME/.config/codesnap
     stow -R codesnap
+
+    rm -rf $HOME/.config/git
+    stow -R git
 end
 
 if test (uname -s) = Linux
     rm -rf $HOME/.config/mihomo
     mkdir -p $HOME/.config/mihomo
     stow -R mihomo
+
+    rm -rf $HOME/.config/git
+    stow -R git@Linux
 
     sudo rm -rf /etc/nginx
     sudo /home/linuxbrew/.linuxbrew/bin/stow -R nginx -t /
@@ -52,9 +58,6 @@ stow -R fish
 
 rm -rf $HOME/.config/ghostty
 stow -R ghostty
-
-rm -rf $HOME/.config/git
-stow -R git
 
 rm -rf $HOME/.config/nvim
 stow -R nvim

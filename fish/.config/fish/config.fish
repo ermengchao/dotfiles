@@ -1,7 +1,7 @@
 if test (uname -s) = Darwin
     # Homebrew
     /opt/homebrew/bin/brew shellenv | source
-    /opt/homebrew/bin/whalebrew completion fish | source
+    # /opt/homebrew/bin/whalebrew completion fish | source
 
     # Orbstack
     source ~/.orbstack/shell/init2.fish 2>/dev/null || :
@@ -30,7 +30,7 @@ end
 if test (uname -s) = Linux
     # Homebrew
     /home/linuxbrew/.linuxbrew/bin/brew shellenv fish | source
-    /home/linuxbrew/.linuxbrew/bin/whalebrew completion fish | source
+    # /home/linuxbrew/.linuxbrew/bin/whalebrew completion fish | source
 
     # SSH-Agent
     eval "$(ssh-agent -c 2>/dev/null)" >/dev/null
