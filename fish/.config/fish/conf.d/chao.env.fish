@@ -2,6 +2,10 @@ if test (uname -s) = Darwin
     # iCloud Path
     set -gx ICLOUD "$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 
+    # Proxy
+    set -gx http_proxy "http://127.0.0.1:6152"
+    set -gx https_proxy "http://127.0.0.1:6152"
+
     # jdk Flags
     set -gx CPPFLAGS -I/opt/homebrew/opt/openjdk/include
     set -gx JAVA_HOME /opt/homebrew/opt/openjdk
@@ -13,6 +17,12 @@ if test (uname -s) = Darwin
 end
 
 if test (uname -s) = Linux
+    if string match -q "*orbstack*" (uname -r); or string match -q "*microsoft*" (uname -r)
+    else
+        # Proxy
+        set -gx http_proxy "http://127.0.0.1:6152"
+        set -gx https_proxy "http://127.0.0.1:6152"
+    end
     set -gx HOMEBREW_BUNDLE_FILE "$HOME/.config/brew/Brewfile_Linux"
     set -gx XDG_DATA_DIRS "/home/chao/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share"
 end
@@ -35,10 +45,6 @@ set -gx EXPLORER y
 
 # Pager
 set -gx PAGER less
-
-# Proxy
-set -gx http_proxy "http://127.0.0.1:6152"
-set -gx https_proxy "http://127.0.0.1:6152"
 
 # XDG Variables
 set -gx XDG_CONFIG_HOME "$HOME/.config"
