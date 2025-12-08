@@ -22,6 +22,12 @@ if test (uname -s) = Linux
     rm -rf $HOME/.config/git
     stow -R git@Linux
 
+    rm -rf $HOME/.config/tailscale
+    stow -R tailscale
+
+    rm -rf $HOME/.config/tree-sitter
+    stow -R tree-sitter
+
     sudo rm -rf /etc/nginx
     sudo /home/linuxbrew/.linuxbrew/bin/stow -R nginx -t /
 
@@ -71,8 +77,8 @@ touch $HOME/.ssh/authorized_keys
 touch $HOME/.ssh/known_hosts
 stow -R ssh
 
-rm -rf $HOME/.config/tailscale
-stow -R tailscale
+rm -rf $HOME/.config/yazi
+stow -R yazi
 
 rm -rf $HOME/.config/zellij
 stow -R zellij

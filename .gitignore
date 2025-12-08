@@ -7,3 +7,4 @@ package.json
 # Ignored files
 fish_variables
 env.fish
+lazy-lock.json
