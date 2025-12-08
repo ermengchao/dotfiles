@@ -16,15 +16,15 @@ if test (uname -s) = Darwin
 
     # Functions
     # Adapt Dynamic Terminal Theme
-    if test "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = Dark
-        osascript -e 'tell application "Terminal"
-            set current settings of tabs of windows to settings set "Transparent Dark" -- Theme name
-        end tell'
-    else
-        osascript -e 'tell application "Terminal"
-            set current settings of tabs of windows to settings set "Transparent Light" -- Theme name
-        end tell'
-    end
+    # if test "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = Dark
+    #     osascript -e 'tell application "Terminal"
+    #         set current settings of tabs of windows to settings set "Transparent Dark" -- Theme name
+    #     end tell'
+    # else
+    #     osascript -e 'tell application "Terminal"
+    #         set current settings of tabs of windows to settings set "Transparent Light" -- Theme name
+    #     end tell'
+    # end
 end
 
 if test (uname -s) = Linux
@@ -42,17 +42,17 @@ if test (uname -s) = Linux
     alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
 
     # Functions
-    function sys_color_scheme_is_dark
-        set -l condition (gsettings get org.gnome.desktop.interface color-scheme \
-          | string trim \
-          | string trim -c "'")
-
-        if test "$condition" = prefer-dark
-            return 0
-        else
-            return 1
-        end
-    end
+    # function sys_color_scheme_is_dark
+    #     set -l condition (gsettings get org.gnome.desktop.interface color-scheme \
+    #       | string trim \
+    #       | string trim -c "'")
+    #
+    #     if test "$condition" = prefer-dark
+    #         return 0
+    #     else
+    #         return 1
+    #     end
+    # end
 
     function bat_alias_wrapper
         if sys_color_scheme_is_dark
@@ -66,7 +66,7 @@ if test (uname -s) = Linux
 end
 
 if status is-interactive
-    eval (zellij setup --generate-auto-start fish | string collect)
+    # eval (zellij setup --generate-auto-start fish | string collect)
     # function fish_greeting
     #     echo "Welcome to $(uname -s)!"
     # end
