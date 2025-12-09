@@ -1,0 +1,21 @@
+name: query datasource
+method: POST
+url: https://api.notion.com/v1/data_sources/2ba346a8-9c74-8073-844f-000b90ccd846/query
+body:
+  content: |-
+    {
+      "filter": {
+        "property": "rawAmount",
+        "number": {
+          "equals": -0.2
+        }
+      }
+    }
+  content_type: application/json
+headers:
+- name: Authorization
+  value: Bearer ${NOTION_API_KEY}
+- name: Notion-Version
+  value: '2025-09-03'
+- name: Content-Type
+  value: application/json

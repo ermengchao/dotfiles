@@ -1,4 +1,11 @@
 if test (uname -s) = Darwin
+    # Appearance
+    if test "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = Dark
+        set -gx POSTING_THEME synthwave
+    else
+        set -gx POSTING_THEME catppuccin-latte
+    end
+
     # iCloud Path
     set -gx ICLOUD "$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 
@@ -23,9 +30,15 @@ if test (uname -s) = Linux
         set -gx http_proxy "http://127.0.0.1:6152"
         set -gx https_proxy "http://127.0.0.1:6152"
     end
-    set -gx TERM xterm-256color
+
+    # Appearance
+    if test "$(gsettings get org.gnome.desktop.interface color-scheme)" = prefer-dark
+    else
+    end
+
+    # set -gx TERM xterm-256color
     set -gx HOMEBREW_BUNDLE_FILE "$HOME/.config/brew/Brewfile_Linux"
-    set -gx XDG_DATA_DIRS "/home/chao/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share"
+    # set -gx XDG_DATA_DIRS "/home/chao/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share"
 end
 
 # fish
@@ -66,11 +79,6 @@ function bun
     end
 end
 
-# Docker
-set -gx DOCKER_COMPOSE "$XDG_DATA_HOME/docker-compose"
-set -gx DOCKERFILE_PATH "$XDG_DATA_HOME/dockerfiles"
-set -gx DOCKER_VOLUMES "$XDG_DATA_HOME/docker"
-
 # fzf
 # set -gx FZF_DEFAULT_COMMAND "fd --type f"
 set -gx FZF_DEFAULT_OPTS "--exact --style full"
@@ -100,5 +108,5 @@ set -gx ZELLIJ_CONFIG_DIR $XDG_CONFIG_HOME/zellij
 
 # Zoxide
 set -gx _ZO_DATA_DIR $XDG_DATA_HOME
-# set -gx _ZO_FZF_OPTS
+set -gx _ZO_FZF_OPTS "--exact style full"
 set -gx _ZO_RESOLVE_SYMLINKS 1

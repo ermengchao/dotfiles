@@ -1,4 +1,15 @@
 if test (uname -s) = Darwin
+    # Appearance
+    if test "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = Dark
+        # osascript -e 'tell application "Terminal"
+        #     set current settings of tabs of windows to settings set "Transparent Dark" -- Theme name
+        # end tell'
+    else
+        # osascript -e 'tell application "Terminal"
+        #     set current settings of tabs of windows to settings set "Transparent Light" -- Theme name
+        # end tell'
+    end
+
     # Homebrew
     /opt/homebrew/bin/brew shellenv | source
     # /opt/homebrew/bin/whalebrew completion fish | source
@@ -14,21 +25,13 @@ if test (uname -s) = Darwin
     alias cat "bat --style='numbers,changes,header'"
     abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
     abbr xcode "open -a Xcode"
-
-    # Functions
-    # Adapt Dynamic Terminal Theme
-    # if test "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = Dark
-    #     osascript -e 'tell application "Terminal"
-    #         set current settings of tabs of windows to settings set "Transparent Dark" -- Theme name
-    #     end tell'
-    # else
-    #     osascript -e 'tell application "Terminal"
-    #         set current settings of tabs of windows to settings set "Transparent Light" -- Theme name
-    #     end tell'
-    # end
 end
 
 if test (uname -s) = Linux
+    # Appearance
+    if test "$(gsettings get org.gnome.desktop.interface color-scheme)" = prefer-dark
+    else
+    end
     # Homebrew
     /home/linuxbrew/.linuxbrew/bin/brew shellenv fish | source
     # /home/linuxbrew/.linuxbrew/bin/whalebrew completion fish | source
@@ -41,29 +44,7 @@ if test (uname -s) = Linux
     abbr sc systemctl
     abbr scu "systemctl --user"
     alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
-
-    # Functions
-    # function sys_color_scheme_is_dark
-    #     set -l condition (gsettings get org.gnome.desktop.interface color-scheme \
-    #       | string trim \
-    #       | string trim -c "'")
-    #
-    #     if test "$condition" = prefer-dark
-    #         return 0
-    #     else
-    #         return 1
-    #     end
-    # end
-    #
-    # function bat_alias_wrapper
-    #     if sys_color_scheme_is_dark
-    #         bat --theme=default $argv
-    #     else
-    #         bat --theme=GitHub $argv
-    #     end
-    # end
-    #
-    alias cat="bat --style='numbers,changes,header'"
+    alias cat bat
 end
 
 if status is-interactive
@@ -99,6 +80,7 @@ abbr td "tailscale down"
 abbr tp "tailscale ping"
 abbr ts "tailscale status"
 abbr tu "tailscale up"
+alias posting "posting --collection $XDG_CONFIG_HOME/posting/collections"
 
 # Functions
 function y
