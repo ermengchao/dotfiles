@@ -9,18 +9,12 @@ if test (uname -s) = Darwin
 
     rm -rf $HOME/.config/codesnap
     stow -R codesnap
-
-    rm -rf $HOME/.config/git
-    stow -R git
 end
 
 if test (uname -s) = Linux
     rm -rf $HOME/.config/mihomo
     mkdir -p $HOME/.config/mihomo
     stow -R mihomo
-
-    rm -rf $HOME/.config/git
-    stow -R git@Linux
 
     rm -rf $HOME/.config/tailscale
     stow -R tailscale
@@ -80,5 +74,5 @@ stow -R tree-sitter
 rm -rf $HOME/.config/yazi
 stow -R yazi
 
-rm -rf $HOME/.config/zellij
-stow -R zellij
+# rm -rf $HOME/.config/zellij
+# stow -R zellij

@@ -34,7 +34,6 @@ brew "stow"
 brew "uv"
 # brew "whalebrew"
 brew "yazi"
-brew "zellij"
 brew "zoxide"
 
 # ==== cask ====

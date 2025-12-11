@@ -255,6 +255,8 @@ ui {
         rounded_corners true
         hide_session_name true
     }
+    disable_tab_bar true
+    disable_status_bar true
 }
 web_client {
     font "monospace"
