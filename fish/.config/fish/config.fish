@@ -59,7 +59,6 @@ zoxide init --cmd cd fish | source
 
 # Key Binding
 bind \t complete
-bind \ce $EXPLORER
 
 # Abbreviation
 # bat

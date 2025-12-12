@@ -3,6 +3,7 @@ if test (uname -s) = Darwin:
         eval (/usr/libexec/path_helper -s)
     end
 
+    fish_add_path /opt/homebrew/opt/coreutils/libexec/gnubin
     fish_add_path /opt/homebrew/opt/git/bin
     fish_add_path /opt/homebrew/opt/openjdk/bin
     fish_add_path "/Applications/Surge.app/Contents/Applications"
