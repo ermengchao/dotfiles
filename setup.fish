@@ -53,6 +53,9 @@ mkdir $HOME/.config/fish/functions
 mkdir $HOME/.config/fish/themes
 stow -R fish
 
+rm -rf $HOME/.config/git
+stow -R git
+
 rm -rf $HOME/.config/ghostty
 stow -R ghostty
 
