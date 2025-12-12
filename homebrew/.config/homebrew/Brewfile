@@ -60,8 +60,8 @@ cask "orbstack"
 cask "stats"
 cask "surge"
 cask "tailscale-app"
-cask "wechat"
-cask "qq"
+# cask "wechat"
+# cask "qq"
 
 # ==== Mas ====
 
