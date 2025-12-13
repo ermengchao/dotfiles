@@ -29,7 +29,7 @@ end
 
 if test (uname -s) = Linux
     # Appearance
-    if test "$(gsettings get org.gnome.desktop.interface color-scheme)" = prefer-dark
+    if test "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" = prefer-dark
     else
     end
     # Homebrew

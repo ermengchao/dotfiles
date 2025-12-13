@@ -25,10 +25,23 @@ if test (uname -s) = Linux
     sudo rm -rf /etc/samba
     sudo /home/linuxbrew/.linuxbrew/bin/stow -R samba -t /
 
+    if test -d /etc/containers
+    else
+        sudo mkdir /etc/containers
+    end
     sudo /home/linuxbrew/.linuxbrew/bin/stow -R quadlet@system -t /
     stow -R quadlet@user
     sudo /home/linuxbrew/.linuxbrew/bin/stow -R systemd@system -t /
     stow -R systemd@user
+
+    # root
+    sudo rm -rf /root/.config/fish
+    sudo mkdir /root/.config/fish
+    sudo mkdir /root/.config/fish/completions
+    sudo mkdir /root/.config/fish/conf.d
+    sudo mkdir /root/.config/fish/functions
+    sudo mkdir /root/.config/fish/themes
+    sudo /home/linuxbrew/.linuxbrew/bin/stow -R -d /home/chao/.dotfiles -t /root bat fish nvim yazi
 end
 
 rm -rf $HOME/.config/bat
