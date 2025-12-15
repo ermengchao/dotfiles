@@ -30,6 +30,7 @@ brew "openjdk"
 brew "openssh"
 brew "pandoc"
 brew "posting"
+brew "rclone"
 brew "ripgrep"
 brew "rust"
 brew "stow"
@@ -41,6 +42,7 @@ brew "zoxide"
 # ==== cask ====
 
 cask "aldente"
+cask "bartender"
 cask "betterdisplay"
 cask "bettertouchtool"
 cask "chatgpt"
@@ -61,8 +63,6 @@ cask "orbstack"
 cask "stats"
 cask "surge"
 cask "tailscale-app"
-# cask "wechat"
-# cask "qq"
 
 # ==== Mas ====
 
