@@ -20,9 +20,11 @@ if test (uname -s) = Linux
     stow -R tailscale
 
     sudo rm -rf /etc/nginx
+    sudo mkdir /etc/nginx
     sudo /home/linuxbrew/.linuxbrew/bin/stow -R nginx -t /
 
     sudo rm -rf /etc/samba
+    sudo mkdir /etc/samba
     sudo /home/linuxbrew/.linuxbrew/bin/stow -R samba -t /
 
     if test -d /etc/containers
