@@ -8,3 +8,4 @@ package.json
 fish_variables
 env.fish
 lazy-lock.json
+*log*
