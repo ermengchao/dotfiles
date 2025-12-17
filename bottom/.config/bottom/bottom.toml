@@ -108,7 +108,9 @@ list = [
   "/System/Volumes/xarts",
   "/System/Volumes/Hardware",
   "/System/Volumes/VM",
-  "/private/tmp/.*"
+  "/private/tmp/.*",
+  "/boot",
+  "/boot/efi"
 ]
 regex = true
 case_sensitive = false

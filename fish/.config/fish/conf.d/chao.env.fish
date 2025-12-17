@@ -46,13 +46,8 @@ set -U fish_greeting
 set -g fish_key_bindings fish_vi_key_bindings
 
 # Editor
-if type -q nvim
-    set -gx EDITOR nvim
-    set -gx VISUAL nvim
-else
-    set -gx EDITOR vi
-    set -gx VISUAL vi
-end
+set -gx EDITOR nvim
+set -gx VISUAL nvim
 
 # Explorer
 set -gx EXPLORER y
