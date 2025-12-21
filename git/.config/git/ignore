@@ -3,3 +3,8 @@
 
 # NodeJS
 **/node_modules/
+
+# Dev Dependencies
+commitlint.config.js
+lefthook.yml
+

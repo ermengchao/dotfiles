@@ -5,8 +5,8 @@ lefthook.yml
 package.json
 
 # Ignored files
-fish_variables
+*cache*
 env.fish
+fish_variables
 lazy-lock.json
 *log*
-*cache*

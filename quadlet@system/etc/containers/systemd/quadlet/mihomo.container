@@ -3,6 +3,7 @@ Description=mihomo (metacubex/mihomo)
 
 [Container]
 Image=ghcr.io/metacubex/mihomo:latest
+AutoUpdate=registry
 ContainerName=mihomo
 
 Pid=host

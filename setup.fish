@@ -12,10 +12,6 @@ if test (uname -s) = Darwin
 end
 
 if test (uname -s) = Linux
-    rm -rf $HOME/.config/mihomo
-    mkdir -p $HOME/.config/mihomo
-    stow -R mihomo
-
     rm -rf $HOME/.config/tailscale
     stow -R tailscale
 
