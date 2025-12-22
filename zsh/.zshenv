@@ -35,16 +35,10 @@ export PATH="/Applications/Surge.app/Contents/Applications:$PATH"
 # Tailscale
 export PATH="/Applications/Tailscale.app/Contents/MacOS:$PATH"
 
-# Apis
-export OPENAI_API_KEY="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"
 # Bun
 export BUN_INSTALL_BIN="/Users/chao/.local/bin"
 export BUN_INSTALL_GLOBAL_DIR="$XDG_DATA_HOME/bun"
 export BUN_INSTALL_CACHE_DIR="$XDG_CACHE_HOME/bun"
-# CampusNetwork
-export CUIT_USERID="2023083061"
-export CUIT_PASSWORD="Cuit_456602847"
-export CUIT_SERVICE="电信"
 # Docker
 export DOCKER_COMPOSE="$XDG_DATA_HOME/docker-compose"
 export DOCKERFILE_PATH="$XDG_DATA_HOME/dockerfiles"
