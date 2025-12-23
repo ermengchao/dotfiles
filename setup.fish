@@ -12,20 +12,19 @@ if test (uname -s) = Darwin
 end
 
 if test (uname -s) = Linux
-    rm -rf $HOME/.config/tailscale
-    stow -R tailscale
-
     sudo rm -rf /etc/samba
     sudo mkdir /etc/samba
     sudo /home/linuxbrew/.linuxbrew/bin/stow -R samba -t /
 
-    if test -d /etc/containers
-    else
-        sudo mkdir /etc/containers
-    end
+    sudo mkdir -p /etc/containers
     sudo /home/linuxbrew/.linuxbrew/bin/stow -R quadlet@system -t /
+
+    mkdir -p ~/.config/containers/systemd
     stow -R quadlet@user
+
     sudo /home/linuxbrew/.linuxbrew/bin/stow -R systemd@system -t /
+
+    mkdir -p ~/.config/systemd/user
     stow -R systemd@user
 
     # root
