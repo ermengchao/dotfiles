@@ -30,7 +30,7 @@ if test (uname -s) = Linux
 
     # root
     sudo rm -rf /root/.config/fish
-    sudo mkdir /root/.config/fish
+    sudo mkdir -p /root/.config/fish
     sudo mkdir /root/.config/fish/completions
     sudo mkdir /root/.config/fish/conf.d
     sudo mkdir /root/.config/fish/functions
@@ -72,11 +72,14 @@ stow -R nvim
 rm -rf $HOME/.config/posting
 stow -R posting
 
-rm -rf $HOME/.ssh
-mkdir $HOME/.ssh
-touch $HOME/.ssh/authorized_keys
-touch $HOME/.ssh/known_hosts
-stow -R ssh
+if test -d ~/.ssh
+else
+    rm -rf $HOME/.ssh
+    mkdir $HOME/.ssh
+    touch $HOME/.ssh/authorized_keys
+    touch $HOME/.ssh/known_hosts
+    stow -R ssh
+end
 
 rm -rf $HOME/.config/tree-sitter
 stow -R tree-sitter
