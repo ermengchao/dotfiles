@@ -25,6 +25,7 @@ end
 
 if test (uname -s) = Linux
     if string match -q "*orbstack*" (uname -r); or string match -q "*microsoft*" (uname -r)
+    else if test -r /sys/class/dmi/id/sys_vendor; and string match -q "*Amazon*" (cat /sys/class/dmi/id/sys_vendor)
     else
         # Proxy
         set -gx http_proxy "http://127.0.0.1:6152"
