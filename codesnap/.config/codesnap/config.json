@@ -23,12 +23,12 @@
       "radius": 12
     },
     "code_config": {
-      "font_family": "Liga SFMono Nerd Font",
+      "font_family": "SFMono",
       "breadcrumbs": {
         "enable": true,
         "separator": "/",
         "color": "#80848b",
-        "font_family": "Liga SFMono Nerd Font"
+        "font_family": "SFMono"
       }
     },
     "watermark": null,

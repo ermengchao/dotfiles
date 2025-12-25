@@ -1,5 +1,8 @@
+brew tap oven-sh/bun
+
 brew "bat"
 brew "bottom"
+brew "oven-sh/bun/bun"
 brew "fastfetch"
 brew "fish"
 brew "fisher"

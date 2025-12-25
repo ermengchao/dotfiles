@@ -11,6 +11,8 @@ font-size = 14
 faint-opacity = 0.8
 
 # Behavior
+working-directory = home
+window-inherit-working-directory = false
 copy-on-select = true
 shell-integration = "fish"
 quit-after-last-window-closed = true

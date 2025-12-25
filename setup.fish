@@ -5,7 +5,6 @@ if test (uname -s) = Darwin
     rm -f $HOME/.zprofile
     rm -f $HOME/.zshenv
     stow -R zsh
-    # stow -R zsh@x86
 
     rm -rf $HOME/.config/codesnap
     stow -R codesnap
