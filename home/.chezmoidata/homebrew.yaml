@@ -117,6 +117,7 @@ homebrew:
       - "fisher"
       - "fd"
       - "fzf"
+      - "gcc"
       - "gh"
       - "git"
       - "git-delta"
