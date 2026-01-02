@@ -1,6 +1,4 @@
-# ==== macOS ====
-
-{{ if eq .chezmoi.os "darwin" -}}
+{{- if eq .chezmoi.os "darwin" -}}
 # Appearance
 if test "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = Dark
     # osascript -e 'tell application "Terminal"
@@ -25,8 +23,6 @@ abbr keychain-add "/usr/bin/ssh-add --apple-use-keychain"
 abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
 abbr xcode "open -a Xcode"
 
-# ==== Linux ====
-
 {{ else if eq .chezmoi.os "linux" -}}
 # Appearance
 if test "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" = prefer-dark
@@ -43,6 +39,7 @@ abbr psg /usr/lib/systemd/system-generators/podman-system-generator
 abbr sc systemctl
 abbr scu "systemctl --user"
 alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
+
 {{ end -}}
 
 if status is-interactive
@@ -74,32 +71,3 @@ abbr jnote "jupyter notebook"
 abbr jlab "jupyter lab"
 abbr n nvim
 alias posting "posting --collection $XDG_CONFIG_HOME/posting/collections"
-
-# Functions
-function y
-    set tmp (mktemp -t "yazi-cwd.XXXXXX")
-    yazi $argv --cwd-file="$tmp"
-    if read -z cwd <"$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-        builtin cd -- "$cwd"
-    end
-    rm -f -- "$tmp"
-end
-
-function clisnap --description 'Snapshot CLI output to clipboard via CodeSnap'
-    set tmp (mktemp -t "clisnap.XXXXXX")
-    cat >$tmp
-    if test -s $tmp
-        codesnap --from-file $tmp --output clipboard --silent
-        set -l exit_code $status
-        rm -f $tmp
-
-        if test $exit_code -eq 0
-            echo "CliSnap saved to clipboard successfully."
-        else
-            echo "CliSnap failed with exit code $exit_code" >&2
-        end
-    else
-        rm -f -- "$tmp"
-        echo "No input received, nothing to snapshot." >&2
-    end
-end
