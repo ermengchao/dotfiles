@@ -1,5 +1,0 @@
-dnf:
-  fedora:
-    - "podman"
-    - "samba"
-    - "seahorse"

@@ -1,0 +1,9 @@
+[dnf]
+
+packages = [
+  "caddy",
+  "flathub",
+  "podman",
+  "samba",
+  "seahorse",
+]
