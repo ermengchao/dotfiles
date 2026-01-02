@@ -17,6 +17,8 @@ begin
 end | /opt/homebrew/bin/brew bundle --file=/dev/stdin
 
 {{- else if eq .chezmoi.os "linux" -}}
+{{-   if eq .chezmoi.uid "0" -}}
+{{-   else -}}
 #!/home/linuxbrew/.linuxbrew/bin/fish
 
 begin
@@ -27,4 +29,5 @@ begin
   echo 'brew {{ . | quote }}'
 {{ end -}}
 end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
+{{-   end -}}
 {{- end -}}
