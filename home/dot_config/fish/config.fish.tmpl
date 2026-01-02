@@ -1,6 +1,6 @@
 # ==== macOS ====
 
-{{ if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.os "darwin" -}}
 # Appearance
 if test "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = Dark
     # osascript -e 'tell application "Terminal"
@@ -14,7 +14,6 @@ end
 
 # Homebrew
 /opt/homebrew/bin/brew shellenv | source
-# /opt/homebrew/bin/whalebrew completion fish | source
 
 # Orbstack
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
@@ -23,20 +22,18 @@ source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 abbr keychain-add "/usr/bin/ssh-add --apple-use-keychain"
 
 # Abbreviation
-alias cat "bat --style='numbers,changes,header'"
 abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
 abbr xcode "open -a Xcode"
 
 # ==== Linux ====
 
-{{ else if eq .chezmoi.os "linux" }}
+{{- else if eq .chezmoi.os "linux" -}}
 # Appearance
 if test "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" = prefer-dark
 end
 
 # Homebrew
 /home/linuxbrew/.linuxbrew/bin/brew shellenv fish | source
-# /home/linuxbrew/.linuxbrew/bin/whalebrew completion fish | source
 
 # SSH-Agent
 eval "$(ssh-agent -c 2>/dev/null)" >/dev/null
@@ -46,7 +43,7 @@ abbr psg /usr/lib/systemd/system-generators/podman-system-generator
 abbr sc systemctl
 abbr scu "systemctl --user"
 alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
-{{ end }}
+{{- end -}}
 
 if status is-interactive
     # eval (zellij setup --generate-auto-start fish | string collect)
@@ -57,6 +54,7 @@ end
 
 chezmoi completion fish | source
 fzf --fish | source
+# whalebrew completion fish | source
 zoxide init --cmd cd fish | source
 
 # Key Binding

@@ -1,10 +1,10 @@
 encryption = "age"
 [age]
-    {{ if eq .chezmoi.os "darwin" }}
+    {{- if eq .chezmoi.os "darwin" -}}
     identity = "/Users/chao/.local/share/chezmoi/key.txt"
-    {{ else if eq .chezmoi.os "linux" }}
+    {{- else if eq .chezmoi.os "linux" -}}
     identity = "/home/chao/.local/share/chezmoi/key.txt"
-    {{ end }}
+    {{- end -}}
     recipient = "age15fguepjnfkjt84ma9wjpyjhlrax8fpedv3wergqm2tnppup7py5s68qz4m"
 [docker]
     command = "podman"

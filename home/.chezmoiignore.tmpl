@@ -1,11 +1,11 @@
-{{ if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.os "darwin" -}}
 .config/containers
 .config/mihomo
 .config/systemd
-{{ else if eq .chezmoi.os "linux" }}
+{{- else if eq .chezmoi.os "linux" -}}
 .config/codesnap
 .config/posting
-{{ end }}
+{{- end -}}
 
 .config/zellij
 
