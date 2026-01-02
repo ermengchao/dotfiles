@@ -1,0 +1,30 @@
+{{- if eq .chezmoi.os "darwin" }}
+#!/opt/homebrew/bin/fish
+
+begin
+{{- range .homebrew.darwin.taps }}
+  echo 'tap {{ . | quote }}'
+{{- end }}
+{{- range .homebrew.darwin.brews }}
+  echo 'brew {{ . | quote }}'
+{{- end }}
+{{- range .homebrew.darwin.casks }}
+  echo 'cask {{ . | quote }}'
+{{- end }}
+{{- range .homebrew.darwin.mas }}
+  echo 'mas {{ . | quote }}'
+{{- end }}
+end | /opt/homebrew/bin/brew bundle --file=/dev/stdin
+
+{{- else if eq .chezmoi.os "linux" }}
+#!/home/linuxbrew/.linuxbrew/bin/fish
+
+begin
+{{- range .homebrew.linux.taps }}
+  echo 'tap {{ . | quote }}'
+{{- end }}
+{{- range .homebrew.linux.brews }}
+  echo 'brew {{ . | quote }}'
+{{- end }}
+end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
+{{- end }}

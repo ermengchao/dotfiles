@@ -31,10 +31,8 @@ abbr xcode "open -a Xcode"
 
 {{ else if eq .chezmoi.os "linux" }}
 # Appearance
-{{ if eq .chezmoi.env.XDG_CURRENT_DESKTOP "GNOME" }}
 if test "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" = prefer-dark
 end
-{{ end }}
 
 # Homebrew
 /home/linuxbrew/.linuxbrew/bin/brew shellenv fish | source
