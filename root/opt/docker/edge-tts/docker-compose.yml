@@ -1,0 +1,7 @@
+services:
+  edge-tts:
+   image: travisvn/openai-edge-tts:latest
+   container_name: edge-tts
+   restart: unless-stopped
+   ports:
+    - "5050:5050"

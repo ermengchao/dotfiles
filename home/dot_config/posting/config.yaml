@@ -1,0 +1,7 @@
+use_host_environment: true
+animation: full
+focus:
+  on_startup: "url"
+  on_response: "body"
+command_palette:
+  theme_preview: true

@@ -1,0 +1,26 @@
+# docker run -it --gpus=all --shm-size="16G"
+
+services:
+  gpt-sovits:
+    image: breakstring/gpt-sovits:latest-elite
+    container_name: gpt-sovits
+    restart: unless-stopped
+    working_dir: /workspace
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu] # 👈 对应 --gpus=all（Compose v3.8+）
+    shm_size: "16g" # 👈 对应 --shm-size="16g"
+    volumes:
+      - "C:/Users/chao/Docker/GPT-SoVITS/output:/workspace/output"
+      - "C:/Users/chao/Docker/GPT-SoVITS/logs:/workspace/logs"
+      - "C:/Users/chao/Docker/GPT-SoVITS/SoVITS_weights:/workspace/SoVITS_weights"
+    ports:
+      - "9880:9880"
+      - "9871:9871"
+      - "9872:9872"
+      - "9873:9873"
+      - "9874:9874"
+    environment:
+      is_half: False

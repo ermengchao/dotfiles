@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  freshrss:
+    image: freshrss/freshrss
+    ports:
+      - "8080:80"
+    volumes:
+      - freshrss-data:/var/www/FreshRSS/data
+      - freshrss-extensions:/var/www/FreshRSS/extensions
+    restart: unless-stopped
+    pull_policy: always
+
+volumes:
+  freshrss-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/haowen/docker/freshrss/data
+      o: bind
+  freshrss-extensions:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/haowen/docker/freshrss/extensions
+      o: bind

@@ -1,0 +1,211 @@
+# This group of options represents a command-line option. Flags explicitly
+# added when running (ie: btm -a) will override this config file if an option
+# is also set here.
+[flags]
+hide_avg_cpu = false
+
+average_cpu_row = true
+
+dot_marker = false
+
+rate = "1s"
+
+cpu_left_legend = false
+
+current_usage = false
+
+unnormalized_cpu = false
+
+group_processes = true
+
+case_sensitive = false
+
+whole_word = true
+
+regex = true
+
+temperature_type = "celsius"
+
+default_time_value = "60s"
+
+time_delta = 15000
+
+hide_time = false
+
+default_widget_type = "cpu"
+default_widget_count = 1
+
+expanded = false
+
+basic = false
+
+use_old_network_legend = false
+
+hide_table_gap = true
+
+battery = false
+
+disable_click = true
+
+disable_keys = false
+
+process_memory_as_value = false
+
+tree = true
+
+show_table_scroll_position = true
+
+process_command = true
+
+network_use_binary_prefix = false
+
+network_use_bytes = true
+
+network_use_log = true
+
+disable_advanced_kill = false
+
+hide_k_threads = false
+
+disable_gpu = false
+
+# Shows cache and buffer memory
+#enable_cache_memory = false
+
+# Subtract freeable ARC from memory usage
+#free_arc = false
+
+retention = "10m"
+
+memory_legend = "top-right"
+
+network_legend = "top-right"
+
+[processes]
+columns = ["PID", "Name", "CPU%", "Mem%", "Virt", "R/s", "W/s", "T.Read", "T.Write", "User", "State", "GMem%", "GPU%"]
+get_threads = false
+
+[cpu]
+default = "avg"
+
+[disk]
+columns = ["Disk", "Mount", "Used", "Free", "Total", "Used%", "R/s", "W/s"]
+
+#[disk.name_filter]
+#is_list_ignored = true
+#list = ["/dev/sda\\d+", "/dev/nvme0n1p2"]
+#regex = true
+#case_sensitive = false
+#whole_word = false
+
+[disk.mount_filter]
+is_list_ignored = true
+list = [
+  "/$",
+  "/System/Volumes/ISCPreboot",
+  "/System/Volumes/Preboot",
+  "/System/Volumes/Update",
+  "/System/Volumes/xarts",
+  "/System/Volumes/Hardware",
+  "/System/Volumes/VM",
+  "/private/tmp/.*",
+  "/boot",
+  "/boot/efi"
+]
+regex = true
+case_sensitive = false
+whole_word = false
+
+[temperature]
+[temperature.sensor_filter]
+is_list_ignored = true
+list = [
+  "PMU tdev\\d+",
+  "PMU2 tdev\\d+"
+]
+regex = true
+case_sensitive = false
+whole_word = false
+
+#[network]
+#[network.interface_filter]
+#is_list_ignored = true
+#list = ["virbr0.*"]
+#regex = true
+#case_sensitive = false
+#whole_word = false
+
+[styles]
+# - "default"
+# - "default-light"
+# - "gruvbox"
+# - "gruvbox-light"
+# - "nord"
+# - "nord-light".
+theme = "default"
+
+#[styles.cpu]
+#all_entry_color = "green"
+#avg_entry_color = "red"
+#cpu_core_colors = ["light magenta", "light yellow", "light cyan", "light green", "light blue", "cyan", "green", "blue"]
+
+#[styles.memory]
+#ram_color = "light magenta"
+#cache_color = "light red"
+#swap_color = "light yellow"
+#arc_color = "light cyan"
+#gpu_colors = ["light blue", "light red", "cyan", "green", "blue", "red"]
+
+#[styles.network]
+#rx_color = "light magenta"
+#tx_color = "light yellow"
+#rx_total_color = "light cyan"
+#tx_total_color = "light green"
+
+#[styles.battery]
+#high_battery_color = "green"
+#medium_battery_color = "yellow"
+#low_battery_color = "red"
+
+#[styles.tables]
+#headers = {color = "light blue", bold = true}
+
+#[styles.graphs]
+#graph_color = "gray"
+#legend_text = {color = "gray"}
+
+#[styles.widgets]
+#border_color = "gray"
+#selected_border_color = "light blue"
+#widget_title = {color = "gray"}
+#text = {color = "gray"}
+#selected_text = {color = "black", bg_color = "light blue"}
+#disabled_text = {color = "dark gray"}
+
+# Only on Linux
+thread_text = {color = "green"}
+
+[[row]]
+  ratio=30
+  [[row.child]]
+  ratio=2
+  type="cpu"
+  [[row.child]]
+  ratio=1
+  type="temp"
+[[row]]
+  ratio=30
+  [[row.child]]
+    ratio=2
+    type="mem"
+  [[row.child]]
+    ratio = 1
+    type="net"
+[[row]]
+  ratio=20
+  [[row.child]]
+  type="proc"
+[[row]]
+  ratio=20
+  [[row.child]]
+  type="disk"

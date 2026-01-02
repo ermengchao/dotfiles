@@ -1,0 +1,66 @@
+# Appearance
+theme = light:"Xcode Light",dark:"Xcode WWDC"
+background-opacity = 0.8
+background-blur = 80
+background-opacity-cells = true
+font-family = "SF Mono"
+font-family = "PingFang SC"
+font-family = "Noto Sans Mono"
+font-family = "Noto Sans CJK SC"
+font-size = 14
+faint-opacity = 0.8
+
+# Behavior
+working-directory = home
+window-inherit-working-directory = false
+copy-on-select = true
+shell-integration = "fish"
+quit-after-last-window-closed = true
+desktop-notifications = true
+# bold-color = "bright"
+term = "xterm-256color"
+# enquiry-response = ""
+async-backend = "auto"
+bell-features = "attention, title"
+link-previews = true
+
+# Cursor
+cursor-style = "bar"
+cursor-click-to-move = true
+
+# Window
+title = ""
+window-height = 40
+window-width = 112
+window-padding-x = 10
+window-padding-y = 10
+window-new-tab-position = "end"
+
+# macOS only
+window-position-x = 20
+window-position-y = 20
+window-save-state = "default"
+window-colorspace = "display-p3"
+macos-non-native-fullscreen = false
+macos-window-buttons = "visible"
+macos-titlebar-style = "transparent"
+macos-titlebar-proxy-icon = "visible"
+macos-dock-drop-behavior = "new-tab"
+macos-option-as-alt = true
+macos-window-shadow = true
+macos-hidden = "never"
+macos-auto-secure-input = true
+macos-icon = "official"
+# macos-custom-icon = "./Ghostty.icns"
+# macos-icon-ghost-color = #0000000
+# macos-icon-screen-color = #0000000
+macos-icon-frame = "aluminum"
+macos-shortcuts = "ask"
+auto-update = "download"
+auto-update-channel = "stable"
+
+# Linux only
+app-notifications = true
+# bell-audio-volume = 0.5
+# bell-audio-path = "./audio"
+window-show-tab-bar = "auto"

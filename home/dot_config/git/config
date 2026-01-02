@@ -1,0 +1,28 @@
+[user]
+  name = ermengchao
+  email = zhangchao050530@gmail.com
+  # signingkey =
+  useConfigOnly = true
+[core]
+  autocrlf = input
+  ignorecase = true
+  excludesfile = ~/.config/git/ignore
+[color]
+  ui = auto
+[init]
+  defaultBranch = main
+[filter "lfs"]
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+[pull]
+	rebase = true
+[credential "https://github.com"]
+	helper = 
+	helper = "!gh auth git-credential"
+[credential "https://gist.github.com"]
+	helper = 
+	helper = "!gh auth git-credential"
+[include]
+  path = ~/.config/git/delta.gitconfig

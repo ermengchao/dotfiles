@@ -1,0 +1,13 @@
+{{ if eq .chezmoi.os "darwin" }}
+.config/containers
+.config/mihomo
+.config/systemd
+{{ else if eq .chezmoi.os "linux" }}
+.config/codesnap
+.config/posting
+{{ end }}
+
+.config/zellij
+
+.zsh
+.zsh_x86

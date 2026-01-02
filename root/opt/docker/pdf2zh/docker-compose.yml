@@ -1,0 +1,7 @@
+services:
+  pdf2zh:
+    image: byaidu/pdf2zh:latest
+    container_name: pdf2zh
+    ports:
+      - "7861:7860"
+    restart: unless-stopped

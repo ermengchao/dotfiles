@@ -1,0 +1,17 @@
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    environment:
+      - N8N_SECURE_COOKIE=false
+      - N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true
+    # stdin_open: true
+    # tty: true
+    # restart: unless-stopped
+    # entrypoint: bash    # 若你只是想进入 shell 可加
+# volumes:
+#   n8n_data:

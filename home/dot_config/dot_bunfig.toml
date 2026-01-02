@@ -1,0 +1,8 @@
+[install]
+globalDir = "~/.local/share/bun"
+globalBinDir = "~/.local/bin"
+
+[install.cache]
+dir = "~/.cache/bun"
+disable = true
+disableManifest = true

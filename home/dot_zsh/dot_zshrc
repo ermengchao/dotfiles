@@ -1,0 +1,161 @@
+# zsh autocompletion
+fpath+=/opt/homebrew/share/zsh/site-functions
+autoload -Uz compinit
+compinit
+
+# uv autocompletion
+eval "$(uv generate-shell-completion zsh)"
+
+# fzf
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# OrbStack
+source $HOME/.orbstack/shell/init.zsh 2>/dev/null || :
+
+# Aliases
+alias apy="source .venv/bin/activate"
+alias dpy="deactivate"
+alias activate="source .venv/bin/activate"
+alias jnote="jupyter notebook"
+alias jlab="jupyter lab"
+alias ssh-keygen="ssh-keygen -t ed25519 -C zhangchao050530@gmail.com"
+alias x86="arch -arm64 env ZDOTDIR=$HOME/.zsh_x86 zsh"
+alias xcode="open -a Xcode"
+
+# Functions
+# Activate fnm
+# function ajs() {
+#   case ":$PATH:" in
+#     *fnm_multishells/*/bin*) ;;
+#     *) eval "$(fnm env --use-on-cd --version-file-strategy=recursive --corepack-enabled --shell zsh)" ;;
+#   esac
+# }
+# function ijs() {
+#   fnm install --lts
+#   # corepack enable
+#   corepack prepare pnpm --activate
+#   pnpm init
+#   fnm use $(fnm current)
+#   fnm current > .node-version
+# }
+
+# Get Application ID
+function appid() {
+  if [ -z "$1" ]; then
+    echo "Usage: appid <Applocation>, such as 'appid Xcode'"
+    return 1
+  fi
+  id=$(osascript -e "id of app \"$1\"")
+  echo "🍎 Bundle ID: $id"
+  echo "📂 Plist 文件：$HOME/Library/Preferences/${id}.plist"
+}
+
+# Convert Extensions
+function convert() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: convert .crx or dict"
+        exit 1
+    fi
+
+    item="$1"
+
+    if [ -f "$item" ]; then
+        extension="${item##*.}"
+
+        if [ "$extension" = "crx" ]; then
+            crx_file="$item"
+            zip_file="${crx_file%.crx}.zip"
+            extracted_dir="${crx_file%.crx}_extracted"
+
+            # 执行 Python 脚本转换 .crx 文件为 .zip
+            python3 /Users/chao/Library/Mobile Documents/com~apple~CloudDocs/bin/CRX-Extractor.py "$crx_file" "$zip_file"
+
+            # 解压并删除 .zip 文件
+            unzip -q "$zip_file" -d "$extracted_dir"
+            rm "$zip_file"
+
+            # 使用 safari-web-extension-converter 转换扩展
+            xcrun /Applications/Xcode.app/Contents/Developer/usr/bin/safari-web-extension-converter "$extracted_dir"
+        else
+            echo "Invalid .crx file."
+            exit 1
+
+        fi
+    fi
+
+    if [ -d "$item" ]; then
+        xcrun /Applications/Xcode.app/Contents/Developer/usr/bin/safari-web-extension-converter "$item"
+        exit 0
+    fi
+
+    echo "Invalid Parameter."
+    exit 1
+}
+
+# Gatekeeper
+function gatekeeper() {
+  if [ $# -ne 1 ]; then
+    set -- help
+  fi
+
+  case "$1" in
+    help)
+      cat <<EOF
+
+Gatekeeper is a security feature in macOS designed to protect users from running potentially malicious software.
+
+Disable gatekeeper:
+  sudo spctl --master-disable
+
+Allow unauthorized application:
+  xattr -cr /path/to/application
+
+Enable gatekeeper:
+  sudo spctl --master-enable
+
+EOF
+    ;;
+
+    *)
+    ;;
+  esac
+}
+
+# Metal HUD
+function hud() {
+  if [ $# -eq 0 ]; then
+    /bin/launchctl getenv MTL_HUD_ENABLED
+    return
+  fi
+  
+  if [ "$1" = "on" ]; then
+    /bin/launchctl setenv MTL_HUD_ENABLED 1
+    echo "HUD enabled."
+  elif [ "$1" = "off" ]; then
+    /bin/launchctl setenv MTL_HUD_ENABLED 0
+    echo "HUD disabled."
+  else
+    echo "Usage: hud [on|off]"
+  fi
+}
+
+# zle
+function cin() {
+  cuit login
+  zle reset-prompt
+}
+function cout() {
+  cuit logout
+  zle reset-prompt
+}
+function cs() {
+  cuit status
+  zle reset-prompt
+}
+zle -N "cin"
+zle -N "cout"
+zle -N "cs"
+bindkey "^[i" cin
+bindkey "^o" cout
+bindkey "^s" cs

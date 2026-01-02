@@ -1,0 +1,226 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: namenode
+  labels:
+    app: hadoop
+    component: namenode
+  annotations:
+    io.podman.annotations.networks: hdfs_network
+    io.podman.annotations.ulimits: nofile=65536:65536
+spec:
+  hostname: namenode
+  restartPolicy: Always
+  containers:
+    - name: namenode
+      image: apache/hadoop:3.4.1
+      command:
+        - /bin/bash
+      args:
+        - /init-namenode.sh
+      env:
+        - name: HADOOP_HOME
+          value: /opt/hadoop
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+      ports:
+        - containerPort: 9870
+          hostPort: 9870
+          protocol: TCP
+      volumeMounts:
+        - name: namenode-data
+          mountPath: /opt/hadoop/data/nameNode
+        - name: hadoop-config
+          mountPath: /opt/hadoop/etc/hadoop
+        - name: init-namenode
+          mountPath: /init-namenode.sh
+          readOnly: true
+  volumes:
+    - name: namenode-data
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/data/namenode
+        type: DirectoryOrCreate
+    - name: hadoop-config
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/config
+        type: Directory
+    - name: init-namenode
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/init-namenode.sh
+        type: File
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: datanode-1
+  labels:
+    app: hadoop
+    component: datanode
+    datanode-index: "1"
+  annotations:
+    io.podman.annotations.networks: hdfs_network
+    io.podman.annotations.ulimits: nofile=65536:65536
+spec:
+  hostname: datanode-1
+  restartPolicy: Always
+  containers:
+    - name: datanode-1
+      image: apache/hadoop:3.4.1
+      command:
+        - /bin/bash
+      args:
+        - /init-datanode.sh
+      env:
+        - name: HADOOP_HOME
+          value: /opt/hadoop
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+      volumeMounts:
+        - name: datanode-1-data
+          mountPath: /opt/hadoop/data/dataNode
+        - name: hadoop-config
+          mountPath: /opt/hadoop/etc/hadoop
+        - name: init-datanode
+          mountPath: /init-datanode.sh
+          readOnly: true
+  volumes:
+    - name: datanode-1-data
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/data/datanode-1
+        type: DirectoryOrCreate
+    - name: hadoop-config
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/config
+        type: Directory
+    - name: init-datanode
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/init-datanode.sh
+        type: File
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: datanode-2
+  labels:
+    app: hadoop
+    component: datanode
+    datanode-index: "2"
+  annotations:
+    io.podman.annotations.networks: hdfs_network
+    io.podman.annotations.ulimits: nofile=65536:65536
+spec:
+  hostname: datanode-2
+  restartPolicy: Always
+  containers:
+    - name: datanode-2
+      image: apache/hadoop:3.4.1
+      command:
+        - /bin/bash
+      args:
+        - /init-datanode.sh
+      env:
+        - name: HADOOP_HOME
+          value: /opt/hadoop
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+      volumeMounts:
+        - name: datanode-2-data
+          mountPath: /opt/hadoop/data/dataNode
+        - name: hadoop-config
+          mountPath: /opt/hadoop/etc/hadoop
+        - name: init-datanode
+          mountPath: /init-datanode.sh
+          readOnly: true
+  volumes:
+    - name: datanode-2-data
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/data/datanode-2
+        type: DirectoryOrCreate
+    - name: hadoop-config
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/config
+        type: Directory
+    - name: init-datanode
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/init-datanode.sh
+        type: File
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: datanode-3
+  labels:
+    app: hadoop
+    component: datanode
+    datanode-index: "3"
+  annotations:
+    io.podman.annotations.networks: hdfs_network
+    io.podman.annotations.ulimits: nofile=65536:65536
+spec:
+  hostname: datanode-3
+  restartPolicy: Always
+  containers:
+    - name: datanode-3
+      image: apache/hadoop:3.4.1
+      command:
+        - /bin/bash
+      args:
+        - /init-datanode.sh
+      env:
+        - name: HADOOP_HOME
+          value: /opt/hadoop
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+      volumeMounts:
+        - name: datanode-3-data
+          mountPath: /opt/hadoop/data/dataNode
+        - name: hadoop-config
+          mountPath: /opt/hadoop/etc/hadoop
+        - name: init-datanode
+          mountPath: /init-datanode.sh
+          readOnly: true
+  volumes:
+    - name: datanode-3-data
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/data/datanode-3
+        type: DirectoryOrCreate
+    - name: hadoop-config
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/config
+        type: Directory
+    - name: init-datanode
+      hostPath:
+        path: /Users/chao/Repos/Dockyard/docker-compose/hadoop/init-datanode.sh
+        type: File
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resourcemanager
+  labels:
+    app: hadoop
+    component: resourcemanager
+  annotations:
+    io.podman.annotations.networks: hdfs_network
+    io.podman.annotations.ulimits: nofile=65536:65536
+spec:
+  hostname: resourcemanager
+  restartPolicy: Always
+  containers:
+    - name: resourcemanager
+      image: apache/hadoop:3.4.1
+      command:
+        - yarn
+      args:
+        - resourcemanager
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+      ports:
+        - containerPort: 8088
+          hostPort: 8088
+          protocol: TCP

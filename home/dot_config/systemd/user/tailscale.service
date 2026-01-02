@@ -1,0 +1,29 @@
+[Unit]
+Description=Tailscale node agent
+Documentation=https://tailscale.com/kb/
+Wants=network-pre.target
+After=network-pre.target NetworkManager.service systemd-resolved.service
+
+[Service]
+Environment="PORT=41641"
+ExecStart=/home/linuxbrew/.linuxbrew/opt/tailscale/bin/tailscaled --tun=userspace-networking --socket=%t/tailscale/tailscaled.sock --state=%h/.local/share/tailscale/tailscaled.state
+ExecStopPost=/home/linuxbrew/.linuxbrew/opt/tailscale/bin/tailscaled --cleanup
+
+Restart=on-failure
+
+RuntimeDirectory=tailscale
+RuntimeDirectoryMode=0755
+StateDirectory=tailscale
+StateDirectoryMode=0700
+CacheDirectory=tailscale
+CacheDirectoryMode=0750
+Type=notify
+
+Environment=HTTP_PROXY=http://127.0.0.1:6152
+Environment=HTTPS_PROXY=http://127.0.0.1:6152
+Environment=NO_PROXY=localhost,127.0.0.1,::1,100.64.0.0/10,100.100.100.100
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

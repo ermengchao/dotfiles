@@ -1,0 +1,9 @@
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    environment:
+      DOCKER_HOST: "tcp://host.docker.internal:2375"
+      WATCHTOWER_NOTIFICATIONS: shoutrrr
+      WATCHTOWER_NOTIFICATION_URL: "discord://1350515112594772045/apSxxUAp2Yqgmq5WrWm2mTk-0xb7IV53-u4G6tuTV2wOUbIsJ5-LQd6QmPVCBc3lEwvN"

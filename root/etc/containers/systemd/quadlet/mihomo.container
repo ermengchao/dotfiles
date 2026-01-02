@@ -1,0 +1,25 @@
+[Unit]
+Description=mihomo (metacubex/mihomo)
+
+[Container]
+Image=ghcr.io/metacubex/mihomo:latest
+AutoUpdate=registry
+ContainerName=mihomo
+
+Pid=host
+Ipc=host
+Network=host
+
+AddCapability=ALL
+# SecurityLabelDisable=true
+
+Volume=/home/chao/.local/podman/mihomo/config:/root/.config/mihomo
+Device=/dev/net/tun
+Volume=/etc/timezone:/etc/timezone:ro
+Volume=/etc/localtime:/etc/localtime:ro
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

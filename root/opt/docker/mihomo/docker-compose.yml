@@ -1,0 +1,49 @@
+services:
+  mihomo:
+    image: metacubex/mihomo
+    container_name: mihomo
+    hostname: mihomo
+    restart: unless-stopped
+    pid: host
+    ipc: host
+    network_mode: host
+    cap_add:
+      - ALL
+    security_opt:
+      - apparmor=unconfined
+    volumes:
+      - ./config:/root/.config/mihomo
+      - /dev/net/tun:/dev/net/tun
+      - /etc/localtime:/etc/localtime:ro
+
+  yacd:
+    container_name: yacd
+    image: haishanh/yacd
+    restart: unless-stopped
+    ports:
+      - "1234:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - mihomo_network
+
+  metacubexd:
+    container_name: metacubexd
+    image: ghcr.io/metacubex/metacubexd
+    restart: unless-stopped
+    ports:
+      - "1235:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./config/metacubexd:/config/caddy
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - mihomo_network
+
+networks:
+  mihomo_network:
+    driver: bridge

@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# NodeJS
+**/node_modules/
+
+# Dev Dependencies
+commitlint.config.js
+lefthook.yml
+
