@@ -3,7 +3,7 @@
 .config/mihomo
 .config/systemd
 {{ else if eq .chezmoi.os "linux" -}}
-{{   if eq.chezmoi.uid "0" -}}
+{{   if eq .chezmoi.uid "0" -}}
 .config/containers
 .config/gh
 .config/ghostty
@@ -11,7 +11,6 @@
 .config/lazygit
 .config/mihomo
 .config/systemd
-.config/tree-sitter
 .config/.bunfig.toml
 {{   end -}}
 .config/codesnap
