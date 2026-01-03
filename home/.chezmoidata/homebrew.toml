@@ -59,7 +59,6 @@ casks = [
   # "font-sf-mono-nerd-font-ligaturized",
   "font-sf-pro",
   "ghostty",
-  "jordanbaird-ice",
   # "mactex-no-gui",
   # "motrix",
   "notchnook",
@@ -69,10 +68,6 @@ casks = [
   "surge",
   "tailscale-app",
 ]
-
-[[homebrew.darwin.mas]]
-name = "AdGuard for Safari"
-id = 1440147259
 
 [[homebrew.darwin.mas]]
 name = "Developer"
