@@ -1,0 +1,31 @@
+{
+  "log": { "loglevel": "warning" },
+  "inbounds": [
+    {
+      "listen": "0.0.0.0",
+      "port": 4443,
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          { "password": {{ .env.XRAY_TROJAN_PASSWORD | quote }} }
+        ]
+      },
+      "streamSettings": {
+        "network": "raw",
+        "security": "tls",
+        "tlsSettings": {
+          "alpn": ["http/1.1"],
+          "certificates": [
+            {
+              "certificateFile": "/home/chao/.local/share/ssl/er-meng.com/fullchain.cer",
+              "keyFile": "/home/chao/.local/share/ssl/er-meng.com/er-meng.com.key"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    { "protocol": "freedom" }
+  ]
+}

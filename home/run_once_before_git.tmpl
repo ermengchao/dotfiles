@@ -1,14 +1,16 @@
-{{- if eq os.chezmoi "darwin" -}}
+{{- if eq .chezmoi.os "darwin" -}}
 #!/opt/homebrew/bin/fish
 
-/opt/homebrew/bin/git remote add d https://github.com/ermengchao/dotfiles
+cd {{ .chezmoi.workingTree }}
+/opt/homebrew/bin/git remote add d https://github.com/ermengchao/dotfiles.git
 
 /opt/homebrew/bin/git branch --set-upstream-to=d/main main
 
-{{- else if eq os.chezmoi "linux" -}}
+{{- else if eq .chezmoi.os "linux" -}}
 #!/home/linuxbrew/.linuxbrew/bin/fish
 
-/home/linuxbrew/.linuxbrew/bin/git remote add d https://github.com/ermengchao/dotfiles
+cd {{ .chezmoi.workingTree }}
+/home/linuxbrew/.linuxbrew/bin/git remote add d https://github.com/ermengchao/dotfiles.git
 
 /home/linuxbrew/.linuxbrew/bin/git branch --set-upstream-to=d/main main
 {{- end -}}
