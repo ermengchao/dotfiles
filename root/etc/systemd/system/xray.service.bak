@@ -1,0 +1,20 @@
+[Unit]
+Description=Xray Service
+Documentation=https://github.com/xtls
+After=network.target nss-lookup.target
+
+[Service]
+User=chao
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+Environment=XRAY_LOCATION_ASSET=/home/chao/.config/xray
+Environment=XRAY_LOCATION_CONFIG=/home/chao/.config/xray
+ExecStart=/home/linuxbrew/.linuxbrew/bin/xray run
+Restart=on-failure
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+
+[Install]
+WantedBy=multi-user.target
