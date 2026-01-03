@@ -6,9 +6,9 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 
-Environment=CNC_USER_ID={{- .env.LR_CNC_USER_ID | quote }}
-Environment=CNC_PASSWORD={{- .env.LR_CNC_PASSWORD | quote }}
-Environment=CNC_SERVICE={{- .env.LR_CNC_SERVICE | quote }}
+Environment=CNC_USER_ID={{- .env.CNC_USER_ID | quote }}
+Environment=CNC_PASSWORD={{- .env.CNC_PASSWORD | quote }}
+Environment=CNC_SERVICE={{- .env.CNC_SERVICE | quote }}
 ExecStartPre=/home/linuxbrew/.linuxbrew/bin/uvx --from cnc-cli cnc logout
 ExecStart=/usr/bin/sleep 2
 ExecStartPost=/home/linuxbrew/.linuxbrew/bin/uvx --from cnc-cli cnc login
