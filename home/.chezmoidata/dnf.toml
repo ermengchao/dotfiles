@@ -1,6 +1,6 @@
 [dnf]
 packages = [
-  "caddy",
+  "clang",
   "flathub",
   "podman",
   "samba",
