@@ -1,0 +1,4 @@
+proxy.er-meng.com {
+    reverse_proxy * localhost:3000
+    tls /home/chao/.local/share/ssl/er-meng.com/fullchain.cer /home/chao/.local/share/ssl/er-meng.com/er-meng.com.key
+}
