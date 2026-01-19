@@ -20,6 +20,7 @@ end | /opt/homebrew/bin/brew bundle --file=/dev/stdin
 {{ else if eq .chezmoi.os "linux" -}}
 {{   if eq .chezmoi.uid "0" -}}
 {{   else -}}
+{{     if eq .chezmoi.version.builtBy "Homebrew" }}
 
 #!/home/linuxbrew/.linuxbrew/bin/fish
 
@@ -30,7 +31,11 @@ begin
 {{ range .homebrew.linux.brews -}}
   echo 'brew {{ . | quote }}'
 {{ end -}}
+{{ range .homebrew.linux.casks -}}
+  echo 'cask {{ . | quote }}'
+{{ end -}}
 end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
 
+{{-     end }}
 {{-   end }}
 {{- end -}}

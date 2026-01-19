@@ -18,6 +18,12 @@ Host Fedora.local
   AddkeysToAgent yes
   IdentityFile ~/.ssh/keys/Fedora/Fedora
 
+Host HA
+  HostName homeassistant.local
+  User root
+  AddkeysToAgent yes
+  IdentityFile ~/.ssh/keys/HomeAssistant/HomeAssistant
+
 Host aws-ec2
   HostName er-meng.com
   User chao

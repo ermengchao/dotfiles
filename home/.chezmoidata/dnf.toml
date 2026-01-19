@@ -1,7 +1,10 @@
 [dnf]
+
 packages = [
   "clang",
   "flathub",
+  "gnome-extensions-app",
+  "gnome-tweaks",
   "podman",
   "samba",
   "seahorse",

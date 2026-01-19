@@ -1,10 +1,13 @@
 {{- if eq .chezmoi.os "darwin" -}}
+
 .config/containers
 .config/mihomo
 .config/systemd
 .config/xray
+
 {{ else if eq .chezmoi.os "linux" -}}
 {{   if eq .chezmoi.uid "0" -}}
+
 .config/containers
 .config/gh
 .config/ghostty
@@ -13,12 +16,10 @@
 .config/mihomo
 .config/systemd
 .config/.bunfig.toml
+
 {{   end -}}
+
 .config/codesnap
 .config/posting
+
 {{- end }}
-
-.config/zellij
-
-.zsh
-.zsh_x86

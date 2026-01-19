@@ -20,7 +20,6 @@ brews = [
   "fd",
   "ffmpeg",
   "fzf",
-  # "genact",
   "gh",
   "git",
   "git-delta",
@@ -41,7 +40,6 @@ brews = [
   "ripgrep",
   "rust",
   "uv",
-  # "whalebrew",
   "yazi",
   "zoxide",
 ]
@@ -57,7 +55,6 @@ casks = [
   "downie",
   "font-sf-compact",
   "font-sf-mono",
-  # "font-sf-mono-nerd-font-ligaturized",
   "font-sf-pro",
   "ghostty",
   # "mactex-no-gui",
@@ -168,4 +165,10 @@ brews = [
   "tldr",
   "yazi",
   "zoxide",
+]
+
+casks = [
+  "font-fira-mono-nerd-font",
+  "font-inter",
+  "font-sarasa-gothic",
 ]

@@ -1,0 +1,15 @@
+[pacman]
+
+packages = [
+  "bat",
+  "chezmoi",
+  "fish",
+  "git",
+  "gnome",
+  "gnome-extra",
+  "gnome-extension",
+  "flatpak",
+  "neovim",
+  "ripgrep",
+  "tailscale",
+]
