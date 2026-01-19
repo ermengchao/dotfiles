@@ -24,12 +24,15 @@ abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
 abbr xcode "open -a Xcode"
 
 {{ else if eq .chezmoi.os "linux" -}}
-# Appearance
-if test "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" = prefer-dark
-end
+{{   if eq .chezmoi.version.builtBy "Homebrew" -}}
 
 # Homebrew
 /home/linuxbrew/.linuxbrew/bin/brew shellenv fish | source
+
+{{   end -}}
+# Appearance
+if test "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" = prefer-dark
+end
 
 # SSH-Agent
 eval "$(ssh-agent -c 2>/dev/null)" >/dev/null
