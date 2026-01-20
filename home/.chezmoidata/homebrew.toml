@@ -139,6 +139,7 @@ taps = [
 ]
 
 brews = [
+  "age",
   "bat",
   "bottom",
   "oven-sh/bun/bun",
@@ -155,14 +156,13 @@ brews = [
   "git-lfs",
   "imagemagick",
   "iperf3",
-  "llvm",
   "mihomo",
   "neovim",
   "p7zip",
   "ripgrep",
   "tailscale",
-  "tree-sitter",
   "tldr",
+  "tree-sitter",
   "yazi",
   "zoxide",
 ]

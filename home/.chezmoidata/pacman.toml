@@ -1,15 +1,45 @@
 [pacman]
 
+drivers = [
+  "nvidia-open",
+  "nvidia-utils",
+]
+
 packages = [
+  "age",
   "bat",
+  "bottom",
+  "bun",
+  "caddy",
   "chezmoi",
+  "fastfetch",
   "fish",
+  "fisher",
+  "fd",
+  "fzf",
   "git",
+  "git-delta",
+  "github-cli",
+  "git-lfs",
   "gnome",
-  "gnome-extra",
-  "gnome-extension",
-  "flatpak",
+  "imagemagick",
+  "iperf3",
   "neovim",
+  "podman",
+  "p7zip",
   "ripgrep",
   "tailscale",
+  "tldr",
+  "tree-sitter",
+  "yazi",
+  "zoxide",
+]
+
+applications = [
+  "steam",
+]
+
+paru = [
+  "mihomo",
+  "google-chrome",
 ]

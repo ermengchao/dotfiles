@@ -2,7 +2,7 @@
 
 packages = [
   "clang",
-  "flathub",
+  "flatpak",
   "gnome-extensions-app",
   "gnome-tweaks",
   "podman",

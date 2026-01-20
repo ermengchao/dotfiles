@@ -22,7 +22,7 @@ end | /opt/homebrew/bin/brew bundle --file=/dev/stdin
 {{   else -}}
 {{     if eq .chezmoi.version.builtBy "Homebrew" }}
 
-#!/home/linuxbrew/.linuxbrew/bin/fish
+#!/usr/bin/env fish
 
 begin
 {{ range .homebrew.linux.taps -}}

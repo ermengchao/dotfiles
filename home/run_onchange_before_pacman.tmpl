@@ -1,0 +1,9 @@
+{{- if eq .chezmoi.osRelease.id "arch" -}}
+
+#!/usr/bin/env fish
+
+{{ range .pacman.packages -}}
+sudo pacman -S --needed --noconfirm {{ . | quote }}
+{{ end -}}
+
+{{- end -}}
