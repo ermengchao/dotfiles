@@ -1,0 +1,33 @@
+{{- if eq .chezmoi.os "darwin" -}}
+Include ~/.orbstack/ssh/config
+{{ end -}}
+
+Host *
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    TCPKeepAlive yes
+
+Host aws-ec2
+  HostName er-meng.com
+  User chao
+  AddkeysToAgent yes
+  IdentityFile ~/.ssh/keys/AWS_KP/AWS_KP
+
+Host laptop
+  Hostname 100.100.1.64
+  User chao
+  AddkeysToAgent yes
+  IdentityFile ~/.ssh/keys/Laptop/Laptop
+
+Host mf
+  HostName 100.100.2.3
+  User chao
+  AddkeysToAgent yes
+  IdentityFile ~/.ssh/keys/Minisforum/Minisforum
+  # RemoteCommand /bin/bash
+
+Host pi
+  HostName 100.100.1.4
+  User root
+  AddkeysToAgent yes
+  IdentityFile ~/.ssh/keys/RaspberryPi/RaspberryPi
