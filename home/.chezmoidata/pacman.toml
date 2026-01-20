@@ -17,6 +17,7 @@ packages = [
   "fisher",
   "fd",
   "fzf",
+  "ghostty",
   "git",
   "git-delta",
   "github-cli",
