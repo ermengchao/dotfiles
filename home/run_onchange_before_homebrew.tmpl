@@ -20,7 +20,7 @@ end | /opt/homebrew/bin/brew bundle --file=/dev/stdin
 {{ else if eq .chezmoi.os "linux" -}}
 {{   if eq .chezmoi.uid "0" -}}
 {{   else -}}
-{{     if eq .chezmoi.version.builtBy "Homebrew" }}
+{{     if eq .chezmoi.version.builtBy "Homebrew" -}}
 
 #!/usr/bin/env fish
 
