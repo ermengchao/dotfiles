@@ -1,7 +1,7 @@
 # Appearance
 theme = light:"Xcode Light",dark:"Xcode WWDC"
-background-opacity = 0.8
-background-blur = 80
+background-opacity = 0.95
+background-blur = 95
 background-opacity-cells = true
 font-family = "SF Mono"
 font-family = "PingFang SC"

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "enabled_providers": ["openai"],
+  "tui": {
+    "scroll_speed": 3,
+    "scroll_acceleration": {
+      "enabled": true
+    },
+    "diff_style": "auto"
+  },
+  "server": {
+    "port": 4096,
+    "hostname": "0.0.0.0",
+    "mdns": true,
+    "cors": ["http://localhost:5173"]
+  },
+  "tools": {
+    "write": false,
+    "bash": false
+  },
+  "theme": "nord",
+  "autoupdate": false,
+  "permission": {
+    "edit": "ask",
+    "bash": "ask"
+  },
+  "watcher": {
+    "ignore": ["node_modules/**", "dist/**", ".git/**"]
+  },
+  "mcp": {
+    "github-mcp": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp",
+      "enabled": false,
+      "headers": {
+        "Authorization": "Bearer {{ .env.GITHUB_PAT }}"
+      }
+    },
+    "chrome-mcp": {
+      "type": "local",
+      "command": ["bunx", "chrome-devtools-mcp@latest"],
+      "enabled": false,
+    },
+    "homebrew-mcp": {
+      "type": "local",
+      "command": ["brew", "mcp-server"],
+      "enabled": false,
+    },
+  },
+}

@@ -2,12 +2,14 @@
 
 .config/containers
 .config/mihomo
+.config/samba
 .config/systemd
 .config/xray
 
 {{ else if eq .chezmoi.os "linux" -}}
 {{   if eq .chezmoi.uid "0" -}}
 
+.ssh
 .config/containers
 .config/gh
 .config/ghostty

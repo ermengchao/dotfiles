@@ -3,9 +3,12 @@
 packages = [
   "clang",
   "flatpak",
-  "gnome-extensions-app",
-  "gnome-tweaks",
   "podman",
   "samba",
+]
+
+gnome-apps = [
+  "gnome-extensions-app",
+  "gnome-tweaks",
   "seahorse",
 ]
