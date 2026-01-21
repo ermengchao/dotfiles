@@ -4,10 +4,11 @@ packages = [
   "clang",
   "flatpak",
   "podman",
+  "wl-clipboard",
   "samba",
 ]
 
-gnome-apps = [
+applications = [
   "gnome-extensions-app",
   "gnome-tweaks",
   "seahorse",

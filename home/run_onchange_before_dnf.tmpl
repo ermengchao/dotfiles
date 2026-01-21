@@ -1,3 +1,5 @@
+{{- $isGraphical := eq (output "sh" "-c" "systemctl is-active --quiet gdm && echo true || echo false" | trim) "true" -}}
+
 {{- if eq .chezmoi.os "linux" -}}
 {{   if eq .chezmoi.osRelease.id "fedora" -}}
 
@@ -6,6 +8,14 @@
 {{ range .dnf.packages -}}
 sudo dnf install -y {{ . | quote }}
 {{ end -}}
+
+{{     if $isGraphical -}}
+
+{{ range .dnf.applications -}}
+sudo dnf install -y {{ . | quote }}
+{{ end -}}
+
+{{     end -}}
 
 {{   end -}}
 {{- end -}}

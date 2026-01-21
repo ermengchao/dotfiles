@@ -27,6 +27,7 @@ brews = [
   "git-lfs",
   "imagemagick",
   "iperf3",
+  "jq",
   "lazygit",
   "lefthook",
   "mermaid-cli",
@@ -37,9 +38,10 @@ brews = [
   "openssh",
   "resvg",
   "pandoc",
+  "poppler",
   "posting",
   "p7zip",
-  "rclone",
+  # "rclone",
   "ripgrep",
   "rust",
   "uv",
@@ -59,8 +61,7 @@ casks = [
   "font-sf-mono",
   "font-sf-pro",
   "ghostty",
-  # "mactex-no-gui",
-  # "motrix",
+  "motrix",
   "notchnook",
   "notion",
   "orbstack",
@@ -69,29 +70,34 @@ casks = [
   "tailscale-app",
 ]
 
+# Apple
+[[homebrew.darwin.mas]]
+name = "Compressor"
+id = 424390742
+
 [[homebrew.darwin.mas]]
 name = "Developer"
 id = 640199958
 
 [[homebrew.darwin.mas]]
-name = "Immersive Translate"
-id = 6447957425
-
-[[homebrew.darwin.mas]]
-name = "Infuse"
-id = 1136220934
+name = "Final Cut Pro"
+id = 424389933
 
 [[homebrew.darwin.mas]]
 name = "Keynote"
 id = 409183694
 
 [[homebrew.darwin.mas]]
-name = "Magnet"
-id = 441258766
+name = "Logic Pro"
+id = 634148309
 
 [[homebrew.darwin.mas]]
-name = "Noir"
-id = 1592917505
+name = "MainStage"
+id = 634159523
+
+[[homebrew.darwin.mas]]
+name = "Motion"
+id = 434290957
 
 [[homebrew.darwin.mas]]
 name = "Numbers"
@@ -102,8 +108,8 @@ name = "Pages"
 id = 409201541
 
 [[homebrew.darwin.mas]]
-name = "Tampermonkey"
-id = 6738342400
+name = "Pixelmator Pro"
+id = 1289583905
 
 [[homebrew.darwin.mas]]
 name = "TestFlight"
@@ -117,22 +123,30 @@ id = 1450874784
 name = "Xcode"
 id = 497799835
 
-# Microsoft
+
+[[homebrew.darwin.mas]]
+name = "Immersive Translate"
+id = 6447957425
+
+[[homebrew.darwin.mas]]
+name = "Infuse"
+id = 1136220934
+
+[[homebrew.darwin.mas]]
+name = "Magnet"
+id = 441258766
+
+[[homebrew.darwin.mas]]
+name = "Noir"
+id = 1592917505
+
+[[homebrew.darwin.mas]]
+name = "Tampermonkey"
+id = 6738342400
+
 [[homebrew.darwin.mas]]
 name = "Windows App"
 id = 1295203466
-
-[[homebrew.darwin.mas]]
-name = "Microsoft Word"
-id = 462054704
-
-[[homebrew.darwin.mas]]
-name = "Microsoft Excel"
-id = 462058435
-
-[[homebrew.darwin.mas]]
-name = "Microsoft PowerPoint"
-id = 462062816
 
 
 [homebrew.linux]
@@ -148,6 +162,7 @@ brews = [
   "caddy",
   "chezmoi",
   "fastfetch",
+  "ffmpeg",
   "fish",
   "fisher",
   "fd",
@@ -158,14 +173,17 @@ brews = [
   "git-lfs",
   "imagemagick",
   "iperf3",
+  "jq",
   "mihomo",
   "neovim",
   "opencode",
   "p7zip",
+  "poppler",
+  "resvg",
   "ripgrep",
   "tailscale",
   "tldr",
-  "tree-sitter",
+  "tree-sitter-cli",
   "yazi",
   "zoxide",
 ]

@@ -3,7 +3,7 @@
 [[flatpak.remotes]]
 name = "flathub"
 location = "https://dl.flathub.org/repo/flathub.flatpakrepo"
-apps = [
+applications = [
   "com.github.tchx84.Flatseal",
   "com.google.Chrome",
   "com.valvesoftware.Steam",
