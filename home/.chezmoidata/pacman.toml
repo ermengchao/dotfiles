@@ -23,6 +23,7 @@ packages = [
   "github-cli",
   "git-lfs",
   "gnome",
+  "gnome-tweaks",
   "imagemagick",
   "iperf3",
   "neovim",
@@ -43,4 +44,10 @@ applications = [
 paru = [
   "mihomo",
   "google-chrome",
+]
+
+font = [
+  "otf-firamono-nerd",
+  "ttf-sarasa-gothic",
+  "inter-font",
 ]
