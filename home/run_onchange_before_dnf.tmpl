@@ -1,6 +1,5 @@
-{{- $isGraphical := eq (output "sh" "-c" "systemctl is-active --quiet gdm && echo true || echo false" | trim) "true" -}}
-
 {{- if eq .chezmoi.os "linux" -}}
+{{- $isGraphical := eq (output "fish" "-c" "systemctl is-active --quiet gdm; and echo true; or echo false" | trim) "true" -}}
 {{   if eq .chezmoi.osRelease.id "fedora" -}}
 
 #!/usr/bin/env fish
