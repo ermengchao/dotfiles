@@ -61,6 +61,7 @@ casks = [
   "font-sf-mono",
   "font-sf-pro",
   "ghostty",
+  "google-chrome",
   "motrix",
   "notchnook",
   "notion",
