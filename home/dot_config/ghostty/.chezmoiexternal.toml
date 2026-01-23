@@ -1,4 +1,4 @@
-[".config/ghostty/themes"]
+["themes"]
 type = "archive"
 url = "https://github.com/mbadolato/iTerm2-Color-Schemes/releases/download/release-20260112-150707-28c8f5b/ghostty-themes.tgz"
 exact = true
