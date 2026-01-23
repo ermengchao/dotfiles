@@ -1,0 +1,540 @@
+allow-lan: true
+bind-address: "*"
+authentication:
+  - "chao:{{ .env.MIHOMO_AUTHENTICATION }}"
+skip-auth-prefixes:
+  - 127.0.0.1/8
+  - 10.0.0.0/8
+  - 172.16.0.0/12
+  - 192.168.0.0/16
+  - 100.64.0.0/10
+  - ::1/128
+mode: rule
+log-level: warning
+ipv6: false
+mixed-port: 6152
+find-process-mode: strict
+external-controller: '0.0.0.0:7890'
+# external-controller-tls: 127.0.0.1:9443
+external-controller-cors:
+  allow-origins:
+    - '*'
+  allow-private-network: true
+# secret: {{ .env.MIHOMO_AUTHENTICATION }}
+profile:
+  store-selected: true
+  store-fake-ip: true
+unified-delay: true
+# interface-name: en0
+# routing-mark: 6153
+geo-auto-update: true
+geo-update-interval: 24
+global-ua: clash.meta
+tun:
+  enable: false
+  stack: mixed
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  device: mihomo
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+  exclude-interface:
+    - Tailscale
+    - tailscale0
+  mtu: 1500
+  route-exclude-address:
+    - 100.64.0.0/10
+    - fd7a:115c:a1e0::/48
+  strict-route: false
+dns:
+  enable: true
+  cache-algorithm: arc
+  prefer-h3: true
+  # use-hosts: true
+  # use-system-hosts: true
+  respect-rules: false
+  listen: 0.0.0.0:1053
+  ipv6: true
+  default-nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - '*.lan'
+    - '+.argotunnel.com'
+  nameserver-policy:
+    '+.arpa': '10.0.0.1'
+    '+.taileee60e.ts.net': '100.100.100.100' 
+    # 'rule-set:cn':
+        # - https://doh.pub/dns-query
+        # - https://dns.alidns.com/dns-query
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback:
+    - https://doh.dns.sb/dns-query
+    - https://dns.cloudflare.com/dns-query
+    - https://dns.twnic.tw/dns-query
+    - tls://8.8.4.4
+    - tls://1.1.1.1
+  # proxy-server-nameserver:
+  #   - https://doh.pub/dns-query
+  # direct-nameserver:
+  #   - system
+  direct-nameserver-follow-policy: false
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    nameserver-policy:
+      - gfw
+    ipcidr:
+      - 240.0.0.0/4
+    domain:
+      - '+.google.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
+
+proxy-providers:
+  General:
+    type: http
+    url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/General?target=ClashMeta
+    path: ./proxy-providers/General
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  HK:
+    type: http
+    url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/HK?target=ClashMeta
+    path: ./proxy-providers/HK
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  TW:
+    type: http
+    url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/TW?target=ClashMeta
+    path: ./proxy-providers/TW
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  JP:
+    type: http
+    url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/JP?target=ClashMeta
+    path: ./proxy-providers/JP
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  SG:
+    type: http
+    url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/SG?target=ClashMeta
+    path: ./proxy-providers/SG
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  US:
+    type: http
+    url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/US?target=ClashMeta
+    path: ./proxy-providers/US
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  MY:
+    type: http
+    url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/MY?target=ClashMeta
+    path: ./proxy-providers/MY
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+
+  AR:
+    type: http
+    url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/AR?target=ClashMeta
+    path: ./proxy-providers/AR
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+
+  TR:
+    type: http
+    url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/TR?target=ClashMeta
+    path: ./proxy-providers/TR
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+
+proxy-groups:
+  - name: "🚀 Select"
+    type: select
+    proxies:
+      - "♻️ Auto"
+      - "🇭🇰 HK"
+      - "🇹🇼 TW"
+      - "🇯🇵 JP"
+      - "🇸🇬 SG"
+      - "🇺🇲 US"
+      - "🇲🇾 MY"
+      - "🇦🇷 AR"
+      - "🇹🇷 TR"
+  - name: "♻️ Auto"
+    type: url-test
+    use:
+      - General
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "💬 ChatGPT"
+    type: select
+    proxies:
+      - "🚀 Select"
+      - "♻️ Auto"
+      - "🇹🇼 TW"
+      - "🇯🇵 JP"
+      - "🇸🇬 SG"
+      - "🇺🇲 US"
+      - "🇲🇾 MY"
+      - "🇦🇷 AR"
+      - "🇹🇷 TR"
+  - name: "🍎 AppleTV"
+    type: select
+    proxies:
+      - DIRECT
+      - "🚀 Select"
+      - "♻️ Auto"
+      - "🇭🇰 HK"
+      - "🇹🇼 TW"
+      - "🇯🇵 JP"
+      - "🇸🇬 SG"
+      - "🇺🇲 US"
+      - "🇲🇾 MY"
+      - "🇦🇷 AR"
+      - "🇹🇷 TR"
+  - name: "🎮 Game"
+    type: select
+    proxies:
+      - "🚀 Select"
+      - DIRECT
+      - "♻️ Auto"
+      - "🇭🇰 HK"
+      - "🇹🇼 TW"
+      - "🇯🇵 JP"
+      - "🇸🇬 SG"
+      - "🇺🇲 US"
+      - "🇲🇾 MY"
+      - "🇦🇷 AR"
+      - "🇹🇷 TR"
+  - name: "🐟 Final"
+    type: select
+    proxies:
+      - "🚀 Select"
+      - DIRECT
+      - "♻️ Auto"
+      - "🇭🇰 HK"
+      - "🇹🇼 TW"
+      - "🇯🇵 JP"
+      - "🇸🇬 SG"
+      - "🇺🇲 US"
+      - "🇲🇾 MY"
+      - "🇦🇷 AR"
+      - "🇹🇷 TR"
+  - name: "🛑 AD"
+    type: select
+    proxies:
+      - REJECT
+      - "🚀 Select"
+      - DIRECT
+    hidden: true
+  - name: "🇭🇰 HK"
+    type: url-test
+    use:
+      - HK
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇹🇼 TW"
+    type: url-test
+    use:
+      - TW
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇯🇵 JP"
+    type: url-test
+    use:
+      - JP
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇸🇬 SG"
+    type: url-test
+    use:
+      - SG
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇺🇲 US"
+    type: url-test
+    use:
+      - US
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇲🇾 MY"
+    type: url-test
+    use:
+      - MY
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇦🇷 AR"
+    type: url-test
+    use:
+      - AR
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇹🇷 TR"
+    type: url-test
+    use:
+      - TR
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+
+rule-providers:
+  # Ruleset
+  ai:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/AI.yaml
+    path: ./rule-providers/Ruleset/ai.yaml
+    interval: 86400
+
+  appletv:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/AppleTV.yaml
+    path: ./rule-providers/Ruleset/appletv.yaml
+    interval: 86400
+
+  steam:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/Steam.yaml
+    path: ./rule-providers/Ruleset/steam.yaml
+    interval: 86400
+
+  sony:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/Sony.yaml
+    path: ./rule-providers/Ruleset/sony.yaml
+    interval: 86400
+
+  nintendo:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/Nintendo.yaml
+    path: ./rule-providers/Ruleset/nintendo.yaml
+    interval: 86400
+
+  steam_cn:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/SteamCN.yaml
+    path: ./rule-providers/Ruleset/steam_cn.yaml
+    interval: 86400
+  
+  game_download:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/GameDownload.yaml
+    path: ./rule-providers/Ruleset/game_download.yaml
+    interval: 86400
+
+  wechat:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/Wechat.yaml
+    path: ./rule-providers/Ruleset/wechat.yaml
+    interval: 86400
+
+  apple:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Apple.yaml
+    path: ./rule-providers/Ruleset/apple.yaml
+    interval: 86400
+
+  microsoft:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/Microsoft.yaml
+    path: ./rule-providers/Ruleset/microsoft.yaml
+    interval: 86400
+
+  onedrive:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/OneDrive.yaml
+    path: ./rule-providers/Ruleset/onedrive.yaml
+    interval: 86400
+
+  # Providers
+  proxy:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/ProxyGFWlist.yaml
+    path: ./rule-providers/proxy.yaml
+    interval: 86400
+
+  unban:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/UnBan.yaml
+    path: ./rule-providers/unban.yaml
+    interval: 86400
+
+  ban_ad:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/BanAD.yaml
+    path: ./rule-providers/ban_ad.yaml
+    interval: 86400
+
+  ban_program_ad:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/BanProgramAD.yaml
+    path: ./rule-providers/ban_program_ad.yaml
+    interval: 86400
+
+  local_area_network:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/LocalAreaNetwork.yaml
+    path: ./rule-providers/local_area_network.yaml
+    interval: 86400
+
+  download:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Download.yaml
+    path: ./rule-providers/download.yaml
+    interval: 86400
+
+  china_domain:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/ChinaDomain.yaml
+    path: ./rule-providers/china_domain.yaml
+    interval: 86400
+
+  china_company:
+    type: http
+    behavior: ipcidr
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/ChinaCompanyIp.yaml
+    path: ./rule-providers/china_company.yaml
+    interval: 86400
+
+  chatgpt_chao:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/Chaoermeng/ACL4chao/refs/heads/main/Clash/Providers/ChatGPT.yaml
+    path: ./rule-providers/chatgpt_chao.yaml
+    interval: 86400
+
+  direct_chao:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/Chaoermeng/ACL4chao/refs/heads/main/Clash/Providers/Direct.yaml
+    path: ./rule-providers/direct_chao.yaml
+    interval: 86400
+
+  game_chao:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/Chaoermeng/ACL4chao/refs/heads/main/Clash/Providers/Game.yaml
+    path: ./rule-providers/game_chao.yaml
+    interval: 86400
+
+  proxy_chao:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/Chaoermeng/ACL4chao/refs/heads/main/Clash/Providers/Proxy.yaml
+    path: ./rule-providers/proxy_chao.yaml
+    interval: 86400
+
+# Summary: 
+# Ruleset: ai, appletv, steam, sony, nintendo, steam_cn, game_download, wechat, apple, microsoft, onedrive
+
+# Providers: proxy, unban, ban_ad, ban_program_ad, local_area_network, download, china_domain, china_company, chatgpt_chao, direct_chao, game_chao, proxy_chao
+
+rules:
+  # Providers
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - RULE-SET,ai,💬 ChatGPT
+  - RULE-SET,appletv,🍎 AppleTV
+  - RULE-SET,steam,🎮 Game
+  - RULE-SET,sony,🎮 Game
+  - RULE-SET,nintendo,🎮 Game
+  - RULE-SET,steam_cn,DIRECT
+  - RULE-SET,game_download,DIRECT
+  - RULE-SET,wechat,DIRECT
+  - RULE-SET,apple,DIRECT
+  - RULE-SET,microsoft,DIRECT
+  - RULE-SET,onedrive,DIRECT
+
+  # Ruleset
+  - RULE-SET,proxy,🚀 Select
+  - RULE-SET,download,DIRECT
+  - RULE-SET,unban,DIRECT
+  - RULE-SET,ban_ad,REJECT
+  - RULE-SET,ban_program_ad,REJECT
+  - RULE-SET,local_area_network,DIRECT
+  - RULE-SET,china_domain,DIRECT
+  - RULE-SET,china_company,DIRECT
+  - RULE-SET,chatgpt_chao,💬 ChatGPT
+  - RULE-SET,direct_chao,DIRECT
+  - RULE-SET,game_chao,🎮 Game
+  - RULE-SET,proxy_chao,🚀 Select
+  - MATCH,🐟 Final

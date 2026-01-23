@@ -1,6 +1,7 @@
 [homebrew]
 
 [homebrew.darwin]
+
 taps = [
   "oven-sh/bun",
   "waydabber/betterdisplay",
@@ -71,7 +72,6 @@ casks = [
   "tailscale-app",
 ]
 
-# Apple
 [[homebrew.darwin.mas]]
 name = "Compressor"
 id = 424390742
@@ -124,7 +124,6 @@ id = 1450874784
 name = "Xcode"
 id = 497799835
 
-
 [[homebrew.darwin.mas]]
 name = "Immersive Translate"
 id = 6447957425
@@ -149,8 +148,8 @@ id = 6738342400
 name = "Windows App"
 id = 1295203466
 
-
 [homebrew.linux]
+
 taps = [
   "oven-sh/bun",
 ]

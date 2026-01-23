@@ -1,0 +1,33 @@
+[gnome]
+
+[gnome.extensions]
+
+uuid = [
+  "apps-menu@gnome-shell-extensions.gcampax.github.com",
+  "blur-my-shell@aunetx",
+  "clipboard-indicator@tudmotu.com",
+  "compiz-alike-magic-lamp-effect@hermes83.github.com",
+  "dash-to-dock@micxgx.gmail.com",
+  "dash2dock-lite@icedman.github.com",
+  "kiwi@kemma",
+  "kiwimenu@kemma",
+  "logomenu@aryan_k",
+  "nightthemeswitcher@romainvigier.fr",
+  "search-light@icedman.github.com",
+  "system-monitor-next@paradoxxx.zero.gmail.com",
+  "user-theme@gnome-shell-extensions.gcampax.github.com",
+]
+
+[[gnome.themes]]
+name = "Orchis"
+url = "https://github.com/vinceliuice/Orchis-theme"
+command = "./install.sh --dest ~/.local/share/themes --icon arch --tweaks macos --tweaks dock --round 4px"
+
+[[gnome.icons]]
+name = "Colloid"
+url = "https://github.com/vinceliuice/Colloid-icon-theme"
+command = "./install.sh --dest $HOME/.local/share/icons"
+
+[[gnome.icons]]
+name = "Bibata Modern Ice"
+url = "https://github.com/ful1e5/Bibata_Cursor/releases/latest/download/Bibata-Modern-Ice.tar.xz"

@@ -1,0 +1,15 @@
+{{- if eq .chezmoi.os "linux" -}}
+{{- $isGraphical := eq (output "fish" "-c" "systemctl is-active --quiet gdm; and echo true; or echo false" | trim) "true" -}}
+{{ if $isGraphical -}}
+#!/usr/bin/env fish
+
+set GNOME_SHELL_VERSION $(gnome-shell --version | grep -oE '[0-9]+\.[0-9]+')
+
+{{ range .gnome.extensions.uuid -}}
+curl -L -o "/tmp/{{ . }}.zip" "https://extensions.gnome.org/download-extension/{{ . }}.shell-extension.zip?shell_version=$GNOME_SHELL_VERSION"
+
+gnome-extensions install "/tmp/{{ . }}"
+{{ end -}}
+
+{{ end -}}
+{{- end -}}
