@@ -1,7 +1,14 @@
 #!/usr/bin/env fish
 
+# configure git repo
 cd {{ .chezmoi.workingTree }}
 
 git remote add d https://github.com/ermengchao/dotfiles.git
 git fetch d --prune
 git branch --set-upstream-to=d/main main
+
+# configure hostname
+
+{{ if eq .chezmoi.os "darwin" -}}
+sudo scutil --set HostName {{ .chezmoi.hostname }}
+{{ end -}}

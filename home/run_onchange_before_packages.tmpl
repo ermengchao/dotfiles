@@ -1,0 +1,132 @@
+#!/usr/bin/env fish
+
+{{ if eq .chezmoi.os "darwin" -}}
+begin
+{{   range .homebrew.darwin.taps -}}
+  echo 'tap {{ . | quote }}'
+{{   end -}}
+
+{{   range .homebrew.darwin.brews -}}
+  echo 'brew {{ . | quote }}'
+{{ end -}}
+
+{{   range .homebrew.darwin.casks -}}
+  echo 'cask {{ . | quote }}'
+{{   end -}}
+
+{{   range .homebrew.darwin.mas -}}
+  echo 'mas {{ .name | quote }}, id: {{ .id }}'
+{{   end -}}
+end | /opt/homebrew/bin/brew bundle --file=/dev/stdin
+
+{{ end -}}
+
+{{ if eq .chezmoi.os "linux" -}}
+{{ $isGraphical := eq (output "fish" "-c" "systemctl is-active --quiet gdm; and echo true; or echo false" | trim) "true" -}}
+
+
+# ==== DNF ====
+{{ if eq .chezmoi.osRelease.id "fedora" -}}
+
+{{   range .dnf.packages -}}
+sudo dnf install -y {{ . | quote }}
+{{   end -}}
+
+{{   if $isGraphical -}}
+
+{{     range .dnf.applications -}}
+sudo dnf install -y {{ . | quote }}
+{{     end -}}
+
+{{   end -}}
+{{ end -}}
+# ==== DNF ====
+
+
+# ==== Flatpak ===
+{{ if ne .chezmoi.osRelease.id "arch" -}}
+{{   if $isGraphical -}}
+
+{{     range .flatpak.remotes -}}
+{{ $remote := .name -}}
+flatpak remote-add --user --if-not-exists {{ .name }} {{ .location | quote }}
+
+{{       range .applications -}}
+flatpak install --user --noninteractive {{ $remote }} {{ . | quote }}
+{{       end -}}
+
+{{     end -}}
+
+{{   end -}}
+{{ end -}}
+# ==== Flatpak ===
+
+
+# ==== Gnome Extensions ====
+{{ if $isGraphical -}}
+set GNOME_SHELL_VERSION $(gnome-shell --version | grep -oE '[0-9]+\.[0-9]+')
+
+{{   range .gnome.extensions.uuid -}}
+curl -L -o "/tmp/{{ . }}.zip" "https://extensions.gnome.org/download-extension/{{ . }}.shell-extension.zip?shell_version=$GNOME_SHELL_VERSION"
+gnome-extensions install "/tmp/{{ . }}"
+{{   end -}}
+
+{{ end -}}
+# ==== Gnome Extensions ====
+
+
+# ==== Homebrew ====
+{{ if eq .chezmoi.version.builtBy "Homebrew" -}}
+{{   if ne .chezmoi.uid "0" -}}
+
+begin
+{{     range .homebrew.linux.taps -}}
+  echo 'tap {{ . | quote }}'
+{{     end -}}
+
+{{     range .homebrew.linux.brews -}}
+  echo 'brew {{ . | quote }}'
+{{     end -}}
+
+{{     range .homebrew.linux.casks -}}
+  echo 'cask {{ . | quote }}'
+{{     end -}}
+end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
+
+{{   end -}}
+{{ end -}}
+# ==== Homebrew ====
+
+
+# ==== Pacman ====
+{{ if eq .chezmoi.osRelease.id "arch" -}}
+
+set paru_path ~/Repos/paru
+
+if not test -d $paru_path
+    echo "Paru not found. Installing paru to $paru_path..."
+
+    mkdir ~/Repos
+    git clone https://aur.archlinux.org/paru.git $paru_path
+    cd $paru_path
+    makepkg -si
+end
+
+{{   range .pacman.packages -}}
+sudo pacman -S --needed --noconfirm {{ . | quote }}
+{{   end -}}
+
+{{   range .paru.packages -}}
+paru -S --needed --noconfirm --skipreview {{ . | quote }}
+{{   end -}}
+
+{{   if $isGraphical -}}
+
+{{     range .pacman.applications -}}
+sudo pacman -S --needed --noconfirm {{ . | quote }}
+{{     end -}}
+
+{{   end -}}
+{{ end -}}
+# ==== Pacman ====
+{{ end -}}
