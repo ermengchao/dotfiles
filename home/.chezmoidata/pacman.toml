@@ -28,6 +28,7 @@ packages = [
   "podman",
   "poppler",
   "p7zip",
+  "resvg",
   "ripgrep",
   "tailscale",
   "tldr",
