@@ -1,3 +1,30 @@
+# General
+
+mode: rule
+log-level: warning
+profile:
+  store-selected: true
+  store-fake-ip: true
+geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 24
+global-ua: clash.meta
+find-process-mode: strict
+routing-mark: 6153
+tcp-concurrent: true
+
+# External Controller
+
+external-controller: 0.0.0.0:7890
+external-controller-tls: 0.0.0.0:7891
+external-controller-cors:
+  allow-origins:
+    - '*'
+  allow-private-network: true
+# secret: {{ .env.MIHOMO_AUTHENTICATION }}
+
+# Lan
+
 allow-lan: true
 bind-address: "*"
 authentication:
@@ -9,29 +36,17 @@ skip-auth-prefixes:
   - 192.168.0.0/16
   - 100.64.0.0/10
   - ::1/128
-mode: rule
-log-level: warning
-ipv6: false
+
+# Proxy Settings
+
 mixed-port: 6152
 redir-port: 6153
 tproxy-port: 6154
-find-process-mode: strict
-external-controller: '0.0.0.0:7890'
-# external-controller-tls: 127.0.0.1:9443
-external-controller-cors:
-  allow-origins:
-    - '*'
-  allow-private-network: true
-# secret: {{ .env.MIHOMO_AUTHENTICATION }}
-profile:
-  store-selected: true
-  store-fake-ip: true
+ipv6: false
 unified-delay: true
-# interface-name: en0
-# routing-mark: 6153
-geo-auto-update: true
-geo-update-interval: 24
-global-ua: clash.meta
+
+# Tun
+
 tun:
   enable: false
   stack: mixed
@@ -50,19 +65,30 @@ tun:
     - 100.64.0.0/10
     - fd7a:115c:a1e0::/48
   strict-route: false
+
+# DNS
+
+hosts:
+  '*.ts.net': '100.100.100.100'
 dns:
   enable: true
+  enhanced-mode: fake-ip
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  default-nameserver:
+    - 114.114.114.114
+    - 8.8.8.8
   cache-algorithm: arc
   prefer-h3: true
-  # use-hosts: true
-  # use-system-hosts: true
+  use-hosts: true
+  use-system-hosts: false
   respect-rules: false
   listen: 0.0.0.0:1053
   ipv6: true
   default-nameserver:
     - 1.1.1.1
     - 8.8.8.8
-  enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
@@ -70,24 +96,21 @@ dns:
     - '+.argotunnel.com'
   nameserver-policy:
     '+.arpa': '10.0.0.1'
-    '+.taileee60e.ts.net': '100.100.100.100' 
+    '*.ts.net': '100.100.100.100' 
     # 'rule-set:cn':
         # - https://doh.pub/dns-query
         # - https://dns.alidns.com/dns-query
-  nameserver:
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
   fallback:
     - https://doh.dns.sb/dns-query
     - https://dns.cloudflare.com/dns-query
     - https://dns.twnic.tw/dns-query
     - tls://8.8.4.4
     - tls://1.1.1.1
-  # proxy-server-nameserver:
-  #   - https://doh.pub/dns-query
-  # direct-nameserver:
-  #   - system
-  direct-nameserver-follow-policy: false
+  proxy-server-nameserver:
+    - https://doh.pub/dns-query
+  direct-nameserver:
+    - system
+  direct-nameserver-follow-policy: true
   fallback-filter:
     geoip: true
     geoip-code: CN
@@ -99,6 +122,24 @@ dns:
       - '+.google.com'
       - '+.facebook.com'
       - '+.youtube.com'
+
+# Sniffer
+
+sniffer:
+  enable: true
+  sniffing:
+    - tls
+    - http
+  skip-domain:
+    - 'Mijia Cloud'
+    - 'dlg.io.mi.com'
+    - '+.apple.com'
+  force-domain:
+    - 'google.com'
+  port-whitelist:
+    - 80
+
+# Proxies
 
 proxy-providers:
   General:
