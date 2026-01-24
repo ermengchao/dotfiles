@@ -5,8 +5,8 @@ background-blur = 95
 background-opacity-cells = true
 font-family = "SF Mono"
 font-family = "PingFang SC"
-font-family = "Noto Sans Mono"
-font-family = "Noto Sans CJK SC"
+font-family = "FiraMonoNerdFont"
+font-family = "Sarasa"
 font-size = 14
 faint-opacity = 0.8
 
