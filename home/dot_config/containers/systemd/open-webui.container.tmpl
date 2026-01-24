@@ -1,0 +1,25 @@
+[Unit]
+Description=Open WebUI Container
+
+[Container]
+Image=ghcr.io/open-webui/open-webui:main
+AutoUpdate=registry
+ContainerName=open-webui
+
+Network=host
+# PublishPort=3000:8080
+# AddHost=host.orb.internal:host-gateway
+
+{{ if eq .chezmoi.os "darwin" -}}
+Volume=/home/chao/.local/share/open-webui:/Users/chao/.ollama/models
+Environment=OLLAMA_BASE_URL=http://host.orb.internal:11434
+{{ else -}}
+Volume=/home/chao/.local/share/open-webui:/home/chao/.ollama/models
+{{ end -}}
+
+[Service]
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+

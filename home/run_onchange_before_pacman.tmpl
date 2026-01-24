@@ -29,6 +29,10 @@ paru -S --needed --noconfirm --skipreview {{ . | quote }}
 sudo pacman -S --needed --noconfirm {{ . | quote }}
 {{ end -}}
 
+{{ range .paru.applications -}}
+paru -S --needed --noconfirm --skipreview {{ . | quote }}
+{{ end -}}
+
 {{     end -}}
 
 {{   end -}}

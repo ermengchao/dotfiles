@@ -49,9 +49,14 @@ applications = [
   "inter-font",
 ]
 
-paru = [
-  "google-chrome",
+[paru]
+
+packages = [
   "mihomo",
   "opencode",
   "gitmoji"
+]
+
+applications = [
+  "google-chrome",
 ]

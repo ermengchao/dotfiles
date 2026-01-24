@@ -5,5 +5,5 @@ function appid
     end
     set id (osascript -e "id of app \"$argv[1]\"")
     echo "🍎 Bundle ID: $id"
-    echo "📂 Plist 文件：$HOME/Library/Preferences/$id.plist"
+    echo "📂 Plist File Path：$HOME/Library/Preferences/$id.plist"
 end

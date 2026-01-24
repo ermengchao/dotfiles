@@ -8,7 +8,7 @@ set GNOME_SHELL_VERSION $(gnome-shell --version | grep -oE '[0-9]+\.[0-9]+')
 {{ range .gnome.extensions.uuid -}}
 curl -L -o "/tmp/{{ . }}.zip" "https://extensions.gnome.org/download-extension/{{ . }}.shell-extension.zip?shell_version=$GNOME_SHELL_VERSION"
 
-gnome-extensions install "/tmp/{{ . }}"
+gnome-extensions install --force "/tmp/{{ . }}.zip"
 {{ end -}}
 
 {{ end -}}
