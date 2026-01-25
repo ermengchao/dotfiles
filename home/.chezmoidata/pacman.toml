@@ -1,6 +1,7 @@
 [pacman]
 
 drivers = [
+  "cuda",
   "nvidia-open",
   "nvidia-utils",
 ]
@@ -50,6 +51,10 @@ applications = [
 ]
 
 [paru]
+
+drivers = [
+  "ncurses5-compat-libs",
+]
 
 packages = [
   "mihomo",
