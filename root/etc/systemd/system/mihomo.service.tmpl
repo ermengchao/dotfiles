@@ -13,7 +13,7 @@ ExecStartPre=/usr/bin/sleep 1s
 {{ if eq .chezmoi.version.builtBy "Homebrew" -}}
 ExecStart="/home/linuxbrew/.linuxbrew/opt/mihomo/bin/mihomo" -d "/home/chao/.config/mihomo"
 {{ else -}}
-ExecStart="/usr/bin/mihomo"
+ExecStart="/usr/bin/mihomo" -d "/home/chao/.config/mihomo"
 {{ end -}}
 ExecReload=/bin/kill -HUP $MAINPID
 StandardOutput=journal
