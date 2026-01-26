@@ -1,3 +1,4 @@
+{{- if eq .chezmoi.os "linux" -}}
 Include /etc/ssh/sshd_config.d/*.conf
 
 Port 22
@@ -79,3 +80,4 @@ Subsystem       sftp    /usr/lib/ssh/sftp-server
 #       AllowTcpForwarding no
 #       PermitTTY no
 #       ForceCommand cvs server
+{{- end -}}
