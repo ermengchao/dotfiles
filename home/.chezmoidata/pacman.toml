@@ -1,6 +1,7 @@
 [pacman]
 
 drivers = [
+  "acpi",
   "cuda",
   "nvidia-open",
   "nvidia-utils",
