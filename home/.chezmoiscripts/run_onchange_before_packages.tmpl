@@ -1,32 +1,59 @@
 #!/usr/bin/env fish
 
+{{ $device := index .devices .chezmoi.hostname }}
+{{ $isMinimal := $device.minimal }}
+
 {{ if eq .chezmoi.os "darwin" -}}
+{{   if $isMinimal -}}
+
 begin
-{{   range .homebrew.darwin.taps -}}
+{{     range .minimal.homebrew.darwin.taps -}}
   echo 'tap {{ . | quote }}'
-{{   end -}}
+{{     end -}}
 
-{{   range .homebrew.darwin.brews -}}
+{{     range .minimal.homebrew.darwin.brews -}}
   echo 'brew {{ . | quote }}'
-{{ end -}}
+{{     end -}}
 
-{{   range .homebrew.darwin.casks -}}
+{{     range .minimal.homebrew.darwin.casks -}}
   echo 'cask {{ . | quote }}'
-{{   end -}}
+{{     end -}}
 
-{{   range .homebrew.darwin.mas -}}
+{{     range .minimal.homebrew.darwin.mas -}}
   echo 'mas {{ .name | quote }}, id: {{ .id }}'
-{{   end -}}
+{{     end -}}
 end | /opt/homebrew/bin/brew bundle --file=/dev/stdin
+
+{{   else -}}
+
+begin
+{{     range .homebrew.darwin.taps -}}
+  echo 'tap {{ . | quote }}'
+{{     end -}}
+
+{{     range .homebrew.darwin.brews -}}
+  echo 'brew {{ . | quote }}'
+{{     end -}}
+
+{{     range .homebrew.darwin.casks -}}
+  echo 'cask {{ . | quote }}'
+{{     end -}}
+
+{{     range .homebrew.darwin.mas -}}
+  echo 'mas {{ .name | quote }}, id: {{ .id }}'
+{{     end -}}
+end | /opt/homebrew/bin/brew bundle --file=/dev/stdin
+
+{{   end -}}
 
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
-{{ $isGraphical := eq (output "fish" "-c" "systemctl is-active --quiet gdm; and echo true; or echo false" | trim) "true" -}}
 
+{{ $isGraphical := exec "systemctl" "is-active" "--quiet" "gdm" }}
 
 # ==== DNF ====
-{{ if eq .chezmoi.osRelease.id "fedora" -}}
+{{ if regexMatch "fedora" .chezmoi.osRelease.id -}}
 
 {{   range .dnf.packages -}}
 sudo dnf install -y {{ . | quote }}
@@ -39,12 +66,13 @@ sudo dnf install -y {{ . | quote }}
 {{     end -}}
 
 {{   end -}}
+
 {{ end -}}
 # ==== DNF ====
 
 
 # ==== Flatpak ===
-{{ if ne .chezmoi.osRelease.id "arch" -}}
+{{ if not (regexMatch "arch" .chezmoi.osRelease.id) -}}
 {{   if $isGraphical -}}
 
 {{     range .flatpak.remotes -}}
@@ -54,7 +82,6 @@ flatpak remote-add --user --if-not-exists {{ .name }} {{ .location | quote }}
 {{       range .applications -}}
 flatpak install --user --noninteractive {{ $remote }} {{ . | quote }}
 {{       end -}}
-
 {{     end -}}
 
 {{   end -}}
@@ -79,28 +106,48 @@ rm "/tmp/{{ . }}.zip"
 # ==== Homebrew ====
 {{ if eq .chezmoi.version.builtBy "Homebrew" -}}
 {{   if ne .chezmoi.uid "0" -}}
+{{     if $isMinimal -}}
 
 begin
-{{     range .homebrew.linux.taps -}}
+{{       range .minimal.homebrew.linux.taps -}}
   echo 'tap {{ . | quote }}'
-{{     end -}}
+{{       end -}}
 
-{{     range .homebrew.linux.brews -}}
+{{       range .minimal.homebrew.linux.brews -}}
   echo 'brew {{ . | quote }}'
-{{     end -}}
+{{       end -}}
 
-{{     range .homebrew.linux.casks -}}
+{{       range .minimal.homebrew.linux.casks -}}
   echo 'cask {{ . | quote }}'
-{{     end -}}
+{{       end -}}
 end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
 
+{{     else -}}
+
+begin
+{{       range .homebrew.linux.taps -}}
+  echo 'tap {{ . | quote }}'
+{{       end -}}
+
+{{       range .homebrew.linux.brews -}}
+  echo 'brew {{ . | quote }}'
+{{       end -}}
+
+{{       range .homebrew.linux.casks -}}
+  echo 'cask {{ . | quote }}'
+{{       end -}}
+end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
+
+{{     end -}}
+
 {{   end -}}
+
 {{ end -}}
 # ==== Homebrew ====
 
 
 # ==== Pacman ====
-{{ if eq .chezmoi.osRelease.id "arch" -}}
+{{ if regexMatch "arch" .chezmoi.osRelease.id -}}
 
 set paru_path ~/Repos/paru
 
@@ -114,7 +161,18 @@ if not test -d $paru_path
     makepkg -si
 end
 
-{{   if eq .chezmoi.arch "amd64" -}}
+{{   if $isMinimal -}}
+
+{{     range .minimal.pacman.packages -}}
+sudo pacman -S --needed --noconfirm {{ . | quote }}
+{{     end -}}
+
+{{     range .minimal.paru.packages -}}
+paru -S --needed --noconfirm --skipreview {{ . | quote }}
+{{     end -}}
+
+{{   else -}}
+
 {{     range .pacman.packages -}}
 sudo pacman -S --needed --noconfirm {{ . | quote }}
 {{     end -}}
@@ -134,20 +192,10 @@ paru -S --needed --noconfirm --skipreview {{ . | quote }}
 {{       end -}}
 
 {{     end -}}
-{{   end -}}
 
-{{   if eq .chezmoi.arch "arm64" -}}
-{{     range .minimal.pacman.packages -}}
-sudo pacman -S --needed --noconfirm {{ . | quote }}
-{{     end -}}
-
-{{     range .minimal.paru.packages -}}
-paru -S --needed --noconfirm --skipreview {{ . | quote }}
-{{     end -}}
 {{   end -}}
 
 {{ end -}}
 # ==== Pacman ====
-
 
 {{ end -}}
