@@ -1,14 +1,37 @@
 #!/usr/bin/env fish
 
-# configure git repo
+# Configure Git Repo
 cd {{ .chezmoi.workingTree }}
 
 git remote add d https://github.com/ermengchao/dotfiles.git
 git fetch d --prune
 git branch --set-upstream-to=d/main main
 
-# configure hostname
+# Configure Hostname
 
-{{ if eq .chezmoi.os "darwin" -}}
-sudo scutil --set HostName {{ .chezmoi.hostname }}
-{{ end -}}
+if test $hostname != {{ .chezmoi.hostname }}
+  printf "Setting hostname..."
+  read -P "Is the hostname: {{ .chezmoi.hostname }} correct (y/n)?" choice
+  
+  switch (string lower -- $choice)
+    case y yes
+      set new_hostname {{ .chezmoi.hostname }}
+    case n no
+      read -P "Please input the hostname: " new_hostname
+      if test -z "$new_hostname"
+          echo "Invalid hostname: hostname cannot be empty."
+          exit 1
+      end
+    case '*'
+      print "Invalid input: please type 'y' or 'n'."
+      exit 1
+  end
+
+  {{ if eq .chezmoi.os "darwin" -}}
+  sudo scutil --set HostName $new_hostname
+  {{ end -}}
+
+  {{ if eq .chezmoi.os "linux" -}}
+  sudo hostnamectl set-hostname $new_hostname
+  {{ end -}}
+end
