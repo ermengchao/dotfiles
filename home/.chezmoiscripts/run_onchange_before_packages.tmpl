@@ -107,31 +107,45 @@ set paru_path ~/Repos/paru
 if not test -d $paru_path
     echo "Paru not found. Installing paru to $paru_path..."
 
+    sudo pacman -S --needed --noconfirm base-devel
     mkdir ~/Repos
     git clone https://aur.archlinux.org/paru.git $paru_path
     cd $paru_path
     makepkg -si
 end
 
-{{   range .pacman.packages -}}
-sudo pacman -S --needed --noconfirm {{ . | quote }}
-{{   end -}}
-
-{{   range .paru.packages -}}
-paru -S --needed --noconfirm --skipreview {{ . | quote }}
-{{   end -}}
-
-{{   if $isGraphical -}}
-
-{{     range .pacman.applications -}}
+{{   if eq .chezmoi.arch "amd64" -}}
+{{     range .pacman.packages -}}
 sudo pacman -S --needed --noconfirm {{ . | quote }}
 {{     end -}}
 
-{{     range .paru.applications -}}
+{{     range .paru.packages -}}
 paru -S --needed --noconfirm --skipreview {{ . | quote }}
 {{     end -}}
 
+{{     if $isGraphical -}}
+
+{{       range .pacman.applications -}}
+sudo pacman -S --needed --noconfirm {{ . | quote }}
+{{       end -}}
+
+{{       range .paru.applications -}}
+paru -S --needed --noconfirm --skipreview {{ . | quote }}
+{{       end -}}
+
+{{     end -}}
 {{   end -}}
+
+{{   if eq .chezmoi.arch "arm64" -}}
+{{     range .minimal.pacman.packages -}}
+sudo pacman -S --needed --noconfirm {{ . | quote }}
+{{     end -}}
+
+{{     range .minimal.paru.packages -}}
+paru -S --needed --noconfirm --skipreview {{ . | quote }}
+{{     end -}}
+{{   end -}}
+
 {{ end -}}
 # ==== Pacman ====
 

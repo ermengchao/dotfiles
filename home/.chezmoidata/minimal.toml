@@ -1,0 +1,35 @@
+[minimal]
+
+[minimal.pacman]
+
+packages = [
+  "age",
+  "bat",
+  "bottom",
+  "bun",
+  "chezmoi",
+  "fastfetch",
+  "fish",
+  "fisher",
+  "fd",
+  "fzf",
+  "git",
+  "git-delta",
+  "github-cli",
+  "git-lfs",
+  "jq",
+  "neovim",
+  "podman",
+  "p7zip",
+  "ripgrep",
+  "tailscale",
+  "tldr",
+  "yazi",
+  "zoxide",
+]
+
+[minimal.paru]
+
+packages = [
+  "gitmoji"
+]
