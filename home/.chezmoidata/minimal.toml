@@ -80,6 +80,8 @@ brews = [
   "zoxide",
 ]
 
+casks = []
+
 [minimal.pacman]
 
 packages = [
