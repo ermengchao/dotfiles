@@ -1,0 +1,5 @@
+[devicesInfo.mac-mini]
+os = "darwin"
+[[devicesInfo.mac-mini.package]]
+manager = "brew"
+minimal = true

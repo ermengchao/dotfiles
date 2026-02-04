@@ -1,0 +1,12 @@
+[icloud]
+type = iclouddrive
+apple_id = {{ .env.RCLONE_ICLOUDDRIVE_APPLE_ID }}
+password = {{ .env.RCLONE_ICLOUDDRIVE_PASSWORD }}
+
+[r2]
+type = s3
+provider = Cloudflare
+access_key_id = {{ .env.RCLONE_S3_ACCESS_KEY_ID }}
+secret_access_key = {{ .env.RCLONE_S3_SECRET_ACCESS_KEY }}
+endpoint = {{ .env.RCLONE_S3_ENDPOINT }}
+acl = private

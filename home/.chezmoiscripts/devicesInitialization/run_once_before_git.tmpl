@@ -1,0 +1,14 @@
+#!/usr/bin/env fish
+
+cd {{ .chezmoi.workingTree }}
+set gitRemoteList (git remote | string trim)
+
+if not string match -q "*d*" $gitRemoteList
+  printf "🧑‍💻 Setting dotfiles repo...\n"
+
+  git remote add d https://github.com/ermengchao/dotfiles.git
+  git fetch d
+  git branch --set-upstream-to=d/main main
+
+  printf "Done.\n"
+end

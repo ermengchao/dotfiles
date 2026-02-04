@@ -1,0 +1,8 @@
+[devicesInfo.aws-ec2]
+os = "arch"
+[[devicesInfo.aws-ec2.package]]
+manager = "pacman"
+minimal = true
+[[devicesInfo.aws-ec2.package]]
+manager = "paru"
+minimal = true

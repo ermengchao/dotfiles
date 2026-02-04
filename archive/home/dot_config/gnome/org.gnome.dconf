@@ -1,26 +1,8 @@
-[Connections]
-first-run=false
-window-size=(1024, 768)
-
-[Console]
-last-window-maximised=false
-last-window-size=(732, 528)
-
-[Extensions]
-window-maximized=false
-
-[Music]
-window-maximized=true
-
 [Weather]
-locations=[<(uint32 2, <('Shanghai', 'ZSSS', true, [(0.54396095602266359, 2.1194114825206833)], [(0.54493057368860898, 2.1198429802716539)])>)>]
-window-height=506
-window-maximized=false
-window-width=587
+locations=[<(uint32 2, <('Nantong', '', false, [(0.55820498256548667, 2.1099365405820536)], @a(dd) [])>)>]
 
-[control-center]
-last-panel='system'
-window-state=(980, 640, false)
+[GWeather4]
+temperature-unit='centigrade'
 
 [desktop/a11y/applications]
 screen-reader-enabled=false
@@ -32,12 +14,12 @@ show-status-shapes=false
 togglekeys-enable=true
 
 [desktop/app-folders]
-folder-children=['System', 'Utilities', 'YaST', 'Pardus', '70daf044-fc20-45c0-a4fa-37e7be3bbb79']
+folder-children=['System', 'Utilities', 'YaST', 'Pardus', 'CLI']
 
-[desktop/app-folders/folders/70daf044-fc20-45c0-a4fa-37e7be3bbb79]
-apps=['yazi.desktop', 'nvim.desktop', 'vim.desktop']
-name='Cli'
-translate=false
+[desktop/app-folders/folders/CLI]
+apps=['yazi.desktop', 'nvim.desktop', 'vim.desktop', 'cmake-gui.desktop', 'dev.lizardbyte.app.Sunshine.desktop']
+name='User-CLI.directory'
+translate=true
 
 [desktop/app-folders/folders/Pardus]
 categories=['X-Pardus-Apps']
@@ -75,11 +57,15 @@ duration-seconds=uint32 300
 interval-seconds=uint32 1800
 play-sound=true
 
+[desktop/file-sharing]
+require-password='always'
+
 [desktop/input-sources]
 sources=[('xkb', 'us')]
 
 [desktop/interface]
-color-scheme='prefer-dark'
+clock-format='24h'
+color-scheme='default'
 cursor-size=24
 cursor-theme='Bibata-Modern-Ice'
 document-font-name='Inter 14'
@@ -138,6 +124,7 @@ primary-color='#967864'
 secondary-color='#000000'
 
 [desktop/search-providers]
+enabled=['org.gnome.Weather.desktop']
 sort-order=['org.gnome.Settings.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Nautilus.desktop']
 
 [desktop/session]
@@ -151,11 +138,8 @@ migrated=true
 
 [gnome-system-monitor]
 cpu-colors=[(uint32 0, '#e01b24'), (1, '#ff7800'), (2, '#f6d32d'), (3, '#33d17a'), (4, '#26a269'), (5, '#62a0ea'), (6, '#1c71d8'), (7, '#613583'), (8, '#9141ac'), (9, '#c061cb'), (10, '#ffbe6f'), (11, '#f9f06b'), (12, '#8ff0a4'), (13, '#2ec27e'), (14, '#1a5fb4'), (15, '#c061cb'), (16, '#7999f33291b2'), (17, '#f332799984fb'), (18, '#7999a876f332'), (19, '#cbf2f3327999'), (20, '#f3327999ef6d'), (21, '#7999f332d37b'), (22, '#f332b0007999'), (23, '#8c847999f332')]
-maximized=false
 show-dependencies=false
 show-whose-processes='user'
-window-height=720
-window-width=800
 
 [gnome-system-monitor/proctree]
 col-26-visible=false
@@ -165,15 +149,8 @@ col-26-width=0
 default-folder-viewer='list-view'
 migrated-gtk-settings=true
 
-[nautilus/window-state]
-initial-size=(890, 550)
-initial-size-file-chooser=(890, 550)
-
-[portal/filechooser/org.gnome.Nautilus]
-last-folder-path='/home/chao/.local/share/icons/hicolor'
-
 [settings-daemon/plugins/color]
-night-light-schedule-automatic=false
+night-light-schedule-automatic=true
 
 [settings-daemon/plugins/housekeeping]
 donation-reminder-last-shown=int64 1768907411325108
@@ -185,16 +162,9 @@ sleep-inactive-battery-type='nothing'
 
 [shell]
 app-picker-layout=[{'org.gnome.Contacts.desktop': <{'position': <0>}>, 'org.gnome.Weather.desktop': <{'position': <1>}>, 'org.gnome.clocks.desktop': <{'position': <2>}>, 'org.gnome.Maps.desktop': <{'position': <3>}>, 'bssh.desktop': <{'position': <4>}>, 'org.gnome.SimpleScan.desktop': <{'position': <5>}>, 'org.gnome.Settings.desktop': <{'position': <6>}>, 'bvnc.desktop': <{'position': <7>}>, 'org.gnome.Snapshot.desktop': <{'position': <8>}>, 'org.gnome.Characters.desktop': <{'position': <9>}>, 'Utilities': <{'position': <10>}>, 'System': <{'position': <11>}>, 'org.gnome.Console.desktop': <{'position': <12>}>, 'org.gnome.Tour.desktop': <{'position': <13>}>, 'org.gnome.Yelp.desktop': <{'position': <14>}>, 'avahi-discover.desktop': <{'position': <15>}>, 'org.gnome.Evince.desktop': <{'position': <16>}>, 'qv4l2.desktop': <{'position': <17>}>, 'qvidcap.desktop': <{'position': <18>}>, '70daf044-fc20-45c0-a4fa-37e7be3bbb79': <{'position': <19>}>, 'org.gnome.Calendar.desktop': <{'position': <20>}>, 'org.gnome.TextEditor.desktop': <{'position': <21>}>, 'org.gnome.Calculator.desktop': <{'position': <22>}>, 'org.gnome.seahorse.Application.desktop': <{'position': <23>}>}]
-disabled-extensions=['extension-list@tu.berry', 'logomenu@aryan_k', 'hidetopbar@mathieu.bidon.ca', 'weatheroclock@CleoMenezesJr.github.io', 'system-monitor@gnome-shell-extensions.gcampax.github.com', 'Resource_Monitor@Ory0n', 'dash2dock-lite@icedman.github.com', 'compiz-windows-effect@hermes83.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com']
-enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'clipboard-indicator@tudmotu.com', 'nightthemeswitcher@romainvigier.fr', 'compiz-alike-magic-lamp-effect@hermes83.github.com', 'search-light@icedman.github.com', 'kiwimenu@kemma', 'blur-my-shell@aunetx', 'burn-my-windows@schneegans.github.com', 'status-icons@gnome-shell-extensions.gcampax.github.com', 'kiwi@kemma', 'system-monitor-next@paradoxxx.zero.gmail.com', 'dash-to-dock@micxgx.gmail.com']
+enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'nightthemeswitcher@romainvigier.fr', 'compiz-alike-magic-lamp-effect@hermes83.github.com', 'search-light@icedman.github.com', 'kiwimenu@kemma', 'blur-my-shell@aunetx', 'status-icons@gnome-shell-extensions.gcampax.github.com', 'kiwi@kemma', 'Vitals@CoreCoding.com', 'burn-my-windows@schneegans.github.com', 'dash-to-dock@micxgx.gmail.com']
 favorite-apps=['org.gnome.Nautilus.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Software.desktop', 'com.mitchellh.ghostty.desktop', 'google-chrome.desktop', 'org.gnome.Showtime.desktop', 'org.gnome.Music.desktop', 'steam.desktop', 'org.gnome.Extensions.desktop', 'org.gnome.tweaks.desktop']
 welcome-dialog-last-shown-version='49.2'
-
-[shell/extensions/Logo-menu]
-menu-button-icon-image=5
-menu-button-icon-size=18
-symbolic-icon=false
-use-custom-icon=false
 
 [shell/extensions/blur-my-shell]
 pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000000'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>}>}>]>}, 'pipeline_default_rounded': {'name': <'Default rounded'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000001'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>}>}>, <{'type': <'corner'>, 'id': <'effect_000000000002'>, 'params': <{'radius': <24>}>}>]>}}
@@ -253,23 +223,19 @@ last-extension-version=47
 last-prefs-version=47
 prefs-open-count=6
 
-[shell/extensions/com/github/hermes83/compiz-windows-effect]
-last-version=29
-preset='R'
-resize-effect=true
-
 [shell/extensions/dash-to-dock]
 apply-custom-theme=true
 background-opacity=0.80000000000000004
 dash-max-icon-size=48
 dock-fixed=true
 dock-position='BOTTOM'
+extend-height=false
 height-fraction=0.81999999999999995
 icon-size-fixed=false
 isolate-monitors=false
 isolate-workspaces=false
 preferred-monitor=-2
-preferred-monitor-by-connector='eDP-2'
+preferred-monitor-by-connector='HDMI-1'
 preview-size-scale=1.0
 running-indicator-style='DEFAULT'
 
@@ -321,139 +287,33 @@ enabled=true
 manual-schedule=true
 nightthemeswitcher-ondemand-keybinding=['<Shift><Super>t']
 
-[shell/extensions/system-monitor-next-applet]
-background='#ffffff16'
-battery-batt0-color='#f2002e'
-battery-display=false
-battery-graph-width=100
-battery-hidesystem=false
-battery-position=9
-battery-refresh-time=5000
-battery-show-menu=false
-battery-show-text=true
-battery-style='digit'
-battery-time=false
-center-display=false
-compact-display=false
-cpu-display=true
-cpu-graph-width=50
-cpu-individual-cores=false
-cpu-iowait-color='#002f3d'
-cpu-nice-color='#00a3ff'
-cpu-other-color='#001d26'
-cpu-position=1
-cpu-refresh-time=1500
-cpu-show-menu=true
-cpu-show-text=false
-cpu-style='digit'
-cpu-system-color='#0092e6'
-cpu-user-color='#0072b3'
-disk-display=false
-disk-graph-width=100
-disk-position=6
-disk-read-color='#c65000'
-disk-refresh-time=2000
-disk-show-menu=true
-disk-show-text=true
-disk-style='graph'
-disk-usage-style='pie'
-disk-write-color='#ff6700'
-fan-display=false
-fan-fan0-color='#f2002e'
-fan-graph-width=100
-fan-position=8
-fan-refresh-time=5000
-fan-sensor-label=''
-fan-show-menu=true
-fan-show-text=true
-fan-style='graph'
-freq-display=false
-freq-freq-color='#001d26'
-freq-graph-width=100
-freq-position=3
-freq-refresh-time=1500
-freq-show-menu=false
-freq-show-text=false
-freq-style='graph'
-gpu-display=true
-gpu-graph-width=50
-gpu-memory-color='#00ff82'
-gpu-position=2
-gpu-refresh-time=5000
-gpu-show-menu=false
-gpu-show-text=false
-gpu-style='digit'
-gpu-used-color='#00b35b'
-icon-display=false
-memory-buffer-color='#00ff82'
-memory-cache-color='#aaf5d0'
-memory-display=true
-memory-graph-width=50
-memory-position=4
-memory-program-color='#00b35b'
-memory-refresh-time=5000
-memory-show-menu=true
-memory-show-text=false
-memory-style='digit'
-move-clock=false
-net-collisions-color='#ff0000'
-net-display=true
-net-down-color='#fce94f'
-net-downerrors-color='#ff6e00'
-net-graph-width=50
-net-position=0
-net-refresh-time=1000
-net-show-menu=true
-net-show-text=false
-net-speed-in-bits=false
-net-style='graph'
-net-up-color='#fb74fb'
-net-uperrors-color='#e0006e'
-rotate-labels=false
-settings-schema-version=1
-show-tooltip=false
-swap-display=false
-swap-graph-width=100
-swap-position=5
-swap-refresh-time=5000
-swap-show-menu=true
-swap-show-text=true
-swap-style='graph'
-swap-used-color='#8b00c3'
-thermal-display=false
-thermal-fahrenheit-unit=false
-thermal-graph-width=100
-thermal-position=7
-thermal-refresh-time=5000
-thermal-sensor-label=''
-thermal-show-menu=true
-thermal-show-text=true
-thermal-style='graph'
-thermal-threshold=0
-thermal-tz0-color='#f2002e'
-tooltip-delay-ms=0
-
-[shell/extensions/system-monitor]
-show-swap=false
-show-upload=false
-
 [shell/extensions/user-theme]
 name='Orchis'
 
-[shell/extensions/weather-oclock]
-weather-after-clock=false
+[shell/extensions/vitals]
+fixed-widths=true
+hide-icons=false
+hide-zeros=false
+include-static-gpu-info=false
+memory-measurement=1
+menu-centered=true
+position-in-panel=2
+show-gpu=true
+show-voltage=false
+update-time=2
+use-higher-precision=true
 
 [shell/weather]
 automatic-location=true
-locations=[<(uint32 2, <('Shanghai', 'ZSSS', true, [(0.54396095602266359, 2.1194114825206833)], [(0.54493057368860898, 2.1198429802716539)])>)>]
+locations=[<(uint32 2, <('Nantong', '', false, [(0.55820498256548667, 2.1099365405820536)], @a(dd) [])>)>]
 
 [shell/world-clocks]
 locations=@av []
 
 [software]
-check-timestamp=int64 1768973363
+check-timestamp=int64 1769638193
 first-run=false
-flatpak-purge-timestamp=int64 1769192402
+flatpak-purge-timestamp=int64 1769645332
 
 [tweaks]
-show-extensions-notice=false
+show-extensions-notice=true

@@ -1,21 +1,52 @@
 [gnome]
 
-[gnome.extensions]
+applications = [
+  "gnome-browser-connector",
+  "gnome-extensions-app",
+  "gnome-tweaks",
+  "seahorse",
+]
 
-uuid = [
-  "apps-menu@gnome-shell-extensions.gcampax.github.com",
+wallpapers = [
+  "AnimeRoomBoard",
+  "CatherineRoom",
+  "ChromeOSBlues",
+  "ChromeOSEarth",
+  "ChromeOSGreens",
+  "ChromeOSReds",
+  "ChromeOSWind",
+  "ChromeOSYellows",
+  "Coast",
+  "EOS-Sunset",
+  "ExternalHimitsuHouse",
+  "FedeMarinMountain",
+  "Firewatch",
+  "Firewatch2",
+  "Fluent",
+  "HimitsuHouse",
+  "LofiCity",
+  "MagicLake",
+  "Monterey",
+  "Ocean",
+  "Riverside",
+  "SolidMountain",
+  "Solitude",
+  "TokyoStreet",
+  "Windows-11-3",
+  "Wiravketto",
+]
+
+extensions = [
   "blur-my-shell@aunetx",
-  "clipboard-indicator@tudmotu.com",
   "compiz-alike-magic-lamp-effect@hermes83.github.com",
   "dash-to-dock@micxgx.gmail.com",
   "dash2dock-lite@icedman.github.com",
   "kiwi@kemma",
   "kiwimenu@kemma",
-  "logomenu@aryan_k",
   "nightthemeswitcher@romainvigier.fr",
   "search-light@icedman.github.com",
-  "system-monitor-next@paradoxxx.zero.gmail.com",
   "user-theme@gnome-shell-extensions.gcampax.github.com",
+  "Vitals@CoreCoding.com",
 ]
 
 [[gnome.themes]]

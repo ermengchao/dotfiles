@@ -1,0 +1,58 @@
+#!/usr/bin/env fish
+
+{{ $deviceInfo := includeTemplate "deviceInfo.tmpl" . | fromToml -}}
+
+{{ range $deviceInfo.package -}}
+{{   if eq .manager "brew" -}}
+
+{{     if eq $.chezmoi.os "darwin" -}}
+set brew_path /opt/homebrew/bin/brew
+{{     end -}}
+
+{{     if eq $.chezmoi.os "linux" -}}
+set brew_path /home/linuxbrew/.linuxbrew/bin/brew
+{{     end -}}
+
+if not test -x $brew_path
+  printf "🍺 Homebrew not found. Installing homebrew...\n"
+
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  printf "ℹ️ Sourcing homebrew shell env...\n"
+
+  $brew_path shellenv fish | source
+
+  printf "Done.\n"
+end
+{{   end -}}
+
+{{   if eq .manager "paru" -}}
+set paru_path ~/.local/share/Repos/paru
+
+if not test -d $paru_path
+  printf "📦 Paru not found. Installing paru to $paru_path...\n"
+
+  sudo pacman -S --needed --noconfirm base-devel
+  mkdir -p $paru_path
+  git clone https://aur.archlinux.org/paru.git $paru_path
+  cd $paru_path
+  makepkg -si
+
+  printf "Done.\n"
+end
+{{   end -}}
+
+{{   if eq .manager "flatpak" -}}
+if not type -q flatpak
+  printf "‼️ Flatpak not found. Please install it manually.\n"
+  exit 1
+end
+
+printf "📦 Adding the flathub repositor...\n"
+
+flatpak remote-add --user --if-not-exists flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
+
+printf "Done.\n"
+{{   end -}}
+
+{{ end -}}

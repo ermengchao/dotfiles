@@ -1,0 +1,3 @@
+{{ $sessionType := env "XDG_CURRENT_DESKTOP" -}}
+{{ if not $sessionType }}{{ $sessionType = "TTY" }}{{ end -}}
+{{ $sessionType -}}

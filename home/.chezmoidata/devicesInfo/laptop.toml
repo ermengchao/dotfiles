@@ -1,0 +1,8 @@
+[devicesInfo.laptop]
+os = "arch"
+[[devicesInfo.laptop.package]]
+manager = "pacman"
+minimal = false
+[[devicesInfo.laptop.package]]
+manager = "paru"
+minimal = false

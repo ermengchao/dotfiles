@@ -1,0 +1,28 @@
+[packageManagers.dnf]
+
+root = true
+command = "install"
+args = [
+  "-y",
+]
+
+packages = [
+  "clang",
+  "flatpak",
+  "podman",
+  "wl-clipboard",
+  "samba",
+]
+
+[packageManagers.dnf.minimal]
+
+root = true
+command = "install"
+args = [
+  "-y",
+]
+
+packages = [
+  "clang",
+  "podman",
+]

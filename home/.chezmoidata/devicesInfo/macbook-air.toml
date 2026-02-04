@@ -1,0 +1,5 @@
+[devicesInfo.macbook-air]
+os = "darwin"
+[[devicesInfo.macbook-air.package]]
+manager = "brew"
+minimal = false

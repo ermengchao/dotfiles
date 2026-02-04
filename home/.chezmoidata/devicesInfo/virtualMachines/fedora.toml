@@ -1,0 +1,9 @@
+[devicesInfo.fedora]
+os = "fedora"
+[[devicesInfo.fedora.package]]
+manager = "dnf"
+minimal = true
+[[devicesInfo.fedora.package]]
+manager = "brew"
+minimal = true
+

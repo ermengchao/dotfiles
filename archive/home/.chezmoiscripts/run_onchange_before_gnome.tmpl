@@ -1,0 +1,17 @@
+#!/usr/bin/env fish
+
+{{ if eq .chezmoi.os "linux" -}}
+{{ $sessionType := includeTemplate "sessionType.tmpl" . }}
+
+{{ if eq $sessionType "GNOME" -}}
+set GNOME_SHELL_VERSION $(gnome-shell --version | grep -oE '[0-9]+\.[0-9]+')
+
+{{   range .gnome.extensions.uuid -}}
+curl -L -s -o "/tmp/{{ . }}.zip" "https://extensions.gnome.org/download-extension/{{ . }}.shell-extension.zip?shell_version=$GNOME_SHELL_VERSION"
+gnome-extensions install --force "/tmp/{{ . }}.zip"
+rm "/tmp/{{ . }}.zip"
+{{   end -}}
+
+{{ end -}}
+
+{{ end -}}

@@ -1,0 +1,8 @@
+[devicesInfo.raspberrypi]
+os = "debian"
+[[devicesInfo.raspberrypi.package]]
+manager = "apt"
+minimal = true
+[[devicesInfo.raspberrypi.package]]
+manager = "brew"
+minimal = true

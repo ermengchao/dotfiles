@@ -3,28 +3,20 @@
 .config/containers
 .config/gnome
 .config/locale.conf
-.config/mihomo
 .config/nixos
 .config/samba
 .config/systemd
-.config/xray
+.config/wayvnc
 
 {{ else if eq .chezmoi.os "linux" -}}
-{{   if eq .chezmoi.uid "0" -}}
+{{ $isRoot := includeTemplate "isRoot.tmpl" . }}
+{{   if $isRoot -}}
 
-.ssh
-.config/containers
-.config/gh
-.config/ghostty
-.config/git
-.config/gnome
-.config/locale.conf
-.config/lazygit
-.config/mihomo
-.config/gnome
-.config/systemd
-.config/xray
-.config/.bunfig.toml
+.config
+!.config/bat
+!.config/fish
+!.config/nvim
+!.config/yazi
 
 {{   end -}}
 

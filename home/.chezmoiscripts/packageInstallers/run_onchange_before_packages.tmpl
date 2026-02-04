@@ -1,0 +1,47 @@
+#! /usr/bin/env fish
+
+{{ $deviceInfo := includeTemplate "deviceInfo.tmpl" . | fromToml -}}
+
+{{ range $deviceInfo.package -}}
+{{ $packageInfo := index $.packageManagers .manager }}{{ if .minimal }}{{ $packageInfo = index $.packageManagers .manager "minimal" }}{{ end }}
+
+{{   if eq .manager "brew" -}}
+
+{{     if eq $.chezmoi.os "darwin" -}}
+set brew_path /opt/homebrew/bin/brew
+{{     end -}}
+
+{{     if eq $.chezmoi.os "linux" -}}
+set brew_path /home/linuxbrew/.linuxbrew/bin/brew
+{{     end -}}
+
+begin
+{{     range index $packageInfo $.chezmoi.os "taps" -}}
+  echo 'tap {{ . | quote }}'
+{{     end -}}
+{{     range index $packageInfo $.chezmoi.os "brews" -}}
+  echo 'brew {{ . | quote }}'
+{{     end -}}
+{{     range index $packageInfo $.chezmoi.os "casks" -}}
+  echo 'cask {{ . | quote }}'
+{{     end -}}
+
+{{     with index $packageInfo $.chezmoi.os "mas" -}}
+{{       range . -}}
+  echo 'mas {{ .name | quote }}, id: {{ .id }}'
+{{       end -}}
+{{     end -}}
+end | $brew_path bundle --file=/dev/stdin
+
+{{   else -}}
+{{ $installerPrefix := "" }}{{ if (index $.packageManagers .manager).root }}{{ $installerPrefix = "sudo" }}{{ end -}}
+{{ $manager := .manager -}}
+{{ $command := index $.packageManagers $manager "command" -}}
+{{ $argList := index $.packageManagers $manager "args" -}}
+
+{{     range $packageInfo.packages -}}
+{{ $installerPrefix }} {{ $manager }} {{ $command }} {{ range $argList }} {{ . }} {{ end }} {{ . | quote }}
+{{     end -}}
+{{   end -}}
+
+{{ end -}}

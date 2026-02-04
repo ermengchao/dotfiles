@@ -1,56 +1,33 @@
 #!/usr/bin/env fish
 
-{{ $device := index .devices .chezmoi.hostname }}
-{{ $isMinimal := $device.minimal }}
+{{ $deviceInfo := includeTemplate "deviceInfo.tmpl" . | fromToml -}}
 
 {{ if eq .chezmoi.os "darwin" -}}
-{{   if $isMinimal -}}
 
 begin
-{{     range .minimal.homebrew.darwin.taps -}}
+{{     range $packagePrefix.homebrew.darwin.taps -}}
   echo 'tap {{ . | quote }}'
 {{     end -}}
 
-{{     range .minimal.homebrew.darwin.brews -}}
+{{     range $packagePrefix.homebrew.darwin.brews -}}
   echo 'brew {{ . | quote }}'
 {{     end -}}
 
-{{     range .minimal.homebrew.darwin.casks -}}
+{{     range $packagePrefix.homebrew.darwin.casks -}}
   echo 'cask {{ . | quote }}'
 {{     end -}}
 
-{{     range .minimal.homebrew.darwin.mas -}}
+{{     range $packagePrefix.homebrew.darwin.mas -}}
   echo 'mas {{ .name | quote }}, id: {{ .id }}'
 {{     end -}}
 end | /opt/homebrew/bin/brew bundle --file=/dev/stdin
-
-{{   else -}}
-
-begin
-{{     range .homebrew.darwin.taps -}}
-  echo 'tap {{ . | quote }}'
-{{     end -}}
-
-{{     range .homebrew.darwin.brews -}}
-  echo 'brew {{ . | quote }}'
-{{     end -}}
-
-{{     range .homebrew.darwin.casks -}}
-  echo 'cask {{ . | quote }}'
-{{     end -}}
-
-{{     range .homebrew.darwin.mas -}}
-  echo 'mas {{ .name | quote }}, id: {{ .id }}'
-{{     end -}}
-end | /opt/homebrew/bin/brew bundle --file=/dev/stdin
-
-{{   end -}}
 
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
 
-{{ $isGraphical := exec "systemctl" "is-active" "--quiet" "gdm" }}
+{{ $sessionType := includeTemplate "sessionType.tmpl" . -}}
+{{ $packageManager := includeTemplate "packageManager.tmpl" . }}
 
 # ==== DNF ====
 {{ if regexMatch "fedora" .chezmoi.osRelease.id -}}
@@ -89,35 +66,21 @@ flatpak install --user --noninteractive {{ $remote }} {{ . | quote }}
 # ==== Flatpak ===
 
 
-# ==== Gnome Extensions ====
-{{ if $isGraphical -}}
-set GNOME_SHELL_VERSION $(gnome-shell --version | grep -oE '[0-9]+\.[0-9]+')
-
-{{   range .gnome.extensions.uuid -}}
-curl -L -s -o "/tmp/{{ . }}.zip" "https://extensions.gnome.org/download-extension/{{ . }}.shell-extension.zip?shell_version=$GNOME_SHELL_VERSION"
-gnome-extensions install --force "/tmp/{{ . }}.zip"
-rm "/tmp/{{ . }}.zip"
-{{   end -}}
-
-{{ end -}}
-# ==== Gnome Extensions ====
-
-
 # ==== Homebrew ====
 {{ if eq .chezmoi.version.builtBy "Homebrew" -}}
 {{   if ne .chezmoi.uid "0" -}}
 {{     if $isMinimal -}}
 
 begin
-{{       range .minimal.homebrew.linux.taps -}}
+{{       range $packagePrefix.homebrew.linux.taps -}}
   echo 'tap {{ . | quote }}'
 {{       end -}}
 
-{{       range .minimal.homebrew.linux.brews -}}
+{{       range $packagePrefix.homebrew.linux.brews -}}
   echo 'brew {{ . | quote }}'
 {{       end -}}
 
-{{       range .minimal.homebrew.linux.casks -}}
+{{       range $packagePrefix.homebrew.linux.casks -}}
   echo 'cask {{ . | quote }}'
 {{       end -}}
 end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
@@ -125,15 +88,15 @@ end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
 {{     else -}}
 
 begin
-{{       range .homebrew.linux.taps -}}
+{{       range .packages.homebrew.linux.taps -}}
   echo 'tap {{ . | quote }}'
 {{       end -}}
 
-{{       range .homebrew.linux.brews -}}
+{{       range .packages.homebrew.linux.brews -}}
   echo 'brew {{ . | quote }}'
 {{       end -}}
 
-{{       range .homebrew.linux.casks -}}
+{{       range .packages.homebrew.linux.casks -}}
   echo 'cask {{ . | quote }}'
 {{       end -}}
 end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
@@ -149,7 +112,7 @@ end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
 # ==== Pacman ====
 {{ if regexMatch "arch" .chezmoi.osRelease.id -}}
 
-set paru_path ~/Repos/paru
+set paru_path ~/.local/share/Repos/paru
 
 if not test -d $paru_path
     echo "Paru not found. Installing paru to $paru_path..."
@@ -163,11 +126,11 @@ end
 
 {{   if $isMinimal -}}
 
-{{     range .minimal.pacman.packages -}}
+{{     range $packagePrefix.pacman.packages -}}
 sudo pacman -S --needed --noconfirm {{ . | quote }}
 {{     end -}}
 
-{{     range .minimal.paru.packages -}}
+{{     range $packagePrefix.paru.packages -}}
 paru -S --needed --noconfirm --skipreview {{ . | quote }}
 {{     end -}}
 

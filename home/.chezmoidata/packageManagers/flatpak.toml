@@ -1,0 +1,14 @@
+[packageManagers.flatpak]
+
+root = false
+command = "install"
+args = [
+  "--user",
+  "--noninteractive",
+]
+
+packages = [
+  "com.github.tchx84.Flatseal",
+  "com.google.Chrome",
+  "com.valvesoftware.Steam",
+]

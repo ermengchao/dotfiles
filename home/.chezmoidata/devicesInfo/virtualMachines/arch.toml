@@ -1,0 +1,8 @@
+[devicesInfo.arch]
+os = "arch"
+[[devicesInfo.arch.package]]
+manager = "pacman"
+minimal = true
+[[devicesInfo.arch.package]]
+manager = "paru"
+minimal = true

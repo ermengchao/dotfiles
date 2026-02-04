@@ -1,43 +1,15 @@
-{{- if eq .chezmoi.os "darwin" -}}
-# Appearance
-if test "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = Dark
-    # osascript -e 'tell application "Terminal"
-    #     set current settings of tabs of windows to settings set "Transparent Dark" -- Theme name
-    # end tell'
-else
-    # osascript -e 'tell application "Terminal"
-    #     set current settings of tabs of windows to settings set "Transparent Light" -- Theme name
-    # end tell'
-end
+{{ if eq .chezmoi.os "darwin" -}}
 
-# Homebrew
-/opt/homebrew/bin/brew shellenv | source
-
-# Orbstack
-source ~/.orbstack/shell/init2.fish 2>/dev/null || :
-
-# SSH-Agent
 abbr keychain-add "/usr/bin/ssh-add --apple-use-keychain"
-
-# Abbreviation
 abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
 abbr xcode "open -a Xcode"
 
-{{ else if eq .chezmoi.os "linux" -}}
-{{   if eq .chezmoi.version.builtBy "Homebrew" -}}
+{{ end -}}
 
-# Homebrew
-/home/linuxbrew/.linuxbrew/bin/brew shellenv fish | source
+{{ if eq .chezmoi.os "linux" -}}
 
-{{   end -}}
-# Appearance
-if test "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" = prefer-dark
-end
-
-# SSH-Agent
 eval "$(ssh-agent -c 2>/dev/null)" >/dev/null
 
-# Abbreviation
 abbr psg /usr/lib/systemd/system-generators/podman-system-generator
 abbr sc systemctl
 abbr scu "systemctl --user"
@@ -46,22 +18,15 @@ alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
 {{ end -}}
 
 if status is-interactive
-    # eval (zellij setup --generate-auto-start fish | string collect)
-    # function fish_greeting
-    #     echo "Welcome to $(uname -s)!"
-    # end
 end
-
-chezmoi completion fish | source
-fzf --fish | source
-# whalebrew completion fish | source
-zoxide init --cmd cd fish | source
 
 # Key Binding
 bind \t complete
 
+# Initialization
+zoxide init fish --cmd cd | source
+
 # Abbreviation
-# bat
 abbr -a --position anywhere -- --help '--help | bat -plhelp'
 abbr -a --position anywhere -- -h '-h | bat -plhelp'
 
@@ -72,5 +37,5 @@ abbr dv deactivate
 abbr fzfp "fzf --style full --preview 'fzf-preview.sh {}'"
 abbr jnote "jupyter notebook"
 abbr jlab "jupyter lab"
-abbr n nvim
+abbr vi nvim
 alias posting "posting --collection $XDG_CONFIG_HOME/posting/collections"

@@ -1,0 +1,32 @@
+#!/usr/bin/env fish
+
+set current_hostname (uname -n | string trim)
+if test $current_hostname != {{ .chezmoi.hostname }}
+  printf "‼️ Setting hostname...\n"
+  read -P "Is the hostname: {{ .chezmoi.hostname }} correct (y/n)?" choice
+  printg "\n"
+
+  switch (string lower -- $choice)
+    case y yes
+      set new_hostname {{ .chezmoi.hostname }}
+    case n no
+      read -P "Please input the hostname: " new_hostname
+      if test -z "$new_hostname"
+          printf "Invalid hostname: hostname cannot be empty.\n"
+          exit 1
+      end
+    case '*'
+      printf "Invalid input: please type 'y' or 'n'.\n"
+      exit 1
+  end
+
+  {{   if eq .chezmoi.os "darwin" -}}
+  sudo scutil --set HostName $new_hostname
+  {{   end -}}
+
+  {{   if eq .chezmoi.os "linux" -}}
+  sudo hostnamectl set-hostname $new_hostname
+  {{   end -}}
+
+  printf "Done.\n"
+end
