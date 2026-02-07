@@ -22,44 +22,38 @@
       {
         "tag": "doh-cloudflare",
         "type": "h3",
-        "server": "https://dns.cloudflare.com",
+        "server": "dns.cloudflare.com",
         "path": "/dns-query",
-        "detour": "🌐 Proxy",
         "domain_resolver": "dns-cloudflare"
       },
       {
         "tag": "doh-google",
         "type": "h3",
-        "server": "https://dns.google",
+        "server": "dns.google",
         "path": "/dns-query",
-        "detour": "🌐 Proxy",
         "domain_resolver": "dns-google"
       },
       {
         "tag": "doh-aliyun",
         "type": "h3",
-        "server": "https://dns.alidns.com",
+        "server": "dns.alidns.com",
         "path": "/dns-query",
-        "detour": "🟢 Direct",
         "domain_resolver": "dns-aliyun"
       },
       {
         "tag": "dns-cloudflare",
         "type": "udp",
         "server": "1.1.1.1",
-        "detour": "🟢 Direct"
       },
       {
         "tag": "dns-google",
         "type": "udp",
         "server": "8.8.8.8",
-        "detour": "🟢 Direct"
       },
       {
         "tag": "dns-aliyun",
         "type": "udp",
         "server": "223.5.5.5",
-        "detour": "🟢 Direct"
       },
       {
         "tag": "dns-tailscale",

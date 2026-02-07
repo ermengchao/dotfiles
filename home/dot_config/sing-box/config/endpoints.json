@@ -12,7 +12,8 @@
       "exit_node": "",
       "exit_node_allow_lan_access": false,
       "advertise_routes": [],
-      "advertise_exit_node": false
+      "advertise_exit_node": false,
+      "domain_resolver": "doh-cloudflare"
     }
   ]
 }

@@ -2,11 +2,11 @@
   "experimental": {
     "cache_file": {
       "enabled": true,
-      "path": "",
+      "path": {{ env "XDG_CACHE_HOME" | quote }},
     },
     "clash_api": {
       "external_controller": "0.0.0.0:9090",
-      "secret": "",
+      "secret": {{ .env.CLASH_AUTHENTICATION | quote }},
       "default_mode": "rule",
       "access_control_allow_origin": "*",
       "access_control_allow_private_network": false,

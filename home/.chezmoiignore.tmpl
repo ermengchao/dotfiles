@@ -1,4 +1,4 @@
-{{- if eq .chezmoi.os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" -}}
 
 .config/containers
 .config/gnome
@@ -9,9 +9,11 @@
 .config/systemd
 .config/wayvnc
 
-{{ else if eq .chezmoi.os "linux" -}}
-{{ $isRoot := includeTemplate "isRoot.tmpl" . }}
-{{   if $isRoot -}}
+{{ end -}}
+
+{{ if eq .chezmoi.os "linux" -}}
+{{ $isRoot := includeTemplate "isRoot.tmpl" . -}}
+{{   if eq $isRoot "true" -}}
 
 .config
 !.config/bat
@@ -24,4 +26,4 @@
 .config/codesnap
 .config/posting
 
-{{- end }}
+{{ end -}}
