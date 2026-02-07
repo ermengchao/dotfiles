@@ -1,8 +1,9 @@
 #!/usr/bin/env fish
 
-set config_fields ./config
-
 if type -q sing-box
+  cd $XDG_CONFIG_HOME/sing-box
+  set config_fields ./config
+
   if test -d $config_fields
     sing-box merge config.json -C $config_fields
   end
