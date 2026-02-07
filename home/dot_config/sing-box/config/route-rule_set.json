@@ -1,0 +1,209 @@
+{
+  "route": {
+    "rule_set": [
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "geosite-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "claude",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Claude/Claude.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "copilot",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Copilot/Copilot.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "amazon_cloud",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/AmazonCloud/AmazonCloud.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "advertising",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Advertising/Advertising.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "zhihu_ads",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/ZhihuAds/ZhihuAds.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "hijacking",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Hijacking/Hijacking.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "privacy",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Privacy/Privacy.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "gemini",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Gemini/Gemini.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "openai",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/OpenAI/OpenAI.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "direct_chao",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Direct/Direct.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "apple",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Apple/Apple.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "china_max",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/ChinaMax/ChinaMax.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "download",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Download/Download.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "lan",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Lan/Lan.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "game_chao",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Game/Game.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "game",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Game/Game.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "disney",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Disney/Disney.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "netflix",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Netflix/Netflix.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "hbo_usa",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/HBOUSA/HBOUSA.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "spotify",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Spotify/Spotify.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "tiktok",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/TikTok/TikTok.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "youtube",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/YouTube/YouTube.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "youtube_music",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/YouTubeMusic/YouTubeMusic.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "proxy_chao",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Proxy/Proxy.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "developer",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Developer/Developer.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "google",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Google/Google.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "github",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/GitHub/GitHub.srs",
+        "download_detour": "🌐 Proxy"
+      }
+    ]
+  }
+}

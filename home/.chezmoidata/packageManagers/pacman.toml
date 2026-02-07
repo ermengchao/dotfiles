@@ -95,7 +95,7 @@ drivers = [
 ]
 
 packages = [
-  "opencode",
+  "opencode-bin",
   "gitmoji",
   "rustdesk",
   "sing-box",

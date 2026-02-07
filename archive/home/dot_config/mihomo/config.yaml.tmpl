@@ -4,31 +4,34 @@ mode: rule
 log-level: warning
 profile:
   store-selected: true
-  store-fake-ip: true
+  store-fake-ip: false
 geodata-mode: true
 geo-auto-update: true
 geo-update-interval: 24
+geox-url:
+    geoip: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
+    geosite: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
 global-ua: clash.meta
 find-process-mode: strict
-routing-mark: 6153
+routing-mark: 6152
 tcp-concurrent: true
 
 # External Controller
 
-external-controller: 0.0.0.0:7890
-external-controller-tls: 0.0.0.0:7891
+external-controller: 0.0.0.0:9090
+external-controller-tls: 0.0.0.0:9091
 external-controller-cors:
   allow-origins:
     - '*'
   allow-private-network: true
-# secret: {{ .env.MIHOMO_AUTHENTICATION }}
+# secret: {{ .env.CLASH_AUTHENTICATION }}
 
 # Lan
 
 allow-lan: true
 bind-address: "*"
 authentication:
-  - "chao:{{ .env.MIHOMO_AUTHENTICATION }}"
+  - "chao:{{ .env.CLASH_AUTHENTICATION }}"
 skip-auth-prefixes:
   - 127.0.0.1/8
   - 10.0.0.0/8
@@ -36,13 +39,16 @@ skip-auth-prefixes:
   - 192.168.0.0/16
   - 100.64.0.0/10
   - ::1/128
+  - fd7a:115c:a1e0::/48
 
 # Proxy Settings
 
-mixed-port: 6152
-redir-port: 6153
-tproxy-port: 6154
-ipv6: false
+# port: 8080
+socks-port: 1080
+mixed-port: 8080
+redir-port: 8081
+tproxy-port: 8082
+ipv6: true
 unified-delay: true
 
 # Tun
@@ -53,6 +59,7 @@ tun:
   auto-route: true
   auto-redirect: true
   auto-detect-interface: true
+  strict-route: false
   device: mihomo
   dns-hijack:
     - any:53
@@ -60,25 +67,24 @@ tun:
   exclude-interface:
     - Tailscale
     - tailscale0
-  mtu: 1500
   route-exclude-address:
     - 100.64.0.0/10
     - fd7a:115c:a1e0::/48
-  strict-route: false
 
 # DNS
 
-hosts:
-  '*.ts.net': '100.100.100.100'
 dns:
   enable: true
   enhanced-mode: fake-ip
   nameserver:
-    - https://doh.pub/dns-query
+    - https://dns.cloudflare.com/dns-query
+    - https://dns.google/dns-query
     - https://dns.alidns.com/dns-query
+    - system
   default-nameserver:
-    - 114.114.114.114
+    - 1.1.1.1
     - 8.8.8.8
+    - 223.5.5.5
   cache-algorithm: arc
   prefer-h3: true
   use-hosts: true
@@ -89,23 +95,23 @@ dns:
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - '*.lan'
-    - '+.argotunnel.com'
+    - "*.lan"
+    - "+.argotunnel.com"
   nameserver-policy:
-    '+.arpa': '10.0.0.1'
-    '*.ts.net': '100.100.100.100' 
-    # 'rule-set:cn':
-        # - https://doh.pub/dns-query
-        # - https://dns.alidns.com/dns-query
+    "+.arpa": "10.0.0.1"
+    "*.ts.net": "100.100.100.100"
+    "rule-set:🟢 Direct":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
   fallback:
-    - https://doh.dns.sb/dns-query
-    - https://dns.cloudflare.com/dns-query
-    - https://dns.twnic.tw/dns-query
-    - tls://8.8.4.4
-    - tls://1.1.1.1
-  proxy-server-nameserver:
     - https://doh.pub/dns-query
+    - tls://1.1.1.1
+    - tls://8.8.8.8
+  proxy-server-nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
   direct-nameserver:
+    - 223.5.5.5
     - system
   direct-nameserver-follow-policy: true
   fallback-filter:
@@ -119,31 +125,40 @@ dns:
       - '+.google.com'
       - '+.facebook.com'
       - '+.youtube.com'
+hosts:
+  '*.ts.net': '100.100.100.100'
 
 # Sniffer
 
 sniffer:
   enable: true
-  sniffing:
-    - tls
-    - http
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: false
+  sniff:
+    HTTP:
+      ports: [80]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
   skip-domain:
     - 'Mijia Cloud'
     - 'dlg.io.mi.com'
     - '+.apple.com'
   force-domain:
     - 'google.com'
-  port-whitelist:
-    - 80
 
 # Proxies
 
 proxy-providers:
-  General:
+  🏳️‍🌈 General:
     type: http
     url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/General?target=ClashMeta
     path: ./proxy-providers/General
     interval: 3600
+    proxy: 🟢 Direct
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -151,11 +166,12 @@ proxy-providers:
       timeout: 5000
       lazy: true
       expected-status: 204
-  HK:
+  🇭🇰 HK:
     type: http
     url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/HK?target=ClashMeta
     path: ./proxy-providers/HK
     interval: 3600
+    proxy: 🟢 Direct
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -163,11 +179,12 @@ proxy-providers:
       timeout: 5000
       lazy: true
       expected-status: 204
-  TW:
+  🇹🇼 TW:
     type: http
     url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/TW?target=ClashMeta
     path: ./proxy-providers/TW
     interval: 3600
+    proxy: 🟢 Direct
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -175,11 +192,12 @@ proxy-providers:
       timeout: 5000
       lazy: true
       expected-status: 204
-  JP:
+  🇯🇵 JP:
     type: http
     url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/JP?target=ClashMeta
     path: ./proxy-providers/JP
     interval: 3600
+    proxy: 🟢 Direct
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -187,11 +205,12 @@ proxy-providers:
       timeout: 5000
       lazy: true
       expected-status: 204
-  SG:
+  🇸🇬 SG:
     type: http
     url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/SG?target=ClashMeta
     path: ./proxy-providers/SG
     interval: 3600
+    proxy: 🟢 Direct
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -199,11 +218,12 @@ proxy-providers:
       timeout: 5000
       lazy: true
       expected-status: 204
-  US:
+  🇺🇸 US:
     type: http
     url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/US?target=ClashMeta
     path: ./proxy-providers/US
     interval: 3600
+    proxy: 🟢 Direct
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -211,11 +231,12 @@ proxy-providers:
       timeout: 5000
       lazy: true
       expected-status: 204
-  MY:
+  🇲🇾 MY:
     type: http
     url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/MY?target=ClashMeta
     path: ./proxy-providers/MY
     interval: 3600
+    proxy: 🟢 Direct
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -223,12 +244,12 @@ proxy-providers:
       timeout: 5000
       lazy: true
       expected-status: 204
-
-  AR:
+  🇦🇷 AR:
     type: http
     url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/AR?target=ClashMeta
     path: ./proxy-providers/AR
     interval: 3600
+    proxy: 🟢 Direct
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -236,12 +257,12 @@ proxy-providers:
       timeout: 5000
       lazy: true
       expected-status: 204
-
-  TR:
+  🇹🇷 TR:
     type: http
     url: https://proxies.er-meng.com{{ .env.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/TR?target=ClashMeta
     path: ./proxy-providers/TR
     interval: 3600
+    proxy: 🟢 Direct
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -250,331 +271,378 @@ proxy-providers:
       lazy: true
       expected-status: 204
 
+proxies:
+  - name: "🟢 Direct"
+    type: direct
+  - name: "🔴 Reject"
+    type: reject
+
 proxy-groups:
-  - name: "🚀 Select"
+  - name: "🌐 Proxy"
     type: select
     proxies:
-      - "♻️ Auto"
+      - "⚡️ Auto"
       - "🇭🇰 HK"
       - "🇹🇼 TW"
       - "🇯🇵 JP"
       - "🇸🇬 SG"
-      - "🇺🇲 US"
+      - "🇺🇸 US"
       - "🇲🇾 MY"
       - "🇦🇷 AR"
       - "🇹🇷 TR"
-  - name: "♻️ Auto"
+  - name: "⚡️ Auto"
     type: url-test
     use:
-      - General
+      - 🏳️‍🌈 General
     url: "https://www.gstatic.com/generate_204"
     interval: 300
-  - name: "💬 ChatGPT"
+  - name: "🧠 AI"
     type: select
     proxies:
-      - "🚀 Select"
-      - "♻️ Auto"
+      - "🌐 Proxy"
+      - "🟢 Direct"
+      - "⚡️ Auto"
       - "🇹🇼 TW"
       - "🇯🇵 JP"
       - "🇸🇬 SG"
-      - "🇺🇲 US"
-      - "🇲🇾 MY"
-      - "🇦🇷 AR"
-      - "🇹🇷 TR"
-  - name: "🍎 AppleTV"
-    type: select
-    proxies:
-      - DIRECT
-      - "🚀 Select"
-      - "♻️ Auto"
-      - "🇭🇰 HK"
-      - "🇹🇼 TW"
-      - "🇯🇵 JP"
-      - "🇸🇬 SG"
-      - "🇺🇲 US"
+      - "🇺🇸 US"
       - "🇲🇾 MY"
       - "🇦🇷 AR"
       - "🇹🇷 TR"
   - name: "🎮 Game"
     type: select
     proxies:
-      - "🚀 Select"
-      - DIRECT
-      - "♻️ Auto"
+      - "🌐 Proxy"
+      - "🟢 Direct"
+      - "⚡️ Auto"
       - "🇭🇰 HK"
       - "🇹🇼 TW"
       - "🇯🇵 JP"
       - "🇸🇬 SG"
-      - "🇺🇲 US"
+      - "🇺🇸 US"
+      - "🇲🇾 MY"
+      - "🇦🇷 AR"
+      - "🇹🇷 TR"
+  - name: "📺 Media"
+    type: select
+    proxies:
+      - "🌐 Proxy"
+      - "🟢 Direct"
+      - "⚡️ Auto"
+      - "🇭🇰 HK"
+      - "🇹🇼 TW"
+      - "🇯🇵 JP"
+      - "🇸🇬 SG"
+      - "🇺🇸 US"
       - "🇲🇾 MY"
       - "🇦🇷 AR"
       - "🇹🇷 TR"
   - name: "🐟 Final"
     type: select
     proxies:
-      - "🚀 Select"
-      - DIRECT
-      - "♻️ Auto"
+      - "🌐 Proxy"
+      - "🟢 Direct"
+      - "⚡️ Auto"
       - "🇭🇰 HK"
       - "🇹🇼 TW"
       - "🇯🇵 JP"
       - "🇸🇬 SG"
-      - "🇺🇲 US"
+      - "🇺🇸 US"
       - "🇲🇾 MY"
       - "🇦🇷 AR"
       - "🇹🇷 TR"
-  - name: "🛑 AD"
-    type: select
-    proxies:
-      - REJECT
-      - "🚀 Select"
-      - DIRECT
-    hidden: true
   - name: "🇭🇰 HK"
     type: url-test
     use:
-      - HK
+      - 🇭🇰 HK
     url: "https://www.gstatic.com/generate_204"
     interval: 300
   - name: "🇹🇼 TW"
     type: url-test
     use:
-      - TW
+      - 🇹🇼 TW
     url: "https://www.gstatic.com/generate_204"
     interval: 300
   - name: "🇯🇵 JP"
     type: url-test
     use:
-      - JP
+      - 🇯🇵 JP
     url: "https://www.gstatic.com/generate_204"
     interval: 300
   - name: "🇸🇬 SG"
     type: url-test
     use:
-      - SG
+      - 🇸🇬 SG
     url: "https://www.gstatic.com/generate_204"
     interval: 300
-  - name: "🇺🇲 US"
+  - name: "🇺🇸 US"
     type: url-test
     use:
-      - US
+      - 🇺🇸 US
     url: "https://www.gstatic.com/generate_204"
     interval: 300
   - name: "🇲🇾 MY"
     type: url-test
     use:
-      - MY
+      - 🇲🇾 MY
     url: "https://www.gstatic.com/generate_204"
     interval: 300
   - name: "🇦🇷 AR"
     type: url-test
     use:
-      - AR
+      - 🇦🇷 AR
     url: "https://www.gstatic.com/generate_204"
     interval: 300
   - name: "🇹🇷 TR"
     type: url-test
     use:
-      - TR
+      - 🇹🇷 TR
     url: "https://www.gstatic.com/generate_204"
     interval: 300
 
+rules:
+  # 🚫 AD
+  - RULE-SET,advertising,🔴 Reject
+  - RULE-SET,zhihu_ads,🔴 Reject
+  - RULE-SET,hijacking,🔴 Reject
+  - RULE-SET,privacy,🔴 Reject
+
+  # 🧠 AI
+  - RULE-SET,ai_chao,🧠 AI
+  - RULE-SET,claude,🧠 AI
+  - RULE-SET,copilot,🧠 AI
+  - RULE-SET,gemini,🧠 AI
+  - RULE-SET,openai,🧠 AI
+
+  # 🟢 Direct
+  - GEOIP,CN,🟢 Direct
+  - RULE-SET,direct_chao,🟢 Direct
+  - RULE-SET,apple,🟢 Direct
+  - RULE-SET,china_max,🟢 Direct
+  - RULE-SET,download,🟢 Direct
+  - RULE-SET,lan,🟢 Direct
+
+  # 🎮 Game
+  - RULE-SET,game_chao,🎮 Game
+  - RULE-SET,game,🎮 Game
+
+  # 📺 Media
+  - RULE-SET,disney,📺 Media
+  - RULE-SET,netflix,📺 Media
+  - RULE-SET,hbo_usa,📺 Media
+  - RULE-SET,spotify,📺 Media
+  - RULE-SET,tiktok,📺 Media
+  - RULE-SET,youtube,📺 Media
+  - RULE-SET,youtube_music,📺 Media
+
+  # 🌐 Proxy
+  - RULE-SET,proxy_chao,🌐 Proxy
+  - RULE-SET,developer,🌐 Proxy
+  - RULE-SET,amazon_cloud,🌐 Proxy
+  - RULE-SET,google,🌐 Proxy
+  - RULE-SET,github,🌐 Proxy
+
+  - MATCH,🐟 Final
+
 rule-providers:
-  # Ruleset
-  ai:
+  # 🚫 AD
+  advertising:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/AI.yaml
-    path: ./rule-providers/Ruleset/ai.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.yaml
+    path: ./rule-providers/AD/advertising.yaml
     interval: 86400
 
-  appletv:
+  zhihu_ads:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/AppleTV.yaml
-    path: ./rule-providers/Ruleset/appletv.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ZhihuAds/ZhihuAds.yaml
+    path: ./rule-providers/AD/zhihu_ads.yaml
     interval: 86400
 
-  steam:
+  hijacking:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/Steam.yaml
-    path: ./rule-providers/Ruleset/steam.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hijacking/Hijacking.yaml
+    path: ./rule-providers/AD/hijacking.yaml
     interval: 86400
 
-  sony:
+  privacy:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/Sony.yaml
-    path: ./rule-providers/Ruleset/sony.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Privacy/Privacy.yaml
+    path: ./rule-providers/AD/privacy.yaml
     interval: 86400
 
-  nintendo:
+  # 🧠 AI
+  ai_chao:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/Nintendo.yaml
-    path: ./rule-providers/Ruleset/nintendo.yaml
+    url: https://raw.githubusercontent.com/ermengchao/proxy_rule_script/main/rule/Clash/AI/AI.yaml
+    path: ./rule-providers/AI/ai_chao.yaml
     interval: 86400
 
-  steam_cn:
+  claude:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/SteamCN.yaml
-    path: ./rule-providers/Ruleset/steam_cn.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml
+    path: ./rule-providers/AI/claude.yaml
     interval: 86400
-  
-  game_download:
+    
+  copilot:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/GameDownload.yaml
-    path: ./rule-providers/Ruleset/game_download.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot.yaml
+    path: ./rule-providers/AI/copilot.yaml
     interval: 86400
 
-  wechat:
+  gemini:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/Wechat.yaml
-    path: ./rule-providers/Ruleset/wechat.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml
+    path: ./rule-providers/AI/gemini.yaml
+    interval: 86400
+
+  openai:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml
+    path: ./rule-providers/AI/openai.yaml
+    interval: 86400
+
+  # 🟢 Direct
+  direct_chao:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ermengchao/proxy_rule_script/main/rule/Clash/Direct/Direct.yaml
+    path: ./rule-providers/Direct/direct_chao.yaml
     interval: 86400
 
   apple:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Apple.yaml
-    path: ./rule-providers/Ruleset/apple.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml
+    path: ./rule-providers/Direct/apple.yaml
     interval: 86400
 
-  microsoft:
+  china_max:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/Microsoft.yaml
-    path: ./rule-providers/Ruleset/microsoft.yaml
-    interval: 86400
-
-  onedrive:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Ruleset/OneDrive.yaml
-    path: ./rule-providers/Ruleset/onedrive.yaml
-    interval: 86400
-
-  # Providers
-  proxy:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/ProxyGFWlist.yaml
-    path: ./rule-providers/proxy.yaml
-    interval: 86400
-
-  unban:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/UnBan.yaml
-    path: ./rule-providers/unban.yaml
-    interval: 86400
-
-  ban_ad:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/BanAD.yaml
-    path: ./rule-providers/ban_ad.yaml
-    interval: 86400
-
-  ban_program_ad:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/BanProgramAD.yaml
-    path: ./rule-providers/ban_program_ad.yaml
-    interval: 86400
-
-  local_area_network:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/LocalAreaNetwork.yaml
-    path: ./rule-providers/local_area_network.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.yaml
+    path: ./rule-providers/Direct/china_max.yaml
     interval: 86400
 
   download:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/Download.yaml
-    path: ./rule-providers/download.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Download/Download.yaml
+    path: ./rule-providers/Direct/download.yaml
     interval: 86400
 
-  china_domain:
+  lan:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/ChinaDomain.yaml
-    path: ./rule-providers/china_domain.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml
+    path: ./rule-providers/Direct/lan.yaml
     interval: 86400
 
-  china_company:
-    type: http
-    behavior: ipcidr
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/ChinaCompanyIp.yaml
-    path: ./rule-providers/china_company.yaml
-    interval: 86400
-
-  chatgpt_chao:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/Chaoermeng/ACL4chao/refs/heads/main/Clash/Providers/ChatGPT.yaml
-    path: ./rule-providers/chatgpt_chao.yaml
-    interval: 86400
-
-  direct_chao:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/Chaoermeng/ACL4chao/refs/heads/main/Clash/Providers/Direct.yaml
-    path: ./rule-providers/direct_chao.yaml
-    interval: 86400
-
+  # 🎮 Game
   game_chao:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/Chaoermeng/ACL4chao/refs/heads/main/Clash/Providers/Game.yaml
-    path: ./rule-providers/game_chao.yaml
+    url: https://raw.githubusercontent.com/ermengchao/proxy_rule_script/main/rule/Clash/Game/Game.yaml
+    path: ./rule-providers/Game/game_chao.yaml
     interval: 86400
 
+  game:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/Game.yaml
+    path: ./rule-providers/Game/game.yaml
+    interval: 86400
+
+  # 📺 Media
+  disney:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.yaml
+    path: ./rule-providers/Media/disney.yaml
+    interval: 86400
+
+  netflix:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml
+    path: ./rule-providers/Media/netflix.yaml
+    interval: 86400
+
+  hbo_usa:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HBOUSA/HBOUSA.yaml
+    path: ./rule-providers/Media/hbo_usa.yaml
+    interval: 86400
+
+  spotify:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.yaml
+    path: ./rule-providers/Media/spotify.yaml
+    interval: 86400
+
+  tiktok:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.yaml
+    path: ./rule-providers/Media/tiktok.yaml
+    interval: 86400
+
+  youtube:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml
+    path: ./rule-providers/Media/youtube.yaml
+    interval: 86400
+
+  youtube_music:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTubeMusic/YouTubeMusic.yaml
+    path: ./rule-providers/Media/youtube_music.yaml
+    interval: 86400
+
+  # 🌐 Proxy
   proxy_chao:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/Chaoermeng/ACL4chao/refs/heads/main/Clash/Providers/Proxy.yaml
-    path: ./rule-providers/proxy_chao.yaml
+    url: https://raw.githubusercontent.com/ermengchao/proxy_rule_script/main/rule/Clash/Proxy/Proxy.yaml
+    path: ./rule-providers/Proxy/proxy_chao.yaml
     interval: 86400
 
-# Summary: 
-# Ruleset: ai, appletv, steam, sony, nintendo, steam_cn, game_download, wechat, apple, microsoft, onedrive
+  developer:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Developer/Developer.yaml
+    path: ./rule-providers/Proxy/developer.yaml
+    interval: 86400
 
-# Providers: proxy, unban, ban_ad, ban_program_ad, local_area_network, download, china_domain, china_company, chatgpt_chao, direct_chao, game_chao, proxy_chao
+  amazon_cloud:
+    type: http
+    behavior: ipcidr
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Cloud/AmazonCloud/AmazonCloud_IP.yaml
+    path: ./rule-providers/Proxy/amazon_cloud.yaml
+    interval: 86400
 
-rules:
-  # Providers
-  - GEOIP,LAN,DIRECT
-  - GEOIP,CN,DIRECT
-  - RULE-SET,ai,💬 ChatGPT
-  - RULE-SET,appletv,🍎 AppleTV
-  - RULE-SET,steam,🎮 Game
-  - RULE-SET,sony,🎮 Game
-  - RULE-SET,nintendo,🎮 Game
-  - RULE-SET,steam_cn,DIRECT
-  - RULE-SET,game_download,DIRECT
-  - RULE-SET,wechat,DIRECT
-  - RULE-SET,apple,DIRECT
-  - RULE-SET,microsoft,DIRECT
-  - RULE-SET,onedrive,DIRECT
+  google:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml
+    path: ./rule-providers/Proxy/google.yaml
+    interval: 86400
 
-  # Ruleset
-  - RULE-SET,proxy,🚀 Select
-  - RULE-SET,download,DIRECT
-  - RULE-SET,unban,DIRECT
-  - RULE-SET,ban_ad,REJECT
-  - RULE-SET,ban_program_ad,REJECT
-  - RULE-SET,local_area_network,DIRECT
-  - RULE-SET,china_domain,DIRECT
-  - RULE-SET,china_company,DIRECT
-  - RULE-SET,chatgpt_chao,💬 ChatGPT
-  - RULE-SET,direct_chao,DIRECT
-  - RULE-SET,game_chao,🎮 Game
-  - RULE-SET,proxy_chao,🚀 Select
-  - MATCH,🐟 Final
+  github:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml
+    path: ./rule-providers/Proxy/github.yaml
+    interval: 86400

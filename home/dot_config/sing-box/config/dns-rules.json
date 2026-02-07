@@ -1,0 +1,86 @@
+{
+  "dns": {
+    "rules": [
+      {
+        "outbound": "any",
+        "server": "doh-aliyun"
+      },
+      {
+        "domain_suffix": [
+          "arpa"
+        ],
+        "action": "route",
+        "server": "dns-dhcp"
+      },
+      {
+        "domain_suffix": [
+          "ts.net"
+        ],
+        "action": "route",
+        "server": "dns-tailscale"
+      },
+      {
+        "rule_set": [
+          "advertising",
+          "zhihu_ads",
+          "hijacking",
+          "privacy"
+        ],
+        "action": "reject"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "action": "route",
+        "server": "dns-fakeip"
+      },
+      {
+        "clash_mode": "direct",
+        "server": "doh-aliyun"
+      },
+      {
+        "clash_mode": "global",
+        "server": "doh-cloudflare"
+      },
+      {
+        "rule_set": [
+          "geosite-cn",
+          "geoip-cn",
+          "direct_chao",
+          "apple",
+          "china_max",
+          "download",
+          "lan"
+        ],
+        "action": "route",
+        "server": "doh-aliyun"
+      },
+      {
+        "rule_set": [
+          "claude",
+          "copilot",
+          "gemini",
+          "openai",
+          "game_chao",
+          "game",
+          "disney",
+          "netflix",
+          "hbo_usa",
+          "spotify",
+          "tiktok",
+          "youtube",
+          "youtube_music",
+          "proxy_chao",
+          "developer",
+          "amazon_cloud",
+          "google",
+          "github"
+        ],
+        "action": "route",
+        "server": "doh-cloudflare"
+      }
+    ]
+  }
+}

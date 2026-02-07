@@ -1,0 +1,78 @@
+{
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns-local",
+        "type": "local"
+      },
+      {
+        "tag": "dns-hosts",
+        "type": "hosts"
+      },
+      {
+        "tag": "dns-fakeip",
+        "type": "fakeip",
+        "inet4_range": "198.18.0.0/15",
+        "inet6_range": "fc00::/18"
+      },
+      {
+        "tag": "dns-dhcp",
+        "type": "dhcp"
+      },
+      {
+        "tag": "doh-cloudflare",
+        "type": "h3",
+        "server": "https://dns.cloudflare.com",
+        "path": "/dns-query",
+        "detour": "🌐 Proxy",
+        "domain_resolver": "dns-cloudflare"
+      },
+      {
+        "tag": "doh-google",
+        "type": "h3",
+        "server": "https://dns.google",
+        "path": "/dns-query",
+        "detour": "🌐 Proxy",
+        "domain_resolver": "dns-google"
+      },
+      {
+        "tag": "doh-aliyun",
+        "type": "h3",
+        "server": "https://dns.alidns.com",
+        "path": "/dns-query",
+        "detour": "🟢 Direct",
+        "domain_resolver": "dns-aliyun"
+      },
+      {
+        "tag": "dns-cloudflare",
+        "type": "udp",
+        "server": "1.1.1.1",
+        "detour": "🟢 Direct"
+      },
+      {
+        "tag": "dns-google",
+        "type": "udp",
+        "server": "8.8.8.8",
+        "detour": "🟢 Direct"
+      },
+      {
+        "tag": "dns-aliyun",
+        "type": "udp",
+        "server": "223.5.5.5",
+        "detour": "🟢 Direct"
+      },
+      {
+        "tag": "dns-tailscale",
+        "type": "tailscale",
+        "endpoint": "endpoints-tailscale",
+        "accept_default_resolvers": false
+      },
+      {
+        "tag": "dns-resolved",
+        "type": "resolved",
+        "service": "services-resolved",
+        "accept_default_resolvers": false
+      }
+    ]
+  }
+}

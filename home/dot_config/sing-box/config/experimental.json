@@ -1,0 +1,15 @@
+{
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "",
+    },
+    "clash_api": {
+      "external_controller": "0.0.0.0:9090",
+      "secret": "",
+      "default_mode": "rule",
+      "access_control_allow_origin": "*",
+      "access_control_allow_private_network": false,
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "route": {
+    "rules": [
+      {
+        "action": "sniff"
+      },
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      },
+      {
+        "inbound": "mixed-in",
+        "action": "resolve",
+        "strategy": "prefer_ipv4"
+      },
+      {
+        "inbound": "socks-in",
+        "action": "resolve",
+        "strategy": "prefer_ipv4"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "🟢 Direct"
+      },
+      {
+        "rule_set": "geoip-cn",
+        "outbound": "🟢 Direct"
+      },
+      {
+        "rule_set": "geosite-cn",
+        "outbound": "🟢 Direct"
+      },
+      {
+        "rule_set": "advertising",
+        "outbound": "🔴 Reject"
+      },
+      {
+        "rule_set": "zhihu_ads",
+        "outbound": "🔴 Reject"
+      },
+      {
+        "rule_set": "hijacking",
+        "outbound": "🔴 Reject"
+      },
+      {
+        "rule_set": "privacy",
+        "outbound": "🔴 Reject"
+      },
+      {
+        "rule_set": "claude",
+        "outbound": "🧠 AI"
+      },
+      {
+        "rule_set": "copilot",
+        "outbound": "🧠 AI"
+      },
+      {
+        "rule_set": "gemini",
+        "outbound": "🧠 AI"
+      },
+      {
+        "rule_set": "openai",
+        "outbound": "🧠 AI"
+      },
+      {
+        "rule_set": "direct_chao",
+        "outbound": "🟢 Direct"
+      },
+      {
+        "rule_set": "apple",
+        "outbound": "🟢 Direct"
+      },
+      {
+        "rule_set": "china_max",
+        "outbound": "🟢 Direct"
+      },
+      {
+        "rule_set": "download",
+        "outbound": "🟢 Direct"
+      },
+      {
+        "rule_set": "lan",
+        "outbound": "🟢 Direct"
+      },
+      {
+        "rule_set": "game_chao",
+        "outbound": "🎮 Game"
+      },
+      {
+        "rule_set": "game",
+        "outbound": "🎮 Game"
+      },
+      {
+        "rule_set": "disney",
+        "outbound": "📺 Media"
+      },
+      {
+        "rule_set": "netflix",
+        "outbound": "📺 Media"
+      },
+      {
+        "rule_set": "hbo_usa",
+        "outbound": "📺 Media"
+      },
+      {
+        "rule_set": "spotify",
+        "outbound": "📺 Media"
+      },
+      {
+        "rule_set": "tiktok",
+        "outbound": "📺 Media"
+      },
+      {
+        "rule_set": "youtube",
+        "outbound": "📺 Media"
+      },
+      {
+        "rule_set": "youtube_music",
+        "outbound": "📺 Media"
+      },
+      {
+        "rule_set": "proxy_chao",
+        "outbound": "🌐 Proxy"
+      },
+      {
+        "rule_set": "developer",
+        "outbound": "🌐 Proxy"
+      },
+      {
+        "rule_set": "amazon_cloud",
+        "outbound": "🌐 Proxy"
+      },
+      {
+        "rule_set": "google",
+        "outbound": "🌐 Proxy"
+      },
+      {
+        "rule_set": "github",
+        "outbound": "🌐 Proxy"
+      }
+    ],
+  }
+}

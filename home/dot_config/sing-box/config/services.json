@@ -1,0 +1,10 @@
+{
+  "services": [
+    {
+      "tag": "services-resolved",
+      "type": "resolved",
+      "listen": "127.0.0.53",
+      "listen_port": 53
+    }
+  ]
+}

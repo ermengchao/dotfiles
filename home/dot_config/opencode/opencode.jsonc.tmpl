@@ -15,17 +15,31 @@
     "cors": ["http://localhost:5173"]
   },
   "tools": {
-    "write": false,
-    "bash": false
+    "write": true,
+    "bash": true,
   },
-  "theme": "nord",
+  "theme": "github",
   "autoupdate": false,
   "permission": {
+    "bash": "ask",
     "edit": "ask",
-    "bash": "ask"
+    "read": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "skill": "allow",
+    "todowrite": "allow",
+    "todoread": "allow",
+    "webfetch": "allow",
+    "question": "allow",
   },
   "watcher": {
-    "ignore": ["node_modules/**", "dist/**", ".git/**"]
+    "ignore": [
+      "node_modules/**",
+      "dist/**",
+      ".git/**"
+    ]
   },
   "mcp": {
     "github-mcp": {

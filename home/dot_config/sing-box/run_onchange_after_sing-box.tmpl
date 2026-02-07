@@ -1,0 +1,9 @@
+#!/usr/bin/env fish
+
+set config_fields ./config
+
+if type -q sing-box
+  if test -d $config_fields
+    sing-box merge config.json -C $config_fields
+  end
+end
