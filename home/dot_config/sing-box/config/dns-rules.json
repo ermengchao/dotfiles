@@ -25,14 +25,6 @@
         "action": "reject"
       },
       {
-        "query_type": [
-          "A",
-          "AAAA"
-        ],
-        "action": "route",
-        "server": "dns-fakeip"
-      },
-      {
         "clash_mode": "direct",
         "server": "doh-aliyun"
       },
@@ -52,6 +44,14 @@
         ],
         "action": "route",
         "server": "doh-aliyun"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "action": "route",
+        "server": "dns-fakeip"
       },
       {
         "rule_set": [

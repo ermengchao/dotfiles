@@ -1,6 +1,6 @@
 {
   "route": {
-    "default_domain_resolver": "doh-cloudflare",
+    "default_domain_resolver": "dns-cloudflare",
     "final": "🌐 Proxy"
   }
 }

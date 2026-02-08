@@ -1,5 +1,11 @@
 #!/usr/bin/env fish
 
-{{ range .rootConfig }}
+{{ $isRoot := includeTemplate "isRoot.tmpl" . }}
+
+{{ if eq "isRoot" "true" }}
+
+{{   range .rootConfig }}
 sudo ln -sf $XDG_CONFIG_HOME/{{ . }} /root/.config/{{ . }}
+{{   end }}
+
 {{ end }}

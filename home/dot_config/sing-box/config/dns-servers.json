@@ -24,14 +24,16 @@
         "type": "h3",
         "server": "dns.cloudflare.com",
         "path": "/dns-query",
-        "domain_resolver": "dns-cloudflare"
+        "domain_resolver": "dns-cloudflare",
+        "detour": "🌐 Proxy"
       },
       {
         "tag": "doh-google",
         "type": "h3",
         "server": "dns.google",
         "path": "/dns-query",
-        "domain_resolver": "dns-google"
+        "domain_resolver": "dns-google",
+        "detour": "🌐 Proxy"
       },
       {
         "tag": "doh-aliyun",
