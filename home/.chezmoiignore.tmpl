@@ -12,18 +12,9 @@
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
-{{ $isRoot := includeTemplate "isRoot.tmpl" . -}}
-{{   if eq $isRoot "true" -}}
-
-.config
-!.config/bat
-!.config/fish
-!.config/nvim
-!.config/yazi
-
-{{   end -}}
 
 .config/codesnap
+.config/nixos
 .config/posting
 
 {{ end -}}

@@ -1,0 +1,6 @@
+rootConfig = [
+  "bat",
+  "fish",
+  "nvim",
+  "yazi",
+]

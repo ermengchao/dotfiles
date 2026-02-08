@@ -2,10 +2,6 @@
   "dns": {
     "rules": [
       {
-        "outbound": "any",
-        "server": "doh-aliyun"
-      },
-      {
         "domain_suffix": [
           "arpa"
         ],

@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+
+{{ range .rootConfig }}
+sudo ln -sf $XDG_CONFIG_HOME/{{ . }} /root/.config/{{ . }}
+{{ end }}

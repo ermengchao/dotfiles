@@ -2,14 +2,17 @@
   "experimental": {
     "cache_file": {
       "enabled": true,
-      "path": {{ env "XDG_CACHE_HOME" | quote }},
+      "path": "{{ env "XDG_CACHE_HOME" }}/sing-box/cache.db",
     },
     "clash_api": {
       "external_controller": "0.0.0.0:9090",
       "secret": {{ .env.CLASH_AUTHENTICATION | quote }},
       "default_mode": "rule",
-      "access_control_allow_origin": "*",
-      "access_control_allow_private_network": false,
+      "access_control_allow_origin": [
+        "http://127.0.0.1",
+        "https://yacd.er-meng.com"
+      ],
+      "access_control_allow_private_network": true,
     }
   }
 }
