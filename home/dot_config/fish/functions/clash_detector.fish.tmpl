@@ -1,0 +1,19 @@
+function sing-box_detector
+    set url "http://127.0.0.1:9090/"
+    set token {{ .secrets.CLASH_AUTHENTICATION }}
+
+    set resp (curl -sS --fail \
+        -H "Authorization: Bearer $token" \
+        --max-time 3 \
+        "$url" 2>/dev/null)
+    or return 1
+
+    set greep (printf '%s' "$resp" | jq -er '.hello // empty | select(type=="string")' 2>/dev/null)
+    or return 1
+
+    if test "$greep" = clash
+        return 0
+    else
+        return 1
+    end
+end

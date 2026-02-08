@@ -115,7 +115,6 @@
     {
       "tag": "🇭🇰 HK",
       "type": "urltest",
-      "domain_resolver": "dns-cloudflare",
       "outbounds": [
         "🇭🇰 HK 01",
         "🇭🇰 HK 02",
@@ -144,7 +143,6 @@
     {
       "tag": "🇹🇼 TW",
       "type": "urltest",
-      "domain_resolver": "dns-cloudflare",
       "outbounds": [
         "🇹🇼 TW 01",
         "🇹🇼 TW 02",
@@ -166,7 +164,6 @@
     {
       "tag": "🇯🇵 JP",
       "type": "urltest",
-      "domain_resolver": "dns-cloudflare",
       "outbounds": [
         "🇯🇵 JP 01",
         "🇯🇵 JP 02",
@@ -203,7 +200,6 @@
     {
       "tag": "🇺🇸 US",
       "type": "urltest",
-      "domain_resolver": "dns-cloudflare",
       "outbounds": [
         "🇺🇸 US 01",
         "🇺🇸 US 02",
@@ -222,7 +218,6 @@
     {
       "tag": "🇲🇾 MY",
       "type": "urltest",
-      "domain_resolver": "dns-cloudflare",
       "outbounds": [
         "🇲🇾 MY 01",
         "🇲🇾 MY 02",
@@ -236,7 +231,6 @@
     {
       "tag": "🇦🇷 AR",
       "type": "urltest",
-      "domain_resolver": "dns-cloudflare",
       "outbounds": [
         "🇦🇷 AR 01"
       ],
@@ -246,7 +240,6 @@
     {
       "tag": "🇹🇷 TR",
       "type": "urltest",
-      "domain_resolver": "dns-cloudflare",
       "outbounds": [
         "🇹🇷 TR 01"
       ],
@@ -256,7 +249,6 @@
     {
       "tag": "🏳️‍🌈 General",
       "type": "selector",
-      "domain_resolver": "dns-cloudflare",
       "outbounds": [
         "🇭🇰 HK 01",
         "🇭🇰 HK 02",

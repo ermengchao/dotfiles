@@ -1,0 +1,17 @@
+function theme
+    {{ if eq .chezmoi.os "darwin" -}}
+    if test "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = Dark
+        printf "dark"
+    else
+        printf "light"
+    end
+    {{ end -}}
+
+    {{ if eq .chezmoi.os "linux" -}}
+    if test "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" = prefer-dark
+        printf "dark"
+    else
+        printf "light"
+    end
+    {{ end -}}
+end

@@ -7,7 +7,7 @@
       "protocol": "trojan",
       "settings": {
         "clients": [
-          { "password": {{ .env.XRAY_TROJAN_PASSWORD | quote }} }
+          { "password": {{ .secrets.INBOUND_TROJAN_PASSWORD | quote }} }
         ]
       },
       "streamSettings": {

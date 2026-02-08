@@ -6,9 +6,9 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 
-Environment=CNC_USER_ID={{ .env.CNC_USER_ID | quote }}
-Environment=CNC_PASSWORD={{ .env.CNC_PASSWORD | quote }}
-Environment=CNC_SERVICE={{ .env.CNC_SERVICE | quote }}
+Environment=CNC_USER_ID={{ .secrets.CNC_USER_ID | quote }}
+Environment=CNC_PASSWORD={{ .secrets.CNC_PASSWORD | quote }}
+Environment=CNC_SERVICE={{ .secrets.CNC_SERVICE | quote }}
 ExecStartPre=/home/chao/.local/bin/cnc logout
 ExecStart=/usr/bin/sleep 2
 ExecStartPost=/home/chao/.local/bin/cnc login

@@ -7,7 +7,7 @@ AutoUpdate=registry
 ContainerName=syncclipboard-server
 
 Environment=SYNCCLIPBOARD_USERNAME=chao
-Environment=SYNCCLIPBOARD_PASSWORD={{ .env.SYNCCLIPBOARD_PASSWORD }}
+Environment=SYNCCLIPBOARD_PASSWORD={{ .secrets.SYNCCLIPBOARD_PASSWORD }}
 
 Volume=/home/chao/.local/share/syncclipboard-server:/app/data
 

@@ -6,7 +6,7 @@
     },
     "clash_api": {
       "external_controller": "0.0.0.0:9090",
-      "secret": {{ .env.CLASH_AUTHENTICATION | quote }},
+      "secret": {{ .secrets.CLASH_AUTHENTICATION | quote }},
       "default_mode": "rule",
       "access_control_allow_origin": [
         "http://127.0.0.1",
