@@ -96,7 +96,7 @@ drivers = [
 
 packages = [
   "opencode-bin",
-  "gitmoji",
+  "go-gitmoji-cli-bin",
   "rustdesk",
   "sing-box",
   "google-chrome",
@@ -105,5 +105,5 @@ packages = [
 [packageManagers.paru.minimal]
 
 packages = [
-  "gitmoji"
+  "go-gitmoji-cli-bin",
 ]
