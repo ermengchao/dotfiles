@@ -217,7 +217,6 @@ brews = [
   "fzf",
   "git",
   "git-delta",
-  "github-cli",
   "git-lfs",
   "neovim",
   "p7zip",
