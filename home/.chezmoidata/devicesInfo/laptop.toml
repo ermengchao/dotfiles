@@ -1,5 +1,8 @@
 [devicesInfo.laptop]
 os = "arch"
+hostname = "laptop"
+prettyHostname = "Laptop"
+
 [[devicesInfo.laptop.package]]
 manager = "pacman"
 minimal = false

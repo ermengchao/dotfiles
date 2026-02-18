@@ -1,5 +1,8 @@
 [devicesInfo.aws-ec2]
 os = "arch"
+hostname = "aws-ec2"
+prettyHostname = "AWS_EC2"
+
 [[devicesInfo.aws-ec2.package]]
 manager = "pacman"
 minimal = true

@@ -1,6 +1,38 @@
-# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
-# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[[mgr.prepend_keymap]]
+on   = "y"
+run  = [
+  "yank",
+  "shell -- osascript -e 'set the clipboard to (POSIX file \"%s\")'",
+]
+for  = "macos"
+desc = "Yank selected files (copy)"
+
+[[mgr.prepend_keymap]]
+on   = "x"
+run  = [
+  "yank --cut",
+  "shell -- osascript -e 'set the clipboard to (POSIX file \"%s\" )'"
+]
+for  = "macos"
+desc = "Yank selected files (cut)"
+
+[[mgr.prepend_keymap]]
+on   = "<Enter>"
+run  = "shell -- qlmanage -p %s"
+for  = "macos"
+desc = "Preview selected files via QuickLook on macOS"
+
+[[mgr.prepend_keymap]]
+on   = "l"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+[[mgr.prepend_keymap]]
+on   = "p"
+run  = "plugin smart-paste"
+desc = "Paste into the hovered directory or CWD"
 
 [mgr]
 
@@ -61,9 +93,7 @@ keymap = [
 	# Operation
 	{ on = "o",         run = "open",                        desc = "Open selected files" },
 	{ on = "O",         run = "open --interactive",          desc = "Open selected files interactively" },
-	{ on = "<Enter>",   run = "open",                        desc = "Open selected files" },
-	{ on = "<S-Enter>", run = "open --interactive",          desc = "Open selected files interactively" },
-	{ on = "y",         run = "yank",                        desc = "Yank selected files (copy)" },
+  { on = "y",         run = "yank",                        desc = "Yank selected files (copy)" },
 	{ on = "x",         run = "yank --cut",                  desc = "Yank selected files (cut)" },
 	{ on = "p",         run = "paste",                       desc = "Paste yanked files" },
 	{ on = "P",         run = "paste --force",               desc = "Paste yanked files (overwrite if the destination exists)" },
@@ -78,6 +108,7 @@ keymap = [
 	{ on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
 	{ on = ";",         run = "shell --interactive",         desc = "Run a shell command" },
 	{ on = ":",         run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
+  { on = "!",         run = "shell '$SHELL' --block",      desc = "Run $SHELL" },
 	{ on = ".",         run = "hidden toggle",               desc = "Toggle the visibility of hidden files" },
 	{ on = "s",         run = "search --via=fd",             desc = "Search files by name via fd" },
 	{ on = "S",         run = "search --via=rg",             desc = "Search files by content via ripgrep" },
@@ -86,12 +117,12 @@ keymap = [
 	{ on = "Z",         run = "plugin zoxide",               desc = "Jump to a directory via zoxide" },
 
 	# Linemode
-	{ on = [ "m", "s" ], run = "linemode size",        desc = "Linemode: size" },
-	{ on = [ "m", "p" ], run = "linemode permissions", desc = "Linemode: permissions" },
-	{ on = [ "m", "b" ], run = "linemode btime",       desc = "Linemode: btime" },
-	{ on = [ "m", "m" ], run = "linemode mtime",       desc = "Linemode: mtime" },
-	{ on = [ "m", "o" ], run = "linemode owner",       desc = "Linemode: owner" },
-	{ on = [ "m", "n" ], run = "linemode none",        desc = "Linemode: none" },
+	{ on = [ "'", "s" ], run = "linemode size",        desc = "Linemode: size" },
+	{ on = [ "'", "p" ], run = "linemode permissions", desc = "Linemode: permissions" },
+	{ on = [ "'", "b" ], run = "linemode btime",       desc = "Linemode: btime" },
+	{ on = [ "'", "m" ], run = "linemode mtime",       desc = "Linemode: mtime" },
+	{ on = [ "'", "o" ], run = "linemode owner",       desc = "Linemode: owner" },
+	{ on = [ "'", "n" ], run = "linemode none",        desc = "Linemode: none" },
 
 	# Copy
 	{ on = [ "c", "c" ], run = "copy path",             desc = "Copy the file path" },
@@ -151,6 +182,9 @@ keymap = [
 
 	# Tasks
 	{ on = "w", run = "tasks:show", desc = "Show task manager" },
+
+  # Mount
+  { on = "m", run = "plugin mount" },
 
 	# Help
 	{ on = "~",    run = "help", desc = "Open help" },

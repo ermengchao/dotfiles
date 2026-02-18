@@ -1,0 +1,23 @@
+[packageManagers.apt]
+
+root = true
+command = "install"
+args = [
+  "-y",
+]
+
+packages = [
+  "git",
+]
+
+[packageManagers.apt.minimal]
+
+root = true
+command = "install"
+args = [
+  "-y",
+]
+
+packages = [
+  "git",
+]

@@ -1,9 +1,9 @@
 {{ if eq .chezmoi.os "darwin" -}}
 
+.config/caddy
 .config/containers
 .config/gnome
 .config/locale.conf
-.config/nixos
 .config/samba
 .config/sing-box
 .config/systemd
@@ -14,7 +14,8 @@
 {{ if eq .chezmoi.os "linux" -}}
 
 .config/codesnap
-.config/nixos
 .config/posting
 
 {{ end -}}
+
+.config/nixos

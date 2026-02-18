@@ -1,5 +1,8 @@
 [devicesInfo.raspberrypi]
 os = "debian"
+hostname = "raspberrypi"
+prettyHostname = "Raspberry Pi"
+
 [[devicesInfo.raspberrypi.package]]
 manager = "apt"
 minimal = true

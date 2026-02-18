@@ -25,8 +25,20 @@ if test $current_hostname != {{ .chezmoi.hostname }}
   {{   end -}}
 
   {{   if eq .chezmoi.os "linux" -}}
-  sudo hostnamectl set-hostname $new_hostname
+  sudo hostnamectl set-hostname --static $new_hostname
   {{   end -}}
 
   printf "Done.\n"
 end
+
+# Set pretty hostname
+
+{{ $deviceInfo := includeTemplate "deviceInfo.tmpl" . | fromToml -}}
+
+{{   if eq .chezmoi.os "darwin" -}}
+sudo scutil --set ComputerName {{ $deviceInfo.prettyHostname }}
+{{   end -}}
+
+{{   if eq .chezmoi.os "linux" -}}
+sudo hostnamectl set-hostname --pretty {{ $deviceInfo.prettyHostname }}
+{{   end -}}

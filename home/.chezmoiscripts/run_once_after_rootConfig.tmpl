@@ -5,6 +5,7 @@
 {{ if eq "isRoot" "true" }}
 
 {{   range .rootConfig }}
+sudo mkdir -p /root/.config
 sudo ln -sf $XDG_CONFIG_HOME/{{ . }} /root/.config/{{ . }}
 {{   end }}
 
