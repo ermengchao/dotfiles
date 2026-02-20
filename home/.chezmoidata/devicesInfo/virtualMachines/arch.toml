@@ -1,5 +1,8 @@
 [devicesInfo.arch]
 os = "arch"
+hostname = "arch"
+prettyHostname = "Arch"
+
 [[devicesInfo.arch.package]]
 manager = "pacman"
 minimal = true

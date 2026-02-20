@@ -1,5 +1,8 @@
 [devicesInfo.fedora]
 os = "fedora"
+hostname = "fedora"
+prettyHostname = "Fedora"
+
 [[devicesInfo.fedora.package]]
 manager = "dnf"
 minimal = true
