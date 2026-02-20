@@ -1,12 +1,10 @@
 #!/usr/bin/env fish
 
-{{ $isRoot := includeTemplate "isRoot.tmpl" . }}
-
-{{ if eq "isRoot" "true" }}
+{{ if eq .chezmoi.os "linux" }}
 
 {{   range .rootConfig }}
 sudo mkdir -p /root/.config
-sudo ln -sf $XDG_CONFIG_HOME/{{ . }} /root/.config/{{ . }}
+sudo ln -sf /home/chao/.config/{{ . }} /root/.config/{{ . }}
 {{   end }}
 
 {{ end }}
