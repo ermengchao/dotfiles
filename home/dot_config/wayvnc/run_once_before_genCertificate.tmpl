@@ -1,0 +1,17 @@
+#!/usr/bin/env fish
+
+printf "🧑‍💻 Generating certificate for WayVNC...\n"
+
+if type -q openssl
+    # Generate RSA key (for rsa_private_key_file)
+    openssl genrsa -out rsa_key.pem 2048
+
+    # Generate certificate and TLS key (non-interactive)
+    openssl req -x509 -newkey rsa:2048 -nodes \
+        -keyout tls_key.pem \
+        -out tls_cert.pem \
+        -days 3650 \
+        -subj "/CN=localhost"
+else
+    printf "OpenSSL is not installed. Skipping generation.\n"
+end

@@ -1,6 +1,10 @@
 use_relative_paths=true
 address=0.0.0.0
+port=5900
+
 enable_auth=true
 username=chao
 password={{ .secrets.WAYVNC_PASSWORD }}
-relax_encryption=true
+certificate_file=tls_cert.pem
+private_key_file=tls_key.pem
+rsa_private_key_file=rsa_key.pem

@@ -14,5 +14,3 @@ function glc --description "Create lefthook.yml from template"
     cp $template ./lefthook.yml
     echo "Created lefthook.yml from template."
 end
-
-functions --copy gen-lefthook-config glc
