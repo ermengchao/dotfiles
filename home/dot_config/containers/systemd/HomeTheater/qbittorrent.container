@@ -12,13 +12,13 @@ AutoUpdate=registry
 Environment=PUID=1000
 Environment=PGID=1000
 Environment=TZ=Asia/Shanghai
-Environment=WEBUI_PORT=8081
-Environment=TORRENTING_PORT=6081
+Environment=WEBUI_PORT=3000
+Environment=TORRENTING_PORT=3001
 Environment=DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
 
-PublishPort=8081:8081
-PublishPort=6081:6081
-PublishPort=6081:6081/udp
+PublishPort=3000:3000
+PublishPort=3001:3001
+PublishPort=3001:3001/udp
 
 Volume=/home/chao/.config/qbittorrent:/config/qBittorrent
 Volume=/Users/chao/Downloads:/downloads

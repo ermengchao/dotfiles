@@ -12,11 +12,11 @@ AutoUpdate=registry
 Environment=SUPERUSER=chao
 Environment=SUPERUSER_PASSWORD=050530
 Environment=TZ=Asia/Shanghai
-Environment=NGINX_PORT=3001
-Environment=PORT=3002
+Environment=NGINX_PORT=3008
+Environment=PORT=3009
 
-PublishPort=3001:3001
-PublishPort=3002:3002
+PublishPort=3008:3008
+PublishPort=3009:3009
 
 Volume=/home/chao/.config/movie_pilot:/config
 Volume=/Users/chao/Movies:/media

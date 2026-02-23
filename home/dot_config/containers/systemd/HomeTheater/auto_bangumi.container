@@ -11,7 +11,7 @@ AutoUpdate=registry
 
 Environment=TZ=Asia/Shanghai
 
-PublishPort=7892:7892
+PublishPort=3004:7892
 
 Volume=/home/chao/.config/auto_bangumi:/app/config
 Volume=/home/chao/.local/share/auto_bangumi:/app/data
