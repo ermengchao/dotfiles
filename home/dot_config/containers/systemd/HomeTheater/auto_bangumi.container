@@ -1,0 +1,17 @@
+[Unit]
+Description=Auto Bangumi Container
+
+[Service]
+Restart=on-failure
+
+[Container]
+ContainerName=auto_bangumi
+Image=ghcr.io/estrellaxd/auto_bangumi:latest
+AutoUpdate=registry
+
+Environment=TZ=Asia/Shanghai
+
+PublishPort=7892:7892
+
+Volume=/home/chao/.config/auto_bangumi:/app/config
+Volume=/home/chao/.local/share/auto_bangumi:/app/data

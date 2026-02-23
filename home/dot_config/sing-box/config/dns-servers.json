@@ -2,12 +2,8 @@
   "dns": {
     "servers": [
       {
-        "tag": "dns-local",
-        "type": "local"
-      },
-      {
-        "tag": "dns-hosts",
-        "type": "hosts"
+        "tag": "dns-dhcp",
+        "type": "dhcp"
       },
       {
         "tag": "dns-fakeip",
@@ -16,8 +12,12 @@
         "inet6_range": "fc00::/18"
       },
       {
-        "tag": "dns-dhcp",
-        "type": "dhcp"
+        "tag": "dns-local",
+        "type": "local"
+      },
+      {
+        "tag": "dns-hosts",
+        "type": "hosts"
       },
       {
         "tag": "doh-cloudflare",

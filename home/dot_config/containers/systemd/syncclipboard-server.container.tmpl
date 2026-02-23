@@ -1,20 +1,17 @@
 [Unit]
 Description=Cross-platform cipboard syncing, history management tool
 
+[Service]
+Restart=on-failure
+
 [Container]
+ContainerName=syncclipboard-server
 Image=docker.io/jericx/syncclipboard-server:latest
 AutoUpdate=registry
-ContainerName=syncclipboard-server
 
 Environment=SYNCCLIPBOARD_USERNAME=chao
 Environment=SYNCCLIPBOARD_PASSWORD={{ .secrets.SYNCCLIPBOARD_PASSWORD }}
 
-Volume=/home/chao/.local/share/syncclipboard-server:/app/data
-
 PublishPort=5033:5033
 
-[Service]
-Restart=on-failure
-
-[Install]
-WantedBy=default.target
+Volume=/home/chao/.local/share/syncclipboard-server:/app/data

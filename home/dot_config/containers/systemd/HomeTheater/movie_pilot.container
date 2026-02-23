@@ -1,0 +1,22 @@
+[Unit]
+Description=Movie Pilot Container
+
+[Service]
+Restart=on-failure
+
+[Container]
+ContainerName=movie_pilot
+Image=ghcr.io/jxxghp/moviepilot:latest
+AutoUpdate=registry
+
+Environment=SUPERUSER=chao
+Environment=SUPERUSER_PASSWORD=050530
+Environment=TZ=Asia/Shanghai
+Environment=NGINX_PORT=3001
+Environment=PORT=3002
+
+PublishPort=3001:3001
+PublishPort=3002:3002
+
+Volume=/home/chao/.config/movie_pilot:/config
+Volume=/Users/chao/Movies:/media

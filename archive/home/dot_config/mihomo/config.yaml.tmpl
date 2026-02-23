@@ -77,10 +77,10 @@ dns:
   enable: true
   enhanced-mode: fake-ip
   nameserver:
+    - system
+    - https://dns.alidns.com/dns-query
     - https://dns.cloudflare.com/dns-query
     - https://dns.google/dns-query
-    - https://dns.alidns.com/dns-query
-    - system
   default-nameserver:
     - 1.1.1.1
     - 8.8.8.8
@@ -95,13 +95,19 @@ dns:
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - "*.lan"
+    - "+.lan"
     - "+.argotunnel.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - "localhost.ptlogin2.qq.com"
+    - "nmcheck.gnome.org"
+    - "nominatim.gnome.org"
+    - "location.services.mozilla.com"
+    - "ping.archlinux.org"
   nameserver-policy:
     "+.arpa": "10.0.0.1"
     "*.ts.net": "100.100.100.100"
     "rule-set:🟢 Direct":
-      - https://doh.pub/dns-query
       - https://dns.alidns.com/dns-query
   fallback:
     - https://doh.pub/dns-query
@@ -111,8 +117,8 @@ dns:
     - 1.1.1.1
     - 8.8.8.8
   direct-nameserver:
-    - 223.5.5.5
     - system
+    - 223.5.5.5
   direct-nameserver-follow-policy: true
   fallback-filter:
     geoip: true
@@ -415,7 +421,6 @@ rules:
   - RULE-SET,openai,🧠 AI
 
   # 🟢 Direct
-  - GEOIP,CN,🟢 Direct
   - RULE-SET,direct_chao,🟢 Direct
   - RULE-SET,apple,🟢 Direct
   - RULE-SET,china_max,🟢 Direct
@@ -438,9 +443,12 @@ rules:
   # 🌐 Proxy
   - RULE-SET,proxy_chao,🌐 Proxy
   - RULE-SET,developer,🌐 Proxy
-  - RULE-SET,amazon_cloud,🌐 Proxy
   - RULE-SET,google,🌐 Proxy
   - RULE-SET,github,🌐 Proxy
+
+  # IP
+  - GEOIP, CN, 🟢 Direct
+  - RULE-SET,amazon_cloud,🌐 Proxy, no-resolve
 
   - MATCH,🐟 Final
 

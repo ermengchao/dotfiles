@@ -47,6 +47,7 @@ brews = [
   "opencode",
   "openjdk",
   "openssh",
+  # "opentofu",
   "pandoc",
   "poppler",
   "posting",
@@ -86,10 +87,6 @@ casks = [
 [[packageManagers.brew.darwin.mas]]
 name = "Compressor"
 id = 6746516157
-
-[[packageManagers.brew.darwin.mas]]
-name = "Developer"
-id = 640199958
 
 [[packageManagers.brew.darwin.mas]]
 name = "Final Cut Pro"

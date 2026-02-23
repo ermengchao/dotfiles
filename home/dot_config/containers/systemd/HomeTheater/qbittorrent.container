@@ -1,0 +1,24 @@
+[Unit]
+Description=QBittorrent Container
+
+[Service]
+Restart=on-failure
+
+[Container]
+ContainerName=qbittorrent
+Image=lscr.io/linuxserver/qbittorrent:latest
+AutoUpdate=registry
+
+Environment=PUID=1000
+Environment=PGID=1000
+Environment=TZ=Asia/Shanghai
+Environment=WEBUI_PORT=8081
+Environment=TORRENTING_PORT=6081
+Environment=DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
+
+PublishPort=8081:8081
+PublishPort=6081:6081
+PublishPort=6081:6081/udp
+
+Volume=/home/chao/.config/qbittorrent:/config/qBittorrent
+Volume=/Users/chao/Downloads:/downloads

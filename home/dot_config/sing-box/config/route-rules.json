@@ -23,10 +23,6 @@
         "outbound": "🟢 Direct"
       },
       {
-        "rule_set": "geoip-cn",
-        "outbound": "🟢 Direct"
-      },
-      {
         "rule_set": "geosite-cn",
         "outbound": "🟢 Direct"
       },
@@ -137,7 +133,11 @@
       {
         "rule_set": "github",
         "outbound": "🌐 Proxy"
-      }
+      },
+      {
+        "rule_set": "geoip-cn",
+        "outbound": "🟢 Direct"
+      },
     ],
   }
 }

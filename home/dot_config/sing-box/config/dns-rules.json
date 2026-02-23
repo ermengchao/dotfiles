@@ -16,26 +16,25 @@
         "server": "dns-tailscale"
       },
       {
-        "rule_set": [
-          "advertising",
-          "zhihu_ads",
-          "hijacking",
-          "privacy"
-        ],
-        "action": "reject"
-      },
-      {
         "clash_mode": "direct",
-        "server": "doh-aliyun"
+        "server": "dns-local"
       },
       {
         "clash_mode": "global",
-        "server": "doh-cloudflare"
+        "server": "dns-fakeip"
+      },
+      {
+        "inbound": [
+          "socks-in",
+          "mixed-in",
+          "tun-in"
+        ],
+        "action": "route",
+        "server": "dns-fakeip"
       },
       {
         "rule_set": [
           "geosite-cn",
-          "geoip-cn",
           "direct_chao",
           "apple",
           "china_max",
@@ -43,15 +42,7 @@
           "lan"
         ],
         "action": "route",
-        "server": "doh-aliyun"
-      },
-      {
-        "query_type": [
-          "A",
-          "AAAA"
-        ],
-        "action": "route",
-        "server": "dns-fakeip"
+        "server": "dns-local"
       },
       {
         "rule_set": [
@@ -75,7 +66,7 @@
           "github"
         ],
         "action": "route",
-        "server": "doh-cloudflare"
+        "server": "dns-fakeip"
       }
     ]
   }

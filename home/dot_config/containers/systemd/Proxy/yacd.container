@@ -2,15 +2,12 @@
 Description=YACD Web Interface for Mihomo
 After=network.target
 
-[Container]
-Image=docker.io/haishanh/yacd:latest
-AutoUpdate=registry
-ContainerName=yacd
-
-PublishPort=1234:80
-
 [Service]
 Restart=on-failure
 
-[Install]
-WantedBy=default.target
+[Container]
+ContainerName=yacd
+Image=docker.io/haishanh/yacd:latest
+AutoUpdate=registry
+
+PublishPort=1234:80
