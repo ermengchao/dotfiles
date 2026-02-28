@@ -10,7 +10,7 @@ Image=ghcr.io/jxxghp/moviepilot:latest
 AutoUpdate=registry
 
 Environment=SUPERUSER=chao
-Environment=SUPERUSER_PASSWORD={{ .secret.PASSWORD }}
+Environment=SUPERUSER_PASSWORD={{ .secrets.PASSWORD }}
 Environment=TZ=Asia/Shanghai
 Environment=NGINX_PORT=3008
 Environment=PORT=3009
