@@ -1,5 +1,5 @@
 [Unit]
-Description=QBittorrent Container
+Description=qBittorrent Container
 
 [Service]
 Restart=on-failure
@@ -21,4 +21,4 @@ PublishPort=3001:3001
 PublishPort=3001:3001/udp
 
 Volume=/home/chao/.config/qbittorrent:/config/qBittorrent
-Volume=/Users/chao/Downloads:/downloads
+Volume=qBittorrent:/downloads

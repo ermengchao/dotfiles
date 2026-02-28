@@ -36,9 +36,9 @@ end
 {{ $deviceInfo := includeTemplate "deviceInfo.tmpl" . | fromToml -}}
 
 {{   if eq .chezmoi.os "darwin" -}}
-sudo scutil --set ComputerName {{ $deviceInfo.prettyHostname }}
+sudo scutil --set ComputerName {{ $deviceInfo.prettyHostname | quote }}
 {{   end -}}
 
 {{   if eq .chezmoi.os "linux" -}}
-sudo hostnamectl set-hostname --pretty {{ $deviceInfo.prettyHostname }}
+sudo hostnamectl set-hostname --pretty {{ $deviceInfo.prettyHostname | quote }}
 {{   end -}}

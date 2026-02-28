@@ -2,13 +2,13 @@
     "program": {
         "rss_time": 900,
         "rename_time": 60,
-        "webui_port": 7892
+        "webui_port": 3004
     },
     "downloader": {
         "type": "qbittorrent",
-        "host": "172.17.0.1:8080",
-        "username": "admin",
-        "password": "adminadmin",
+        "host": "http://host.containers.internal:3000",
+        "username": "chao",
+        "password": {{ .secret.PASSWORD | quote }},
         "path": "/downloads/Bangumi",
         "ssl": false
     },

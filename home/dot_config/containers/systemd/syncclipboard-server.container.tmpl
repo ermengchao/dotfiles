@@ -10,7 +10,7 @@ Image=docker.io/jericx/syncclipboard-server:latest
 AutoUpdate=registry
 
 Environment=SYNCCLIPBOARD_USERNAME=chao
-Environment=SYNCCLIPBOARD_PASSWORD={{ .secrets.SYNCCLIPBOARD_PASSWORD }}
+Environment=SYNCCLIPBOARD_PASSWORD={{ .secrets.PASSWORD }}
 
 PublishPort=5033:5033
 

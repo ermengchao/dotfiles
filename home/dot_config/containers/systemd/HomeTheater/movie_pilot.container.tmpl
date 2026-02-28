@@ -10,7 +10,7 @@ Image=ghcr.io/jxxghp/moviepilot:latest
 AutoUpdate=registry
 
 Environment=SUPERUSER=chao
-Environment=SUPERUSER_PASSWORD=050530
+Environment=SUPERUSER_PASSWORD={{ .secret.PASSWORD }}
 Environment=TZ=Asia/Shanghai
 Environment=NGINX_PORT=3008
 Environment=PORT=3009
@@ -19,4 +19,6 @@ PublishPort=3008:3008
 PublishPort=3009:3009
 
 Volume=/home/chao/.config/movie_pilot:/config
-Volume=/Users/chao/Movies:/media
+Volume=/home/chao/.config/qbittorrent/BT_backup:/BT_backup
+Volume=/Users/chao/.local/share/torrents:/torrents
+Volume=/Users/chao/Movies/Movies:/movies
