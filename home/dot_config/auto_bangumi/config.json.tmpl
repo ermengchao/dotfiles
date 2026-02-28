@@ -8,7 +8,7 @@
         "type": "qbittorrent",
         "host": "http://host.containers.internal:3000",
         "username": "chao",
-        "password": {{ .secret.PASSWORD | quote }},
+        "password": {{ .secrets.PASSWORD | quote }},
         "path": "/downloads/Bangumi",
         "ssl": false
     },
