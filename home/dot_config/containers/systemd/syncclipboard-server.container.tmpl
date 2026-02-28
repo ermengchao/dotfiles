@@ -9,6 +9,8 @@ ContainerName=syncclipboard-server
 Image=docker.io/jericx/syncclipboard-server:latest
 AutoUpdate=registry
 
+UserNS=keep-id
+
 Environment=SYNCCLIPBOARD_USERNAME=chao
 Environment=SYNCCLIPBOARD_PASSWORD={{ .secrets.PASSWORD }}
 

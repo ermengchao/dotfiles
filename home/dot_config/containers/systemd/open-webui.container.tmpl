@@ -9,6 +9,8 @@ ContainerName=open-webui
 Image=ghcr.io/open-webui/open-webui:main
 AutoUpdate=registry
 
+UserNS=keep-id
+
 PublishPort=8088:8080
 
 {{ if eq .chezmoi.os "darwin" -}}

@@ -9,6 +9,8 @@ ContainerName=sub-store
 Image=docker.io/xream/sub-store:http-meta
 AutoUpdate=registry
 
+UserNS=keep-id
+
 Environment=SUB_STORE_BACKEND_API_HOST=0.0.0.0
 Environment=SUB_STORE_BACKEND_API_PORT=2000
 Environment=SUB_STORE_BACKEND_MERGE=true
