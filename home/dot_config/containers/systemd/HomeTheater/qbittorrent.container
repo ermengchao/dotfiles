@@ -9,8 +9,6 @@ ContainerName=qbittorrent
 Image=lscr.io/linuxserver/qbittorrent:latest
 AutoUpdate=registry
 
-UserNS=keep-id
-
 Environment=PUID=1000
 Environment=PGID=1000
 Environment=TZ=Asia/Shanghai

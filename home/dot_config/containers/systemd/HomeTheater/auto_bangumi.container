@@ -9,8 +9,6 @@ ContainerName=auto_bangumi
 Image=ghcr.io/estrellaxd/auto_bangumi:latest
 AutoUpdate=registry
 
-UserNS=keep-id
-
 Environment=TZ=Asia/Shanghai
 
 PublishPort=3004:7892

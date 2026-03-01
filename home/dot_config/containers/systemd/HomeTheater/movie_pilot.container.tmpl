@@ -9,8 +9,6 @@ ContainerName=movie_pilot
 Image=ghcr.io/jxxghp/moviepilot:latest
 AutoUpdate=registry
 
-UserNS=keep-id
-
 Environment=SUPERUSER=chao
 Environment=SUPERUSER_PASSWORD={{ .secrets.PASSWORD }}
 Environment=TZ=Asia/Shanghai
