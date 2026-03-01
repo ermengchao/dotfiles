@@ -1,7 +1,7 @@
 movie:
-  Action&Adventure:
+  Action:
     genre-ids: '28'
-  Action&Adventure:
+  Adventure:
     genre-ids: '12'
   Comedy:
     genre_ids: '35'
@@ -15,17 +15,17 @@ movie:
     genre_ids: '10751'
   Romance:
     genre_ids: '10749'
-  Sci-Fi&Fantasy:
+  Sci-Fi:
     genre_ids: '878'
-  Sci-Fi&Fantasy:
+  Fantasy:
     genre_ids: '14'
   Thriller:
     genre_ids: '53'
   Uncategorize: {}
 tv:
-  Action&Adventure:
+  Action:
     genre-ids: '28'
-  Action&Adventure:
+  Adventure:
     genre-ids: '12'
   Comedy:
     genre_ids: '35'
@@ -39,9 +39,9 @@ tv:
     genre_ids: '10751'
   Romance:
     genre_ids: '10749'
-  Sci-Fi&Fantasy:
+  Sci-Fi:
     genre_ids: '878'
-  Sci-Fi&Fantasy:
+  Fantasy:
     genre_ids: '14'
   Thriller:
     genre_ids: '53'
