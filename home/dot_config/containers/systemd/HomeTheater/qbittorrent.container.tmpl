@@ -20,6 +20,5 @@ PublishPort=3000:3000
 PublishPort=3001:3001
 PublishPort=3001:3001/udp
 
-Volume=/home/chao/.config/qbittorrent:/config/qBittorrent
-Volume=/home/chao/.cache/qbittorrent:/config/.cache
+Volume=/home/chao/.config/qbittorrent/qBittorrent:/config
 Volume={{ .mediaPath | quote }}:/downloads
