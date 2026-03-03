@@ -10,6 +10,7 @@ Image=ghcr.io/estrellaxd/auto_bangumi:latest
 AutoUpdate=registry
 
 Environment=TZ=Asia/Shanghai
+Environment=UMASK=022
 
 PublishPort=3004:3004
 
