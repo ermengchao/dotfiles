@@ -9,10 +9,13 @@ ContainerName=auto_bangumi
 Image=ghcr.io/estrellaxd/auto_bangumi:latest
 AutoUpdate=registry
 
+UserNS=keep-id
+
 Environment=TZ=Asia/Shanghai
 Environment=UMASK=022
 
 PublishPort=3004:3004
 
+Volume=/home/chao/.config/auto_bangumi/entry-host.sh:/entry-host.sh:ro
 Volume=/home/chao/.config/auto_bangumi:/app/config
 Volume=/home/chao/.local/share/auto_bangumi:/app/data
