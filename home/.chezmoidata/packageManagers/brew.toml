@@ -251,6 +251,10 @@ casks = [
 ]
 
 [[packageManagers.brew.minimal.darwin.mas]]
+name = "Infuse"
+id = 1136220934
+
+[[packageManagers.brew.minimal.darwin.mas]]
 name = "TestFlight"
 id = 899247664
 
