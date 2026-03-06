@@ -40,6 +40,21 @@
     },
     "notification": {
         "enable": false,
+        "providers": [
+            {
+                "type": "telegram",
+                "enabled": true,
+                "token": "",
+                "chat_id": "",
+                "webhook_url": null,
+                "server_url": null,
+                "device_key": null,
+                "user_key": null,
+                "api_token": null,
+                "template": null,
+                "url": null
+            }
+        ],
         "type": "telegram",
         "token": "",
         "chat_id": ""
@@ -52,5 +67,19 @@
         "api_version": "2023-05-15",
         "model": "gpt-3.5-turbo",
         "deployment_id": ""
+    },
+    "security": {
+        "login_whitelist": [],
+        "login_tokens": [],
+        "mcp_whitelist": [
+            "127.0.0.0/8",
+            "10.0.0.0/8",
+            "172.16.0.0/12",
+            "192.168.0.0/16",
+            "::1/128",
+            "fe80::/10",
+            "fc00::/7"
+        ],
+        "mcp_tokens": []
     }
 }
