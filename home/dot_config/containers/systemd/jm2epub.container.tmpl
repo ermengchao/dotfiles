@@ -1,0 +1,15 @@
+[Unit]
+Description=JM2Epub Container
+
+[Service]
+Restart=on-failure
+
+[Container]
+ContainerName=jm2epub
+Image=ghcr.io/ermengchao/jm2epub
+AutoUpdate=registry
+
+PublishPort=4000:4000
+
+Environment=JM2EPUB_API_KEY={{ .secrets.JM2EPUB_API_KEY }}
+Environment=PORT=4000
