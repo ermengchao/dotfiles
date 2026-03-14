@@ -29,17 +29,15 @@ cursor-style = "bar"
 cursor-click-to-move = true
 
 # Window
-title = ""
 window-height = 40
 window-width = 112
 window-padding-x = 10
 window-padding-y = 10
-window-new-tab-position = "end"
+window-save-state = "default"
+window-subtitle = "working-directory"
+window-theme = "auto"
 
 # macOS only
-window-position-x = 20
-window-position-y = 20
-window-save-state = "default"
 window-colorspace = "display-p3"
 macos-non-native-fullscreen = false
 macos-window-buttons = "visible"
