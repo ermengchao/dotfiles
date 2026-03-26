@@ -1,4 +1,7 @@
 {
+  "canvasHost": {
+    "port": 4001
+  },
   "agents": {
     "defaults": {
       "model": {
@@ -22,7 +25,15 @@
       }
     }
   },
-  "channels": {},
+  "channels": {
+    "telegram": {
+        "enabled": true,
+        "botToken": {{ .secrets.OPENCLAW_TELEGRAM_BOT_TOKEN | quote }},
+        "dmPolicy": "pairing",
+        "allowFrom": ["6862873414"],
+        "groups": { "*": { requireMention: true } },
+    },
+  },
   "commands": {
     "native": "auto",
     "nativeSkills": "auto",
@@ -30,13 +41,11 @@
     "ownerDisplay": "raw"
   },
   "gateway": {
-    "port": 18789,
+    "port": 4000,
     "mode": "local",
     "bind": "lan",
     "controlUi": {
       "allowedOrigins": [
-        "http://localhost:18789",
-        "http://127.0.0.1:18789",
         "http://10.10.10.3:18789"
       ]
     },
@@ -63,15 +72,27 @@
   "messages": {
     "ackReactionScope": "group-mentions"
   },
+  "plugins": {
+    "entries": {
+      "ollama": {
+        "enabled": false
+      }
+    }
+  },
   "session": {
     "dmScope": "per-channel-peer"
   },
   "skills": {
     "load": {
       "extraDirs": [
-        "~/.local/share/skills"
-      ]
-    }
+        "~/.config/opencode/skills"
+      ],
+      "watch": true
+    },
+    "install": {
+        "preferBrew": true,
+        "nodeManager": "bun"
+    },
   },
   "tools": {
     "profile": "coding",
