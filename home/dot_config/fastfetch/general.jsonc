@@ -1,0 +1,329 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "logo": {
+    "type": "auto",
+    "source": "",
+    "width": null,
+    "height": null,
+    "padding": {
+      "top": 2,
+      "left": 0,
+      "right": 4
+    },
+    "printRemaining": true,
+    "preserveAspectRatio": true,
+    "recache": false,
+    "position": "left",
+    "chafa": {
+      "fgOnly": true,
+      "symbols": "block+border+space-wide-inverted",
+      "canvasMode": "TRUECOLOR",
+      "colorSpace": "DIN99D",
+      "ditherMode": "DIFFUSION"
+    }
+  },
+  "display": {
+    "stat": false,
+    "pipe": false,
+    "showErrors": true,
+    "disableLinewrap": true,
+    "hideCursor": false,
+    "separator": ": ",
+    "color": {
+      "keys": "",
+      "title": "",
+      "output": "",
+      "separator": ""
+    },
+    "brightColor": true,
+    "duration": {
+      "abbreviation": false,
+      "spaceBeforeUnit": "always"
+    },
+    "size": {
+      "maxPrefix": "YB",
+      "binaryPrefix": "iec",
+      "ndigits": 2,
+      "spaceBeforeUnit": "always"
+    },
+    "temp": {
+      "unit": "D",
+      "ndigits": 1,
+      "color": {
+        "green": "32",
+        "yellow": "93",
+        "red": "91"
+      },
+      "spaceBeforeUnit": "always"
+    },
+    "percent": {
+      "type": [
+        "num",
+        "num-color"
+      ],
+      "ndigits": 0,
+      "color": {
+        "green": "32",
+        "yellow": "93",
+        "red": "91"
+      },
+      "spaceBeforeUnit": "always",
+      "width": 0
+    },
+    "bar": {
+      "char": {
+        "elapsed": "■",
+        "total": "-"
+      },
+      "border": {
+        "left": "[ ",
+        "right": " ]",
+        "leftElapsed": "",
+        "rightElapsed": ""
+      },
+      "color": {
+        "elapsed": "auto",
+        "total": "97",
+        "border": "97"
+      },
+      "width": 10
+    },
+    "fraction": {
+      "ndigits": 2
+    },
+    "noBuffer": false,
+    "key": {
+      "width": 16,
+      "type": "both",
+      "paddingLeft": 0
+    },
+    "freq": {
+      "ndigits": 2,
+      "spaceBeforeUnit": "always"
+    },
+    "constants": []
+  },
+  "general": {
+    "thread": true,
+    "processingTimeout": 5000,
+    // "playerName": "",
+    "preRun": "clear",
+    "detectVersion": true,
+  },
+  "modules": [
+    {
+      "type": "title",
+      "key": "About",
+      "keyIcon": " ",
+      "fqdn": false,
+      "color": {
+        "user": "",
+        "at": "",
+        "host": ""
+      }
+    },
+    {
+      "type": "separator",
+      "string": "-",
+      "outputColor": "",
+      "times": 0
+    },
+    {
+      "type": "os",
+      "keyIcon": " ",
+      "format": "{name} {codename} {version}"
+    },
+    {
+      "type": "host",
+      "keyIcon": "󰌢 "
+    },
+    {
+      "type": "kernel",
+      "keyIcon": " "
+    },
+    {
+      "type": "shell",
+      "keyIcon": " "
+    },
+    {
+      "type": "terminal",
+      "keyIcon": " "
+    },
+    {
+      "type": "packages",
+      "keyIcon": "󰏖 ",
+      "disabled": [
+        "winget"
+      ],
+      "combined": false
+    },
+    {
+      "type": "separator",
+      "string": "-",
+      "outputColor": "",
+      "times": 0
+    },
+    {
+      "type": "cpu",
+      "keyIcon": " ",
+      "temp": false,
+      "showPeCoreCount": false
+    },
+    {
+      "type": "gpu",
+      "keyIcon": "󰾲 ",
+      "driverSpecific": false,
+      "detectionMethod": "auto",
+      "temp": false,
+      "hideType": "none",
+      "percent": {
+        "green": 50,
+        "yellow": 80,
+        "type": 0
+      }
+    },
+    {
+      "type": "memory",
+      "keyIcon": " ",
+      "percent": {
+        "green": 50,
+        "yellow": 80,
+        "type": 0
+      }
+    },
+    {
+      "type": "swap",
+      "percent": {
+        "green": 50,
+        "yellow": 80,
+        "type": 0
+      },
+      "keyIcon": "󰓡 ",
+      "separate": false
+    },
+    {
+      "type": "disk",
+      "keyIcon": " ",
+      "folders": ["/"],
+      "showRegular": false,
+      "showExternal": true,
+      "showHidden": false,
+      "showSubvolumes": false,
+      "showReadOnly": true,
+      "showUnknown": false,
+      "hideFolders": "",
+      "hideFS": ["fat32"],
+      "useAvailable": false,
+      "percent": {
+        "green": 50,
+        "yellow": 80,
+        "type": 0
+      }
+    },
+    {
+      "type": "display",
+      "keyIcon": "󰍹 ",
+      "compactType": "none",
+      "preciseRefreshRate": false,
+      "order": null
+    },
+    // {
+    //   "type": "battery",
+    //   "keyIcon": " ",
+    //   "temp": false,
+    //   "percent": {
+    //     "green": 50,
+    //     "yellow": 20,
+    //     "type": 0
+    //   }
+    // },
+    // {
+    //   "type": "poweradapter",
+    //   "keyIcon": "󰚥 "
+    // },
+    {
+      "type": "separator",
+      "string": "-",
+      "outputColor": "",
+      "times": 0
+    },
+    {
+      "type": "de",
+      "keyIcon": " "
+    },
+    {
+      "type": "theme",
+      "keyIcon": "󰉼 "
+    },
+    {
+      "type": "wm",
+      "keyIcon": " ",
+      "detectPlugin": true
+    },
+    {
+      "type": "wmtheme",
+      "keyIcon": "󰓸 "
+    },
+    {
+      "type": "font",
+      "keyIcon": " "
+    },
+    // {
+    //   "type": "terminalfont",
+    //   "keyIcon": " "
+    // },
+    {
+      "type": "icons",
+      "keyIcon": " "
+    },
+    // {
+    //   "type": "cursor",
+    //   "keyIcon": "󰆿 "
+    // },
+    {
+      "type": "separator",
+      "string": "-",
+      "outputColor": "",
+      "times": 0
+    },
+    // {
+    //   "type": "localip",
+    //   "keyIcon": "󰩟 ",
+    //   "showIpv4": true,
+    //   "showIpv6": false,
+    //   "showMac": false,
+    //   "showLoop": false,
+    //   "showPrefixLen": true,
+    //   "showMtu": false,
+    //   "showSpeed": false,
+    //   "showFlags": false,
+    //   "compact": false,
+    //   "defaultRouteOnly": true,
+    //   "showAllIps": false,
+    //   "namePrefix": ""
+    // },
+    {
+      "type": "uptime",
+      "keyIcon": " "
+    },
+    // {
+    //   "type": "locale",
+    //   "keyIcon": " "
+    // },
+    // "break",
+    // {
+    //   "type": "colors",
+    //   "key": " ",
+    //   "keyIcon": " ",
+    //   "symbol": "block",
+    //   "paddingLeft": 0,
+    //   "block": {
+    //     "width": 3,
+    //     "range": [
+    //       0,
+    //       15
+    //     ]
+    //   }
+    // }
+  ]
+}

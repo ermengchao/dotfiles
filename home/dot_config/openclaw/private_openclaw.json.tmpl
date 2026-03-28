@@ -1,64 +1,68 @@
 {
-  "canvasHost": {
-    "port": 4001
-  },
-  "agents": {
-    "defaults": {
-      "model": {
-        "primary": "openai-codex/gpt-5.4"
+  agents: {
+    defaults: {
+      model: {
+        primary: "openai-codex/gpt-5.4"
       },
-      "workspace": "/Users/chao/.local/share/openclaw/.openclaw/workspace",
-      "compaction": {
-        "mode": "safeguard"
+      workspace: "/Users/chao/.local/share/openclaw/.openclaw/workspace",
+      compaction: {
+        mode: "safeguard"
       },
-      "maxConcurrent": 4,
-      "subagents": {
-        "maxConcurrent": 8
+      maxConcurrent: 4,
+      subagents: {
+        maxConcurrent: 8
       }
     }
   },
-  "auth": {
-    "profiles": {
+  auth: {
+    profiles: {
       "openai-codex:default": {
-        "provider": "openai-codex",
-        "mode": "oauth"
+        provider: "openai-codex",
+        mode: "oauth"
       }
     }
   },
-  "channels": {
-    "telegram": {
-        "enabled": true,
-        "botToken": {{ .secrets.OPENCLAW_TELEGRAM_BOT_TOKEN | quote }},
-        "dmPolicy": "pairing",
-        "allowFrom": ["6862873414"],
-        "groups": { "*": { requireMention: true } },
-    },
+  canvasHost: {
+    port: 4001
   },
-  "commands": {
-    "native": "auto",
-    "nativeSkills": "auto",
-    "restart": true,
-    "ownerDisplay": "raw"
+  channels: {
+    telegram: {
+      enabled: true,
+      botToken: {{ .secrets.OPENCLAW_TELEGRAM_BOT_TOKEN | quote }},
+      dmPolicy: "pairing",
+      allowFrom: ["6862873414"],
+      groups: { "*": { requireMention: true } }
+    }
   },
-  "gateway": {
-    "port": 4000,
-    "mode": "local",
-    "bind": "lan",
-    "controlUi": {
-      "allowedOrigins": [
-        "http://10.10.10.3:18789"
-      ]
+  commands: {
+    native: "auto",
+    nativeSkills: "auto",
+    restart: true,
+    ownerDisplay: "raw"
+  },
+  gateway: {
+    port: 4000,
+    mode: "local",
+    bind: "lan",
+    controlUi: {
+      allowInsecureAuth: true,
+      allowedOrigins: [
+        "http://10.10.10.3:4000",
+        "http://100.100.10.3:4000",
+        "https://openclaw.er-meng.com"
+      ],
+      dangerouslyDisableDeviceAuth: true
     },
-    "auth": {
-      "mode": "password",
-      "password": {{ .secrets.PASSWORD | quote }}
+    auth: {
+      mode: "password",
+      password: {{ .secrets.PASSWORD | quote }}
     },
-    "tailscale": {
-      "mode": "off",
-      "resetOnExit": false
+    tailscale: {
+      mode: "off",
+      resetOnExit: false
     },
-    "nodes": {
-      "denyCommands": [
+    nodes: {
+      denyCommands: [
         "camera.snap",
         "camera.clip",
         "screen.record",
@@ -69,43 +73,48 @@
       ]
     }
   },
-  "messages": {
-    "ackReactionScope": "group-mentions"
+  messages: {
+    ackReactionScope: "group-mentions"
   },
-  "plugins": {
-    "entries": {
-      "ollama": {
-        "enabled": false
+  plugins: {
+    entries: {
+      "device-pair": {
+        config: {
+          publicUrl: "https://openclaw.er-meng.com"
+        }
+      },
+      ollama: {
+        enabled: false
       }
     }
   },
-  "session": {
-    "dmScope": "per-channel-peer"
+  session: {
+    dmScope: "per-channel-peer"
   },
-  "skills": {
-    "load": {
-      "extraDirs": [
+  skills: {
+    load: {
+      extraDirs: [
         "~/.config/opencode/skills"
       ],
-      "watch": true
+      watch: true
     },
-    "install": {
-        "preferBrew": true,
-        "nodeManager": "bun"
-    },
+    install: {
+      preferBrew: true,
+      nodeManager: "bun"
+    }
   },
-  "tools": {
-    "profile": "coding",
-    "web": {
-      "search": {
-        "enabled": true,
-        "provider": "gemini"
+  tools: {
+    profile: "coding",
+    web: {
+      search: {
+        enabled: true,
+        provider: "gemini"
       }
     }
   },
-  "ui": {
-    "assistant": {
-      "name": "J.A.R.V.I.S"
+  ui: {
+    assistant: {
+      name: "J.A.R.V.I.S"
     }
   }
 }

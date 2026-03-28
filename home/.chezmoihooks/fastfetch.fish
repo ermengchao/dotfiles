@@ -1,0 +1,29 @@
+#!/usr/bin/env fish
+
+if type -q fastfetch
+    if not type -q bunx
+        printf "❌ Error: bunx not found.\n"
+        exit 1
+    end
+
+    if not type -q jq
+        printf "❌ Error: jq not found.\n"
+        exit 1
+    end
+
+    cd $XDG_CONFIG_HOME/fastfetch
+
+    set os (string lower (uname -s))
+
+    if test $os = darwin
+        begin
+            bunx json5 general.jsonc
+            bunx json5 darwin.jsonc
+        end | jq -s 'reduce .[] as $item ({}; . * $item)' >config.jsonc
+    else if test $os = linux
+        begin
+            bunx json5 general.jsonc
+            bunx json5 darwin.jsonc
+        end | jq -s 'reduce .[] as $item ({}; . * $item)' >config.jsonc
+    end
+end
