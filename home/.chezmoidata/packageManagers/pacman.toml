@@ -39,6 +39,7 @@ packages = [
   "jq",
   "librsvg",
   "neovim",
+  "nmap",
   "podman",
   "poppler",
   "p7zip",

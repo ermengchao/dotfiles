@@ -22,9 +22,13 @@ end
 
 # Key Binding
 bind \t complete
+bind -M insert \e\cn _fzf_lsof
 
 # Initialization
 zoxide init fish --cmd cd | source
+
+# Plugins
+fzf_configure_bindings --directory=ctrl-alt-f --history=ctrl-alt-h --processes=ctrl-alt-p --variables=ctrl-alt-v
 
 # Abbreviation
 abbr -a --position anywhere -- --help '--help | bat -plhelp'

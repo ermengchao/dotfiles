@@ -15,7 +15,7 @@ working-directory = home
 window-inherit-working-directory = false
 copy-on-select = true
 shell-integration = "fish"
-quit-after-last-window-closed = true
+quit-after-last-window-closed = false
 desktop-notifications = true
 # bold-color = "bright"
 term = "xterm-256color"
@@ -35,7 +35,7 @@ window-padding-x = 10
 window-padding-y = 10
 window-save-state = "default"
 window-subtitle = "working-directory"
-window-theme = "auto"
+window-theme = "system"
 
 # macOS only
 window-colorspace = "display-p3"

@@ -1,0 +1,20 @@
+set shell := ["bash", "-euo", "pipefail", "-c"]
+
+default:
+  @just --list
+
+# Show available NixOS configurations in this flake.
+list:
+  nix flake show --extra-experimental-features 'nix-command flakes' --json | jq -r '.nixosConfigurations | keys[]'
+
+# Apply the selected system configuration.
+switch system:
+  sudo nixos-rebuild switch --extra-experimental-features 'nix-command flakes' --flake .#{{system}}
+
+# Test the selected system configuration without changing the boot default.
+test system:
+  sudo nixos-rebuild test --extra-experimental-features 'nix-command flakes' --flake .#{{system}}
+
+# Build the selected system configuration for the next boot.
+boot system:
+  sudo nixos-rebuild boot --extra-experimental-features 'nix-command flakes' --flake .#{{system}}

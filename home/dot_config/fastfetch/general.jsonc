@@ -222,10 +222,12 @@
     },
     {
       "type": "display",
+      "key": "Display",
       "keyIcon": "󰍹 ",
       "compactType": "none",
       "preciseRefreshRate": false,
-      "order": null
+      "order": null,
+      "format": "{name} [{type}], {width} * {height} / {scale-factor} @ {refresh-rate} hz, {bit-depth} bit"
     },
     // {
     //   "type": "battery",

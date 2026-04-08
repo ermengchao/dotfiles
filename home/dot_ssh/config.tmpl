@@ -8,12 +8,12 @@ Host *
   TCPKeepAlive yes
   # PreferredAuthentications publickey
 
-Host aws-ec2
+Host ec2-nixos
   HostName er-meng.com
   User chao
   AddKeysToAgent yes
   IdentitiesOnly yes
-  IdentityFile ~/.ssh/keys/aws-ec2/aws-ec2
+  IdentityFile ~/.ssh/keys/ec2-nixos/ec2-nixos
 
 Host laptop
   Hostname 100.100.10.65
