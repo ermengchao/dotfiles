@@ -1,8 +1,0 @@
-[devicesInfo.macbook-air]
-os = "darwin"
-hostname = "macbook-air"
-prettyHostname = "MacBook Air"
-
-[[devicesInfo.macbook-air.package]]
-manager = "brew"
-minimal = false

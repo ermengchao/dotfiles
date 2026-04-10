@@ -1,0 +1,54 @@
+#!/usr/bin/env fish
+
+set configured_hostname {{ .meta.hostname | quote }}
+set configured_pretty_hostname {{ .meta.prettyHostname | quote }}
+set current_hostname ""
+set current_pretty_hostname ""
+
+{{ if eq .chezmoi.os "darwin" -}}
+set current_hostname (scutil --get HostName)
+set current_pretty_hostname (scutil --get ComputerName)
+{{ end -}}
+
+{{ if eq .chezmoi.os "linux" -}}
+set current_hostname (hostnamectl hostname)
+set current_pretty_hostname (hostnamectl hostname --pretty)
+{{ end -}}
+
+# Set hostname
+
+if test "$current_hostname" != "$configured_hostname"
+  printf "🪦 Current hostname is: $current_hostname\n"
+  printf "🔥 Configured hostname is: $configured_hostname\n"
+
+  printf "🧑‍💻 Setting hostname..."
+
+  {{ if eq .chezmoi.os "darwin" -}}
+  sudo scutil --set HostName $configured_hostname
+  {{ end -}}
+
+  {{ if eq .chezmoi.os "linux" -}}
+  sudo hostnamectl set-hostname --static $configured_hostname
+  {{ end -}}
+
+  printf "✅ Done.\n"
+end
+
+# Set pretty hostname
+
+if test "$current_pretty_hostname" != "$configured_pretty_hostname"
+  printf "🪦 Current pretty hostname is: $current_pretty_hostname\n"
+  printf "🔥 Configured pretty hostname is: $configured_pretty_hostname\n"
+
+  printf "🧑‍💻 Setting pretty hostname..."
+
+  {{ if eq .chezmoi.os "darwin" -}}
+  sudo scutil --set ComputerName $configured_pretty_hostname
+  {{ end -}}
+
+  {{ if eq .chezmoi.os "linux" -}}
+  sudo hostnamectl set-hostname --pretty $configured_pretty_hostname
+  {{ end -}}
+
+  printf "✅ Done.\n"
+end

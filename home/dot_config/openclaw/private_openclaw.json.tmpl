@@ -28,7 +28,7 @@
   channels: {
     telegram: {
       enabled: true,
-      botToken: {{ .secrets.OPENCLAW_TELEGRAM_BOT_TOKEN | quote }},
+      botToken: {{ gopass "openclaw/telegram_bot_token" | quote }},
       dmPolicy: "pairing",
       allowFrom: ["6862873414"],
       groups: { "*": { requireMention: true } }
@@ -55,7 +55,7 @@
     },
     auth: {
       mode: "password",
-      password: {{ .secrets.PASSWORD | quote }}
+      password: {{ gopass "chao/password" | quote }}
     },
     tailscale: {
       mode: "off",

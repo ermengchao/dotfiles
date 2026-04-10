@@ -1,10 +1,10 @@
 #!/usr/bin/env fish
 
-printf "📦 Installing plugins for yazi...\n"
+printf "📦 Checking for updates for yazi plugins...\n"
 
 if type -q yazi
   ya pkg install >/dev/null
-  printf "Done.\n"
+  printf "✅ Done.\n"
 else
-  printf "Yazi is not installed. Skip installing.\n"
+  printf "‼️ Yazi is not installed. Skip installing.\n"
 end

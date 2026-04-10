@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./ec2.nix
+    ./swap.nix
+  ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking.hostName = "ec2-nixos";
@@ -9,7 +14,6 @@
     enable = true;
     settings = {
       PasswordAuthentication = true;
-      PermitRootLogin = "no";
     };
   };
 

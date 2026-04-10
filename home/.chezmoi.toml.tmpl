@@ -1,0 +1,40 @@
+encryption = "age"
+mode = "file"
+progress = true
+useBuiltinAge = false
+useBuiltinGit = false
+
+[add]
+secrets = "error"
+
+[age]
+identity = "{{ .chezmoi.workingTree }}/key.txt"
+recipient = "age15fguepjnfkjt84ma9wjpyjhlrax8fpedv3wergqm2tnppup7py5s68qz4m"
+
+[docker]
+command = "podman"
+
+[edit]
+apply = true
+
+[hooks]
+[hooks.apply.post]
+script = "{{ .chezmoi.sourceDir }}/.chezmoihooks/default.fish"
+
+[interpreters]
+[interpreters.fish]
+command = "fish"
+
+[update]
+apply = true
+
+[data]
+mediaPath = "/Volumes/HDD/Infuse"
+
+[data.meta]
+{{ $packageManagerList := list "brew" "apt" "dnf" "flatpak" "pacman" "paru" -}}
+
+hostname = {{ promptString "💥 Hostname" .chezmoi.hostname | toToml }}
+prettyHostname = {{ promptString "👀 Pretty hostname" | toToml }}
+packageManager = {{ promptMultichoice "📦 Package manager" $packageManagerList | toToml }}
+isMinimal = {{ promptBool "🧩 Minimal installation" true | toToml }}

@@ -1,0 +1,28 @@
+[packageManagers.paru]
+
+root = false
+command = ""
+args = [
+  "-S",
+  "--needed",
+  "--noconfirm",
+  "--skipreview",
+]
+
+drivers = [
+  "ncurses5-compat-libs",
+]
+
+packages = [
+  "opencode-bin",
+  "go-gitmoji-cli-bin",
+  "rustdesk",
+  "sing-box",
+  "google-chrome",
+]
+
+[packageManagers.paru.minimal]
+
+packages = [
+  "go-gitmoji-cli-bin",
+]

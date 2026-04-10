@@ -1,8 +1,0 @@
-[devicesInfo.mac-mini]
-os = "darwin"
-hostname = "mac-mini"
-prettyHostname = "Mac mini"
-
-[[devicesInfo.mac-mini.package]]
-manager = "brew"
-minimal = true

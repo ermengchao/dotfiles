@@ -1,0 +1,46 @@
+#! /usr/bin/env fish
+
+{{ range .meta.packageManager -}}
+{{   $packageMap := index $.packageManagers . }}{{ if $.meta.isMinimal }}{{ $packageList = index $.packageManagers . "minimal" }}{{ end -}}
+
+{{   if eq . "brew" -}}
+
+{{     if eq $.chezmoi.os "darwin" -}}
+         set brew_path /opt/homebrew/bin/brew
+{{     end -}}
+
+{{     if eq $.chezmoi.os "linux" -}}
+         set brew_path /home/linuxbrew/.linuxbrew/bin/brew
+{{     end -}}
+
+       begin
+{{       range index $packageMap $.chezmoi.os "taps" -}}
+           echo 'tap {{ . | quote }}'
+{{       end -}}
+{{       range index $packageMap $.chezmoi.os "brews" -}}
+           echo 'brew {{ . | quote }}'
+{{       end -}}
+{{       range index $packageMap $.chezmoi.os "casks" -}}
+           echo 'cask {{ . | quote }}'
+{{       end -}}
+
+{{       with index $packageMap $.chezmoi.os "mas" -}}
+{{         range . -}}
+             echo 'mas {{ .name | quote }}, id: {{ .id }}'
+{{         end -}}
+{{       end -}}
+       end | $brew_path bundle --file=/dev/stdin
+
+{{   else -}}
+
+{{     $installer := "" }}{{ if (index $.packageManagers .).root }}{{ $installer = "sudo " }}{{ end -}}
+{{     $manager := . -}}
+{{     $command := index $.packageManagers . "command" -}}
+{{     $argList := index $.packageManagers . "args" -}}
+
+{{     range (index $packageMap "packages") -}}
+{{       $installer -}} {{ $manager }} {{ $command }} {{ range $argList }} {{ . }} {{ end }} {{ . | quote }}
+{{     end -}}
+
+{{   end -}}
+{{ end -}}

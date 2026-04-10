@@ -24,14 +24,14 @@ external-controller-cors:
   allow-origins:
     - '*'
   allow-private-network: true
-# secret: {{ .secrets.CLASH_AUTHENTICATION }}
+# secret: {{ gopass "chao/password" }}
 
 # Lan
 
 allow-lan: true
 bind-address: "*"
 authentication:
-  - "chao:{{ .secrets.CLASH_AUTHENTICATION }}"
+  - 'chao:{{ gopass "chao/password" }}'
 skip-auth-prefixes:
   - 127.0.0.1/8
   - 10.0.0.0/8
@@ -161,7 +161,7 @@ sniffer:
 proxy-providers:
   🏳️‍🌈 General:
     type: http
-    url: https://proxies.er-meng.com{{ .secrets.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/General?target=ClashMeta
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/General?target=ClashMeta
     path: ./proxy-providers/General
     interval: 3600
     proxy: 🟢 Direct
@@ -174,7 +174,7 @@ proxy-providers:
       expected-status: 204
   🇭🇰 HK:
     type: http
-    url: https://proxies.er-meng.com{{ .secrets.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/HK?target=ClashMeta
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/HK?target=ClashMeta
     path: ./proxy-providers/HK
     interval: 3600
     proxy: 🟢 Direct
@@ -187,7 +187,7 @@ proxy-providers:
       expected-status: 204
   🇹🇼 TW:
     type: http
-    url: https://proxies.er-meng.com{{ .secrets.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/TW?target=ClashMeta
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/TW?target=ClashMeta
     path: ./proxy-providers/TW
     interval: 3600
     proxy: 🟢 Direct
@@ -200,7 +200,7 @@ proxy-providers:
       expected-status: 204
   🇯🇵 JP:
     type: http
-    url: https://proxies.er-meng.com{{ .secrets.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/JP?target=ClashMeta
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/JP?target=ClashMeta
     path: ./proxy-providers/JP
     interval: 3600
     proxy: 🟢 Direct
@@ -213,7 +213,7 @@ proxy-providers:
       expected-status: 204
   🇸🇬 SG:
     type: http
-    url: https://proxies.er-meng.com{{ .secrets.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/SG?target=ClashMeta
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/SG?target=ClashMeta
     path: ./proxy-providers/SG
     interval: 3600
     proxy: 🟢 Direct
@@ -226,7 +226,7 @@ proxy-providers:
       expected-status: 204
   🇺🇸 US:
     type: http
-    url: https://proxies.er-meng.com{{ .secrets.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/US?target=ClashMeta
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/US?target=ClashMeta
     path: ./proxy-providers/US
     interval: 3600
     proxy: 🟢 Direct
@@ -239,7 +239,7 @@ proxy-providers:
       expected-status: 204
   🇲🇾 MY:
     type: http
-    url: https://proxies.er-meng.com{{ .secrets.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/MY?target=ClashMeta
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/MY?target=ClashMeta
     path: ./proxy-providers/MY
     interval: 3600
     proxy: 🟢 Direct
@@ -252,7 +252,7 @@ proxy-providers:
       expected-status: 204
   🇦🇷 AR:
     type: http
-    url: https://proxies.er-meng.com{{ .secrets.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/AR?target=ClashMeta
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/AR?target=ClashMeta
     path: ./proxy-providers/AR
     interval: 3600
     proxy: 🟢 Direct
@@ -265,7 +265,7 @@ proxy-providers:
       expected-status: 204
   🇹🇷 TR:
     type: http
-    url: https://proxies.er-meng.com{{ .secrets.SUB_STORE_FRONTEND_BACKEND_PATH }}/download/collection/TR?target=ClashMeta
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/TR?target=ClashMeta
     path: ./proxy-providers/TR
     interval: 3600
     proxy: 🟢 Direct

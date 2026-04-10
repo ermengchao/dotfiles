@@ -39,7 +39,7 @@
       "url": "https://api.githubcopilot.com/mcp",
       "enabled": false,
       "headers": {
-        "Authorization": "Bearer {{ .secrets.GITHUB_PAT }}"
+        "Authorization": "Bearer {{ gopass "github/pat" }}"
       }
     },
     "chrome-mcp": {

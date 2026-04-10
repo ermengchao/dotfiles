@@ -1,12 +1,12 @@
 [icloud]
 type = iclouddrive
-apple_id = {{ .secrets.RCLONE_ICLOUDDRIVE_APPLE_ID }}
-password = {{ .secrets.RCLONE_ICLOUDDRIVE_PASSWORD }}
+apple_id = {{ gopass "rclone/icloud_drive/apple_id" }}
+password = {{ gopass "rclone/icloud_drive/password" }}
 
 [r2]
 type = s3
 provider = Cloudflare
-access_key_id = {{ .secrets.RCLONE_S3_ACCESS_KEY_ID }}
-secret_access_key = {{ .secrets.RCLONE_S3_SECRET_ACCESS_KEY }}
-endpoint = {{ .secrets.RCLONE_S3_ENDPOINT }}
+access_key_id = {{ gopass "rclone/s3/access_key_id" }}
+secret_access_key = {{ gopass "rclone/s3/secret_access_key" }}
+endpoint = {{ gopass "rclone/s3/endpoint" }}
 acl = private
