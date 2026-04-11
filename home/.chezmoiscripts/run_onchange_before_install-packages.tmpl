@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 {{ range .meta.packageManager -}}
-{{   $packageMap := index $.packageManagers . }}{{ if $.meta.isMinimal }}{{ $packageList = index $.packageManagers . "minimal" }}{{ end -}}
+{{   $packageMap := index $.packageManagers . }}{{ if $.meta.isMinimal }}{{ $packageMap = index $.packageManagers . "minimal" }}{{ end -}}
 
 {{   if eq . "brew" -}}
 
