@@ -31,7 +31,7 @@
 {{       end -}}
        end | $brew_prefix/bin/brew bundle --file=/dev/stdin
 
-{{     if $.chezmoi.os "darwin" -}}
+{{     if eq $.chezmoi.os "darwin" -}}
          brew uninstall --ignore-dependencies --force pinentry
          ln -sf $brew_prefix/bin/pinentry-mac $brew_prefix/bin/pinentry
 {{     end -}}
