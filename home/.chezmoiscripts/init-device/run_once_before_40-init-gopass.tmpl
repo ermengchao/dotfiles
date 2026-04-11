@@ -1,0 +1,25 @@
+#!/usr/bin/env fish
+
+if type -q gopass
+  printf "‼️ Could not detect gopass. Please install it first.\n"
+  exit 1
+end
+
+set $key_file {{ .chezmoi.workingTree }}/key.txt
+if not test -f $key_file
+  printf "‼️ Could not find key.txt. Please generate or import one.\n"
+  exit 1
+end
+
+printf "🧑‍💻 Setting gopass...\n"
+
+gopass clone https://github.com/ermengchao/credentials
+
+set $age_identity (grep AGE-SECRET-KEY $key_file)
+set $age_recipient (age-keygen -y $key_file)
+
+gopass age identities add $age_identity $age_recipient
+
+cd $XDG_DATA_HOME/gopass/root
+git remote add c https://github.com/ermengchao/credentials
+git fetch c

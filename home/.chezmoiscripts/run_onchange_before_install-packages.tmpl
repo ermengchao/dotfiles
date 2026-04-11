@@ -1,4 +1,4 @@
-#! /usr/bin/env fish
+#!/usr/bin/env fish
 
 {{ range .meta.packageManager -}}
 {{   $packageMap := index $.packageManagers . }}{{ if $.meta.isMinimal }}{{ $packageList = index $.packageManagers . "minimal" }}{{ end -}}
@@ -6,11 +6,11 @@
 {{   if eq . "brew" -}}
 
 {{     if eq $.chezmoi.os "darwin" -}}
-         set brew_path /opt/homebrew/bin/brew
+         set brew_prefix /opt/homebrew
 {{     end -}}
 
 {{     if eq $.chezmoi.os "linux" -}}
-         set brew_path /home/linuxbrew/.linuxbrew/bin/brew
+         set brew_prefix /home/linuxbrew/.linuxbrew
 {{     end -}}
 
        begin
@@ -29,7 +29,12 @@
              echo 'mas {{ .name | quote }}, id: {{ .id }}'
 {{         end -}}
 {{       end -}}
-       end | $brew_path bundle --file=/dev/stdin
+       end | $brew_prefix/bin/brew bundle --file=/dev/stdin
+
+{{     if $.chezmoi.os "darwin" -}}
+         brew uninstall --ignore-dependencies --force pinentry
+         ln -sf $brew_prefix/bin/pinentry-mac $brew_prefix/bin/pinentry
+{{     end -}}
 
 {{   else -}}
 
