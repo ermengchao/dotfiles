@@ -1,19 +1,25 @@
 {{ if eq .chezmoi.os "darwin" -}}
 
-abbr keychain-add "/usr/bin/ssh-add --apple-use-keychain"
-abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
-abbr xcode "open -a Xcode"
+  abbr keychain-add "/usr/bin/ssh-add --apple-use-keychain"
+  abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
+  abbr xcode "open -a Xcode"
 
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
 
-eval "$(ssh-agent -c 2>/dev/null)" >/dev/null
+  eval "$(ssh-agent -c 2>/dev/null)" >/dev/null
 
-abbr psg /usr/lib/systemd/system-generators/podman-system-generator
-abbr sc systemctl
-abbr scu "systemctl --user"
-alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
+  abbr psg /usr/lib/systemd/system-generators/podman-system-generator
+  abbr sc systemctl
+  abbr scu "systemctl --user"
+  alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
+
+{{   if eq .chezmoi.version.builtBy "Homebrew" -}}
+
+    eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+{{   end -}}
 
 {{ end -}}
 
