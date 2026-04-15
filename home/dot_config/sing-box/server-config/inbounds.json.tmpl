@@ -7,7 +7,7 @@
       "listen_port": {{ .ports.sing_box.inbound.socks }},
       "users": [
         {
-          "name": "chao",
+          "username": "chao",
           "password": {{ gopass "sing_box/inbound/socks_password" | quote }}
         }
       ]
@@ -20,7 +20,7 @@
       "listen_port": {{ .ports.sing_box.inbound.mixed }},
       "users": [
         {
-          "name": "chao",
+          "username": "chao",
           "password": {{ gopass "sing_box/inbound/mixed_password" | quote }}
         }
       ]
