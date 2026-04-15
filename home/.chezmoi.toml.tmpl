@@ -37,7 +37,7 @@ packageManager = {{ promptMultichoice "📦 Package manager" $packageManagerList
 isMinimal = {{ promptBool "🧩 Minimal installation" true | toToml }}
 
 {{ if eq .chezmoi.os "linux" -}}
-isProxyServer = {{ promptBool "🌐 Whether a proxy server" false | toToml -}}
+isProxyServer = {{ promptBool "🌐 Whether a proxy server" false | toToml }}
 {{ end -}}
 
 [data.ports]
