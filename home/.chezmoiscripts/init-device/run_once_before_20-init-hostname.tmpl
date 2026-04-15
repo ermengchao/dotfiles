@@ -21,7 +21,7 @@ if test "$current_hostname" != "$configured_hostname"
   printf "🪦 Current hostname is: $current_hostname\n"
   printf "🔥 Configured hostname is: $configured_hostname\n"
 
-  printf "🧑‍💻 Setting hostname..."
+  printf "🧑‍💻 Setting hostname...\n"
 
   {{ if eq .chezmoi.os "darwin" -}}
   sudo scutil --set HostName $configured_hostname
