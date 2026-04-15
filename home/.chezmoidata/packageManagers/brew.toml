@@ -201,7 +201,7 @@ brews = [
   "ripgrep",
   "sing-box",
   "tailscale",
-  "tldr",
+  "tlrc",
   "tree-sitter-cli",
   "yazi",
   "zoxide",
@@ -241,7 +241,7 @@ brews = [
   "p7zip",
   "pinentry-mac",
   "ripgrep",
-  "tldr",
+  "tlrc",
   "yazi",
   "zoxide",
 ]
@@ -299,7 +299,7 @@ brews = [
   "p7zip",
   "pinentry",
   "ripgrep",
-  "tldr",
+  "tlrc",
   "yazi",
   "zoxide",
 ]

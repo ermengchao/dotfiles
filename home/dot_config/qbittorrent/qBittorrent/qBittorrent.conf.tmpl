@@ -15,7 +15,7 @@ program=
 Session\AddTorrentStopped=false
 Session\DefaultSavePath=/downloads/
 Session\ExcludedFileNames=
-Session\Port=3001
+Session\Port={{ .ports.qbittorrent.session }}
 Session\QueueingSystemEnabled=true
 Session\SSL\Port=47185
 Session\ShareLimitAction=Stop
@@ -56,7 +56,7 @@ WebUI\ClickjackingProtection=false
 WebUI\HostHeaderValidation=false
 WebUI\LocalHostAuth=false
 WebUI\Password_PBKDF2="@ByteArray(lcZXMklMYCmtAkXAPwU8hg==:3jjD3sGzT5VTj0vf3eTqQucP6wUcqw5Kfb85FIad90KaPICgSqfWbBrOZ9bQkDn4RWUSFvYMcad32tSiKoXPUg==)"
-WebUI\Port=3000
+WebUI\Port={{ .ports.qbittorrent.webui }}
 WebUI\RootFolder=/config/webUI/vuetorrent
 WebUI\SecureCookie=false
 WebUI\ServerDomains=*

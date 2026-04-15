@@ -1,0 +1,30 @@
+{
+  "inbounds": [
+    {
+      "type": "trojan",
+      "listen": "::",
+      "listen_port": {{ .ports.sing_box.inbound.trojan }},
+      "users": [
+        {
+          "name": "chao",
+          "password": {{ gopass "sing_box/inbound/trojan_password" | quote }}
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "proxy.er-meng.com",
+        "acme": {
+          "domain": "proxy.er-meng.com",
+          "email": {{ gopass "cloudflare/email" | quote }},
+          "dns01_challenge": {
+            "provider": "cloudflare",
+            "api_token": {{ gopass "cloudflare/token" | quote }}
+          }
+        }
+      },
+      "multiplex": {
+        "enabled": true
+      }
+    }
+  ]
+}

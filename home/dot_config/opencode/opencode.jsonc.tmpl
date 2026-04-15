@@ -2,10 +2,10 @@
   "$schema": "https://opencode.ai/config.json",
   "enabled_providers": ["openai"],
   "server": {
-    "port": 4096,
+    "port": {{ .ports.opencode.server }},
     "hostname": "0.0.0.0",
     "mdns": true,
-    "cors": ["http://localhost:5173"]
+    "cors": ["http://localhost"]
   },
   "tools": {
     "write": true,

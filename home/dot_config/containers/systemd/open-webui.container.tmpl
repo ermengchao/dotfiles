@@ -9,11 +9,8 @@ ContainerName=open-webui
 Image=ghcr.io/open-webui/open-webui:main
 AutoUpdate=registry
 
-PublishPort=8088:8080
+PublishPort={{ .ports.open_webui }}:8080
 
-{{ if eq .chezmoi.os "darwin" -}}
-Volume=/home/chao/.local/share/open-webui:/Users/chao/.local/share/ollama/models
+Volume={{ env "XDG_DATA_HOME" }}/open-webui:/app/backend/data
+Volume=~/.ollama/models:/root/.ollama/models
 Environment=OLLAMA_BASE_URL=http://host.orb.internal:11434
-{{ else -}}
-Volume=/home/chao/.local/share/open-webui:/home/chao/.local/share/ollama/models
-{{ end -}}

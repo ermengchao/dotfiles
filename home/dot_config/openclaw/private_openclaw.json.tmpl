@@ -4,7 +4,7 @@
       model: {
         primary: "openai-codex/gpt-5.4"
       },
-      workspace: "/Users/chao/.local/share/openclaw/.openclaw/workspace",
+      workspace: "{{ env "XDG_DATA_HOME" }}/openclaw/.openclaw/workspace",
       compaction: {
         mode: "safeguard"
       },
@@ -23,7 +23,7 @@
     }
   },
   canvasHost: {
-    port: 4001
+    port: {{ .ports.openclaw.canvas_host }}
   },
   channels: {
     telegram: {
@@ -41,7 +41,7 @@
     ownerDisplay: "raw"
   },
   gateway: {
-    port: 4000,
+    port: {{ .ports.openclaw.gateway }},
     mode: "local",
     bind: "lan",
     controlUi: {
@@ -94,7 +94,7 @@
   skills: {
     load: {
       extraDirs: [
-        "~/.config/opencode/skills"
+        "{{ env "XDG_CONFIG_HOME" }}/opencode/skills"
       ],
       watch: true
     },

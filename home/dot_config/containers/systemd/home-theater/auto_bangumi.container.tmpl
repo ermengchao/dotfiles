@@ -15,8 +15,8 @@ Entrypoint=/entry-host.sh
 Environment=TZ=Asia/Shanghai
 Environment=UMASK=022
 
-PublishPort=3004:3004
+PublishPort={{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
 
-Volume=/home/chao/.config/auto_bangumi/entry-host.sh:/entry-host.sh:ro
-Volume=/home/chao/.config/auto_bangumi:/app/config
-Volume=/home/chao/.local/share/auto_bangumi:/app/data
+Volume={{ env "XDG_CONFIG_HOME" }}/auto_bangumi/entry-host.sh:/entry-host.sh:ro
+Volume={{ env "XDG_CONFIG_HOME" }}/auto_bangumi:/app/config
+Volume={{ env "XDG_DATA_HOME" }}/auto_bangumi:/app/data

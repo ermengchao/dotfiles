@@ -11,15 +11,15 @@ AutoUpdate=registry
 
 GroupAdd=keep-groups
 
-Environment=NGINX_PORT=3008
-Environment=PORT=3009
+Environment=NGINX_PORT={{ .ports.movie_pilot.nginx_port }}
+Environment=PORT={{ .ports.movie_pilot.port }}
 Environment=TZ=Asia/Shanghai
 Environment=UMASK=022
 Environment=START_NOGOSU=true
 
-PublishPort=3008:3008
-PublishPort=3009:3009
+PublishPort={{ .ports.movie_pilot.nginx_port }}:{{ .ports.movie_pilot.nginx_port }}
+PublishPort={{ .ports.movie_pilot.port }}:{{ .ports.movie_pilot.port }}
 
-Volume=/home/chao/.config/movie_pilot:/config
-Volume=/home/chao/.config/qbittorrent/qBittorrent/BT_backup:/BT_backup
+Volume={{ env "XDG_CONFIG_HOME" }}/movie_pilot:/config
+Volume={{ env "XDG_CONFIG_HOME" }}/qbittorrent/qBittorrent/BT_backup:/BT_backup
 Volume={{ .mediaPath }}:/media

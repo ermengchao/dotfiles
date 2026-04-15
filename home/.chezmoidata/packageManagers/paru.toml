@@ -14,14 +14,16 @@ drivers = [
 ]
 
 packages = [
-  "opencode-bin",
-  "go-gitmoji-cli-bin",
-  "sing-box",
   "google-chrome",
+  "go-gitmoji-cli-bin",
+  "opencode-bin",
+  "sing-box",
+  "tlrc",
 ]
 
 [packageManagers.paru.minimal]
 
 packages = [
   "go-gitmoji-cli-bin",
+  "tlrc",
 ]

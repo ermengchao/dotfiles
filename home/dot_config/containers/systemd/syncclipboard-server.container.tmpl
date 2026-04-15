@@ -12,6 +12,6 @@ AutoUpdate=registry
 Environment=SYNCCLIPBOARD_USERNAME=chao
 Environment=SYNCCLIPBOARD_PASSWORD={{ gopass "chao/password" }}
 
-PublishPort=5033:5033
+PublishPort={{ .ports.syncclipboard_server }}:5033
 
-Volume=/home/chao/.local/share/syncclipboard-server:/app/data
+Volume={{ env "XDG_DATA_HOME" }}/syncclipboard-server:/app/data

@@ -10,4 +10,4 @@ ContainerName=yacd
 Image=docker.io/haishanh/yacd:latest
 AutoUpdate=registry
 
-PublishPort=2004:80
+PublishPort={{ .ports.yacd }}:80

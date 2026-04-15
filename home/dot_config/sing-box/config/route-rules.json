@@ -137,7 +137,7 @@
       {
         "rule_set": "geoip-cn",
         "outbound": "🟢 Direct"
-      },
+      }
     ],
   }
 }

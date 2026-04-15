@@ -11,6 +11,13 @@
 .config/systemd
 .config/wayvnc
 
+{{ if .meta.isMinimal -}}
+
+.config/ghostty
+.config/marimo
+
+{{ end -}}
+
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
@@ -18,6 +25,14 @@
 .config/codesnap
 .config/openclaw
 .config/posting
+
+{{ if .meta.isMinimal -}}
+
+.config/ghostty
+.config/marimo
+.config/wayvnc
+
+{{ end -}}
 
 {{ end -}}
 

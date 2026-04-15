@@ -4,7 +4,7 @@
 
 {{   range .rootConfig -}}
        sudo mkdir -p /root/.config
-       sudo ln -sf /home/chao/.config/{{ . }} /root/.config/{{ . }}
+       sudo ln -sf {{ env "XDG_CONFIG_HOME" }}/{{ . }} /root/.config/{{ . }}
 {{   end -}}
 
 {{ end -}}

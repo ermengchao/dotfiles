@@ -29,6 +29,7 @@ command = "fish"
 apply = true
 
 [data]
+email = "zhangchao050530@gmail.com"
 mediaPath = "/Volumes/HDD/Infuse"
 
 [data.meta]
@@ -38,3 +39,34 @@ hostname = {{ promptString "💥 Hostname" .chezmoi.hostname | toToml }}
 prettyHostname = {{ promptString "👀 Pretty hostname" | toToml }}
 packageManager = {{ promptMultichoice "📦 Package manager" $packageManagerList | toToml }}
 isMinimal = {{ promptBool "🧩 Minimal installation" true | toToml }}
+
+[data.ports]
+# Reserved
+wayvnc = 5900
+sing_box.inbound.mixed = 8080
+sing_box.inbound.socks = 1080
+
+# Proxy Service
+sub_store.backend_api = 2000
+yacd = 2001
+
+sing_box.inbound.shadowsocks = 2008
+sing_box.inbound.vmess = 2009
+sing_box.inbound.trojan = 2010
+
+# Home Theater
+qbittorrent.webui = 3000
+qbittorrent.session = 3001
+auto_bangumi = 3004
+movie_pilot.nginx_port = 3008
+movie_pilot.port = 3009
+
+# AI
+openclaw.gateway = 4000
+openclaw.canvas_host = 4001
+open_webui = 4008
+opencode.server = 4096
+
+# Misc
+jm2epub = 10000
+syncclipboard_server = 10001

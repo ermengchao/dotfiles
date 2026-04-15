@@ -9,7 +9,7 @@ ContainerName=jm2epub
 Image=ghcr.io/ermengchao/jm2epub
 AutoUpdate=registry
 
-PublishPort=10000:10000
-
 Environment=JM2EPUB_API_KEY={{ gopass "jm2epub/api_key" }}
-Environment=PORT=10000
+Environment=PORT={{ .ports.jm2epub }}
+
+PublishPort={{ .ports.jm2epub }}:{{ .ports.jm2epub }}

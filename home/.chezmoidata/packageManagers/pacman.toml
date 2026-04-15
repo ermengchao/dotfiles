@@ -49,7 +49,6 @@ packages = [
   "p7zip",
   "ripgrep",
   "tailscale",
-  "tldr",
   "tree-sitter",
   "wayvnc",
   "wl-clipboard",
@@ -85,7 +84,6 @@ packages = [
   "podman",
   "p7zip",
   "ripgrep",
-  "tldr",
   "yazi",
   "zoxide",
 ]

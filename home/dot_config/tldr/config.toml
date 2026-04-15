@@ -1,5 +1,5 @@
 [cache]
-dir = "~/.cache/tlrc"
+dir = "{{ env "XDG_CACHE_HOME" }}/tldr"
 mirror = "https://github.com/tldr-pages/tldr/releases/latest/download"
 auto_update = true
 defer_auto_update = false

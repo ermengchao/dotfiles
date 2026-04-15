@@ -6,7 +6,7 @@
 [core]
   autocrlf = input
   ignorecase = true
-  excludesfile = ~/.config/git/ignore
+  excludesfile = {{ env "XDG_CONFIG_HOME" }}/git/ignore
 [color]
   ui = auto
 [init]
@@ -25,4 +25,4 @@
 	helper = 
 	helper = "!gh auth git-credential"
 [include]
-  path = ~/.config/git/delta.gitconfig
+  path = {{ env "XDG_CONFIG_HOME" }}/git/delta.gitconfig
