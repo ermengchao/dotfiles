@@ -1,0 +1,6 @@
+{
+  "dns": {
+    "strategy": "prefer_ipv4",
+    "final": "dns-local"
+  }
+}

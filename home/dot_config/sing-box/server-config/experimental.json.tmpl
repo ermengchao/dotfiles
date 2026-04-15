@@ -1,0 +1,17 @@
+{
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "{{ env "XDG_CACHE_HOME" }}/sing-box/cache.db",
+    },
+    "clash_api": {
+      "external_controller": "0.0.0.0:{{ .ports.sing_box.clash_api }}",
+      "secret": {{ gopass "chao/password" | quote }},
+      "default_mode": "rule",
+      "access_control_allow_origin": [
+        "*"
+      ],
+      "access_control_allow_private_network": true,
+    }
+  }
+}

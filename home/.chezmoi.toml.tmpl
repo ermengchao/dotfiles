@@ -17,10 +17,6 @@ command = "podman"
 [edit]
 apply = true
 
-[hooks]
-[hooks.apply.post]
-script = "{{ .chezmoi.sourceDir }}/.chezmoihooks/default.fish"
-
 [interpreters]
 [interpreters.fish]
 command = "fish"
@@ -40,6 +36,10 @@ prettyHostname = {{ promptString "👀 Pretty hostname" | toToml }}
 packageManager = {{ promptMultichoice "📦 Package manager" $packageManagerList | toToml }}
 isMinimal = {{ promptBool "🧩 Minimal installation" true | toToml }}
 
+{{ if eq .chezmoi.os "linux" -}}
+isProxyServer = {{ promptBool "🌐 Whether a proxy server" false | toToml -}}
+{{ end -}}
+
 [data.ports]
 # Reserved
 wayvnc = 5900
@@ -48,11 +48,13 @@ sing_box.inbound.socks = 1080
 
 # Proxy Service
 sub_store.backend_api = 2000
-yacd = 2001
+sub_store.clash_api = 2001
+yacd = 2002
 
 sing_box.inbound.shadowsocks = 2008
 sing_box.inbound.vmess = 2009
 sing_box.inbound.trojan = 2010
+sing_box.inbound.hysteria2 = 2014
 
 # Home Theater
 qbittorrent.webui = 3000

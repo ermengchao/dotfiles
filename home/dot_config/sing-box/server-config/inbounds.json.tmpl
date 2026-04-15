@@ -1,0 +1,91 @@
+{
+  "inbounds": [
+    {
+      "tag": "socks-in",
+      "type": "socks",
+      "listen": "0.0.0.0",
+      "listen_port": {{ .ports.sing_box.inbound.socks }},
+      "users": [
+        {
+          "name": "chao",
+          "password": {{ gopass "sing_box/inbound/socks_password" | quote }}
+        }
+      ]
+    },
+    {
+      "tag": "mixed-in",
+      "type": "mixed",
+      "set_system_proxy": false,
+      "listen": "0.0.0.0",
+      "listen_port": {{ .ports.sing_box.inbound.mixed }},
+      "users": [
+        {
+          "name": "chao",
+          "password": {{ gopass "sing_box/inbound/mixed_password" | quote }}
+        }
+      ]
+    },
+    {
+      "type": "shadowsocks",
+      "listen": "::",
+      "listen_port": {{ .ports.sing_box.inbound.shadowsocks }},
+      "network": "tcp",
+      "method": "2022-blake3-aes-128-gcm",
+      "password": {{ gopass "sing_box/inbound/shadowsocks_password" | quote }},
+      "multiplex": {
+        "enabled": true
+      }
+    },
+    {
+      "type": "trojan",
+      "listen": "::",
+      "listen_port": {{ .ports.sing_box.inbound.trojan }},
+      "users": [
+        {
+          "name": "chao",
+          "password": {{ gopass "sing_box/inbound/trojan_password" | quote }}
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "proxy.er-meng.com",
+        "acme": {
+          "domain": "proxy.er-meng.com",
+          "email": {{ gopass "cloudflare/email" | quote }},
+          "dns01_challenge": {
+            "provider": "cloudflare",
+            "api_token": {{ gopass "cloudflare/token" | quote }}
+          }
+        }
+      },
+      "multiplex": {
+        "enabled": true
+      }
+    },
+    {
+      "type": "hysteria2",
+      "listen": "::",
+      "listen_port": {{ .ports.sing_box.inbound.hysteria2 }},
+      "up_mbps": 100,
+      "down_mbps": 100,
+      "users": [
+        {
+          "name": "chao",
+          "password": {{ gopass "sing_box/inbound/hysteria2_password" | quote }}
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "example.org",
+        "acme": {
+          "domain": "proxy.er-meng.com",
+          "email": {{ gopass "cloudflare/email" | quote }},
+          "dns01_challenge": {
+            "provider": "cloudflare",
+            "api_token": {{ gopass "cloudflare/token" | quote }}
+          }
+        }
+      }
+    }
+  ]
+}

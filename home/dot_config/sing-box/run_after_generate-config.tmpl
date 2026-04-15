@@ -1,0 +1,17 @@
+#!/usr/bin/env fish
+
+{{ if eq .chezmoi.os "linux" -}}
+if type -q sing-box
+  cd $XDG_CONFIG_HOME/sing-box
+
+  if {{ .meta.isProxyServer }}
+    set config_dir ./server-config
+  else
+    set config_dir ./client-config
+  end
+
+  if test -d $config_dir
+    sing-box merge config.json -C $config_dir
+  end
+end
+{{ end -}}
