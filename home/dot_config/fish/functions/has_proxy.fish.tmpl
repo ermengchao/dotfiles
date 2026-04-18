@@ -1,6 +1,6 @@
 function has_proxy
   {{ if eq .chezmoi.os "linux" -}}
-    if {{ .meta.isProxyServer -}}
+    if {{ .meta.isProxyServer }}
       return 1
     end
   {{ end -}}
