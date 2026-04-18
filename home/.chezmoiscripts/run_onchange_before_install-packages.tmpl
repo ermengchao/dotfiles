@@ -34,6 +34,8 @@
 {{     if eq $.chezmoi.os "darwin" -}}
          brew uninstall --ignore-dependencies --force pinentry
          ln -sf $brew_prefix/bin/pinentry-mac $brew_prefix/bin/pinentry
+
+	 defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
 {{     end -}}
 
 {{   else -}}

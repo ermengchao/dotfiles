@@ -1,0 +1,12 @@
+[Unit]
+Description=iperf3 Server
+After=network.target
+
+[Service]
+ExecStart=/home/linuxbrew/.linuxbrew/bin/iperf3 --server
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+

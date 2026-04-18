@@ -8,6 +8,13 @@ Host *
   TCPKeepAlive yes
   # PreferredAuthentications publickey
 
+Host ec2-fedora
+  HostName er-meng.com
+  User chao
+  AddKeysToAgent yes
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/keys/ec2-fedora/ec2-fedora
+
 Host ec2-nixos
   HostName er-meng.com
   User chao

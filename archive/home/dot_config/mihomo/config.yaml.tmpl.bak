@@ -1,4 +1,5 @@
 # General
+
 mode: rule
 log-level: warning
 profile:
@@ -8,18 +9,29 @@ geodata-mode: true
 geo-auto-update: true
 geo-update-interval: 24
 geox-url:
-  geoip: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
-  geosite: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
+    geoip: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
+    geosite: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
+global-ua: clash.meta
 find-process-mode: strict
+routing-mark: 6152
 tcp-concurrent: true
-ipv6: true
-unified-delay: true
 
-# External Access
+# External Controller
+
+external-controller: 0.0.0.0:9090
+external-controller-tls: 0.0.0.0:9091
+external-controller-cors:
+  allow-origins:
+    - '*'
+  allow-private-network: true
+# secret: {{ gopass "chao/password" }}
+
+# Lan
+
 allow-lan: true
 bind-address: "*"
-#authentication:
-#  - 'chao:{{ gopass "chao/password" }}'
+authentication:
+  - 'chao:{{ gopass "chao/password" }}'
 skip-auth-prefixes:
   - 127.0.0.1/8
   - 10.0.0.0/8
@@ -28,14 +40,38 @@ skip-auth-prefixes:
   - 100.64.0.0/10
   - ::1/128
   - fd7a:115c:a1e0::/48
-external-controller: 0.0.0.0:9090
-external-controller-tls: 0.0.0.0:9091
-# secret: {{ gopass "chao/password" }}
-external-controller-cors:
-  allow-origins:
-    - '*'
-  allow-private-network: true
-routing-mark: 8080
+
+# Proxy Settings
+
+# port: 8080
+socks-port: 1080
+mixed-port: 8080
+redir-port: 8081
+tproxy-port: 8082
+ipv6: true
+unified-delay: true
+
+# Tun
+
+tun:
+  enable: false
+  stack: mixed
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  strict-route: false
+  device: mihomo
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+  exclude-interface:
+    - Tailscale
+    - tailscale0
+  route-exclude-address:
+    - 100.64.0.0/10
+    - fd7a:115c:a1e0::/48
+
+# DNS
 
 dns:
   enable: true
@@ -44,9 +80,11 @@ dns:
     - system
     - https://dns.alidns.com/dns-query
     - https://dns.cloudflare.com/dns-query
+    - https://dns.google/dns-query
   default-nameserver:
-    - 223.5.5.5
     - 1.1.1.1
+    - 8.8.8.8
+    - 223.5.5.5
   cache-algorithm: arc
   prefer-h3: true
   use-hosts: true
@@ -69,6 +107,8 @@ dns:
   nameserver-policy:
     "+.arpa": "10.0.0.1"
     "*.ts.net": "100.100.100.100"
+    "rule-set:🟢 Direct":
+      - https://dns.alidns.com/dns-query
   fallback:
     - https://doh.pub/dns-query
     - tls://1.1.1.1
@@ -94,6 +134,8 @@ dns:
 hosts:
   '*.ts.net': '100.100.100.100'
 
+# Sniffer
+
 sniffer:
   enable: true
   force-dns-mapping: true
@@ -101,17 +143,12 @@ sniffer:
   override-destination: false
   sniff:
     HTTP:
-      ports: 
-        - 80
+      ports: [80]
       override-destination: true
     TLS:
-      ports: 
-        - 443
-        - 8443
+      ports: [443, 8443]
     QUIC:
-      ports: 
-        - 443
-        - 8443
+      ports: [443, 8443]
   skip-domain:
     - 'Mijia Cloud'
     - 'dlg.io.mi.com'
@@ -119,112 +156,262 @@ sniffer:
   force-domain:
     - 'google.com'
 
-# Inbounds
-listeners:
-  - name: mixed
-    type: mixed
-    port: {{ .ports.sing_box.inbound.mixed }}
-    listen: 0.0.0.0
-  - name: socks
-    type: socks
-    port: {{ .ports.sing_box.inbound.socks }}
-    listen: 0.0.0.0
-  - name: tun
-    type: tun
-    stack: mixed
-    auto-route: true
-    auto-redirect: true
-    auto-detect-interface: true
-    strict-route: false
-    device: mihomo
-    dns-hijack:
-    - any:53
-    - tcp://any:53
-    exclude-interface:
-    - Tailscale
-    - tailscale0
-    route-exclude-address:
-    - 100.64.0.0/10
-    - fd7a:115c:a1e0::/48
+# Proxies
 
-# Outbounds
+proxy-providers:
+  🏳️‍🌈 General:
+    type: http
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/General?target=ClashMeta
+    path: ./proxy-providers/General
+    interval: 3600
+    proxy: 🟢 Direct
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  🇭🇰 HK:
+    type: http
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/HK?target=ClashMeta
+    path: ./proxy-providers/HK
+    interval: 3600
+    proxy: 🟢 Direct
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  🇹🇼 TW:
+    type: http
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/TW?target=ClashMeta
+    path: ./proxy-providers/TW
+    interval: 3600
+    proxy: 🟢 Direct
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  🇯🇵 JP:
+    type: http
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/JP?target=ClashMeta
+    path: ./proxy-providers/JP
+    interval: 3600
+    proxy: 🟢 Direct
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  🇸🇬 SG:
+    type: http
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/SG?target=ClashMeta
+    path: ./proxy-providers/SG
+    interval: 3600
+    proxy: 🟢 Direct
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  🇺🇸 US:
+    type: http
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/US?target=ClashMeta
+    path: ./proxy-providers/US
+    interval: 3600
+    proxy: 🟢 Direct
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  🇲🇾 MY:
+    type: http
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/MY?target=ClashMeta
+    path: ./proxy-providers/MY
+    interval: 3600
+    proxy: 🟢 Direct
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  🇦🇷 AR:
+    type: http
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/AR?target=ClashMeta
+    path: ./proxy-providers/AR
+    interval: 3600
+    proxy: 🟢 Direct
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+  🇹🇷 TR:
+    type: http
+    url: https://proxies.er-meng.com{{ gopass "sub-store/frontend_backend_path"}}/download/collection/TR?target=ClashMeta
+    path: ./proxy-providers/TR
+    interval: 3600
+    proxy: 🟢 Direct
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+      timeout: 5000
+      lazy: true
+      expected-status: 204
+
 proxies:
-  - name: "⏿ Shadowsocks"
-    type: "ss"
-    server: "proxy.er-meng.com"
-    port: 2008
-    password: {{ gopass "sing_box/inbound/shadowsocks" | quote }}
-    cipher: "2022-blake3-aes-128-gcm"
-  - name: "⏿ Trojan"
-    type: "trojan"
-    server: "proxy.er-meng.com"
-    port: 2010
-    password: {{ gopass "sing_box/inbound/trojan" | quote }}
-  - name: "⏿ Hysteria2"
-    type: "hysteria2"
-    server: "proxy.er-meng.com"
-    port: 2014
-    password: {{ gopass "sing_box/inbound/hysteria2" | quote }}
+  - name: "🟢 Direct"
+    type: direct
+  - name: "🔴 Reject"
+    type: reject
 
 proxy-groups:
-  - name: "🟢 Direct"
-    type: select
-    proxies:
-      - DIRECT
-    hidden: true
-  - name: "🔴 Reject"
-    type: select
-    proxies:
-      - REJECT
-    hidden: true
   - name: "🌐 Proxy"
     type: select
     proxies:
-      - "✨ Auto"
-      - "⏿ Shadowsocks"
-      - "⏿ Trojan"
-      - "⏿ Hysteria2"
-  - name: "✨ Auto"
+      - "⚡️ Auto"
+      - "🇭🇰 HK"
+      - "🇹🇼 TW"
+      - "🇯🇵 JP"
+      - "🇸🇬 SG"
+      - "🇺🇸 US"
+      - "🇲🇾 MY"
+      - "🇦🇷 AR"
+      - "🇹🇷 TR"
+  - name: "⚡️ Auto"
     type: url-test
-    url: 'https://www.gstatic.com/generate_204'
+    use:
+      - 🏳️‍🌈 General
+    url: "https://www.gstatic.com/generate_204"
     interval: 300
-    proxies:
-      - "⏿ Shadowsocks"
-      - "⏿ Trojan"
-      - "⏿ Hysteria2"
-  - name: "📺 AD"
-    type: select
-    proxies:
-      - "🌐 Proxy"
-      - "🟢 Direct"
-      - "🔴 Reject"
   - name: "🧠 AI"
     type: select
     proxies:
       - "🌐 Proxy"
       - "🟢 Direct"
+      - "⚡️ Auto"
+      - "🇹🇼 TW"
+      - "🇯🇵 JP"
+      - "🇸🇬 SG"
+      - "🇺🇸 US"
+      - "🇲🇾 MY"
+      - "🇦🇷 AR"
+      - "🇹🇷 TR"
   - name: "🎮 Game"
     type: select
     proxies:
       - "🌐 Proxy"
       - "🟢 Direct"
-  - name: "🎥 Media"
+      - "⚡️ Auto"
+      - "🇭🇰 HK"
+      - "🇹🇼 TW"
+      - "🇯🇵 JP"
+      - "🇸🇬 SG"
+      - "🇺🇸 US"
+      - "🇲🇾 MY"
+      - "🇦🇷 AR"
+      - "🇹🇷 TR"
+  - name: "📺 Media"
     type: select
     proxies:
       - "🌐 Proxy"
       - "🟢 Direct"
+      - "⚡️ Auto"
+      - "🇭🇰 HK"
+      - "🇹🇼 TW"
+      - "🇯🇵 JP"
+      - "🇸🇬 SG"
+      - "🇺🇸 US"
+      - "🇲🇾 MY"
+      - "🇦🇷 AR"
+      - "🇹🇷 TR"
   - name: "🐟 Final"
     type: select
     proxies:
       - "🌐 Proxy"
       - "🟢 Direct"
+      - "⚡️ Auto"
+      - "🇭🇰 HK"
+      - "🇹🇼 TW"
+      - "🇯🇵 JP"
+      - "🇸🇬 SG"
+      - "🇺🇸 US"
+      - "🇲🇾 MY"
+      - "🇦🇷 AR"
+      - "🇹🇷 TR"
+  - name: "🇭🇰 HK"
+    type: url-test
+    use:
+      - 🇭🇰 HK
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇹🇼 TW"
+    type: url-test
+    use:
+      - 🇹🇼 TW
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇯🇵 JP"
+    type: url-test
+    use:
+      - 🇯🇵 JP
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇸🇬 SG"
+    type: url-test
+    use:
+      - 🇸🇬 SG
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇺🇸 US"
+    type: url-test
+    use:
+      - 🇺🇸 US
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇲🇾 MY"
+    type: url-test
+    use:
+      - 🇲🇾 MY
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇦🇷 AR"
+    type: url-test
+    use:
+      - 🇦🇷 AR
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
+  - name: "🇹🇷 TR"
+    type: url-test
+    use:
+      - 🇹🇷 TR
+    url: "https://www.gstatic.com/generate_204"
+    interval: 300
 
 rules:
-  # 📺 AD
-  - RULE-SET,advertising,REJECT
-  - RULE-SET,zhihu_ads,REJECT
-  - RULE-SET,hijacking,REJECT
-  - RULE-SET,privacy,REJECT
+  # 🚫 AD
+  - RULE-SET,advertising,🔴 Reject
+  - RULE-SET,zhihu_ads,🔴 Reject
+  - RULE-SET,hijacking,🔴 Reject
+  - RULE-SET,privacy,🔴 Reject
 
   # 🧠 AI
   - RULE-SET,ai_chao,🧠 AI
@@ -234,24 +421,24 @@ rules:
   - RULE-SET,openai,🧠 AI
 
   # 🟢 Direct
-  - RULE-SET,direct_chao,DIRECT
-  - RULE-SET,apple,DIRECT
-  - RULE-SET,china_max,DIRECT
-  - RULE-SET,download,DIRECT
-  - RULE-SET,lan,DIRECT
+  - RULE-SET,direct_chao,🟢 Direct
+  - RULE-SET,apple,🟢 Direct
+  - RULE-SET,china_max,🟢 Direct
+  - RULE-SET,download,🟢 Direct
+  - RULE-SET,lan,🟢 Direct
 
   # 🎮 Game
   - RULE-SET,game_chao,🎮 Game
   - RULE-SET,game,🎮 Game
 
-  # 🎥 Media
-  - RULE-SET,disney,🎥 Media
-  - RULE-SET,netflix,🎥 Media
-  - RULE-SET,hbo_usa,🎥 Media
-  - RULE-SET,spotify,🎥 Media
-  - RULE-SET,tiktok,🎥 Media
-  - RULE-SET,youtube,🎥 Media
-  - RULE-SET,youtube_music,🎥 Media
+  # 📺 Media
+  - RULE-SET,disney,📺 Media
+  - RULE-SET,netflix,📺 Media
+  - RULE-SET,hbo_usa,📺 Media
+  - RULE-SET,spotify,📺 Media
+  - RULE-SET,tiktok,📺 Media
+  - RULE-SET,youtube,📺 Media
+  - RULE-SET,youtube_music,📺 Media
 
   # 🌐 Proxy
   - RULE-SET,proxy_chao,🌐 Proxy
@@ -260,13 +447,13 @@ rules:
   - RULE-SET,github,🌐 Proxy
 
   # IP
-  - GEOIP, CN, DIRECT
+  - GEOIP, CN, 🟢 Direct
   - RULE-SET,amazon_cloud,🌐 Proxy, no-resolve
 
   - MATCH,🐟 Final
 
 rule-providers:
-  # 📺 AD
+  # 🚫 AD
   advertising:
     type: http
     behavior: classical
@@ -382,7 +569,7 @@ rule-providers:
     path: ./rule-providers/Game/game.yaml
     interval: 86400
 
-  # 🎥 Media
+  # 📺 Media
   disney:
     type: http
     behavior: classical

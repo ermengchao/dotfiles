@@ -8,7 +8,7 @@
       "users": [
         {
           "username": "chao",
-          "password": {{ gopass "sing_box/inbound/socks_password" | quote }}
+          "password": {{ gopass "sing_box/inbound/socks" | quote }}
         }
       ]
     },
@@ -21,7 +21,7 @@
       "users": [
         {
           "username": "chao",
-          "password": {{ gopass "sing_box/inbound/mixed_password" | quote }}
+          "password": {{ gopass "sing_box/inbound/mixed" | quote }}
         }
       ]
     },
@@ -31,7 +31,7 @@
       "listen_port": {{ .ports.sing_box.inbound.shadowsocks }},
       "network": "tcp",
       "method": "2022-blake3-aes-128-gcm",
-      "password": {{ gopass "sing_box/inbound/shadowsocks_password" | quote }},
+      "password": {{ gopass "sing_box/inbound/shadowsocks" | quote }},
       "multiplex": {
         "enabled": true
       }
@@ -43,7 +43,7 @@
       "users": [
         {
           "name": "chao",
-          "password": {{ gopass "sing_box/inbound/trojan_password" | quote }}
+          "password": {{ gopass "sing_box/inbound/trojan" | quote }}
         }
       ],
       "tls": {
@@ -71,7 +71,7 @@
       "users": [
         {
           "name": "chao",
-          "password": {{ gopass "sing_box/inbound/hysteria2_password" | quote }}
+          "password": {{ gopass "sing_box/inbound/hysteria2" | quote }}
         }
       ],
       "tls": {

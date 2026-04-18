@@ -1,0 +1,12 @@
+{
+  "sound": false,
+  "notification": true,
+  "bell": false,
+  "timeout": 5,
+  "showProjectName": true,
+  "showSessionTitle": true,
+  "showIcon": true,
+  "suppressWhenFocused": false,
+  "enableOnDesktop": false,
+  "notificationSystem": "ghostty"
+}

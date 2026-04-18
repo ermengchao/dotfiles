@@ -40,6 +40,7 @@ packages = [
   "imagemagick",
   "iperf3",
   "jq",
+  "libnotify",
   "librsvg",
   "neovim",
   "nmap",
@@ -56,6 +57,8 @@ packages = [
   "zoxide",
   "ghostty",
   "otf-firamono-nerd",
+  "tmux",
+  "tree-sitter",
   "ttf-sarasa-gothic",
   "inter-font",
 ]
@@ -84,6 +87,8 @@ packages = [
   "podman",
   "p7zip",
   "ripgrep",
+  "tmux",
+  "tree-sitter",
   "yazi",
   "zoxide",
 ]

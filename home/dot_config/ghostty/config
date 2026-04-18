@@ -1,5 +1,5 @@
 # Appearance
-theme = light:"Xcode Light",dark:"Xcode WWDC"
+theme = light:"Catppuccin Latte",dark:"Catppuccin Mocha"
 background-opacity = 0.95
 background-blur = 95
 background-opacity-cells = true

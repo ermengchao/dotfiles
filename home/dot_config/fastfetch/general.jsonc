@@ -6,7 +6,7 @@
     "width": null,
     "height": null,
     "padding": {
-      "top": 2,
+      "top": 0,
       "left": 0,
       "right": 4
     },
@@ -131,7 +131,18 @@
     {
       "type": "os",
       "keyIcon": " ",
-      "format": "{name} {codename} {version}"
+      "format": "{name} {codename} {version}",
+      "condition": {
+        "system": "macOS"
+      }
+    },
+    {
+      "type": "os",
+      "keyIcon": " ",
+      "format": "{name} {codename} {version}",
+      "condition": {
+        "system": "Linux"
+      }
     },
     {
       "type": "host",
@@ -141,14 +152,14 @@
       "type": "kernel",
       "keyIcon": " "
     },
-    {
-      "type": "shell",
-      "keyIcon": " "
-    },
-    {
-      "type": "terminal",
-      "keyIcon": " "
-    },
+    // {
+    //   "type": "shell",
+    //   "keyIcon": " "
+    // },
+    // {
+    //   "type": "terminal",
+    //   "keyIcon": " "
+    // },
     {
       "type": "packages",
       "keyIcon": "󰏖 ",
@@ -266,18 +277,18 @@
       "type": "wmtheme",
       "keyIcon": "󰓸 "
     },
-    {
-      "type": "font",
-      "keyIcon": " "
-    },
+    // {
+    //   "type": "font",
+    //   "keyIcon": " "
+    // },
     // {
     //   "type": "terminalfont",
     //   "keyIcon": " "
     // },
-    {
-      "type": "icons",
-      "keyIcon": " "
-    },
+    // {
+    //   "type": "icons",
+    //   "keyIcon": " "
+    // },
     // {
     //   "type": "cursor",
     //   "keyIcon": "󰆿 "
