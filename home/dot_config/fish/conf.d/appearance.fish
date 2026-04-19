@@ -1,4 +1,4 @@
-if test is_dark_mode
+if is_dark_mode
   alias btm "btm -C $XDG_CONFIG_HOME/bottom/catppuccin-mocha.toml"
   alias codesnap "codesnap --code-theme 'Catppuccin Mocha'"
   alias delta "delta --features=catppuccin-mocha"
@@ -10,7 +10,7 @@ if test is_dark_mode
                             --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
                             --color=selected-bg:#45475A \
                             --color=border:#6C7086,label:#CDD6F4"
-  set -gx LG_CONFIG_FILE $XDG_CONFIG_FILE/lazygit/config.yml,catppuccin-mocha.yml
+  set -gx LG_CONFIG_FILE $XDG_CONFIG_HOME/lazygit/config.yml,catppuccin-mocha.yml
   set -gx OPENCODE_TUI_CONFIG $XDG_CONFIG_HOME/opencode/catppuccin-mocha.json
   set -gx POSTING_THEME catppuccin-mocha
 else
@@ -25,9 +25,7 @@ else
                             --color=marker:#7287FD,fg+:#4C4F69,prompt:#8839EF,hl+:#D20F39 \
                             --color=selected-bg:#BCC0CC \
                             --color=border:#9CA0B0,label:#4C4F69"
-  set -gx LG_CONFIG_FILE $XDG_CONFIG_FILE/lazygit/config.yml,catppuccin-latte.yml
+  set -gx LG_CONFIG_FILE $XDG_CONFIG_HOME/lazygit/config.yml,catppuccin-latte.yml
   set -gx OPENCODE_TUI_CONFIG $XDG_CONFIG_HOME/opencode/catppuccin-latte.json
   set -gx POSTING_THEME catppuccin-latte
 end
-
-

@@ -1,0 +1,12 @@
+{{- $missingDependencies := list -}}
+{{- range $dependency := .dependencies -}}
+{{- if not (lookPath $dependency) -}}
+{{- warnf "Missing required dependency before chezmoi apply: %s" $dependency -}}
+{{- $missingDependencies = append $missingDependencies $dependency -}}
+{{- end -}}
+{{- end }}
+#!/usr/bin/env fish
+
+{{- if gt (len $missingDependencies) 0 }}
+exit 1
+{{- end }}

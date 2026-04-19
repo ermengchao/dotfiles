@@ -1,0 +1,9 @@
+dependencies = [
+  "age",
+  "bun",
+  "fish",
+  "git",
+  "gopass",
+  "jq",
+  "pinentry",
+]

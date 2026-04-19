@@ -22,6 +22,8 @@ set age_recipient (age-keygen -y $key_file)
 
 gopass age identities add $age_identity $age_recipient
 
+set -Ux GOPASS_AGE_PASSWORD {{ gopass "chao/password" }}
+
 cd (gopass config mounts.path)
 git remote add c https://github.com/ermengchao/credentials
 git fetch c
