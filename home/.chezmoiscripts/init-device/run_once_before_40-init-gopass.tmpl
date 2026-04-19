@@ -1,3 +1,6 @@
+{{- if not (env "GPG_TTY") -}}
+{{- warnf "GPG_TTY is not set. Please run 'set -gx GPG_TTY (tty)' in your current shell and rerun chezmoi apply." -}}
+{{- end -}}
 #!/usr/bin/env fish
 
 if not type -q gopass
@@ -15,14 +18,26 @@ printf "🧑‍💻 Setting gopass...\n"
 
 gopass clone https://github.com/ermengchao/credentials
 
-set -gx GPG_TTY (tty)
+{{- if not (env "GPG_TTY") }}
+exit 1
+{{- end }}
+
+if not set -q GOPASS_AGE_PASSWORD; or test -z "$GOPASS_AGE_PASSWORD"
+  read --silent --prompt-str "🙈 Enter your passphrase: " gopass_age_password
+  printf "\n"
+
+  if test -z "$gopass_age_password"
+    printf "‼️ GOPASS_AGE_PASSWORD cannot be empty.\n"
+    exit 1
+  end
+
+  set -Ux GOPASS_AGE_PASSWORD $gopass_age_password
+end
 
 set age_identity (grep AGE-SECRET-KEY $key_file)
 set age_recipient (age-keygen -y $key_file)
 
 gopass age identities add $age_identity $age_recipient
-
-set -Ux GOPASS_AGE_PASSWORD {{ gopass "chao/password" }}
 
 cd (gopass config mounts.path)
 git remote add c https://github.com/ermengchao/credentials
