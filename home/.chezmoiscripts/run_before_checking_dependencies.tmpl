@@ -4,7 +4,7 @@
 {{- warnf "Missing required dependency before chezmoi apply: %s" $dependency -}}
 {{- $missingDependencies = append $missingDependencies $dependency -}}
 {{- end -}}
-{{- end }}
+{{- end -}}
 #!/usr/bin/env fish
 
 {{- if gt (len $missingDependencies) 0 }}
