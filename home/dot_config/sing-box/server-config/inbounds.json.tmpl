@@ -8,20 +8,20 @@
       "users": [
         {
           "username": "chao",
-          "password": {{ gopass "sing_box/inbound/socks" | quote }}
+          "password": {{ gopass "chao/password" | quote }}
         }
       ]
     },
     {
-      "tag": "mixed-in",
-      "type": "mixed",
+      "tag": "http-in",
+      "type": "http",
       "set_system_proxy": false,
       "listen": "0.0.0.0",
-      "listen_port": {{ .ports.sing_box.inbound.mixed }},
+      "listen_port": {{ .ports.sing_box.inbound.http }},
       "users": [
         {
           "username": "chao",
-          "password": {{ gopass "sing_box/inbound/mixed" | quote }}
+          "password": {{ gopass "chao/password" | quote }}
         }
       ]
     },

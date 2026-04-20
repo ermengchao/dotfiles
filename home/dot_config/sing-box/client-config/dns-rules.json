@@ -26,7 +26,7 @@
       {
         "inbound": [
           "socks-in",
-          "mixed-in",
+          "http-in",
           "tun-in"
         ],
         "action": "route",

@@ -1,0 +1,48 @@
+{
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns-dhcp",
+        "type": "dhcp"
+      },
+      {
+        "tag": "dns-local",
+        "type": "local"
+      },
+      {
+        "tag": "dns-hosts",
+        "type": "hosts"
+      },
+      {
+        "tag": "doh-cloudflare",
+        "type": "h3",
+        "server": "dns.cloudflare.com",
+        "path": "/dns-query",
+        "domain_resolver": "dns-cloudflare",
+      },
+      {
+        "tag": "doh-aliyun",
+        "type": "h3",
+        "server": "dns.alidns.com",
+        "path": "/dns-query",
+        "domain_resolver": "dns-aliyun"
+      },
+      {
+        "tag": "dns-cloudflare",
+        "type": "udp",
+        "server": "1.1.1.1",
+      },
+      {
+        "tag": "dns-aliyun",
+        "type": "udp",
+        "server": "223.5.5.5",
+      },
+      {
+        "tag": "dns-resolved",
+        "type": "resolved",
+        "service": "services-resolved",
+        "accept_default_resolvers": false
+      }
+    ]
+  }
+}
