@@ -1,0 +1,60 @@
+#cloud-config
+
+# Meta
+preserve_hostname: true
+hostname: ec2-fedora
+# fqdn: ec2-fedora.er-meng.com
+# prefer_fqdn_over_hostname: false
+timezone: Asia/Tokyo
+
+# Users
+users:
+  - default
+  - name: chao
+    groups: wheel
+    lock_passwd: false
+    passwd: "$6$rounds=500000$ximEWTUwm/A2CZJR$mQfNzRu2N2I.ili/wAYe6o6D9ozBsZTrWlOysdy2D2MMocanhqO3rvkjv/4qw5RJJFlbhR28EQEy8fSmf2BHq0"
+    sudo: ALL=(ALL) ALL
+    shell: /bin/bash
+    ssh_authorized_keys: 
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJVHXrNokh6IByZC0FxTkRY18chyBtRsS0Gb1NQj60R/ zhangchao050530@gmail.com"
+
+# SSH
+allow_public_ssh_keys: true
+disable_root: true
+disable_root_opts: no-port-forwarding,no-agent-forwarding,no-X11-forwarding
+ssh_pwauth: false
+write_files:
+  - path: /etc/ssh/sshd_config.d/10-chao.conf
+    owner: root:root
+    permissions: '0644'
+    content: |
+      KexAlgorithms sntrup761x25519-sha512,mlkem768x25519-sha256
+  - path: /etc/ssh/sshd_config.d/90-connection-keepalive.conf
+    owner: root:root
+    permissions: '0644'
+    content: |
+      ClientAliveInterval 60
+      ClientAliveCountMax 3
+
+# Swap
+swap:
+  filename: /swapfile
+  size: 2G
+  maxsize: 2G
+
+runcmd:
+  - [systemctl, restart, sshd]
+
+# Packages
+package_reboot_if_required: true
+package_update: true
+package_upgrade: true
+packages:
+  - git
+  - curl
+
+# Misc
+updates:
+  network:
+    when: [boot, hotplug]

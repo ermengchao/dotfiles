@@ -11,26 +11,11 @@ local function isDarkMode()
   return hs.host.interfaceStyle() == "Dark"
 end
 
-local function sendNotification(message)
-  hs.notify.new({
-    title = "Hammerspoon",
-    informativeText = message,
-  }):send()
-end
-
-function obj:notifyAppearanceChanged()
-  local modeName = isDarkMode() and "Dark" or "Light"
-  sendNotification("macOS switched to " .. modeName .. " mode. Reloading appearance settings.")
-end
-
 function obj:reloadAppearance()
   local ok, _, _, rc = hs.execute("fish -c reload_appearance", true)
   if not ok or rc ~= 0 then
-    sendNotification("Failed to run reload_appearance.")
     return
   end
-
-  self:notifyAppearanceChanged()
 end
 
 function obj:start()

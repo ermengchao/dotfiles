@@ -1,26 +1,20 @@
 {{ if eq .chezmoi.os "darwin" -}}
-
-  abbr keychain-add "/usr/bin/ssh-add --apple-use-keychain"
-  abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
-  abbr xcode "open -a Xcode"
-
+abbr keychain-add "/usr/bin/ssh-add --apple-use-keychain"
+abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
+abbr xcode "open -a Xcode"
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
+eval "$(ssh-agent -c 2>/dev/null)" >/dev/null
 
-  eval "$(ssh-agent -c 2>/dev/null)" >/dev/null
-
-  abbr psg /usr/lib/systemd/system-generators/podman-system-generator
-  abbr sc systemctl
-  abbr scu "systemctl --user"
-  alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
+abbr psg /usr/lib/systemd/system-generators/podman-system-generator
+abbr sc systemctl
+abbr scu "systemctl --user"
+alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
 
 {{   if eq .chezmoi.version.builtBy "Homebrew" -}}
-
-    eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
+eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 {{   end -}}
-
 {{ end -}}
 
 if status is-interactive
@@ -34,11 +28,11 @@ function fish_user_key_bindings
 end
 
 # Initialization
-zoxide init fish --cmd cd | source
+zoxide init fish --cmd cd | source; or true
 
 # Plugins
 fish_config theme choose catppuccin-mocha
-fzf_configure_bindings --directory=ctrl-alt-f --history=ctrl-alt-h --processes=ctrl-alt-p --variables=ctrl-alt-v
+fzf_configure_bindings --directory=ctrl-alt-f --history=ctrl-alt-h --processes=ctrl-alt-p --variables=ctrl-alt-v; or true
 
 # Abbreviation
 abbr -a --position anywhere -- --help '--help | bat -plhelp'

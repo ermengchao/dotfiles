@@ -7,7 +7,12 @@ args = [
 ]
 
 packages = [
+  "clang",
+  "flatpak",
   "git",
+  "podman",
+  "wl-clipboard",
+  "samba",
 ]
 
 [packageManagers.apt.minimal]

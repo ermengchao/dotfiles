@@ -1,5 +1,5 @@
 function reload_appearance
-  source $XDG_CONFIG_HOME/fish/conf.d/appearance.fish
-  sleep 1
-  printf '\e]777;notify;;✨ Reload theme successfully.\a'
+  tmux source-file $XDG_CONFIG_HOME/tmux/tmux.conf; or true
+  source $XDG_CONFIG_HOME/fish/conf.d/20-appearance.fish
+  return 0
 end
