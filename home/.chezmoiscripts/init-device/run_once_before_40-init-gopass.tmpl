@@ -18,10 +18,6 @@ printf "🧑‍💻 Setting gopass...\n"
 
 gopass clone https://github.com/ermengchao/credentials
 
-{{- if not (env "GPG_TTY") }}
-exit 1
-{{- end }}
-
 if not set -q GOPASS_AGE_PASSWORD; or test -z "$GOPASS_AGE_PASSWORD"
   read --silent --prompt-str "🙈 Enter your passphrase: " gopass_age_password
   printf "\n"
