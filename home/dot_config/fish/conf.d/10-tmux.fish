@@ -1,6 +1,9 @@
 if status is-interactive
     and type -q tmux
     and not set -q TMUX
-    and test "$TERM_PROGRAM" = ghostty
+    and begin
+        test "$TERM_PROGRAM" = ghostty
+        or set -q SSH_TTY
+    end
     exec tmux new-session -A -s main
 end

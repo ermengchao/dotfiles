@@ -121,9 +121,9 @@ sniffer:
 
 # Inbounds
 listeners:
-  - name: mixed
-    type: mixed
-    port: {{ .ports.sing_box.inbound.mixed }}
+  - name: http
+    type: http
+    port: {{ .ports.sing_box.inbound.http }}
     listen: 0.0.0.0
   - name: socks
     type: socks
