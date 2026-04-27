@@ -7,7 +7,7 @@
   },
   "diff_style": "auto",
   "keybinds": {
-    "leader": "ctrl+x",
+    "leader": "ctrl+o",
     "app_exit": "ctrl+c,ctrl+d,<leader>q",
     "editor_open": "<leader>e",
     "theme_list": "<leader>t",

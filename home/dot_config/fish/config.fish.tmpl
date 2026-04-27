@@ -23,8 +23,9 @@ end
 # Key Binding
 function fish_user_key_bindings
   bind \t complete
-  bind \cr reload_appearance
-  bind -M insert \e\cn _fzf_lsof
+  bind -M insert \cr reload_appearance
+  bind -M insert \cn _fzf_lsof
+  bind -M insert \co launch_opencode
 end
 
 # Initialization

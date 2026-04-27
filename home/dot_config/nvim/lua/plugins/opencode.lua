@@ -1,6 +1,6 @@
 vim.pack.add {{
-  name = "opencode",
-  src = "https://github.com/nickjvandyke/opencode.nvim",
+  name = 'opencode',
+  src = 'https://github.com/nickjvandyke/opencode.nvim',
 }}
 
 local opencode = require("opencode")

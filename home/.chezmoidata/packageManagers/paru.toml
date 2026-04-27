@@ -17,6 +17,7 @@ packages = [
   "google-chrome",
   "go-gitmoji-cli-bin",
   "opencode-bin",
+  "sesh",
   "sing-box",
   "tlrc",
 ]

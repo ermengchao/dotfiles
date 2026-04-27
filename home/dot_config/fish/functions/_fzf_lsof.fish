@@ -1,4 +1,4 @@
 function _fzf_lsof
-    lsof | fzf
+    lsof -i -sTCP:LISTEN -n -P | fzf
     commandline -f repaint
 end

@@ -1,0 +1,82 @@
+# Plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-open'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'laktak/extrakto'
+set -g @plugin 'niqodea/tmux-matryoshka'
+# set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
+# set -g @plugin 'tmux-plugins/tmux-continuum'
+
+# Appearance
+set-hook -g client-dark-theme {
+  source-file {{ env "XDG_CONFIG_HOME" }}/tmux/themes/catppuccin_mocha.conf
+  source-file {{ env "XDG_CONFIG_HOME" }}/tmux/appearance.conf
+}
+set-hook -g client-light-theme {
+  source-file {{ env "XDG_CONFIG_HOME" }}/tmux/themes/catppuccin_latte.conf
+  source-file {{ env "XDG_CONFIG_HOME" }}/tmux/appearance.conf
+}
+
+# Key Binding
+## Session
+# bind l run-shell "sesh last"
+bind s run-shell "sesh connect \"$(sesh list --icons | fzf-tmux -p 80%,70% --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' --bind 'tab:down,btab:up' --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' --preview-window 'right:55%' --preview 'sesh preview {}')\""
+
+## Window
+bind t new-window -c "#{pane_current_path}"
+bind -n C-w kill-window
+bind w kill-window
+bind C-l send-keys 'C-l'
+bind C-\\ send-keys 'C-\'
+
+## Pane
+bind '\' split-window -h -c "#{pane_current_path}"
+bind '/' split-window -v -c "#{pane_current_path}"
+bind X kill-pane
+
+## Copy mode
+set -g prefix C-Space
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
+bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+bind -T copy-mode-vi Y send -X copy-end-of-line
+bind b copy-mode\;\
+       send-keys -X start-of-line\;\
+       send-keys -X search-backward "❯"
+bind f copy-mode\;\
+       send-keys -X start-of-line\;\
+       send-keys -X search-forward "❯"
+
+# Misc
+set -g default-terminal "tmux-256color"
+set -g extended-keys on
+set -g extended-keys-format csi-u
+set -gsa terminal-features ',xterm-ghostty:RGB,kitty:RGB,xterm-kitty:RGB'
+set -gsa terminal-features ',xterm-ghostty:extkeys,kitty:extkeys,xterm-kitty:extkeys'
+set -g mouse on
+set -g automatic-rename on
+set -g automatic-rename-format '#{pane_current_command}'
+set -g base-index 1
+set -g pane-base-index 1
+set -g renumber-windows on
+set -gw pane-base-index 1
+set -gw mode-keys vi
+set -g allow-rename on
+set -gs escape-time 0
+set -gs repeat-time 0
+set -g detach-on-destroy off
+set -g allow-passthrough on
+set -ga update-environment TERM
+set -ga update-environment TERM_PROGRAM
+
+# Plugin Settings
+## Matryoshka
+set -g @matryoshka_up_keybind 'F11'
+set -g @matryoshka_down_keybind 'F12'
+set -g @matryoshka_up_recursive_keybind 'F10'
+set -g @matryoshka_inactive_status_style 'bg=#{@thm_bg},fg=#{@thm_fg}'
+
+run '~/.config/tmux/plugins/tpm/tpm'

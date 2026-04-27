@@ -1,11 +1,6 @@
 local obj = {}
 obj.__index = obj
-
 obj.name = "ReloadAppearance"
-obj.version = "0.1"
-obj.author = "OpenCode"
-obj.homepage = "local"
-obj.license = "MIT"
 
 local function isDarkMode()
   return hs.host.interfaceStyle() == "Dark"
