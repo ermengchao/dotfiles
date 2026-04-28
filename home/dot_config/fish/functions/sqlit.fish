@@ -1,6 +1,6 @@
 function sqlit
   if type -q sqlit
-    if is_dark_mode
+    if test $IS_DARK_MODE = true
       command sqlit --theme 'catppuccin-mocha' $argv
     else
       command sqlit --theme 'catppuccin-latte' $argv

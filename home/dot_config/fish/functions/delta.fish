@@ -1,5 +1,5 @@
 function delta
-  if is_dark_mode
+  if test $IS_DARK_MODE = true
     command delta --features=catppuccin-mocha $argv
   else
     command delta --features=catppuccin-latte $argv

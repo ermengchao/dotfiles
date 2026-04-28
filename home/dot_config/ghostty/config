@@ -73,6 +73,8 @@ keybind = super+digit6=text:\x00\x36
 keybind = super+digit7=text:\x00\x37
 keybind = super+digit8=text:\x00\x38
 keybind = super+digit9=text:\x00\x39
+keybind = super+r=unbind
+keybind = super+r=text:\x12
 keybind = super+t=unbind
 keybind = super+t=text:\x00c
 keybind = super+w=unbind
