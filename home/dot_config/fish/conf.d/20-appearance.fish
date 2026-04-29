@@ -1,4 +1,4 @@
-if test $IS_DARK_MODE = true
+if set -q IS_DARK_MODE; and test $IS_DARK_MODE = true
   source ~/.config/fish/conf.d/tide/colors/catppuccin_mocha.fish
   set -Ux EZA_CONFIG_DIR $XDG_CONFIG_HOME/eza/catppuccin-mocha
   set -Ux FZF_DEFAULT_OPTS "--exact \
