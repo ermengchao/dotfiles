@@ -30,6 +30,7 @@ apply = true
 [data]
 email = "zhangchao050530@gmail.com"
 mediaPath = "/Volumes/HDD/Infuse"
+rootDir = "{{ .chezmoi.workingTree }}/root"
 
 [data.meta]
 {{ $packageManagerList := list "brew" "apt" "dnf" "flatpak" "pacman" "paru" -}}

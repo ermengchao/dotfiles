@@ -5,6 +5,6 @@
   <name replace-wildcards="yes">%h WayVNC</name>
   <service>
     <type>_rfb._tcp</type>
-    <port>5900</port>
+    <port>{{ .ports.vnc }}</port>
   </service>
 </service-group>
