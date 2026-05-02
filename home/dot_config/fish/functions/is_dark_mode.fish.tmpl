@@ -1,4 +1,13 @@
 function is_dark_mode
+    if set -q SSH_CONNECTION; and set -q IS_DARK_MODE
+      switch $IS_DARK_MODE
+        case true
+          return 0
+        case false
+          return 1
+      end
+    end
+
     {{ if eq .chezmoi.os "darwin" -}}
     if test "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = Dark
         set -Ux IS_DARK_MODE true
@@ -10,7 +19,7 @@ function is_dark_mode
     {{ end -}}
 
     {{ if eq .chezmoi.os "linux" -}}
-    if test "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" = prefer-dark
+    if test "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" = "'prefer-dark'"
         set -Ux IS_DARK_MODE true
         return 0
     else
