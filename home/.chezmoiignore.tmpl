@@ -1,4 +1,7 @@
 {{ if eq .chezmoi.os "darwin" -}}
+{{   if .meta.isMinimal -}}
+.config/marimo
+{{   end -}}
 
 .config/auto_bangumi
 .config/caddy
@@ -8,32 +11,26 @@
 .config/movie_pilot
 .config/qbittorrent
 .config/sing-box
+.config/snell-server
 .config/systemd
 .config/wayvnc
-
-{{ if .meta.isMinimal -}}
-
-.config/marimo
-
-{{ end -}}
-
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
+{{   if not .meta.isProxyServer  -}}
+.config/snell-server
+{{   end -}}
+
+{{   if .meta.isMinimal -}}
+.config/ghostty
+.config/marimo
+.config/wayvnc
+{{   end -}}
 
 .config/codesnap
 .config/hammerspool
 .config/openclaw
 .config/posting
-
-{{ if .meta.isMinimal -}}
-
-.config/ghostty
-.config/marimo
-.config/wayvnc
-
-{{ end -}}
-
 {{ end -}}
 
 .config/nixos

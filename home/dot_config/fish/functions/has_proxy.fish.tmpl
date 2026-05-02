@@ -4,7 +4,7 @@ function has_proxy
       return 1
     end
   {{ end -}}
-  set status_code (curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:{{ .ports.sing_box.clash_api }} -L -H "Authorization: Bearer {{ gopass "chao/password" }}")
+  set status_code (curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:{{ .ports.clash_api }} -L -H "Authorization: Bearer {{ gopass "chao/password" }}")
   if test $status_code -eq 200
     return 0
   else

@@ -45,19 +45,19 @@ isProxyServer = {{ promptBool "🌐 Whether a proxy server" false | toToml }}
 
 [data.ports]
 # Reserved
-wayvnc = 5900
-sing_box.inbound.http = 8080
-sing_box.inbound.socks = 1080
+vnc = 5900
+proxy.http = 8080
+proxy.socks = 1080
 
-# Proxy Service
-sub_store.backend_api = 2000
-sing_box.clash_api = 2001
-yacd = 2002
+# Proxy
+yacd = 2000
+clash_api = 2001
 
-sing_box.inbound.shadowsocks = 2008
-sing_box.inbound.vmess = 2009
-sing_box.inbound.trojan = 2010
-sing_box.inbound.hysteria2 = 2014
+proxy.shadowsocks = 2008
+proxy.vmess = 2009
+proxy.trojan = 2010
+proxy.snell = 2012
+proxy.hysteria2 = 2014
 
 # Home Theater
 qbittorrent.webui = 3000

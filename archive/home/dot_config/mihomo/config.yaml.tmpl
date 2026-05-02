@@ -123,11 +123,11 @@ sniffer:
 listeners:
   - name: http
     type: http
-    port: {{ .ports.sing_box.inbound.http }}
+    port: {{ .ports.proxy.http }}
     listen: 0.0.0.0
   - name: socks
     type: socks
-    port: {{ .ports.sing_box.inbound.socks }}
+    port: {{ .ports.proxy.socks }}
     listen: 0.0.0.0
   - name: tun
     type: tun
@@ -152,19 +152,19 @@ proxies:
   - name: "⏿ Shadowsocks"
     type: "ss"
     server: "proxy.er-meng.com"
-    port: 2008
-    password: {{ gopass "sing_box/inbound/shadowsocks" | quote }}
+    port: {{ .ports.proxy.shadowsocks }}
+    password: {{ gopass "proxy/inbounds/shadowsocks" | quote }}
     cipher: "2022-blake3-aes-128-gcm"
   - name: "⏿ Trojan"
     type: "trojan"
     server: "proxy.er-meng.com"
-    port: 2010
-    password: {{ gopass "sing_box/inbound/trojan" | quote }}
+    port: {{ .ports.proxy.trojan }}
+    password: {{ gopass "proxy/inbounds/trojan" | quote }}
   - name: "⏿ Hysteria2"
     type: "hysteria2"
     server: "proxy.er-meng.com"
-    port: 2014
-    password: {{ gopass "sing_box/inbound/hysteria2" | quote }}
+    port: {{ .ports.proxy.hysteria2 }}
+    password: {{ gopass "proxy/inbounds/hysteria2" | quote }}
 
 proxy-groups:
   - name: "🟢 Direct"

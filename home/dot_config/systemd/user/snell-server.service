@@ -1,0 +1,11 @@
+[Unit]
+Description=snell-server service
+
+[Service]
+ExecStart=/home/chao/.local/bin/snell-server -c /home/chao/.config/snell-server/snell-server.conf
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=default.target

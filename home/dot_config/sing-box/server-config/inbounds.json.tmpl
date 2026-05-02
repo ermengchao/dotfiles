@@ -1,37 +1,12 @@
 {
   "inbounds": [
     {
-      "tag": "socks-in",
-      "type": "socks",
-      "listen": "0.0.0.0",
-      "listen_port": {{ .ports.sing_box.inbound.socks }},
-      "users": [
-        {
-          "username": "chao",
-          "password": {{ gopass "chao/password" | quote }}
-        }
-      ]
-    },
-    {
-      "tag": "http-in",
-      "type": "http",
-      "set_system_proxy": false,
-      "listen": "0.0.0.0",
-      "listen_port": {{ .ports.sing_box.inbound.http }},
-      "users": [
-        {
-          "username": "chao",
-          "password": {{ gopass "chao/password" | quote }}
-        }
-      ]
-    },
-    {
       "type": "shadowsocks",
       "listen": "::",
-      "listen_port": {{ .ports.sing_box.inbound.shadowsocks }},
+      "listen_port": {{ .ports.proxy.shadowsocks }},
       "network": "tcp",
       "method": "2022-blake3-aes-128-gcm",
-      "password": {{ gopass "sing_box/inbound/shadowsocks" | quote }},
+      "password": {{ gopass "proxy/inbounds/shadowsocks" | quote }},
       "multiplex": {
         "enabled": true
       }
@@ -39,11 +14,11 @@
     {
       "type": "trojan",
       "listen": "::",
-      "listen_port": {{ .ports.sing_box.inbound.trojan }},
+      "listen_port": {{ .ports.proxy.trojan }},
       "users": [
         {
           "name": "chao",
-          "password": {{ gopass "sing_box/inbound/trojan" | quote }}
+          "password": {{ gopass "proxy/inbounds/trojan" | quote }}
         }
       ],
       "tls": {
@@ -65,13 +40,13 @@
     {
       "type": "hysteria2",
       "listen": "::",
-      "listen_port": {{ .ports.sing_box.inbound.hysteria2 }},
+      "listen_port": {{ .ports.proxy.hysteria2 }},
       "up_mbps": 100,
       "down_mbps": 100,
       "users": [
         {
           "name": "chao",
-          "password": {{ gopass "sing_box/inbound/hysteria2" | quote }}
+          "password": {{ gopass "proxy/inbounds/hysteria2" | quote }}
         }
       ],
       "tls": {

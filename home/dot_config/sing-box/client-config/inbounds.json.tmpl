@@ -4,14 +4,14 @@
       "tag": "socks-in",
       "type": "socks",
       "listen": "0.0.0.0",
-      "listen_port": {{ .ports.sing_box.inbound.socks }}
+      "listen_port": {{ .ports.proxy.socks }}
     },
     {
       "tag": "http-in",
       "type": "http",
       "set_system_proxy": false,
       "listen": "0.0.0.0",
-      "listen_port": {{ .ports.sing_box.inbound.http }}
+      "listen_port": {{ .ports.proxy.http }}
     },
     {
       "tag": "tun-in",
@@ -51,7 +51,7 @@
         "http_proxy": {
           "enabled": true,
           "server": "0.0.0.0",
-          "server_port": {{ .ports.sing_box.inbound.http }},
+          "server_port": {{ .ports.proxy.http }},
           "bypass_domain": [],
           "match_domain": []
         }
