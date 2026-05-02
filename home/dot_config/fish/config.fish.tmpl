@@ -11,10 +11,6 @@ abbr psg /usr/lib/systemd/system-generators/podman-system-generator
 abbr sc systemctl
 abbr scu "systemctl --user"
 alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
-
-{{   if eq .chezmoi.version.builtBy "Homebrew" -}}
-eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-{{   end -}}
 {{ end -}}
 
 if status is-interactive
