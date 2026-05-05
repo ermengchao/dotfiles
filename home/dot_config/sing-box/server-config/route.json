@@ -1,0 +1,5 @@
+{
+  "route": {
+    "default_domain_resolver": "dns-local"
+  }
+}
