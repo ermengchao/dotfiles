@@ -149,22 +149,22 @@ listeners:
 
 # Outbounds
 proxies:
-  - name: "⏿ Shadowsocks"
+  - name: "🇯🇵 Japan 01"
     type: "ss"
     server: "proxy.er-meng.com"
     port: {{ .ports.proxy.shadowsocks }}
-    password: {{ gopass "proxy/inbounds/shadowsocks" | quote }}
+    password: {{ gopass "proxy/shadowsocks" | quote }}
     cipher: "2022-blake3-aes-128-gcm"
-  - name: "⏿ Trojan"
+  - name: "🇯🇵 Japan 02"
     type: "trojan"
     server: "proxy.er-meng.com"
     port: {{ .ports.proxy.trojan }}
-    password: {{ gopass "proxy/inbounds/trojan" | quote }}
-  - name: "⏿ Hysteria2"
+    password: {{ gopass "proxy/trojan" | quote }}
+  - name: "🇯🇵 Japan 03"
     type: "hysteria2"
     server: "proxy.er-meng.com"
     port: {{ .ports.proxy.hysteria2 }}
-    password: {{ gopass "proxy/inbounds/hysteria2" | quote }}
+    password: {{ gopass "proxy/hysteria2" | quote }}
 
 proxy-groups:
   - name: "🟢 Direct"
@@ -181,17 +181,17 @@ proxy-groups:
     type: select
     proxies:
       - "✨ Auto"
-      - "⏿ Shadowsocks"
-      - "⏿ Trojan"
-      - "⏿ Hysteria2"
+      - "🇯🇵 Japan 01"
+      - "🇯🇵 Japan 02"
+      - "🇯🇵 Japan 03"
   - name: "✨ Auto"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
     proxies:
-      - "⏿ Shadowsocks"
-      - "⏿ Trojan"
-      - "⏿ Hysteria2"
+      - "🇯🇵 Japan 01"
+      - "🇯🇵 Japan 02"
+      - "🇯🇵 Japan 03"
   - name: "📺 AD"
     type: select
     proxies:

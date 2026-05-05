@@ -47,18 +47,18 @@ dns-server = system, 100.100.100.100
 [Proxy]
 🟢 Direct = direct
 🔴 Reject = reject
-⏿ Shadowsocks = ss, {{ .meta.hostname }}.proxy.er-meng.com, {{ .ports.proxy.shadowsocks }}, encrypt-method=2022-blake3-aes-128-gcm, password={{ gopass "proxy/shadowsocks" }}
-⏿ Trojan = trojan, {{ .meta.hostname }}.proxy.er-meng.com, {{ .ports.proxy.trojan }}, username=chao, password={{ gopass "proxy/trojan" }}
-⏿ Hysteria2 = hysteria2, {{ .meta.hostname }}.proxy.er-meng.com, {{ .ports.proxy.hysteria2 }}, password={{ gopass "proxy/hysteria2" }}
+🇯🇵 Japan 01 = ss, {{ .meta.hostname }}.proxy.er-meng.com, {{ .ports.proxy.shadowsocks }}, encrypt-method=2022-blake3-aes-128-gcm, password={{ gopass "proxy/shadowsocks" }}
+🇯🇵 Japan 02 = trojan, {{ .meta.hostname }}.proxy.er-meng.com, {{ .ports.proxy.trojan }}, username=chao, password={{ gopass "proxy/trojan" }}
+🇯🇵 Japan 03 = hysteria2, {{ .meta.hostname }}.proxy.er-meng.com, {{ .ports.proxy.hysteria2 }}, password={{ gopass "proxy/hysteria2" }}
 
 [Proxy Group]
-🌐 Proxy = select, "✨ Auto", "⏿ Shadowsocks", "⏿ Hysteria2", "⏿ Trojan", "⏿ Snell"
-✨ Auto = smart, "⏿ Shadowsocks", "⏿ Hysteria2", "⏿ Trojan", "⏿ Snell"
+🌐 Proxy = select, "✨ Auto", "🇯🇵 Japan 01", "🇯🇵 Japan 02", "🇯🇵 Japan 03"
+✨ Auto = smart, "🇯🇵 Japan 01", "🇯🇵 Japan 02", "🇯🇵 Japan 03"
 📺 AD = select, "🌐 Proxy", "🟢 Direct", "🔴 Reject", default=🔴 Reject
-🧠 AI = select, "🌐 Proxy", "🟢 Direct", "🔴 Reject"
-🎮 Game = select, "🌐 Proxy", "🟢 Direct", "🔴 Reject"
-🎥 Media = select, "🌐 Proxy", "🟢 Direct", "🔴 Reject"
-🐟 Final = select, "🌐 Proxy", "🟢 Direct", "🔴 Reject"
+🧠 AI = select, "🌐 Proxy", "🟢 Direct"
+🎮 Game = select, "🌐 Proxy", "🟢 Direct"
+🎥 Media = select, "🌐 Proxy", "🟢 Direct"
+🐟 Final = select, "🌐 Proxy", "🟢 Direct"
 
 [Rule]
 # 🚫 AD
