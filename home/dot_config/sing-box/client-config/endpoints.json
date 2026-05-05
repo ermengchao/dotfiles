@@ -13,7 +13,7 @@
       "exit_node_allow_lan_access": false,
       "advertise_routes": [],
       "advertise_exit_node": false,
-      "domain_resolver": "doh-cloudflare"
+      "domain_resolver": "dns-cloudflare"
     }
   ]
 }

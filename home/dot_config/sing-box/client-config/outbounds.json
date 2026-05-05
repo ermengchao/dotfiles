@@ -11,51 +11,43 @@
     {
       "tag": "🌐 Proxy",
       "type": "selector",
-      "default": "⚡️ Auto",
+      "default": "✨ Auto",
       "outbounds": [
-        "⚡️ Auto",
-        "🟢 Direct",
-        "🇭🇰 HK",
-        "🇹🇼 TW",
-        "🇯🇵 JP",
-        "🇸🇬 SG",
-        "🇺🇸 US",
-        "🇲🇾 MY",
-        "🇦🇷 AR",
-        "🇹🇷 TR"
+        "✨ Auto",
+        "⏿ Shadowsocks",
+        "⏿ Trojan",
+        "⏿ Hysteria2"
       ]
     },
     {
-      "tag": "⚡️ Auto",
+      "tag": "✨ Auto",
       "type": "urltest",
       "outbounds": [
-        "🇭🇰 HK",
-        "🇹🇼 TW",
-        "🇯🇵 JP",
-        "🇸🇬 SG",
-        "🇺🇸 US",
-        "🇲🇾 MY",
-        "🇦🇷 AR",
-        "🇹🇷 TR"
+        "⏿ Shadowsocks",
+        "⏿ Trojan",
+        "⏿ Hysteria2"
       ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "300s"
     },
     {
-      "tag": "🧠 AI",
+      "tag": "📺 AD",
       "type": "selector",
-      "default": "🌐 Proxy",
+      "default": "🔴 Reject",
       "outbounds": [
         "🌐 Proxy",
         "🟢 Direct",
-        "⚡️ Auto",
-        "🇹🇼 TW",
-        "🇯🇵 JP",
-        "🇸🇬 SG",
-        "🇺🇸 US",
-        "🇲🇾 MY",
-        "🇦🇷 AR",
-        "🇹🇷 TR"
+        "🔴 Reject"
+      ]
+    },
+    {
+      "tag": "🧠 AI",
+      "type": "selector",
+      "default": "🔴 Reject",
+      "outbounds": [
+        "🌐 Proxy",
+        "🟢 Direct",
+        "🔴 Reject"
       ]
     },
     {
@@ -64,34 +56,16 @@
       "default": "🌐 Proxy",
       "outbounds": [
         "🌐 Proxy",
-        "🟢 Direct",
-        "⚡️ Auto",
-        "🇭🇰 HK",
-        "🇹🇼 TW",
-        "🇯🇵 JP",
-        "🇸🇬 SG",
-        "🇺🇸 US",
-        "🇲🇾 MY",
-        "🇦🇷 AR",
-        "🇹🇷 TR"
+        "🟢 Direct"
       ]
     },
     {
-      "tag": "📺 Media",
+      "tag": "🎥 Media",
       "type": "selector",
       "default": "🌐 Proxy",
       "outbounds": [
         "🌐 Proxy",
-        "🟢 Direct",
-        "⚡️ Auto",
-        "🇭🇰 HK",
-        "🇹🇼 TW",
-        "🇯🇵 JP",
-        "🇸🇬 SG",
-        "🇺🇸 US",
-        "🇲🇾 MY",
-        "🇦🇷 AR",
-        "🇹🇷 TR"
+        "🟢 Direct"
       ]
     },
     {
@@ -100,226 +74,7 @@
       "default": "🌐 Proxy",
       "outbounds": [
         "🌐 Proxy",
-        "🟢 Direct",
-        "⚡️ Auto",
-        "🇭🇰 HK",
-        "🇹🇼 TW",
-        "🇯🇵 JP",
-        "🇸🇬 SG",
-        "🇺🇸 US",
-        "🇲🇾 MY",
-        "🇦🇷 AR",
-        "🇹🇷 TR"
-      ]
-    },
-    {
-      "tag": "🇭🇰 HK",
-      "type": "urltest",
-      "outbounds": [
-        "🇭🇰 HK 01",
-        "🇭🇰 HK 02",
-        "🇭🇰 HK 03",
-        "🇭🇰 HK 04",
-        "🇭🇰 HK 05",
-        "🇭🇰 HK 06",
-        "🇭🇰 HK 07",
-        "🇭🇰 HK 08",
-        "🇭🇰 HK 09",
-        "🇭🇰 HK 10",
-        "🇭🇰 HK 11",
-        "🇭🇰 HK 12",
-        "🇭🇰 HK 13",
-        "🇭🇰 HK 14",
-        "🇭🇰 HK 15",
-        "🇭🇰 HK 16",
-        "🇭🇰 HK 17",
-        "🇭🇰 HK 18",
-        "🇭🇰 HK 19",
-        "🇭🇰 HK 20"
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "300s"
-    },
-    {
-      "tag": "🇹🇼 TW",
-      "type": "urltest",
-      "outbounds": [
-        "🇹🇼 TW 01",
-        "🇹🇼 TW 02",
-        "🇹🇼 TW 03",
-        "🇹🇼 TW 04",
-        "🇹🇼 TW 05",
-        "🇹🇼 TW 06",
-        "🇹🇼 TW 07",
-        "🇹🇼 TW 08",
-        "🇹🇼 TW 09",
-        "🇹🇼 TW 10",
-        "🇹🇼 TW 11",
-        "🇹🇼 TW 12",
-        "🇹🇼 TW 13"
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "300s"
-    },
-    {
-      "tag": "🇯🇵 JP",
-      "type": "urltest",
-      "outbounds": [
-        "🇯🇵 JP 01",
-        "🇯🇵 JP 02",
-        "🇯🇵 JP 03",
-        "🇯🇵 JP 04",
-        "🇯🇵 JP 05",
-        "🇯🇵 JP 06",
-        "🇯🇵 JP 07",
-        "🇯🇵 JP 08",
-        "🇯🇵 JP 09",
-        "🇯🇵 JP 10"
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "300s"
-    },
-    {
-      "tag": "🇸🇬 SG",
-      "type": "urltest",
-      "outbounds": [
-        "🇸🇬 SG 01",
-        "🇸🇬 SG 02",
-        "🇸🇬 SG 03",
-        "🇸🇬 SG 04",
-        "🇸🇬 SG 05",
-        "🇸🇬 SG 06",
-        "🇸🇬 SG 07",
-        "🇸🇬 SG 08",
-        "🇸🇬 SG 09",
-        "🇸🇬 SG 10"
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "300s"
-    },
-    {
-      "tag": "🇺🇸 US",
-      "type": "urltest",
-      "outbounds": [
-        "🇺🇸 US 01",
-        "🇺🇸 US 02",
-        "🇺🇸 US 03",
-        "🇺🇸 US 04",
-        "🇺🇸 US 05",
-        "🇺🇸 US 06",
-        "🇺🇸 US 07",
-        "🇺🇸 US 08",
-        "🇺🇸 US 09",
-        "🇺🇸 US 10"
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "300s"
-    },
-    {
-      "tag": "🇲🇾 MY",
-      "type": "urltest",
-      "outbounds": [
-        "🇲🇾 MY 01",
-        "🇲🇾 MY 02",
-        "🇲🇾 MY 03",
-        "🇲🇾 MY 04",
-        "🇲🇾 MY 05"
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "300s"
-    },
-    {
-      "tag": "🇦🇷 AR",
-      "type": "urltest",
-      "outbounds": [
-        "🇦🇷 AR 01"
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "300s"
-    },
-    {
-      "tag": "🇹🇷 TR",
-      "type": "urltest",
-      "outbounds": [
-        "🇹🇷 TR 01"
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "300s"
-    },
-    {
-      "tag": "🏳️‍🌈 General",
-      "type": "selector",
-      "outbounds": [
-        "🇭🇰 HK 01",
-        "🇭🇰 HK 02",
-        "🇭🇰 HK 03",
-        "🇭🇰 HK 04",
-        "🇭🇰 HK 05",
-        "🇭🇰 HK 06",
-        "🇭🇰 HK 07",
-        "🇭🇰 HK 08",
-        "🇭🇰 HK 09",
-        "🇭🇰 HK 10",
-        "🇭🇰 HK 11",
-        "🇭🇰 HK 12",
-        "🇭🇰 HK 13",
-        "🇭🇰 HK 14",
-        "🇭🇰 HK 15",
-        "🇭🇰 HK 16",
-        "🇭🇰 HK 17",
-        "🇭🇰 HK 18",
-        "🇭🇰 HK 19",
-        "🇭🇰 HK 20",
-        "🇹🇼 TW 01",
-        "🇹🇼 TW 02",
-        "🇹🇼 TW 03",
-        "🇹🇼 TW 04",
-        "🇹🇼 TW 05",
-        "🇹🇼 TW 06",
-        "🇹🇼 TW 07",
-        "🇹🇼 TW 08",
-        "🇹🇼 TW 09",
-        "🇹🇼 TW 10",
-        "🇹🇼 TW 11",
-        "🇹🇼 TW 12",
-        "🇹🇼 TW 13",
-        "🇯🇵 JP 01",
-        "🇯🇵 JP 02",
-        "🇯🇵 JP 03",
-        "🇯🇵 JP 04",
-        "🇯🇵 JP 05",
-        "🇯🇵 JP 06",
-        "🇯🇵 JP 07",
-        "🇯🇵 JP 08",
-        "🇯🇵 JP 09",
-        "🇯🇵 JP 10",
-        "🇸🇬 SG 01",
-        "🇸🇬 SG 02",
-        "🇸🇬 SG 03",
-        "🇸🇬 SG 04",
-        "🇸🇬 SG 05",
-        "🇸🇬 SG 06",
-        "🇸🇬 SG 07",
-        "🇸🇬 SG 08",
-        "🇸🇬 SG 09",
-        "🇸🇬 SG 10",
-        "🇺🇸 US 01",
-        "🇺🇸 US 02",
-        "🇺🇸 US 03",
-        "🇺🇸 US 04",
-        "🇺🇸 US 05",
-        "🇺🇸 US 06",
-        "🇺🇸 US 07",
-        "🇺🇸 US 08",
-        "🇺🇸 US 09",
-        "🇺🇸 US 10",
-        "🇲🇾 MY 01",
-        "🇲🇾 MY 02",
-        "🇲🇾 MY 03",
-        "🇲🇾 MY 04",
-        "🇲🇾 MY 05",
-        "🇹🇷 TR 01",
-        "🇦🇷 AR 01"
+        "🟢 Direct"
       ]
     }
   ]

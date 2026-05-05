@@ -2,7 +2,7 @@
   "experimental": {
     "cache_file": {
       "enabled": true,
-      "path": "{{ env "XDG_CACHE_HOME" }}/sing-box/cache.db",
+      "path": "/var/cache/sing-box/cache.db"
     },
     "clash_api": {
       "external_controller": "0.0.0.0:{{ .ports.clash_api }}",
@@ -11,7 +11,7 @@
       "access_control_allow_origin": [
         "*"
       ],
-      "access_control_allow_private_network": true,
+      "access_control_allow_private_network": true
     }
   }
 }

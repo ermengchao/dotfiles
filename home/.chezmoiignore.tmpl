@@ -14,11 +14,16 @@
 .config/snell-server
 .config/systemd
 .config/wayvnc
+.local/share/cloud-init
+.local/share/edid
+.local/share/podman
+.local/share/subscription
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
 {{   if not .meta.isProxyServer  -}}
 .config/snell-server
+.local/share/subscription
 {{   end -}}
 
 {{   if .meta.isMinimal -}}

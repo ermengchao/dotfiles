@@ -1,31 +1,80 @@
 {
   "inbounds": [
     {
+      "tag": "inbounds-shadowtls",
+      "type": "shadowtls",
+      "listen": "::",
+      "listen_port": {{ .ports.proxy.shadowtls }},
+      "version": 3,
+      "detour": "inbounds-shadowsocks",
+      "users": [
+        {
+          "password": {{ gopass "proxy/shadowtls" | quote }}
+        }
+      ],
+      "handshake": {
+        "server": "{{ .meta.hostname }}.proxy.er-meng.com",
+        "server_port": 443
+      },
+      "strict_mode": true
+    },
+    {
+      "tag": "inbounds-shadowsocks",
       "type": "shadowsocks",
       "listen": "::",
       "listen_port": {{ .ports.proxy.shadowsocks }},
       "network": "tcp",
       "method": "2022-blake3-aes-128-gcm",
-      "password": {{ gopass "proxy/inbounds/shadowsocks" | quote }},
+      "password": {{ gopass "proxy/shadowsocks" | quote }},
       "multiplex": {
         "enabled": true
       }
     },
     {
+      "tag": "inbounds-vmess",
+      "type": "vmess",
+      "listen": "::",
+      "listen_port": {{ .ports.proxy.vmess }},
+      "tcp_fast_open": true,
+      "proxy_protocol": false,
+      "users": [
+        {
+          "uuid": {{ gopass "proxy/vmess" | quote }},
+          "alterId": 0
+        }
+      ],
+      "transport": {
+        "type": "ws",
+        "path": "/{{ gopass "proxy/vmess" }}",
+        "max_early_data": 2560,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "multiplex": {
+        "enabled": true,
+        "padding": true,
+        "brutal": {
+          "enabled": true,
+          "up_mbps": 1000,
+          "down_mbps": 1000
+        }
+      }
+    },
+    {
+      "tag": "inbounds-trojan",
       "type": "trojan",
       "listen": "::",
       "listen_port": {{ .ports.proxy.trojan }},
       "users": [
         {
           "name": "chao",
-          "password": {{ gopass "proxy/inbounds/trojan" | quote }}
+          "password": {{ gopass "proxy/trojan" | quote }}
         }
       ],
       "tls": {
         "enabled": true,
-        "server_name": "proxy.er-meng.com",
+        "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
         "acme": {
-          "domain": "proxy.er-meng.com",
+          "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
           "email": {{ gopass "cloudflare/email" | quote }},
           "dns01_challenge": {
             "provider": "cloudflare",
@@ -38,6 +87,81 @@
       }
     },
     {
+      "tag": "inbounds-naive",
+      "type": "naive",
+      "listen": "::",
+      "listen_port": {{ .ports.proxy.naive }},
+      "users": [
+        {
+          "username": "chao",
+          "password": {{ gopass "proxy/naive" | quote }}
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
+        "acme": {
+          "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
+          "email": {{ gopass "cloudflare/email" | quote }},
+          "dns01_challenge": {
+            "provider": "cloudflare",
+            "api_token": {{ gopass "cloudflare/token" | quote }}
+          }
+        }
+      }
+    },
+    {
+      "tag": "inbounds-tuic",
+      "type": "tuic",
+      "listen": "::",
+      "listen_port": {{ .ports.proxy.tuic }},
+      "users": [
+        {
+          "uuid": {{ gopass "proxy/tuic" | quote }},
+          "password": {{ gopass "proxy/tuic" | quote }}
+        }
+      ],
+      "congestion_control": "bbr",
+      "zero_rtt_handshake": true,
+      "tls": {
+        "enabled": true,
+        "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
+        "acme": {
+          "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
+          "email": {{ gopass "cloudflare/email" | quote }},
+          "dns01_challenge": {
+            "provider": "cloudflare",
+            "api_token": {{ gopass "cloudflare/token" | quote }}
+          }
+        }
+      }
+    },
+    {
+      "tag": "inbounds-anytls",
+      "type": "anytls",
+      "listen": "::",
+      "listen_port": {{ .ports.proxy.anytls }},
+      "users": [
+        {
+          "password": {{ gopass "proxy/anytls" | quote }}
+        }
+      ],
+      "padding_scheme": [],
+      "tls": {
+        "enabled": true,
+        "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
+        "acme": {
+          "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
+          "email": {{ gopass "cloudflare/email" | quote }},
+          "dns01_challenge": {
+            "provider": "cloudflare",
+            "api_token": {{ gopass "cloudflare/token" | quote }}
+          }
+        }
+      }
+    },
+    {
+      "tag": "inbounds-hysteria2",
       "type": "hysteria2",
       "listen": "::",
       "listen_port": {{ .ports.proxy.hysteria2 }},
@@ -46,14 +170,14 @@
       "users": [
         {
           "name": "chao",
-          "password": {{ gopass "proxy/inbounds/hysteria2" | quote }}
+          "password": {{ gopass "proxy/hysteria2" | quote }}
         }
       ],
       "tls": {
         "enabled": true,
-        "server_name": "example.org",
+        "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
         "acme": {
-          "domain": "proxy.er-meng.com",
+          "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
           "email": {{ gopass "cloudflare/email" | quote }},
           "dns01_challenge": {
             "provider": "cloudflare",

@@ -2,6 +2,20 @@
   "dns": {
     "servers": [
       {
+        "tag": "dns-hosts",
+        "type": "hosts"
+      },
+      {
+        "tag": "dns-resolved",
+        "type": "resolved",
+        "service": "services-resolved",
+        "accept_default_resolvers": false
+      },
+      {
+        "tag": "dns-local",
+        "type": "local"
+      },
+      {
         "tag": "dns-dhcp",
         "type": "dhcp"
       },
@@ -12,12 +26,10 @@
         "inet6_range": "fc00::/18"
       },
       {
-        "tag": "dns-local",
-        "type": "local"
-      },
-      {
-        "tag": "dns-hosts",
-        "type": "hosts"
+        "tag": "dns-tailscale",
+        "type": "tailscale",
+        "endpoint": "endpoints-tailscale",
+        "accept_default_resolvers": false
       },
       {
         "tag": "doh-cloudflare",
@@ -45,29 +57,17 @@
       {
         "tag": "dns-cloudflare",
         "type": "udp",
-        "server": "1.1.1.1",
+        "server": "1.1.1.1"
       },
       {
         "tag": "dns-google",
         "type": "udp",
-        "server": "8.8.8.8",
+        "server": "8.8.8.8"
       },
       {
         "tag": "dns-aliyun",
         "type": "udp",
-        "server": "223.5.5.5",
-      },
-      {
-        "tag": "dns-tailscale",
-        "type": "tailscale",
-        "endpoint": "endpoints-tailscale",
-        "accept_default_resolvers": false
-      },
-      {
-        "tag": "dns-resolved",
-        "type": "resolved",
-        "service": "services-resolved",
-        "accept_default_resolvers": false
+        "server": "223.5.5.5"
       }
     ]
   }

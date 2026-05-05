@@ -1,0 +1,44 @@
+#!/usr/bin/env fish
+
+if type -q sing-box
+  if {{ .meta.isProxyServer }}
+    set zone_name "er-meng.com"
+    set record_name "{{ .meta.hostname }}.proxy.er-meng.com"
+    set token {{ gopass "cloudflare/token" | quote }}
+    set ip (curl -fsS https://api64.ipify.org)
+
+    set zone_id (curl -fsS \
+      -H "Authorization: Bearer $token" \
+      -H "Content-Type: application/json" \
+      "https://api.cloudflare.com/client/v4/zones?name=$zone_name" \
+      | jq -r '.result[0].id')
+
+    set record_id (curl -fsS \
+      -H "Authorization: Bearer $token" \
+      -H "Content-Type: application/json" \
+      "https://api.cloudflare.com/client/v4/zones/$zone_id/dns_records?type=A&name=$record_name" \
+      | jq -r '.result[0].id // empty')
+
+    set payload (begin
+      jq -nc \
+        --arg type "A" \
+        --arg name "$record_name" \
+        --arg content "$ip" \
+        '{type:$type,name:$name,content:$content,ttl:60,proxied:false}'
+    end)
+
+    if test -n "$record_id"
+      curl -fsS -X PUT \
+        -H "Authorization: Bearer $token" \
+        -H "Content-Type: application/json" \
+        --data "$payload" \
+        "https://api.cloudflare.com/client/v4/zones/$zone_id/dns_records/$record_id"
+    else
+      curl -fsS -X POST \
+        -H "Authorization: Bearer $token" \
+        -H "Content-Type: application/json" \
+        --data "$payload" \
+        "https://api.cloudflare.com/client/v4/zones/$zone_id/dns_records"
+    end
+  end
+end

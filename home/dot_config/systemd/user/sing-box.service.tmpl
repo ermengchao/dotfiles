@@ -1,0 +1,17 @@
+[Unit]
+Description=sing-box service
+Documentation=https://sing-box.sagernet.org
+
+[Service]
+{{ if eq .chezmoi.version.builtBy "Homebrew" -}}
+ExecStart={{ env "HOMEBREW_PREFIX" }}/bin/sing-box -C {{ env "XDG_CONFIG_HOME" }}/sing-box run
+{{ else -}}
+ExecStart=/usr/bin/sing-box -C {{ env "XDG_CONFIG_HOME" }}/sing-box run
+{{ end -}}
+
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,20 @@
+https://{{ .meta.hostname }}.proxy.er-meng.com {
+	@vmess_ws {
+		path /{{ gopass "proxy/vmess" }}*
+		header Upgrade websocket
+	}
+	reverse_proxy @vmess_ws http://127.0.0.1:{{ .ports.proxy.vmess }} {
+		header_up Host {host}
+		header_up X-Real-IP {remote_host}
+	}
+
+	@subscription {
+		path /subscription/*
+	}
+	reverse_proxy @subscription http://127.0.0.1:{{ .ports.subscription }} {
+		header_up Host {host}
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+	}
+}

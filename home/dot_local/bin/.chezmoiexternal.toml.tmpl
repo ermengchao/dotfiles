@@ -1,0 +1,10 @@
+{{ if eq .chezmoi.os "linux" -}}
+{{   if .meta.isProxyServer -}}
+["snell-server"]
+{{ $arch := output "arch" | trim }}{{ if eq $arch "x86_64" }}{{ $arch = "amd64" }}{{ end -}}
+type = "archive-file"
+path = "snell-server"
+url = "https://dl.nssurge.com/snell/snell-server-v5.0.1-linux-{{ $arch }}.zip"
+executable = true
+{{   end -}}
+{{ end -}}

@@ -1,0 +1,17 @@
+[Unit]
+Description=iperf3 Server
+After=network.target
+
+[Service]
+{{ if eq .chezmoi.version.builtBy "Homebrew" -}}
+ExecStart={{ env "HOMEBREW_PREFIX" }}/bin/iperf3 --server
+{{ else -}}
+ExecStart=/usr/bin/iperf3 --server
+{{ end -}}
+
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+

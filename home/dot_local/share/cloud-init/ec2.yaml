@@ -2,8 +2,8 @@
 
 # Meta
 preserve_hostname: true
-hostname: ec2-fedora
-# fqdn: ec2-fedora.er-meng.com
+hostname: ec2
+# fqdn: ec2.er-meng.com
 # prefer_fqdn_over_hostname: false
 timezone: Asia/Tokyo
 

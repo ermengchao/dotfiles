@@ -1,4 +1,4 @@
-{{- if eq .chezmoi.os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" -}}
 Include ~/.orbstack/ssh/config
 {{ end -}}
 
@@ -10,26 +10,12 @@ Host *
   SendEnv IS_DARK_MODE
   # PreferredAuthentications publickey
 
-Host ec2-fedora
-  HostName er-meng.com
+Host aws
+  Hostname er-meng.com
   User chao
   AddKeysToAgent yes
   IdentitiesOnly yes
-  IdentityFile ~/.ssh/keys/ec2-fedora/ec2-fedora
-
-Host ec2-nixos
-  HostName er-meng.com
-  User chao
-  AddKeysToAgent yes
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/keys/ec2-nixos/ec2-nixos
-
-Host laptop
-  Hostname 100.100.10.65
-  User chao
-  AddKeysToAgent yes
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/keys/laptop/laptop
+  IdentityFile ~/.ssh/keys/aws/aws
 
 Host mac-mini
   Hostname 100.100.10.3

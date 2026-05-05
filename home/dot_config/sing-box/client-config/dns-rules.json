@@ -16,19 +16,21 @@
         "server": "dns-tailscale"
       },
       {
+        "action": "evaluate",
+        "server": "dns-resolved"
+      },
+      {
+        "match_response": true,
+        "ip_accept_any": true,
+        "action": "respond"
+      },
+      {
         "clash_mode": "direct",
+        "action": "route",
         "server": "dns-local"
       },
       {
         "clash_mode": "global",
-        "server": "dns-fakeip"
-      },
-      {
-        "inbound": [
-          "socks-in",
-          "http-in",
-          "tun-in"
-        ],
         "action": "route",
         "server": "dns-fakeip"
       },
@@ -36,6 +38,7 @@
         "rule_set": [
           "geosite-cn",
           "direct_chao",
+          "direct",
           "apple",
           "china_max",
           "download",
@@ -62,8 +65,19 @@
           "proxy_chao",
           "developer",
           "amazon_cloud",
+          "apple_proxy",
           "google",
-          "github"
+          "github",
+          "global"
+        ],
+        "action": "route",
+        "server": "dns-fakeip"
+      },
+      {
+        "inbound": [
+          "socks-in",
+          "http-in",
+          "tun-in"
         ],
         "action": "route",
         "server": "dns-fakeip"

@@ -9,38 +9,16 @@
         "action": "hijack-dns"
       },
       {
-        "inbound": "mixed-in",
-        "action": "resolve",
-        "strategy": "prefer_ipv4"
-      },
-      {
-        "inbound": "socks-in",
-        "action": "resolve",
-        "strategy": "prefer_ipv4"
-      },
-      {
         "ip_is_private": true,
         "outbound": "🟢 Direct"
       },
       {
+        "rule_set": "advertising",
+        "outbound": "📺 AD"
+      },
+      {
         "rule_set": "geosite-cn",
         "outbound": "🟢 Direct"
-      },
-      {
-        "rule_set": "advertising",
-        "outbound": "🔴 Reject"
-      },
-      {
-        "rule_set": "zhihu_ads",
-        "outbound": "🔴 Reject"
-      },
-      {
-        "rule_set": "hijacking",
-        "outbound": "🔴 Reject"
-      },
-      {
-        "rule_set": "privacy",
-        "outbound": "🔴 Reject"
       },
       {
         "rule_set": "claude",
@@ -63,8 +41,16 @@
         "outbound": "🟢 Direct"
       },
       {
+        "rule_set": "direct",
+        "outbound": "🟢 Direct"
+      },
+      {
         "rule_set": "apple",
         "outbound": "🟢 Direct"
+      },
+      {
+        "rule_set": "apple_proxy",
+        "outbound": "🌐 Proxy"
       },
       {
         "rule_set": "china_max",
@@ -88,31 +74,31 @@
       },
       {
         "rule_set": "disney",
-        "outbound": "📺 Media"
+        "outbound": "🎥 Media"
       },
       {
         "rule_set": "netflix",
-        "outbound": "📺 Media"
+        "outbound": "🎥 Media"
       },
       {
         "rule_set": "hbo_usa",
-        "outbound": "📺 Media"
+        "outbound": "🎥 Media"
       },
       {
         "rule_set": "spotify",
-        "outbound": "📺 Media"
+        "outbound": "🎥 Media"
       },
       {
         "rule_set": "tiktok",
-        "outbound": "📺 Media"
+        "outbound": "🎥 Media"
       },
       {
         "rule_set": "youtube",
-        "outbound": "📺 Media"
+        "outbound": "🎥 Media"
       },
       {
         "rule_set": "youtube_music",
-        "outbound": "📺 Media"
+        "outbound": "🎥 Media"
       },
       {
         "rule_set": "proxy_chao",
@@ -135,9 +121,13 @@
         "outbound": "🌐 Proxy"
       },
       {
+        "rule_set": "global",
+        "outbound": "🌐 Proxy"
+      },
+      {
         "rule_set": "geoip-cn",
         "outbound": "🟢 Direct"
       }
-    ],
+    ]
   }
 }

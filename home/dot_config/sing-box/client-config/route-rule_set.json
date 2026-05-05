@@ -16,6 +16,13 @@
         "download_detour": "🌐 Proxy"
       },
       {
+        "tag": "advertising",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Advertising/Advertising.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
         "tag": "claude",
         "type": "remote",
         "format": "binary",
@@ -27,41 +34,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Copilot/Copilot.srs",
-        "download_detour": "🌐 Proxy"
-      },
-      {
-        "tag": "amazon_cloud",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/AmazonCloud/AmazonCloud.srs",
-        "download_detour": "🌐 Proxy"
-      },
-      {
-        "tag": "advertising",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Advertising/Advertising.srs",
-        "download_detour": "🌐 Proxy"
-      },
-      {
-        "tag": "zhihu_ads",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/ZhihuAds/ZhihuAds.srs",
-        "download_detour": "🌐 Proxy"
-      },
-      {
-        "tag": "hijacking",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Hijacking/Hijacking.srs",
-        "download_detour": "🌐 Proxy"
-      },
-      {
-        "tag": "privacy",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Privacy/Privacy.srs",
         "download_detour": "🌐 Proxy"
       },
       {
@@ -97,6 +69,13 @@
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/ChinaMax/ChinaMax.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "direct",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Direct/Direct.srs",
         "download_detour": "🌐 Proxy"
       },
       {
@@ -184,6 +163,20 @@
         "download_detour": "🌐 Proxy"
       },
       {
+        "tag": "amazon_cloud",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/AmazonCloud/AmazonCloud.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "apple_proxy",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/AppleProxy/AppleProxy.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
         "tag": "developer",
         "type": "remote",
         "format": "binary",
@@ -191,17 +184,24 @@
         "download_detour": "🌐 Proxy"
       },
       {
-        "tag": "google",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Google/Google.srs",
-        "download_detour": "🌐 Proxy"
-      },
-      {
         "tag": "github",
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/GitHub/GitHub.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "global",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Global/Global.srs",
+        "download_detour": "🌐 Proxy"
+      },
+      {
+        "tag": "google",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Google/Google.srs",
         "download_detour": "🌐 Proxy"
       }
     ]
