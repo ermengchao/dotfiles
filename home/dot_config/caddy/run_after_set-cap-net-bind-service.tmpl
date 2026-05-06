@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+
+{{ if eq .chezmoi.os "linux" -}}
+if type -q caddy
+  printf "🧑‍💻 Add cap_net_bind_service for caddy...\n"
+
+  sudo setcap cap_net_bind_service=+ep (readlink -f (command -v caddy))
+  printf "✅ Done.\n"
+end
+{{ end -}}

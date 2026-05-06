@@ -39,6 +39,8 @@ bind X kill-pane
 
 ## Copy mode
 set -g prefix C-Space
+set -g set-clipboard external
+set -g @override_copy_command 'tmux load-buffer -w -'
 bind -T copy-mode-vi v send-keys -X begin-selection
 bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
 bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
@@ -54,6 +56,7 @@ bind f copy-mode\;\
 set -g default-terminal "tmux-256color"
 set -g extended-keys on
 set -g extended-keys-format csi-u
+set -gsa terminal-features ',tmux-256color:clipboard,screen*:clipboard'
 set -gsa terminal-features ',xterm-ghostty:RGB,kitty:RGB,xterm-kitty:RGB'
 set -gsa terminal-features ',xterm-ghostty:extkeys,kitty:extkeys,xterm-kitty:extkeys'
 set -g mouse on

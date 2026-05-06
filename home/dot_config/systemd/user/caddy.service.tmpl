@@ -1,0 +1,17 @@
+[Unit]
+Description=caddy service
+
+[Service]
+{{ if eq .chezmoi.version.builtBy "Homebrew" -}}
+ExecStart={{ env "HOMEBREW_PREFIX" }}/bin/caddy run --config {{ env "XDG_CONFIG_HOME" }}/caddy/Caddyfile
+ExecReload={{ env "HOMEBREW_PREFIX" }}/bin/caddy reload
+{{ else -}}
+ExecStart=/usr/bin/caddy run --config {{ env "XDG_CONFIG_HOME" }}/caddy/Caddyfile
+ExecReload=/usr/bin/caddy reload
+{{ end -}}
+
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=postgres service
+
+[Service]
+ExecStart="/home/linuxbrew/.linuxbrew/bin/postgres" "-D" "/home/linuxbrew/.linuxbrew/var/postgresql@18"
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=default.target

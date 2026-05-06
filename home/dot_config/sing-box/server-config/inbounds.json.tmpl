@@ -122,9 +122,12 @@
         }
       ],
       "congestion_control": "bbr",
-      "zero_rtt_handshake": true,
+      "zero_rtt_handshake": false,
       "tls": {
         "enabled": true,
+        "alpn": [
+          "h3"
+        ],
         "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
         "acme": {
           "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
