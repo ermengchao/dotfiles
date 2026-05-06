@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eu
+
+target_tty="${1:-}"
+if [ -z "$target_tty" ]; then
+  exit 1
+fi
+
+encoded="$(base64 | tr -d '\n')"
+printf '\033Ptmux;\033\033]52;c;%s\a\033\\' "$encoded" > "$target_tty"

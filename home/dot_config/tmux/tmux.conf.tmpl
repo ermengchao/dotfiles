@@ -43,9 +43,6 @@ set -g set-clipboard external
 set -g @override_copy_command 'tmux load-buffer -w -'
 bind -T copy-mode-vi v send-keys -X begin-selection
 bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
-bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'tmux load-buffer -w -'
-bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'tmux load-buffer -w -'
-bind -T copy-mode MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'tmux load-buffer -w -'
 bind -T copy-mode-vi Y send -X copy-end-of-line
 bind b copy-mode\;\
        send-keys -X start-of-line\;\
@@ -86,3 +83,14 @@ set -g @matryoshka_up_recursive_keybind 'F10'
 set -g @matryoshka_inactive_status_style 'bg=#{@thm_bg},fg=#{@thm_fg}'
 
 run '~/.config/tmux/plugins/tpm/tpm'
+
+# Keep copy bindings after TPM so tmux-yank cannot override them.
+bind -T copy-mode-vi y if-shell -F '#{||:#{m/r:^tmux,#{client_termname}},#{m/r:^screen,#{client_termname}}}' \
+       'send-keys -X copy-pipe-and-cancel "{{ env "XDG_CONFIG_HOME" }}/tmux/scripts/osc52-passthrough-copy #{client_tty}"' \
+       'send-keys -X copy-selection-and-cancel'
+bind -T copy-mode-vi MouseDragEnd1Pane if-shell -F '#{||:#{m/r:^tmux,#{client_termname}},#{m/r:^screen,#{client_termname}}}' \
+       'send-keys -X copy-pipe-and-cancel "{{ env "XDG_CONFIG_HOME" }}/tmux/scripts/osc52-passthrough-copy #{client_tty}"' \
+       'send-keys -X copy-selection-and-cancel'
+bind -T copy-mode MouseDragEnd1Pane if-shell -F '#{||:#{m/r:^tmux,#{client_termname}},#{m/r:^screen,#{client_termname}}}' \
+       'send-keys -X copy-pipe-and-cancel "{{ env "XDG_CONFIG_HOME" }}/tmux/scripts/osc52-passthrough-copy #{client_tty}"' \
+       'send-keys -X copy-selection-and-cancel'
