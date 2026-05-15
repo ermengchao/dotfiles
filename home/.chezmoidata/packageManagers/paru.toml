@@ -15,7 +15,6 @@ drivers = [
 
 packages = [
   "google-chrome",
-  "go-gitmoji-cli-bin",
   "opencode-bin",
   "sesh",
   "sing-box",
@@ -25,6 +24,5 @@ packages = [
 [packageManagers.paru.minimal]
 
 packages = [
-  "go-gitmoji-cli-bin",
   "tlrc",
 ]

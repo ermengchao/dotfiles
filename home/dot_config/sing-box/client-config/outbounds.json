@@ -14,18 +14,24 @@
       "default": "✨ Auto",
       "outbounds": [
         "✨ Auto",
-        "⏿ Shadowsocks",
-        "⏿ Trojan",
-        "⏿ Hysteria2"
+        "🇯🇵 Japan 01",
+        "🇯🇵 Japan 02",
+        "🇯🇵 Japan 03",
+        "🇯🇵 Japan 04",
+        "🇯🇵 Japan 05",
+        "🇯🇵 Japan 06"
       ]
     },
     {
       "tag": "✨ Auto",
       "type": "urltest",
       "outbounds": [
-        "⏿ Shadowsocks",
-        "⏿ Trojan",
-        "⏿ Hysteria2"
+        "🇯🇵 Japan 01",
+        "🇯🇵 Japan 02",
+        "🇯🇵 Japan 03",
+        "🇯🇵 Japan 04",
+        "🇯🇵 Japan 05",
+        "🇯🇵 Japan 06"
       ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "300s"
@@ -46,8 +52,7 @@
       "default": "🔴 Reject",
       "outbounds": [
         "🌐 Proxy",
-        "🟢 Direct",
-        "🔴 Reject"
+        "🟢 Direct"
       ]
     },
     {

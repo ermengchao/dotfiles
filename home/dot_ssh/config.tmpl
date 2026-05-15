@@ -10,12 +10,12 @@ Host *
   SendEnv IS_DARK_MODE
   # PreferredAuthentications publickey
 
-Host aws
-  Hostname er-meng.com
+Host apne*-*
+  Hostname %h.proxy.er-meng.com
   User chao
   AddKeysToAgent yes
   IdentitiesOnly yes
-  IdentityFile ~/.ssh/keys/aws/aws
+  IdentityFile ~/.ssh/keys/aws/%n/%n
 
 Host mac-mini
   Hostname 100.100.10.3
