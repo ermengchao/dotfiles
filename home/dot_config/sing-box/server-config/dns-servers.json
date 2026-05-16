@@ -18,14 +18,14 @@
         "type": "h3",
         "server": "dns.cloudflare.com",
         "path": "/dns-query",
-        "domain_resolver": "dns-cloudflare",
+        "domain_resolver": "dns-cloudflare"
       },
       {
         "tag": "doh-google",
         "type": "h3",
         "server": "dns.google",
         "path": "/dns-query",
-        "domain_resolver": "dns-google",
+        "domain_resolver": "dns-google"
       },
       {
         "tag": "dns-cloudflare",

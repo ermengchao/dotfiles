@@ -38,6 +38,11 @@
     "oh-my-openagent@latest"
   ],
   "mcp": {
+    "chrome-mcp": {
+      "type": "local",
+      "command": ["bunx", "chrome-devtools-mcp@latest"],
+      "enabled": false,
+    },
     "github-mcp": {
       "type": "remote",
       "url": "https://api.githubcopilot.com/mcp",
@@ -46,15 +51,18 @@
         "Authorization": "Bearer {{ gopass "github/pat" }}"
       }
     },
-    "chrome-mcp": {
-      "type": "local",
-      "command": ["bunx", "chrome-devtools-mcp@latest"],
-      "enabled": false,
-    },
     "homebrew-mcp": {
       "type": "local",
       "command": ["brew", "mcp-server"],
       "enabled": false,
     },
-  },
+    "neon": {
+      "type": "remote",
+      "url": "https://mcp.neon.tech/mcp",
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer {{ gopass "neon/api_key" }}"
+      }
+    }
+  }
 }

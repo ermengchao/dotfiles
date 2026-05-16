@@ -25,8 +25,13 @@ function fish_user_key_bindings
 end
 
 # Initialization
-mise activate fish | source; or true
-zoxide init fish --cmd cd | source; or true
+if type -q mise
+  mise activate fish | source
+end
+
+if type -q zoxide
+  zoxide init fish --cmd cd | source
+end
 
 # Plugins
 fish_config theme choose catppuccin-mocha

@@ -8,7 +8,7 @@ if set -q IS_DARK_MODE; and test $IS_DARK_MODE = true
                             --color=selected-bg:#45475A \
                             --color=border:#6C7086,label:#CDD6F4"
   set -Ux LG_CONFIG_FILE $XDG_CONFIG_HOME/lazygit/config.yml,catppuccin-mocha.yml
-  set -Ux OPENCODE_TUI_CONFIG $XDG_CONFIG_HOME/opencode/catppuccin-mocha.json
+  set -Ux OPENCODE_TUI_CONFIG $XDG_CONFIG_HOME/opencode/tui/catppuccin-mocha.json
   set -Ux POSTING_THEME catppuccin-mocha
 else
   source ~/.config/fish/conf.d/tide/colors/catppuccin_latte.fish
@@ -20,7 +20,7 @@ else
                             --color=selected-bg:#BCC0CC \
                             --color=border:#9CA0B0,label:#4C4F69"
   set -Ux LG_CONFIG_FILE $XDG_CONFIG_HOME/lazygit/config.yml,catppuccin-latte.yml
-  set -Ux OPENCODE_TUI_CONFIG $XDG_CONFIG_HOME/opencode/catppuccin-latte.json
+  set -Ux OPENCODE_TUI_CONFIG $XDG_CONFIG_HOME/opencode/tui/catppuccin-latte.json
   set -Ux POSTING_THEME catppuccin-latte
 end
 
