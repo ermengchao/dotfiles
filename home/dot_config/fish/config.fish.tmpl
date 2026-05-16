@@ -14,6 +14,8 @@ alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
 {{ end -}}
 
 if status is-interactive
+else
+  return
 end
 
 # Key Binding
