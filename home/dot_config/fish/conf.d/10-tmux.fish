@@ -1,4 +1,6 @@
 if status is-interactive
+    and test -t 0
+    and test -t 1
     and type -q tmux
     and not set -q TMUX
     and begin
@@ -6,7 +8,6 @@ if status is-interactive
         or set -q SSH_CONNECTION
     end
     if set -q SSH_CONNECTION; and set -q IS_DARK_MODE
-        # Keep long-lived fish shells inside tmux aligned with the SSH client's theme.
         set -Ux IS_DARK_MODE $IS_DARK_MODE
     end
 
