@@ -1,38 +1,77 @@
 #:schema https://yazi-rs.github.io/schemas/keymap.json
 
 [[mgr.prepend_keymap]]
-on   = "y"
-run  = [
-  "yank",
-  "shell -- osascript -e 'set the clipboard to (POSIX file \"%s\")'",
-]
-for  = "macos"
-desc = "Yank selected files (copy)"
+
+on  = "M"
+run = "plugin mount"
+desc = "Mount point manager"
 
 [[mgr.prepend_keymap]]
-on   = "x"
-run  = [
-  "yank --cut",
-  "shell -- osascript -e 'set the clipboard to (POSIX file \"%s\" )'"
-]
-for  = "macos"
-desc = "Yank selected files (cut)"
+
+on   = "f"
+run  = "plugin smart-filter"
+desc = "Smart filter"
 
 [[mgr.prepend_keymap]]
-on   = "<Enter>"
-run  = "shell -- qlmanage -p %s"
-for  = "macos"
-desc = "Preview selected files via QuickLook on macOS"
 
-[[mgr.prepend_keymap]]
 on   = "l"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 [[mgr.prepend_keymap]]
+
 on   = "p"
 run  = "plugin smart-paste"
 desc = "Paste into the hovered directory or CWD"
+
+[[mgr.prepend_keymap]]
+
+on   = "x"
+for  = "macos"
+run  = [ "shell -- osascript -e 'set the clipboard to (POSIX file \"%s\" )'", "yank --cut"]
+desc = "Yank selected files (cut)"
+
+[[mgr.prepend_keymap]]
+
+on   = "y"
+for  = "macos"
+run  = [ "shell -- osascript -e 'set the clipboard to (POSIX file \"%s\")'", "yank"]
+desc = "Yank selected files (copy)"
+
+[[mgr.prepend_keymap]]
+
+on  = "x"
+for  = "linux"
+run = [ 'shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text/uri-list', "yank --cut" ]
+desc = "Yank selected files (cut)"
+
+[[mgr.prepend_keymap]]
+
+on  = "y"
+for  = "linux"
+run = [ 'shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text/uri-list', "yank" ]
+desc = "Yank selected files (copy)"
+
+[[mgr.prepend_keymap]]
+
+on   = "<Enter>"
+for  = "macos"
+run  = "shell -- qlmanage -p %s"
+desc = "Preview selected files via QuickLook on macOS"
+
+[[mgr.prepend_keymap]]
+
+on   = "!"
+for  = "unix"
+run  = 'shell "$SHELL" --block'
+desc = "Open $SHELL here"
+
+[[mgr.prepend_keymap]]
+
+on   = "!"
+for  = "windows"
+run  = 'shell "powershell.exe" --block'
+desc = "Open PowerShell here"
 
 [mgr]
 
@@ -93,7 +132,9 @@ keymap = [
 	# Operation
 	{ on = "o",         run = "open",                        desc = "Open selected files" },
 	{ on = "O",         run = "open --interactive",          desc = "Open selected files interactively" },
-  { on = "y",         run = "yank",                        desc = "Yank selected files (copy)" },
+	{ on = "<Enter>",   run = "open",                        desc = "Open selected files" },
+	{ on = "<S-Enter>", run = "open --interactive",          desc = "Open selected files interactively" },
+	{ on = "y",         run = "yank",                        desc = "Yank selected files (copy)" },
 	{ on = "x",         run = "yank --cut",                  desc = "Yank selected files (cut)" },
 	{ on = "p",         run = "paste",                       desc = "Paste yanked files" },
 	{ on = "P",         run = "paste --force",               desc = "Paste yanked files (overwrite if the destination exists)" },
@@ -108,7 +149,6 @@ keymap = [
 	{ on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
 	{ on = ";",         run = "shell --interactive",         desc = "Run a shell command" },
 	{ on = ":",         run = "shell --block --interactive", desc = "Run a shell command (block until finishes)" },
-  { on = "!",         run = "shell '$SHELL' --block",      desc = "Run $SHELL" },
 	{ on = ".",         run = "hidden toggle",               desc = "Toggle the visibility of hidden files" },
 	{ on = "s",         run = "search --via=fd",             desc = "Search files by name via fd" },
 	{ on = "S",         run = "search --via=rg",             desc = "Search files by content via ripgrep" },
@@ -125,10 +165,10 @@ keymap = [
 	{ on = [ "'", "n" ], run = "linemode none",        desc = "Linemode: none" },
 
 	# Copy
-	{ on = [ "c", "c" ], run = "copy path",             desc = "Copy the file path" },
-	{ on = [ "c", "d" ], run = "copy dirname",          desc = "Copy the directory path" },
-	{ on = [ "c", "f" ], run = "copy filename",         desc = "Copy the filename" },
-	{ on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy the filename without extension" },
+	{ on = [ "c", "c" ], run = "copy path",             desc = "Copy file URL" },
+	{ on = [ "c", "d" ], run = "copy dirname",          desc = "Copy directory URL" },
+	{ on = [ "c", "f" ], run = "copy filename",         desc = "Copy filename" },
+	{ on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy filename without extension" },
 
 	# Filter
 	{ on = "f", run = "filter --smart", desc = "Filter files" },
@@ -162,7 +202,8 @@ keymap = [
 	{ on = [ "g", "f" ],       run = "follow",           desc = "Follow hovered symlink" },
 
 	# Tabs
-	{ on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },
+	{ on = [ "t", "t" ], run = "tab_create --current",     desc = "Create a new tab in CWD" },
+	{ on = [ "t", "r" ], run = "tab_rename --interactive", desc = "Rename current tab" },
 
 	{ on = "1", run = "tab_switch 0", desc = "Switch to first tab" },
 	{ on = "2", run = "tab_switch 1", desc = "Switch to second tab" },
@@ -182,9 +223,6 @@ keymap = [
 
 	# Tasks
 	{ on = "w", run = "tasks:show", desc = "Show task manager" },
-
-  # Mount
-  { on = "m", run = "plugin mount" },
 
 	# Help
 	{ on = "~",    run = "help", desc = "Open help" },

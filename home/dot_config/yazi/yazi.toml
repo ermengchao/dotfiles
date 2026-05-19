@@ -1,17 +1,4 @@
-# A TOML linter such as https://github.com/tombi-toml/tombi can use this schema to validate your config.
-# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-
-#:schema https://yazi-rs.github.io/schemas/yazi.json
-
-[[plugin.prepend_fetchers]]
-url   = "*"
-run   = "git"
-group = "git"
-
-[[plugin.prepend_fetchers]]
-url   = "*/"
-run   = "git"
-group = "git"
+#:schema https://yazi-rs.github.io/schemas/keymap.json
 
 [mgr]
 ratio          = [ 1, 4, 3 ]
@@ -106,6 +93,32 @@ bizarre_retry    = 3
 image_alloc      = 536870912  # 512MB
 image_bound      = [ 10000, 10000 ]
 suppress_preload = false
+
+[[plugin.prepend_fetchers]]
+url   = "*"
+run   = "git"
+group = "git"
+
+[[plugin.prepend_fetchers]]
+url   = "*/"
+run   = "git"
+group = "git"
+
+[[plugin.prepend_previewers]]
+url = "*.csv"
+run = 'piper -- bat -p --color=always "$1"'
+
+[[plugin.prepend_previewers]]
+url = "*.md"
+run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"'
+
+[[plugin.prepend_previewers]]
+url = "*.tar*"
+run = 'piper --format=url -- tar tf "$1"'
+
+[[plugin.prepend_previewers]]
+mime = "application/sqlite3"
+run  = 'piper -- sqlite3 "$1" ".schema --indent"'
 
 [plugin]
 fetchers = [
@@ -255,19 +268,3 @@ sort_by      	 = "none"
 sort_sensitive = false
 sort_reverse 	 = false
 sort_translit  = false
-
-[[plugin.prepend_previewers]]
-url = "*.tar*"
-run = 'piper --format=url -- tar tf "$1"'
-
-[[plugin.prepend_previewers]]
-url = "*.csv"
-run = 'piper -- bat -p "$1"'
-
-[[plugin.prepend_previewers]]
-url = "*.md"
-run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"'
-
-# [[plugin.prepend_previewers]]
-# url = "*/"
-# run = 'piper -- eza --color=always --icons=always --group-directories-first --no-quotes "$1"'

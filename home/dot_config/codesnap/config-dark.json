@@ -1,0 +1,52 @@
+{
+  "print_eggs": false,
+  "snapshot_config": {
+    "theme": "Catppuccin Mocha",
+    "title": null,
+    "watermark": null,
+    "background": "#00000000",
+    "line_number_color": "#7f849c",
+    "themes_folders": [
+      "/Users/chao/.config/codesnap/remote_themes"
+    ],
+    "fonts_folders": [
+      "/Users/chao/.config/codesnap/remote_fonts"
+    ],
+    "window": {
+      "mac_window_bar": true,
+      "radius": 18,
+      "shadow": {
+        "radius": 18,
+        "color": "#00000040"
+      },
+      "margin": {
+        "x": 12,
+        "y": 12
+      },
+      "border": {
+        "width": 0,
+        "color": "#ffffff00"
+      },
+      "title_config": {
+        "color": "#cdd6f4",
+        "font_family": "SF Mono Nerd Font"
+      }
+    },
+    "code_config": {
+      "font_family": "SF Mono Nerd Font",
+      "breadcrumbs": {
+        "enable": true,
+        "separator": "/",
+        "color": "#7f849c",
+        "font_family": "SF Mono Nerd Font"
+      }
+    },
+    "command_output_config": {
+      "prompt": "❯",
+      "font_family": "SF Mono Nerd Font",
+      "prompt_color": "#f5c2e7",
+      "command_color": "#a6e3a1",
+      "string_arg_color": "#f38ba8"
+    }
+  }
+}

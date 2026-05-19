@@ -1,7 +1,7 @@
 function codesnap
   if test $IS_DARK_MODE = true
-    command codesnap --code-theme 'Catppuccin Mocha' $argv
+    command codesnap --config $XDG_CONFIG_HOME/codesnap/config-dark.json $argv
   else
-    command codesnap --code-theme 'Catppuccin Latte' $argv
+    command codesnap --config $XDG_CONFIG_HOME/codesnap/config-light.json $argv
   end
 end

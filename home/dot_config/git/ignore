@@ -1,10 +1,8 @@
 # macOS
 .DS_Store
 
+# Mise
+mise.local.toml
+
 # NodeJS
 **/node_modules/
-
-# Dev Dependencies
-commitlint.config.js
-lefthook.yml
-
