@@ -9,6 +9,7 @@ args = [
 [packageManagers.brew.darwin]
 
 taps = [
+  "darrylmorley/whatcable",
   "oven-sh/bun",
   "waydabber/betterdisplay",
 ]
@@ -28,9 +29,9 @@ brews = [
   "exiftool",
   "eza",
   "fastfetch",
+  "fd",
   "fish",
   "fisher",
-  "fd",
   "ffmpeg",
   "fzf",
   "gh",
@@ -97,6 +98,7 @@ casks = [
   "stats",
   "surge",
   "tailscale-app",
+  "darrylmorley/whatcable/whatcable",
 ]
 
 [[packageManagers.brew.darwin.mas]]

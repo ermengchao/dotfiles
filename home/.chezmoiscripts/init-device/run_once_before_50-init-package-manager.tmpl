@@ -38,6 +38,14 @@
 
          printf "✅ Done.\n"
       end
+
+      if not type -q bun
+         printf "📦 Bun not found. Installing bun via paru...\n"
+
+	 paru -S --needed --noconfirm --skipreview bun-cli
+
+         printf "✅ Done.\n"
+      end
 {{   end -}}
 
 {{   if eq . "flatpak" -}}

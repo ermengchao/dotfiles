@@ -1,3 +1,13 @@
 [flavor]
 light = "catppuccin-latte"
 dark = "catppuccin-mocha"
+
+[git]
+added_sign = "+"
+clean_sign = ""
+deleted_sign = "x"
+ignored_sign = ""
+modified_sign = "~"
+unknown_sign = ""
+untracked_sign = "?"
+updated_sign = ""

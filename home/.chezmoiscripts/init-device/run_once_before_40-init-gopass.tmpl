@@ -1,6 +1,6 @@
-{{- if not (env "GPG_TTY") -}}
-{{- warnf "GPG_TTY is not set. Please run 'set -gx GPG_TTY (tty)' in your current shell and rerun chezmoi apply." -}}
-{{- end -}}
+{{ if and (eq .chezmoi.os "linux") (not (env "GPG_TTY")) -}}
+{{ warnf "GPG_TTY is not set. Please run 'set -gx GPG_TTY (tty)' in your current shell and rerun chezmoi apply." -}}
+{{ end -}}
 #!/usr/bin/env fish
 
 if not type -q gopass

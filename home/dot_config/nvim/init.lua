@@ -1,27 +1,27 @@
 -- Interface
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.mouse = 'a'
-vim.o.showmode = false
-vim.o.signcolumn = 'yes'
-vim.o.cursorline = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.mouse = 'a'
+vim.opt.showmode = false
+vim.opt.signcolumn = 'yes'
+vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
+vim.opt.scrolloff = 10
 
 -- Navigation
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.splitright = true
-vim.o.splitbelow = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 -- Edit
-vim.o.breakindent = true
-vim.o.confirm = true
-vim.o.undofile = true
-vim.o.list = true
+vim.opt.breakindent = true
+vim.opt.confirm = true
+vim.opt.undofile = true
+vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 ---- Show preview before replacement
-vim.o.inccommand = 'nosplit'
+vim.opt.inccommand = 'nosplit'
 ---- LSP configuration
 vim.diagnostic.config {
   update_in_insert = false,
@@ -43,9 +43,9 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Misc
 vim.g.have_nerd_font = true
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 300
+vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('user-highlight-yank', { clear = true }),
