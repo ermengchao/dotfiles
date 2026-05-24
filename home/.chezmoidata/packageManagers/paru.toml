@@ -24,5 +24,4 @@ packages = [
 [packageManagers.paru.minimal]
 
 packages = [
-  "tlrc",
 ]
