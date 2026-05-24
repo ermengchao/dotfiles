@@ -4,5 +4,4 @@ dependencies = [
   "git",
   "gopass",
   "jq",
-  "pinentry",
 ]

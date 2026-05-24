@@ -30,10 +30,14 @@
        if not test -d $paru_path
          printf "📦 Paru not found. Installing paru to $paru_path...\n"
 
+         set -x CARGO_HOME ~/.local/share/cargo
+         set -x RUSTUP_HOME ~/.local/share/rustup
+
          sudo pacman -S --needed --noconfirm base-devel
          mkdir -p $paru_path
          git clone https://aur.archlinux.org/paru.git $paru_path
          cd $paru_path
+	 rustup default stable
          makepkg -si
 
          printf "✅ Done.\n"
