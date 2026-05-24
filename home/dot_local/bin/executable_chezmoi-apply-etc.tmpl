@@ -1,0 +1,9 @@
+{{ if eq .chezmoi.os linux -}}
+#!/usr/bin/env fish
+
+set chezmoi_working_tree  (chezmoi execute-template "{{ .chezmoi.workingTree }}")
+sudo chezmoi apply \
+  --source "$chezmoi_working_tree/root" \
+  --destination / \
+  --mode symlink
+{{ end }}

@@ -1,5 +1,0 @@
-#!/usr/bin/env fish
-
-{{ if eq .chezmoi.os "linux" -}}
-sudo -E chezmoi apply --source {{ .chezmoi.workingTree }}/root --mode symlink --destination /
-{{ end -}}
