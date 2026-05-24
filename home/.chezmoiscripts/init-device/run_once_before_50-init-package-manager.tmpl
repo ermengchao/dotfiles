@@ -38,7 +38,7 @@
          git clone https://aur.archlinux.org/paru.git $paru_path
          cd $paru_path
 	 rustup default stable
-         makepkg -si
+         makepkg -si --noconfirm
 
          printf "✅ Done.\n"
       end
