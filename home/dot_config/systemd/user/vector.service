@@ -1,0 +1,12 @@
+[Unit]
+Description=Homebrew generated unit for vector
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/vector -C /home/chao/.config/vector
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,48 @@
+data_dir = "/var/lib/vector"
+
+[sources.sing_box_journald]
+type = "journald"
+extra_args = ["--user"]
+since_now = true
+
+[sources.sing_box_journald.include_matches]
+_SYSTEMD_USER_UNIT = ["sing-box.service"]
+
+[sinks.kafka]
+type = "kafka"
+inputs = ["sing_box_journald"]
+bootstrap_servers = "127.0.0.1:9092"
+topic = "sing-box-logs"
+
+[sinks.kafka.encoding]
+codec = "json"
+
+[sources.kafka_sing_box_logs]
+type = "kafka"
+bootstrap_servers = "127.0.0.1:9092"
+group_id = "vector-elasticsearch-sink"
+topics = ["sing-box-logs"]
+decoding.codec = "json"
+
+[transforms.clean_for_elasticsearch]
+type = "remap"
+inputs = ["kafka_sing_box_logs"]
+source = '''
+# Elasticsearch/Kibana 更习惯 @timestamp
+.@timestamp = parse_timestamp(.timestamp, "%+") ?? now()
+
+# 保留原始消息，顺手清理 ANSI 颜色码，方便 Kibana 搜索
+.message = replace(string!(.message), r'\x1b\[[0-9;]*m', "")
+
+# 可选：把 priority 转数字
+.priority = to_int(.PRIORITY) ?? null
+'''
+
+[sinks.elasticsearch]
+type = "elasticsearch"
+inputs = ["clean_for_elasticsearch"]
+endpoints = ["http://127.0.0.1:9201"]
+mode = "bulk"
+
+[sinks.elasticsearch.bulk]
+index = "sing-box-logs"

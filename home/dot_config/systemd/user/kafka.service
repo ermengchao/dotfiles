@@ -1,0 +1,13 @@
+[Unit]
+Description=Homebrew generated unit for kafka
+
+[Install]
+WantedBy=default.target
+
+[Service]
+Type=simple
+ExecStart="/home/linuxbrew/.linuxbrew/bin/kafka-server-start" "/home/linuxbrew/.linuxbrew/etc/kafka/server.properties"
+Restart=on-failure
+WorkingDirectory=/home/linuxbrew/.linuxbrew
+StandardOutput=append:/home/linuxbrew/.linuxbrew/var/log/kafka/kafka_output.log
+StandardError=append:/home/linuxbrew/.linuxbrew/var/log/kafka/kafka_output.log

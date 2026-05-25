@@ -1,0 +1,108 @@
+---
+- name: Bootstrap all Arch Linux hosts
+  hosts: arch
+  become: true
+
+  vars:
+    normal_user: "{{ ansible_user }}"
+    normal_user_home: "/home/{{ normal_user }}"
+    chezmoi_hostname: "arch"
+    chezmoi_pretty_hostname: "Arch"
+    gopass_age_password: "050530"
+    user_env:
+      HOME: "{{ normal_user_home }}"
+      USER: "{{ normal_user }}"
+      LOGNAME: "{{ normal_user }}"
+      XDG_CONFIG_HOME: "{{ normal_user_home }}/.config"
+      XDG_DATA_HOME: "{{ normal_user_home }}/.local/share"
+      XDG_STATE_HOME: "{{ normal_user_home }}/.local/state"
+      XDG_CACHE_HOME: "{{ normal_user_home }}/.cache"
+      GIT_TERMINAL_PROMPT: "0"
+
+  pre_tasks:
+    - name: Ensure target is Arch Linux
+      assert:
+        that:
+          - ansible_facts["distribution"] == "Archlinux"
+        fail_msg: "This playbook only supports Arch Linux."
+        success_msg: "Arch Linux detected."
+
+  tasks:
+    - name: Disable IPv6 temporarily
+      command: sysctl -w {{ item }}
+      loop:
+        - net.ipv6.conf.all.disable_ipv6=1
+        - net.ipv6.conf.default.disable_ipv6=1
+      become: true
+
+    - name: Install required packages
+      community.general.pacman:
+        name:
+          - fish
+          - chezmoi
+          - age
+          - git
+          - gopass
+          - jq
+        state: present
+        update_cache: true
+
+    - name: Run chezmoi init
+      become: true
+      become_user: "{{ normal_user }}"
+      command: >
+        chezmoi --source {{ normal_user_home }}/.local/share/chezmoi --force --no-tty init ermengchao
+        --promptString "💥 Hostname={{ chezmoi_hostname }},👀 Pretty hostname={{ chezmoi_pretty_hostname }}"
+        --promptMultichoice "📦 Package manager=pacman/paru"
+        --promptBool "🧩 Minimal installation=true,🌐 Whether a proxy server=true"
+      environment: "{{ user_env }}"
+      args:
+        creates: "{{ normal_user_home }}/.local/share/chezmoi"
+
+    - name: Copy key.txt to chezmoi's source dir
+      become: true
+      become_user: "{{ normal_user }}"
+      copy:
+        src: '{{ lookup("env", "XDG_DATA_HOME") }}/chezmoi/key.txt'
+        dest: "{{ normal_user_home }}/.local/share/chezmoi/key.txt"
+        mode: "0600"
+
+    - name: Run chezmoi apply
+      become: true
+      become_user: "{{ normal_user }}"
+      command: >
+        chezmoi --source {{ normal_user_home }}/.local/share/chezmoi --force --no-tty apply
+      environment: "{{ user_env | combine({'GOPASS_AGE_PASSWORD': gopass_age_password}) }}"
+
+    - name: Reload system systemd daemon
+      systemd:
+        daemon_reload: true
+
+    - name: Restart sshd
+      systemd:
+        name: sshd
+        state: restarted
+
+    - name: Set default shell to fish
+      become: true
+      user:
+        name: "{{ normal_user }}"
+        shell: /bin/fish
+
+    - name: Configure subuid for normal user
+      become: true
+      lineinfile:
+        path: /etc/subuid
+        regexp: "^{{ normal_user }}:"
+        line: "{{ normal_user }}:524288:65536"
+        create: true
+        mode: "0644"
+
+    - name: Configure subgid for normal user
+      become: true
+      lineinfile:
+        path: /etc/subgid
+        regexp: "^{{ normal_user }}:"
+        line: "{{ normal_user }}:524288:65536"
+        create: true
+        mode: "0644"
