@@ -1,19 +1,17 @@
 #!/usr/bin/env fish
 
 if type -q fastfetch
-    cd $XDG_CONFIG_HOME/fastfetch
-
-    set os (string lower (uname -s))
-
-    if test $os = darwin
-        begin
-            bunx json5 general.jsonc
-            bunx json5 darwin.jsonc
-        end | jq -s 'reduce .[] as $item ({}; . * $item)' >config.jsonc
-    else if test $os = linux
-        begin
-            bunx json5 general.jsonc
-            bunx json5 darwin.jsonc
-        end | jq -s 'reduce .[] as $item ({}; . * $item)' >config.jsonc
-    end
+  cd $XDG_CONFIG_HOME/fastfetch
+  set os (string lower (uname -s))
+  if test $os = darwin
+    begin
+      bunx json5 general.jsonc
+      bunx json5 darwin.jsonc
+    end | jq -s 'reduce .[] as $item ({}; . * $item)' >config.jsonc
+  else if test $os = linux
+    begin
+      bunx json5 general.jsonc
+      bunx json5 darwin.jsonc
+    end | jq -s 'reduce .[] as $item ({}; . * $item)' >config.jsonc
+  end
 end

@@ -28,6 +28,7 @@ command = "pinentry"
 apply = true
 
 [data]
+username = "chao"
 email = "zhangchao050530@gmail.com"
 mediaPath = "/Volumes/HDD/Infuse"
 rootDir = "{{ .chezmoi.workingTree }}/root"
@@ -35,13 +36,13 @@ rootDir = "{{ .chezmoi.workingTree }}/root"
 [data.meta]
 {{ $packageManagerList := list "brew" "apt" "dnf" "flatpak" "pacman" "paru" -}}
 
-hostname = {{ promptString "💥 Hostname" .chezmoi.hostname | toToml }}
-prettyHostname = {{ promptString "👀 Pretty hostname" | toToml }}
-packageManager = {{ promptMultichoice "📦 Package manager" $packageManagerList | toToml }}
-isMinimal = {{ promptBool "🧩 Minimal installation" true | toToml }}
+hostname = {{ promptStringOnce .meta "hostname" "💥 Hostname" $.chezmoi.hostname | toToml }}
+prettyHostname = {{ promptStringOnce .meta "prettyHostname" "👀 Pretty hostname" | toToml }}
+packageManager = {{ promptMultichoiceOnce .meta "packageManager" "📦 Package manager" $packageManagerList | toToml }}
+isMinimal = {{ promptBoolOnce .meta "isMinimal" "🧩 Minimal installation" true | toToml }}
 
 {{ if eq .chezmoi.os "linux" -}}
-isProxyServer = {{ promptBool "🌐 Whether a proxy server" false | toToml }}
+isProxyServer = {{ promptBoolOnce .meta "isProxyServer" "🌐 Whether a proxy server" false | toToml }}
 {{ end -}}
 
 [data.ports]

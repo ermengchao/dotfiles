@@ -16,7 +16,6 @@ set current_pretty_hostname (hostnamectl hostname --pretty)
 {{ end -}}
 
 # Set hostname
-
 if test "$current_hostname" != "$configured_hostname"
   printf "🪦 Current hostname is: $current_hostname\n"
   printf "🔥 Configured hostname is: $configured_hostname\n"
@@ -35,7 +34,6 @@ if test "$current_hostname" != "$configured_hostname"
 end
 
 # Set pretty hostname
-
 if test "$current_pretty_hostname" != "$configured_pretty_hostname"
   printf "🪦 Current pretty hostname is: $current_pretty_hostname\n"
   printf "🔥 Configured pretty hostname is: $configured_pretty_hostname\n"
