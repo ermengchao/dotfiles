@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-{{ if eq .chezmoi.os "linux" -}}
+{{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
 if type -q caddy
   printf "🧑‍💻 Add cap_net_bind_service for caddy...\n"
 

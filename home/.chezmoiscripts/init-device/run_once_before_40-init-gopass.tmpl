@@ -1,5 +1,6 @@
 #!/usr/bin/env fish
 
+{{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
 if not type -q gopass
   printf "‼️ Could not detect gopass. Please install it first.\n"
   exit 1
@@ -13,26 +14,43 @@ end
 
 printf "🧑‍💻 Setting gopass...\n"
 
+{{   if eq .chezmoi.os "linux" -}}
 if test -z "$GOPASS_AGE_PASSWORD"
   {{ warnf "GOPASS_AGE_PASSWORD is not set; using interactive mode." -}}
   sleep 2
 
   if test -z "$GPG_TTY"
-    {{ warnf "GPG_TTY is not set. Please run 'set -gx GPG_TTY (tty)' in your current terminal and rerun chezmoi apply." -}}
+    {{ warnf "GPG_TTY is not set, and pinentry may encounter error; please run 'set -gx GPG_TTY (tty)' in your current terminal." -}}
     exit 1
   end
-  read --silent --prompt-str "🙈 Enter your passphrase: " GOPASS_AGE_PASSWORD
-  set -x GOPASS_AGE_PASSWORD $GOPASS_AGE_PASSWORD
 end
+{{   end -}}
 
 set age_identity (grep AGE-SECRET-KEY $key_file)
 set age_recipient (age-keygen -y $key_file)
-gopass age identities add $age_identity $age_recipient
+if gopass age identities | string match -q --entire $age_recipient
+  printf "🔑 Age identity already exist."
+else
+  printf "🔑 Adding age identity...\n"
+  gopass age identities add $age_identity $age_recipient
+end
 
-set -x GIT_AUTHOR_NAME {{ .username | quote }}
-set -x GIT_AUTHOR_EMAIL {{ .email | quote }}
-gopass --yes clone --crypto age https://github.com/ermengchao/credentials
+set root_password_store (gopass config mounts.path)
+if test -z (ls -A "$root_password_store")
+  printf "🔒 Cloning credentials...\n"
 
-cd (gopass config mounts.path)
-git remote add c https://github.com/ermengchao/credentials
-git fetch c
+  read --silent --prompt-str "🫆 Enter your passphrase: " GOPASS_AGE_PASSWORD
+  set -x GOPASS_AGE_PASSWORD $GOPASS_AGE_PASSWORD
+  set -x GIT_AUTHOR_NAME {{ .username | quote }}
+  set -x GIT_AUTHOR_EMAIL {{ .email | quote }}
+  gopass --yes clone --crypto age {{ .gitHostUrl }}/{{ .fullname }}/credentials
+else
+  printf "🔒 Root password store already exist.\n"
+end
+
+cd $root_password_store
+if not string match -q "c" (git remote | string trim)
+  git remote add c {{ .gitHostUrl }}/{{ .fullname }}/credentials
+  git fetch c
+end
+{{ end -}}

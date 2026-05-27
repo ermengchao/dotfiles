@@ -1,15 +1,16 @@
 #!/usr/bin/env fish
 
+{{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
 {{ range .meta.packageManager -}}
 {{ $packageMap := index $.packageManagers . }}{{ if $.meta.isMinimal }}{{ $packageMap = index $.packageManagers . "minimal" }}{{ end -}}
 
-{{ if eq . "brew" -}}
-{{   if eq $.chezmoi.os "darwin" -}}
+{{   if eq . "brew" -}}
+{{     if eq $.chezmoi.os "darwin" -}}
 set brew_prefix /opt/homebrew
-{{   end -}}
-{{   if eq $.chezmoi.os "linux" -}}
+{{     end -}}
+{{     if eq $.chezmoi.os "linux" -}}
 set brew_prefix /home/linuxbrew/.linuxbrew
-{{   end -}}
+{{     end -}}
 begin
 
 {{ range index $packageMap $.chezmoi.os "taps" -}}
@@ -33,13 +34,13 @@ echo 'mas {{ .name | quote }}, id: {{ .id }}'
 {{ end -}}
 
 end | $brew_prefix/bin/brew bundle --file=/dev/stdin
-{{   if eq $.chezmoi.os "darwin" -}}
+{{     if eq $.chezmoi.os "darwin" -}}
 brew uninstall --ignore-dependencies --force pinentry
 ln -sf $brew_prefix/bin/pinentry-mac $brew_prefix/bin/pinentry
 
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
-{{   end -}}
-{{ else -}}
+{{     end -}}
+{{   else -}}
 {{ $installer := "" }}{{ if (index $.packageManagers .).root }}{{ $installer = "sudo " }}{{ end -}}
 {{ $manager := . -}}
 {{ $command := index $.packageManagers . "command" -}}
@@ -49,5 +50,6 @@ defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/i
 {{ $installer -}} {{ $manager }} {{ $command }} {{ range $argList }} {{ . }} {{ end }} {{ . | quote }}
 {{ end -}}
 
+{{   end -}}
 {{ end -}}
 {{ end -}}

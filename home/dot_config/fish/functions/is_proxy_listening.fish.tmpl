@@ -1,4 +1,7 @@
-function has_proxy
+function is_proxy_listening
+  {{ if eq .chezmoi.osRelease.id "nixos" -}}
+    return 1
+  {{ end -}}
   {{ if eq .chezmoi.os "linux" -}}
   if {{ .meta.isProxyServer }}
     return 1

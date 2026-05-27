@@ -2,7 +2,11 @@
 Description=postgres service
 
 [Service]
-ExecStart="/home/linuxbrew/.linuxbrew/bin/postgres" "-D" "/home/linuxbrew/.linuxbrew/var/postgresql@18"
+{{ if eq .chezmoi.version.builtBy "Homebrew" -}}
+ExecStart="{{ env "HOMEBREW_PREFIX" }}/bin/postgres" "-D" "%h/.local/share/postgresql/18"
+{{ else -}}
+ExecStart="/usr/bin/postgres" "-D" "%h/.local/share/postgresql/18"
+{{ end -}}
 Restart=on-failure
 RestartSec=10s
 

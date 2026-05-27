@@ -2,8 +2,10 @@
 {{   if .meta.isMinimal -}}
 .config/marimo
 {{   end -}}
+
 .config/caddy
 .config/containers
+.config/kafka
 .config/locale.conf
 .config/movie_pilot
 .config/qbittorrent
@@ -17,15 +19,22 @@
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
-{{   if not .meta.isProxyServer  -}}
+{{   if eq .chezmoi.osRelease.id "nixos" -}}
+.config/systemd
+{{   else -}}
+
+{{     if not .meta.isProxyServer  -}}
 .config/snell-server
 .local/share/subscription
-{{   end -}}
-{{   if .meta.isMinimal -}}
+{{     end -}}
+
+{{     if .meta.isMinimal -}}
 .config/ghostty
 .config/marimo
 .config/wayvnc
+{{     end -}}
 {{   end -}}
+
 Library/
 .config/codesnap
 .config/hammerspoon
@@ -33,6 +42,7 @@ Library/
 .config/openclaw
 .config/posting
 {{ end -}}
+
 .local/share/cloud-init
 .local/share/edid
 .local/share/podman

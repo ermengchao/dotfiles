@@ -1,5 +1,6 @@
 #!/usr/bin/env fish
 
+{{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
 if type -q fastfetch
   cd $XDG_CONFIG_HOME/fastfetch
   set os (string lower (uname -s))
@@ -11,7 +12,8 @@ if type -q fastfetch
   else if test $os = linux
     begin
       bunx json5 general.jsonc
-      bunx json5 darwin.jsonc
+      bunx json5 linux.jsonc
     end | jq -s 'reduce .[] as $item ({}; . * $item)' >config.jsonc
   end
 end
+{{ end -}}

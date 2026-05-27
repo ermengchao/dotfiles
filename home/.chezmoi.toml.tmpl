@@ -22,28 +22,38 @@ apply = true
 command = "fish"
 
 [pinentry]
+{{ if eq .chezmoi.os "darwin" -}}
+command = "pinentry-mac"
+{{ else -}}
 command = "pinentry"
+{{ end -}}
 
 [update]
 apply = true
 
 [data]
 username = "chao"
+fullname = "ermengchao"
 email = "zhangchao050530@gmail.com"
+gitHostUrl = "https://github.com"
 mediaPath = "/Volumes/HDD/Infuse"
-rootDir = "{{ .chezmoi.workingTree }}/root"
+rootPath = "{{ .chezmoi.workingTree }}/root"
 
 [data.meta]
-{{ $packageManagerList := list "brew" "apt" "dnf" "flatpak" "pacman" "paru" -}}
-
+{{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "nixos") -}}
+hostname = {{ .chezmoi.hostname | toToml }}
+{{ else -}}
 hostname = {{ promptStringOnce . "meta.hostname" "💥 Hostname" $.chezmoi.hostname | toToml }}
-prettyHostname = {{ promptStringOnce . "meta.prettyHostname" "👀 Pretty hostname" | toToml }}
-packageManager = {{ promptMultichoiceOnce . "meta.packageManager" "📦 Package manager" $packageManagerList | toToml }}
-isMinimal = {{ promptBoolOnce . "meta.isMinimal" "🧩 Minimal installation" true | toToml }}
+{{ end -}}
 
-{{ if eq .chezmoi.os "linux" -}}
+{{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
 isProxyServer = {{ promptBoolOnce . "meta.isProxyServer" "🌐 Whether a proxy server" false | toToml }}
 {{ end -}}
+
+prettyHostname = {{ promptStringOnce . "meta.prettyHostname" "👀 Pretty hostname" | toToml }}
+isMinimal = {{ promptBoolOnce . "meta.isMinimal" "🧩 Minimal installation" true | toToml }}
+{{ $packageManagerList := list "brew" "apt" "dnf" "flatpak" "pacman" "paru" -}}
+packageManager = {{ promptMultichoiceOnce . "meta.packageManager" "📦 Package manager" $packageManagerList | toToml }}
 
 [data.ports]
 # Reserved

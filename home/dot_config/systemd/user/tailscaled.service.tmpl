@@ -5,7 +5,7 @@ Wants=network-pre.target
 After=network-pre.target NetworkManager.service systemd-resolved.service
 
 [Service]
-Environment="PORT=41641"
+Type=notify
 {{ if eq .chezmoi.version.builtBy "Homebrew" -}}
 ExecStart={{ env "HOMEBREW_PREFIX" }}/bin/tailscaled --tun=userspace-networking --socket=%t/tailscale/tailscaled.sock --state=%h/.local/share/tailscale/tailscaled.state
 ExecStopPost={{ env "HOMEBREW_PREFIX" }}/bin/tailscaled --cleanup
@@ -22,8 +22,8 @@ StateDirectory=tailscale
 StateDirectoryMode=0700
 CacheDirectory=tailscale
 CacheDirectoryMode=0750
-Type=notify
 
+Environment="PORT=41641"
 Environment=HTTP_PROXY=http://127.0.0.1:{{ .ports.proxy.http }}
 Environment=HTTPS_PROXY=http://127.0.0.1:{{ .ports.proxy.http }}
 Environment=NO_PROXY=localhost,127.0.0.1,::1,100.64.0.0/10,100.100.100.100

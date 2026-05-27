@@ -1,9 +1,8 @@
 #!/usr/bin/env fish
 
-{{ if eq .chezmoi.os "linux" -}}
-set chezmoi_working_tree  (chezmoi execute-template "{{ .chezmoi.workingTree }}")
+{{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
 sudo chezmoi apply \
-  --source "$chezmoi_working_tree/root" \
+  --source {{ .rootPath }} \
   --destination / \
   --mode symlink
 {{ end }}

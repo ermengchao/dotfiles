@@ -1,5 +1,6 @@
 #!/usr/bin/env fish
 
+{{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
 mkdir -p ~/.config
 set -Ux XDG_CONFIG_HOME ~/.config
 
@@ -11,3 +12,4 @@ set -Ux XDG_STATE_HOME ~/.local/state
 
 mkdir -p ~/.cache
 set -Ux XDG_CACHE_HOME ~/.cache
+{{ end -}}

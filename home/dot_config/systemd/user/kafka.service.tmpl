@@ -1,0 +1,15 @@
+[Unit]
+Description=Homebrew generated unit for kafka
+
+[Service]
+{{ if eq .chezmoi.version.builtBy "Homebrew" -}}
+ExecStart="{{ env "HOMEBREW_PREFIX" }}/bin/kafka-server-start" "%h/.config/kafka/server.properties"
+{{ else -}}
+ExecStart="/usr/bin/kafka-server-start" "%h/.config/kafka/server.properties"
+{{ end -}}
+
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

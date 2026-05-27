@@ -9,8 +9,5 @@ ExecStart=/usr/bin/sunshine
 Restart=on-failure
 RestartSec=5s
 
-Restart=on-failure
-RestartSec=5s
-
 [Install]
 WantedBy=graphical-session.target

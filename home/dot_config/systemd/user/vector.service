@@ -2,8 +2,11 @@
 Description=Homebrew generated unit for vector
 
 [Service]
-Type=simple
-ExecStart=/usr/bin/vector -C /home/chao/.config/vector
+{{ if eq .chezmoi.version.builtBy "Homebrew" -}}
+ExecStart="{{ env "HOMEBREW_PREFIX" }}/bin/vector -C %h/.config/vector"
+{{ else -}}
+ExecStart=/usr/bin/vector -C %h/.config/vector
+{{ end -}}
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
 RestartSec=10s
