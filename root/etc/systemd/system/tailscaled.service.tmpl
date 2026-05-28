@@ -1,0 +1,30 @@
+[Unit]
+Description=Tailscale node agent
+Documentation=https://tailscale.com/docs/
+Wants=network-pre.target
+After=network-pre.target NetworkManager.service systemd-resolved.service
+
+[Service]
+{{ if eq .chezmoi.version.builtBy "Homebrew" -}}
+ExecStart={{ env "HOMEBREW_PREFIX" }}/bin/tailscaled --state=/var/lib/tailscale/tailscaled.state --socket=/run/tailscale/tailscaled.sock --port=${PORT} $FLAGS
+ExecStopPost={{ env "HOMEBREW_PREFIX" }}/bin/tailscaled --cleanup
+{{ else -}}
+ExecStart=/usr/bin/tailscaled --state=/var/lib/tailscale/tailscaled.state --socket=/run/tailscale/tailscaled.sock --port=${PORT} $FLAGS
+ExecStopPost=/usr/bin/tailscaled --cleanup
+{{ end -}}
+
+Restart=on-failure
+
+Environment=PORT=41641
+Environment=FLAGS=
+
+RuntimeDirectory=tailscale
+RuntimeDirectoryMode=0755
+StateDirectory=tailscale
+StateDirectoryMode=0700
+CacheDirectory=tailscale
+CacheDirectoryMode=0750
+Type=notify
+
+[Install]
+WantedBy=multi-user.target
