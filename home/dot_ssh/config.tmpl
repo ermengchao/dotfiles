@@ -4,6 +4,9 @@ Host *
   TCPKeepAlive yes
   SendEnv LANG LC_*
   SendEnv IS_DARK_MODE
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/keys/%n/%n
+  IdentitiesOnly yes
   # PreferredAuthentications publickey
 
 {{ if eq .chezmoi.os "darwin" -}}
@@ -12,8 +15,6 @@ Host orb
   Port 32222
   User chao
   IdentityFile ~/.orbstack/ssh/id_ed25519
-  AddKeysToAgent yes
-  IdentitiesOnly yes
   UserKnownHostsFile ~/.orbstack/ssh/known_hosts
   ProxyCommand '/Applications/OrbStack.app/Contents/Frameworks/OrbStack Helper.app/Contents/MacOS/OrbStack Helper' ssh-proxy-fdpass 501
   ProxyUseFdpass yes
@@ -23,33 +24,19 @@ Host apne*-*
   Hostname %h.proxy.er-meng.com
   User chao
   IdentityFile ~/.ssh/keys/aws/%n/%n
-  AddKeysToAgent yes
-  IdentitiesOnly yes
 
 Host mac-mini
   Hostname 100.100.10.3
   User chao
-  IdentityFile ~/.ssh/keys/mac-mini/mac-mini
-  AddKeysToAgent yes
-  IdentitiesOnly yes
 
 Host macbook-air
   Hostname 100.100.10.128
   User chao
-  IdentityFile ~/.ssh/keys/macbook-air/macbook-air
-  AddKeysToAgent yes
-  IdentitiesOnly yes
 
 Host minisforum
   HostName 100.100.20.3
   User chao
-  IdentityFile ~/.ssh/keys/minisforum/minisforum
-  AddKeysToAgent yes
-  IdentitiesOnly yes
 
 Host raspberrypi
   HostName 100.100.10.4
   User chao
-  IdentityFile ~/.ssh/keys/raspberrypi/raspberrypi
-  AddKeysToAgent yes
-  IdentitiesOnly yes
