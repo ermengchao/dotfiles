@@ -11,24 +11,29 @@ set brew_prefix /opt/homebrew
 {{     if eq $.chezmoi.os "linux" -}}
 set brew_prefix /home/linuxbrew/.linuxbrew
 {{     end -}}
+
+{{ range index $packageMap $.chezmoi.os "taps" -}}
+$brew_prefix/bin/brew trust {{ . | quote }}
+{{ end -}}
+
 begin
 
 {{ range index $packageMap $.chezmoi.os "taps" -}}
-echo 'tap {{ . | quote }}'
+echo "tap {{ . | quote }}"
 {{ end -}}
 
 {{ range index $packageMap $.chezmoi.os "brews" -}}
-echo 'brew {{ . | quote }}'
+echo "brew {{ . | quote }}"
 {{ end -}}
 
 {{ range index $packageMap $.chezmoi.os "casks" -}}
-echo 'cask {{ . | quote }}'
+echo "cask {{ . | quote }}"
 {{ end -}}
 
 {{ with index $packageMap $.chezmoi.os "mas" -}}
 
 {{ range . -}}
-echo 'mas {{ .name | quote }}, id: {{ .id }}'
+echo "mas {{ .name | quote }}, id: {{ .id }}"
 {{ end -}}
 
 {{ end -}}

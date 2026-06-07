@@ -40,6 +40,12 @@ local function treesitter_try_attach(buf, language)
   if not vim.treesitter.language.add(language) then return end
   vim.treesitter.start(buf, language)
 
+  local disable_indent = {
+    nix = true,
+  }
+
+  if disable_indent[language] then return end
+
   if vim.treesitter.query.get(language, 'indents') ~= nil then
     vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end
