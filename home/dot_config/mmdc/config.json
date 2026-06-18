@@ -1,0 +1,11 @@
+{
+  "htmlLabels": false,
+  "themeVariables": {
+    "fontFamily": "SF Pro Text, PingFang SC",
+    "fontSize": "18px"
+  },
+  "flowchart": {
+    "htmlLabels": false,
+    "useMaxWidth": false
+  }
+}

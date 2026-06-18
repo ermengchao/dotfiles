@@ -1,0 +1,10 @@
+[Unit]
+Description=Restart sing-box daily at 00:00 UTC
+
+[Timer]
+OnCalendar=*-*-* 00:00:00 UTC
+Persistent=true
+Unit=restart-sing-box.service
+
+[Install]
+WantedBy=timers.target

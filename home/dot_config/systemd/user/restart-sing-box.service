@@ -1,0 +1,7 @@
+[Unit]
+Description=Restart sing-box service
+Documentation=https://sing-box.sagernet.org
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/systemctl --user restart sing-box.service
