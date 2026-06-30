@@ -3,10 +3,11 @@ obj.__index = obj
 obj.name = "SwitchInputSource"
 
 obj.displayName = ""
+obj.baseDdcValue = 15
 obj.vcpValue = "inputSelect"
 
 local hotkeyModifiers = { "ctrl", "alt" }
-local hotkeyDigits = { "1", "2", "3", "4" }
+local hotkeyDigits = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
 
 local function sendNotification(message)
   hs.notify.new({
@@ -55,8 +56,9 @@ function obj:bindHotkeys()
   self:stop()
 
   self.switchInputSourceHotkeys = {}
-  for index, digit in ipairs(hotkeyDigits) do
-    local ddcValue = 14 + index
+  for _, digit in ipairs(hotkeyDigits) do
+    local offset = tonumber(digit) - 1
+    local ddcValue = self.baseDdcValue + offset
     table.insert(self.switchInputSourceHotkeys, hs.hotkey.bind(hotkeyModifiers, digit, function()
       self:sendRequest(ddcValue)
     end))

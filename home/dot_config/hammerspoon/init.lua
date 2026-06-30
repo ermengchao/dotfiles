@@ -5,7 +5,8 @@ local toggleAppearance = hs.loadSpoon("ToggleAppearance")
 local windowArrangement = hs.loadSpoon("WindowArrangement")
 local windowNavigation = hs.loadSpoon("WindowNavigation")
 
-switchInputSource.displayName = "P2410R"
+switchInputSource.displayName = "H25T7"
+switchInputSource.baseDdcValue = 15
 toggleAppearance.hotkeyModifiers = { "fn", "ctrl" }
 toggleAppearance.hotkeyKey = "t"
 

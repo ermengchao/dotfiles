@@ -1,0 +1,4 @@
+interface:
+  display_name: "Use Case Diagram"
+  short_description: "Create evidence-based UML use case diagrams in Figma."
+  default_prompt: "Create a UML use case diagram in Figma from this project, using code evidence and validating that labels do not overlap."

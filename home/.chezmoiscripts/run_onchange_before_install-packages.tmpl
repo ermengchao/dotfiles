@@ -40,6 +40,8 @@ echo "mas {{ .name | quote }}, id: {{ .id }}"
 
 end | $brew_prefix/bin/brew bundle --file=/dev/stdin
 {{     if eq $.chezmoi.os "darwin" -}}
+ln -sf /Applications/Xcode.app/Contents/Applications /Applications/Developer\ Tools
+
 brew uninstall --ignore-dependencies --force pinentry
 ln -sf $brew_prefix/bin/pinentry-mac $brew_prefix/bin/pinentry
 

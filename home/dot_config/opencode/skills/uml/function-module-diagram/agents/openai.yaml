@@ -1,0 +1,4 @@
+interface:
+  display_name: "Function Module Diagram"
+  short_description: "Draw thesis module diagrams as SVG XML"
+  default_prompt: "Use $function-module-diagram to draw a thesis-style functional module diagram as hand-written SVG."
