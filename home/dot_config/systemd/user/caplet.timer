@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily campus network re-login timer
+
+[Timer]
+OnCalendar=daily
+OnCalendar=05:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

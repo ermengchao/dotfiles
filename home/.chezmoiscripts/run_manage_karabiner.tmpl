@@ -1,0 +1,17 @@
+#!/usr/bin/env fish
+
+{{ if eq .chezmoi.os "darwin" -}}
+printf "⌨️ Managing Karabiner Elements...\n"
+
+if test -d "/Applications/.Karabiner-VirtualHIDDevice-Manager.app"; and test -d "/Applications/Karabiner-Elements.app"
+    sudo mkdir -p "/Applications/Karabiner-Elements.app/Contents/Applications"
+    sudo mv "/Applications/.Karabiner-VirtualHIDDevice-Manager.app" "/Applications/Karabiner-Elements.app/Contents"
+end
+
+if test -d "/Applications/Karabiner-EventViewer.app"; and test -d "/Applications/Karabiner-Elements.app"
+    sudo mkdir -p "/Applications/Karabiner-Elements.app/Contents/Applications"
+    sudo mv "/Applications/Karabiner-EventViewer.app" "/Applications/Karabiner-Elements.app/Contents"
+end
+
+printf "✅ Done."
+{{ end -}}

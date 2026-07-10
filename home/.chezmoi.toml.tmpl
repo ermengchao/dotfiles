@@ -44,16 +44,15 @@ rootPath = "{{ .chezmoi.workingTree }}/root"
 hostname = {{ .chezmoi.hostname | toToml }}
 {{ else -}}
 hostname = {{ promptStringOnce . "meta.hostname" "💥 Hostname" $.chezmoi.hostname | toToml }}
+prettyHostname = {{ promptStringOnce . "meta.prettyHostname" "👀 Pretty hostname" | toToml }}
+isMinimal = {{ promptBoolOnce . "meta.isMinimal" "🧩 Minimal installation" true | toToml }}
+{{ $packageManagerList := list "brew" "apt" "dnf" "flatpak" "pacman" "paru" -}}
+packageManager = {{ promptMultichoiceOnce . "meta.packageManager" "📦 Package manager" $packageManagerList | toToml }}
 {{ end -}}
 
 {{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
 isProxyServer = {{ promptBoolOnce . "meta.isProxyServer" "🌐 Whether a proxy server" false | toToml }}
 {{ end -}}
-
-prettyHostname = {{ promptStringOnce . "meta.prettyHostname" "👀 Pretty hostname" | toToml }}
-isMinimal = {{ promptBoolOnce . "meta.isMinimal" "🧩 Minimal installation" true | toToml }}
-{{ $packageManagerList := list "brew" "apt" "dnf" "flatpak" "pacman" "paru" -}}
-packageManager = {{ promptMultichoiceOnce . "meta.packageManager" "📦 Package manager" $packageManagerList | toToml }}
 
 [data.ports]
 # Reserved

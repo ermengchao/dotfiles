@@ -20,6 +20,7 @@
 
 {{ if eq .chezmoi.os "linux" -}}
 {{   if eq .chezmoi.osRelease.id "nixos" -}}
+.config/fish/config.fish
 .config/systemd
 {{   else -}}
 

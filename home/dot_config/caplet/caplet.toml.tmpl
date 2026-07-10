@@ -1,0 +1,9 @@
+[url]
+probe = "http://captive.apple.com/hotspot-detect.html"
+login = "http://10.254.241.19/eportal/InterFace.do?method=login"
+logout = "http://10.254.241.19/eportal/InterFace.do?method=logout"
+
+[user]
+id = {{ gopass "caplet/zc/id" | quote }}
+password = {{ gopass "caplet/zc/password" | quote }}
+service = {{ gopass "caplet/zc/service" | quote }}

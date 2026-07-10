@@ -1,0 +1,14 @@
+[Unit]
+Description=Unauth and then auth campus network
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+
+ExecStartPre=/home/chao/.local/bin/caplet unauth
+ExecStart=/usr/bin/sleep 2
+ExecStartPost=/home/chao/.local/bin/caplet auth
+
+StandardOutput=journal
+StandardError=journal

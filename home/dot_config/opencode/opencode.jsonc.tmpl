@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "enabled_providers": ["openai"],
+  "enabled_providers": ["openai", "openrouter"],
   "server": {
     "port": {{ .ports.opencode.server }},
     "hostname": "0.0.0.0",
@@ -11,6 +11,7 @@
     "write": true,
     "bash": true,
   },
+  "instructions": ["{{ env "XDG_CONFIG_HOME" }}/opencode/AGENTS.md"],
   "autoupdate": false,
   "permission": {
     "bash": "ask",

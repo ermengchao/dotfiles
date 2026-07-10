@@ -19,28 +19,28 @@ $brew_prefix/bin/brew trust {{ . | quote }}
 begin
 
 {{ range index $packageMap $.chezmoi.os "taps" -}}
-echo "tap {{ . | quote }}"
+echo 'tap {{ . | quote }}'
 {{ end -}}
 
 {{ range index $packageMap $.chezmoi.os "brews" -}}
-echo "brew {{ . | quote }}"
+echo 'brew {{ . | quote }}'
 {{ end -}}
 
 {{ range index $packageMap $.chezmoi.os "casks" -}}
-echo "cask {{ . | quote }}"
+echo 'cask {{ . | quote }}'
 {{ end -}}
 
 {{ with index $packageMap $.chezmoi.os "mas" -}}
 
 {{ range . -}}
-echo "mas {{ .name | quote }}, id: {{ .id }}"
+echo 'mas {{ .name | quote }}, id: {{ .id }}'
 {{ end -}}
 
 {{ end -}}
 
 end | $brew_prefix/bin/brew bundle --file=/dev/stdin
 {{     if eq $.chezmoi.os "darwin" -}}
-ln -sf /Applications/Xcode.app/Contents/Applications /Applications/Developer\ Tools
+sudo ln -sf /Applications/Xcode.app/Contents/Applications /Applications/Developer\ Tools
 
 brew uninstall --ignore-dependencies --force pinentry
 ln -sf $brew_prefix/bin/pinentry-mac $brew_prefix/bin/pinentry
