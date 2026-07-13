@@ -329,6 +329,7 @@ brews = [
   "rustup",
   "tlrc",
   "tmux",
+  "tree-sitter-cli",
   "yazi",
   "zoxide",
 ]
