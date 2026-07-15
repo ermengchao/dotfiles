@@ -39,7 +39,7 @@ if test "$current_pretty_hostname" != "$configured_pretty_hostname"
   printf "🪦 Current pretty hostname is: $current_pretty_hostname\n"
   printf "🔥 Configured pretty hostname is: $configured_pretty_hostname\n"
 
-  printf "🧑‍💻 Setting pretty hostname..."
+  printf "🧑‍💻 Setting pretty hostname...\n"
 
   {{ if eq .chezmoi.os "darwin" -}}
   sudo scutil --set ComputerName $configured_pretty_hostname

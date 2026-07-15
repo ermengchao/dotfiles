@@ -1,0 +1,175 @@
+{
+  "outbounds": [
+    {
+      "tag": "🟢 Direct",
+      "type": "direct"
+    },
+    {
+      "tag": "🔴 Reject",
+      "type": "block"
+    },
+    {
+      "tag": "🌐 Proxy",
+      "type": "selector",
+      "default": "✨ Auto",
+      "outbounds": [
+        "✨ Auto",
+        "🇯🇵 Japan 01",
+        "🇯🇵 Japan 02",
+        "🇯🇵 Japan 03",
+        "🇯🇵 Japan 04",
+        "🇯🇵 Japan 05",
+        "🇯🇵 Japan 06"
+      ]
+    },
+    {
+      "tag": "✨ Auto",
+      "type": "urltest",
+      "outbounds": [
+        "🇯🇵 Japan 01",
+        "🇯🇵 Japan 02",
+        "🇯🇵 Japan 03",
+        "🇯🇵 Japan 04",
+        "🇯🇵 Japan 05",
+        "🇯🇵 Japan 06"
+      ],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "300s"
+    },
+    {
+      "tag": "🇯🇵 Japan 01",
+      "type": "shadowsocks",
+      "server": "apne1-01.proxy.er-meng.com",
+      "server_port": {{ .ports.proxy.shadowsocks }},
+      "method": "2022-blake3-aes-128-gcm",
+      "password": {{ gopass "proxy/shadowsocks" | quote }},
+      "network": "tcp",
+      "multiplex": {
+        "enabled": true
+      }
+    },
+    {
+      "tag": "🇯🇵 Japan 02",
+      "type": "trojan",
+      "server": "apne1-01.proxy.er-meng.com",
+      "server_port": {{ .ports.proxy.trojan }},
+      "password": {{ gopass "proxy/trojan" | quote }},
+      "tls": {
+        "enabled": true,
+        "server_name": "apne1-01.proxy.er-meng.com"
+      },
+      "multiplex": {
+        "enabled": true
+      }
+    },
+    {
+      "tag": "🇯🇵 Japan 03",
+      "type": "hysteria2",
+      "server": "apne1-01.proxy.er-meng.com",
+      "server_port": {{ .ports.proxy.hysteria2 }},
+      "up_mbps": 100,
+      "down_mbps": 100,
+      "password": {{ gopass "proxy/hysteria2" | quote }},
+      "tls": {
+        "enabled": true,
+        "server_name": "apne1-01.proxy.er-meng.com"
+      }
+    },
+    {
+      "tag": "🇯🇵 Japan 04",
+      "type": "tuic",
+      "server": "apne1-01.proxy.er-meng.com",
+      "server_port": {{ .ports.proxy.tuic }},
+      "uuid": {{ gopass "proxy/tuic" | quote }},
+      "password": {{ gopass "proxy/tuic" | quote }},
+      "congestion_control": "bbr",
+      "zero_rtt_handshake": false,
+      "tls": {
+        "enabled": true,
+        "server_name": "apne1-01.proxy.er-meng.com",
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "tag": "🇯🇵 Japan 05",
+      "type": "anytls",
+      "server": "apne1-01.proxy.er-meng.com",
+      "server_port": {{ .ports.proxy.anytls }},
+      "password": {{ gopass "proxy/anytls" | quote }},
+      "tls": {
+        "enabled": true,
+        "server_name": "apne1-01.proxy.er-meng.com"
+      }
+    },
+    {
+      "tag": "🇯🇵 Japan 06",
+      "type": "shadowsocks",
+      "method": "2022-blake3-aes-128-gcm",
+      "password": {{ gopass "proxy/shadowsocks" | quote }},
+      "multiplex": {
+        "enabled": true
+      },
+      "detour": "🇯🇵 Japan 06 ShadowTLS"
+    },
+    {
+      "tag": "🇯🇵 Japan 06 ShadowTLS",
+      "type": "shadowtls",
+      "server": "apne1-01.proxy.er-meng.com",
+      "server_port": {{ .ports.proxy.shadowtls }},
+      "version": 3,
+      "password": {{ gopass "proxy/shadowtls" | quote }},
+      "tls": {
+        "enabled": true,
+        "server_name": "apne1-01.proxy.er-meng.com"
+      }
+    },
+    {
+      "tag": "📺 AD",
+      "type": "selector",
+      "default": "🔴 Reject",
+      "outbounds": [
+        "🌐 Proxy",
+        "🟢 Direct",
+        "🔴 Reject"
+      ]
+    },
+    {
+      "tag": "🧠 AI",
+      "type": "selector",
+      "default": "🔴 Reject",
+      "outbounds": [
+        "🌐 Proxy",
+        "🟢 Direct"
+      ]
+    },
+    {
+      "tag": "🎮 Game",
+      "type": "selector",
+      "default": "🌐 Proxy",
+      "outbounds": [
+        "🌐 Proxy",
+        "🟢 Direct"
+      ]
+    },
+    {
+      "tag": "🎥 Media",
+      "type": "selector",
+      "default": "🌐 Proxy",
+      "outbounds": [
+        "🌐 Proxy",
+        "🟢 Direct"
+      ]
+    },
+    {
+      "tag": "🐟 Final",
+      "type": "selector",
+      "default": "🌐 Proxy",
+      "outbounds": [
+        "🌐 Proxy",
+        "🟢 Direct"
+      ]
+    }
+  ]
+}

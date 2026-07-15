@@ -57,12 +57,6 @@ show_table_scroll_position = true
 
 process_command = true
 
-network_use_binary_prefix = false
-
-network_use_bytes = true
-
-network_use_log = true
-
 disable_advanced_kill = false
 
 hide_k_threads = false
@@ -77,16 +71,21 @@ disable_gpu = false
 
 retention = "10m"
 
-memory_legend = "top-right"
-
-network_legend = "top-right"
-
 [processes]
 columns = ["PID", "Name", "CPU%", "Mem%", "Virt", "R/s", "W/s", "T.Read", "T.Write", "User", "State", "GMem%", "GPU%"]
 get_threads = false
 
 [cpu]
 default = "avg"
+
+[memory_graph]
+legend_position = "top-right"
+
+[network_graph]
+use_binary_prefix = false
+use_bytes = true
+use_log = true
+legend_position = "top-right"
 
 [disk]
 columns = ["Disk", "Mount", "Used", "Free", "Total", "Used%", "R/s", "W/s"]
@@ -127,8 +126,7 @@ regex = true
 case_sensitive = false
 whole_word = false
 
-#[network]
-#[network.interface_filter]
+#[network_graph.interface_filter]
 #is_list_ignored = true
 #list = ["virbr0.*"]
 #regex = true

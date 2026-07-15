@@ -16,11 +16,11 @@ printf "🧑‍💻 Setting gopass...\n"
 
 {{   if eq .chezmoi.os "linux" -}}
 if test -z "$GOPASS_AGE_PASSWORD"
-  {{ warnf "GOPASS_AGE_PASSWORD is not set; using interactive mode." -}}
+  printf "⚠️ GOPASS_AGE_PASSWORD is not set; using interactive mode.\n"
   sleep 2
 
   if test -z "$GPG_TTY"
-    {{ warnf "GPG_TTY is not set, and pinentry may encounter error; please run 'set -gx GPG_TTY (tty)' in your current terminal." -}}
+    printf "⚠️ GPG_TTY is not set, and pinentry may encounter error; please run 'set -gx GPG_TTY (tty)' in your current terminal.\n"
     exit 1
   end
 end
