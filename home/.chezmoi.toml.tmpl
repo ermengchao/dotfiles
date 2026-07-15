@@ -4,6 +4,12 @@ progress = true
 useBuiltinAge = false
 useBuiltinGit = false
 
+[env]
+XDG_CACHE_HOME = "{{ .chezmoi.homeDir }}/.cache"
+XDG_CONFIG_HOME = "{{ .chezmoi.homeDir }}/.config"
+XDG_DATA_HOME = "{{ .chezmoi.homeDir }}/.local/share"
+XDG_STATE_HOME = "{{ .chezmoi.homeDir }}/.local/state"
+
 [add]
 secrets = "error"
 
