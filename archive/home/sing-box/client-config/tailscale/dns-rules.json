@@ -9,6 +9,11 @@
         "server": "dns-dhcp"
       },
       {
+        "preferred_by": "dns-tailscale",
+        "action": "route",
+        "server": "dns-tailscale"
+      },
+      {
         "clash_mode": "direct",
         "action": "route",
         "server": "dns-local"

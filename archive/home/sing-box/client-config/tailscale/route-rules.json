@@ -9,6 +9,16 @@
         "action": "hijack-dns"
       },
       {
+        "inbound": "endpoints-tailscale",
+        "action": "route",
+        "outbound": "🟢 Direct"
+      },
+      {
+        "preferred_by": "endpoints-tailscale",
+        "action": "route",
+        "outbound": "endpoints-tailscale"
+      },
+      {
         "ip_is_private": true,
         "outbound": "🟢 Direct"
       },

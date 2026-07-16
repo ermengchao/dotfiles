@@ -1,0 +1,13 @@
+{
+  "dns": {
+    "servers": [
+      {
+        "type": "tailscale",
+        "tag": "dns-tailscale",
+        "endpoint": "endpoints-tailscale",
+        "accept_default_resolvers": false,
+        "accept_search_domain": true
+      }
+    ]
+  }
+}
