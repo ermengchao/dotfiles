@@ -9,6 +9,14 @@
         "server": "dns-dhcp"
       },
       {
+        "domain_suffix": [
+          "pool.ntp.org",
+          "time.apple.com"
+        ],
+        "action": "route",
+        "server": "dns-cloudflare"
+      },
+      {
         "clash_mode": "direct",
         "action": "route",
         "server": "dns-local"

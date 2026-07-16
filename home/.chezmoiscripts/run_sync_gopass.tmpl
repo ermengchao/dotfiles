@@ -1,0 +1,6 @@
+#!/usr/bin/env fish
+
+set root_password_store (gopass config mounts.path)
+if not test -z (ls -A "$root_password_store")
+  gopass --yes sync
+end
