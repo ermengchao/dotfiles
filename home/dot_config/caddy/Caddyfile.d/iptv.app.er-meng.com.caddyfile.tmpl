@@ -1,0 +1,12 @@
+https://iptv.app.er-meng.com {
+	@authorized query api_key={{ gopass "iptv/api_key" }}
+
+	handle @authorized {
+		uri query -api_key
+		reverse_proxy http://100.100.20.1:{{ .ports.udpxy }}
+	}
+
+	handle {
+		respond "Unauthorized" 401
+	}
+}
