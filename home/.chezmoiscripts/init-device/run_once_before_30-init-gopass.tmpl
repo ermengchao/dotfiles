@@ -36,7 +36,7 @@ else
 end
 
 set root_password_store (gopass config mounts.path)
-if test -z (ls -A "$root_password_store")
+if test -z (ls -A "$root_password_store" | string collect)
   printf "🔒 Cloning credentials...\n"
 
   read --silent --prompt-str "🫆 Enter your passphrase: " GOPASS_AGE_PASSWORD
