@@ -20,10 +20,11 @@
         "inet6_range": "fc00::/18"
       },
       {
-        "tag": "dns-tailscale",
         "type": "tailscale",
+        "tag": "dns-tailscale",
         "endpoint": "endpoints-tailscale",
-        "accept_default_resolvers": false
+        "accept_default_resolvers": false,
+        "accept_search_domain": true
       },
       {
         "tag": "doh-cloudflare",

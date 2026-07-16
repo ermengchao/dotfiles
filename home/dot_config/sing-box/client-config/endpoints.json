@@ -1,18 +1,16 @@
 {
   "endpoints": [
     {
-      "tag": "endpoints-tailscale",
       "type": "tailscale",
-      "state_directory": "",
-      "auth_key": "",
-      "control_url": "",
+      "tag": "endpoints-tailscale",
+      "state_directory": "/var/lib/sing-box/tailscale",
+      "hostname": "r2s-sing-box",
       "ephemeral": false,
-      "hostname": "",
-      "accept_routes": false,
-      "exit_node": "",
-      "exit_node_allow_lan_access": false,
+      "accept_routes": true,
       "advertise_routes": [],
       "advertise_exit_node": false,
+      "system_interface": false,
+      "ssh_server": false,
       "domain_resolver": "dns-cloudflare"
     }
   ]

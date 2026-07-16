@@ -9,9 +9,7 @@
         "server": "dns-dhcp"
       },
       {
-        "domain_suffix": [
-          "ts.net"
-        ],
+        "preferred_by": "dns-tailscale",
         "action": "route",
         "server": "dns-tailscale"
       },
