@@ -1,0 +1,8 @@
+{
+  "http_clients": [
+    {
+      "tag": "ruleset-via-proxy",
+      "detour": "🌐 Proxy"
+    }
+  ]
+}

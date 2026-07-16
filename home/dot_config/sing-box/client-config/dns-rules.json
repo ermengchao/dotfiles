@@ -16,15 +16,6 @@
         "server": "dns-tailscale"
       },
       {
-        "action": "evaluate",
-        "server": "dns-resolved"
-      },
-      {
-        "match_response": true,
-        "ip_accept_any": true,
-        "action": "respond"
-      },
-      {
         "clash_mode": "direct",
         "action": "route",
         "server": "dns-local"
@@ -39,35 +30,52 @@
           "geosite-cn",
           "direct_chao",
           "direct",
-          "apple",
-          "china_max",
-          "download",
-          "lan"
+          "download"
         ],
         "action": "route",
         "server": "dns-local"
       },
       {
+        "action": "evaluate",
+        "server": "dns-local"
+      },
+      {
+        "match_response": true,
+        "rule_set": [
+          "apple",
+          "china_max",
+          "lan"
+        ],
+        "action": "respond"
+      },
+      {
         "rule_set": [
           "claude",
-          "copilot",
           "gemini",
+          "disney",
+          "hbo_usa",
+          "tiktok",
+          "youtube_music",
+          "developer",
+          "apple_proxy",
+          "github"
+        ],
+        "action": "route",
+        "server": "dns-fakeip"
+      },
+      {
+        "match_response": true,
+        "rule_set": [
+          "copilot",
           "openai",
           "game_chao",
           "game",
-          "disney",
           "netflix",
-          "hbo_usa",
           "spotify",
-          "tiktok",
           "youtube",
-          "youtube_music",
           "proxy_chao",
-          "developer",
           "amazon_cloud",
-          "apple_proxy",
           "google",
-          "github",
           "global"
         ],
         "action": "route",

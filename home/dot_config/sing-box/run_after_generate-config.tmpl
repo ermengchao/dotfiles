@@ -9,7 +9,7 @@ if type -q sing-box
     mkdir -p $XDG_CACHE_HOME/sing-box
   else
     set config_dir ./client-config
-    mkdir -p /var/cache/sing-box
+    sudo mkdir -p /var/cache/sing-box
   end
 
   if test -d $config_dir
