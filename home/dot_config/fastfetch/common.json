@@ -106,9 +106,8 @@
   "general": {
     "thread": true,
     "processingTimeout": 5000,
-    // "playerName": "",
     "preRun": "clear",
-    "detectVersion": true,
+    "detectVersion": true
   },
   "modules": [
     {
@@ -152,14 +151,6 @@
       "type": "kernel",
       "keyIcon": " "
     },
-    // {
-    //   "type": "shell",
-    //   "keyIcon": " "
-    // },
-    // {
-    //   "type": "terminal",
-    //   "keyIcon": " "
-    // },
     {
       "type": "packages",
       "keyIcon": "󰏖 ",
@@ -240,20 +231,6 @@
       "order": null,
       "format": "{name} [{type}], {width} * {height} / {scale-factor} @ {refresh-rate} hz, {bit-depth} bit"
     },
-    // {
-    //   "type": "battery",
-    //   "keyIcon": " ",
-    //   "temp": false,
-    //   "percent": {
-    //     "green": 50,
-    //     "yellow": 20,
-    //     "type": 0
-    //   }
-    // },
-    // {
-    //   "type": "poweradapter",
-    //   "keyIcon": "󰚥 "
-    // },
     {
       "type": "separator",
       "string": "-",
@@ -277,66 +254,15 @@
       "type": "wmtheme",
       "keyIcon": "󰓸 "
     },
-    // {
-    //   "type": "font",
-    //   "keyIcon": " "
-    // },
-    // {
-    //   "type": "terminalfont",
-    //   "keyIcon": " "
-    // },
-    // {
-    //   "type": "icons",
-    //   "keyIcon": " "
-    // },
-    // {
-    //   "type": "cursor",
-    //   "keyIcon": "󰆿 "
-    // },
     {
       "type": "separator",
       "string": "-",
       "outputColor": "",
       "times": 0
     },
-    // {
-    //   "type": "localip",
-    //   "keyIcon": "󰩟 ",
-    //   "showIpv4": true,
-    //   "showIpv6": false,
-    //   "showMac": false,
-    //   "showLoop": false,
-    //   "showPrefixLen": true,
-    //   "showMtu": false,
-    //   "showSpeed": false,
-    //   "showFlags": false,
-    //   "compact": false,
-    //   "defaultRouteOnly": true,
-    //   "showAllIps": false,
-    //   "namePrefix": ""
-    // },
     {
       "type": "uptime",
       "keyIcon": " "
-    },
-    // {
-    //   "type": "locale",
-    //   "keyIcon": " "
-    // },
-    // "break",
-    // {
-    //   "type": "colors",
-    //   "key": " ",
-    //   "keyIcon": " ",
-    //   "symbol": "block",
-    //   "paddingLeft": 0,
-    //   "block": {
-    //     "width": 3,
-    //     "range": [
-    //       0,
-    //       15
-    //     ]
-    //   }
-    // }
+    }
   ]
 }

@@ -4,16 +4,7 @@
 if type -q fastfetch
   cd $XDG_CONFIG_HOME/fastfetch
   set os (string lower (uname -s))
-  if test $os = darwin
-    begin
-      bunx json5 general.jsonc
-      bunx json5 darwin.jsonc
-    end | jq -s 'reduce .[] as $item ({}; . * $item)' >config.jsonc
-  else if test $os = linux
-    begin
-      bunx json5 general.jsonc
-      bunx json5 linux.jsonc
-    end | jq -s 'reduce .[] as $item ({}; . * $item)' >config.jsonc
-  end
+
+  jq -s '.[0] * .[1]' common.json "$os.json" >config.json
 end
 {{ end -}}
