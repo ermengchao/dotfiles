@@ -1,0 +1,16 @@
+[Unit]
+Description=Home Assistant Container
+
+[Service]
+Restart=on-failure
+
+[Container]
+ContainerName=home-assistant
+Image=ghcr.io/homeassistant/home-assistant:stable
+AutoUpdate=registry
+
+Environment=TZ={{ template "getSystemTimezone" . }}
+
+Volumes={{ env "XDG_CONFIG_HOME" }}/home-assistant:/config
+Volumes=/etc/localtime:/etc/localtime:ro
+Volumes=/run/dbus:/run/dbus:ro

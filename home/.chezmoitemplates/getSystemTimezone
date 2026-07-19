@@ -1,0 +1,8 @@
+{{- if eq .chezmoi.os "linux" -}}
+{{- output "timedatectl" "show" "--property=Timezone" "--value" | trim -}}
+{{- else if eq .chezmoi.os "darwin" -}}
+{{- $localtime := output "readlink" "/etc/localtime" | trim -}}
+{{- regexReplaceAll "^.*/zoneinfo/" $localtime "" -}}
+{{- else -}}
+UTC
+{{- end -}}

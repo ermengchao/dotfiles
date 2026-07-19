@@ -12,7 +12,7 @@ AutoUpdate=registry
 UserNS=keep-id
 Entrypoint=/entry-host.sh
 
-Environment=TZ=Asia/Shanghai
+Environment=TZ={{ template "getSystemTimezone" . }}
 Environment=UMASK=022
 
 PublishPort={{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}

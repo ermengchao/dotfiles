@@ -13,7 +13,7 @@ GroupAdd=keep-groups
 
 Environment=NGINX_PORT={{ .ports.movie_pilot.nginx_port }}
 Environment=PORT={{ .ports.movie_pilot.port }}
-Environment=TZ=Asia/Shanghai
+Environment=TZ={{ template "getSystemTimezone" . }}
 Environment=UMASK=022
 Environment=START_NOGOSU=true
 
