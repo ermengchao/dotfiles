@@ -14,8 +14,8 @@ body:
   content_type: application/json
 headers:
 - name: Authorization
-  value: Bearer ${NOTION_API_KEY}
+  value: Bearer {{ gopass "notion/bookkeeping" }}
 - name: Notion-Version
-  value: '2025-09-03'
+  value: '2026-03-11'
 - name: Content-Type
   value: application/json
