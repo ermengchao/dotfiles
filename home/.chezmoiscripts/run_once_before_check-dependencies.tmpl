@@ -2,9 +2,6 @@
 
 {{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
 {{ $missingDependencies := list -}}
-{{   if and (eq .chezmoi.os "linux") (not (contains "arch" (.chezmoi.osRelease.id | trim))) -}}
-{{ $missingDependencies = append $missingDependencies "bun" -}}
-{{   end -}}
 
 {{ range $dependency := .dependencies -}}
 {{   if not (lookPath $dependency) -}}
