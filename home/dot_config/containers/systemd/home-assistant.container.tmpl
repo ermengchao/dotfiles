@@ -11,6 +11,6 @@ AutoUpdate=registry
 
 Environment=TZ={{ template "getSystemTimezone" . }}
 
-Volumes={{ env "XDG_CONFIG_HOME" }}/home-assistant:/config
-Volumes=/etc/localtime:/etc/localtime:ro
-Volumes=/run/dbus:/run/dbus:ro
+Volume={{ env "XDG_CONFIG_HOME" }}/home-assistant:/config
+Volume=/etc/localtime:/etc/localtime:ro
+Volume=/run/dbus:/run/dbus:ro
