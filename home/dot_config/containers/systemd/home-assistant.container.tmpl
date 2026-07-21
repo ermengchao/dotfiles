@@ -6,8 +6,10 @@ Restart=on-failure
 
 [Container]
 ContainerName=home-assistant
-Image=ghcr.io/homeassistant/home-assistant:stable
+Image=ghcr.io/home-assistant/home-assistant:stable
 AutoUpdate=registry
+
+Network=host
 
 Environment=TZ={{ template "getSystemTimezone" . }}
 
