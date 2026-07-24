@@ -1,0 +1,15 @@
+{{ if eq .meta.hostname "r2s" -}}
+[Match]
+Name=enu1
+
+[Network]
+DHCP=no
+Address=169.254.100.1/16
+LinkLocalAddressing=ipv6
+IPv6AcceptRA=yes
+
+[Route]
+Destination=239.49.8.19/32
+Scope=link
+PreferredSource=169.254.100.1
+{{ end -}}

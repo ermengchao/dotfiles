@@ -28,13 +28,6 @@
         "detour": "🌐 Proxy"
       },
       {
-        "tag": "doh-aliyun",
-        "type": "h3",
-        "server": "dns.alidns.com",
-        "path": "/dns-query",
-        "domain_resolver": "dns-aliyun"
-      },
-      {
         "tag": "dns-cloudflare",
         "type": "udp",
         "server": "1.1.1.1"
