@@ -2,3 +2,10 @@
 # config-file = tmux.ghostty
 
 keybind = "global:ctrl+backquote=toggle_quick_terminal"
+
+keybind = "global:ctrl+backquote=toggle_quick_terminal"
+keybind = "alt+arrow_left=esc:b"
+keybind = "alt+arrow_right=esc:f"
+
+keybind = "super+arrow_left=csi:H"
+keybind = "super+arrow_right=csi:F"
