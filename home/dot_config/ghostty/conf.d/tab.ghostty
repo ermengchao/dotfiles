@@ -1,2 +1,2 @@
-tab-inherit-working-directory = true
+tab-inherit-working-directory = false
 window-new-tab-position = "current"

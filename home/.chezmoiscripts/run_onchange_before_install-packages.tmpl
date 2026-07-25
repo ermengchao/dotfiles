@@ -53,7 +53,7 @@ defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/i
 {{ $argList := index $.packageManagers . "args" -}}
 
 {{ range (index $packageMap "packages") -}}
-{{ $installer -}} {{ $manager }} {{ $command }} {{ range $argList }} {{ . }} {{ end }} {{ . | quote }}
+{{ $installer -}} {{ $manager }} {{ $command }} {{ range $argList }} {{ . }} {{ end }} {{ . | quote }} > /dev/null
 {{ end -}}
 
 {{   end -}}
