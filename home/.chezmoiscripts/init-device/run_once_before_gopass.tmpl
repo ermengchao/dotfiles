@@ -6,6 +6,11 @@ if not type -q gopass
     exit 1
 end
 
+if not set -q GPG_TTY
+    printf "‼️ GPG_TTY not set. Run set GPG_TTY (tty) to set.\n"
+    exit 1
+end
+
 printf "🧑‍💻 Setting gopass...\n"
 gopass config age.agent-enabled true > /dev/null
 gopass config age.agent-timeout {{ .agentTimeout }} > /dev/null
