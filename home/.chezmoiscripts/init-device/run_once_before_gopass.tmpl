@@ -1,0 +1,43 @@
+#!/usr/bin/env fish
+
+{{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
+if not type -q gopass
+    printf "‼️ Gopass is not available. Applying abort.\n"
+    exit 1
+end
+
+printf "🧑‍💻 Setting gopass...\n"
+gopass config age.agent-enabled true > /dev/null
+gopass config age.agent-timeout {{ .agentTimeout }} > /dev/null
+printf "✅ Done.\n"
+
+sleep {{ .scriptDelay }}
+
+set -gx GOPASS_SSH_DIR ~/.ssh
+if not test -f ~/.ssh/id_ed25519
+    printf "‼️ SSH private key, which is used as gopass age identity could not found. Applying abort.\n"
+    exit 1
+end
+
+set root_password_store (gopass config mounts.path)
+if test -z (ls -A "$root_password_store" | string collect)
+    printf "🧑‍💻 Cloning root password store...\n"
+
+    set -x GOPASS_AGE_PASSWORD $GOPASS_AGE_PASSWORD
+    set -x GIT_AUTHOR_NAME {{ .username | quote }}
+    set -x GIT_AUTHOR_EMAIL {{ .email | quote }}
+    gopass --yes clone --crypto age {{ .gitHostUrl }}/{{ .fullname }}/credentials
+
+    printf "✅ Done.\n"
+else
+    printf "ℹ️ Root password store already exists.\n"
+end
+
+cd $root_password_store
+if not string match -q "credentials" (git remote | string trim)
+    git remote add credentials {{ .gitHostUrl }}/{{ .fullname }}/credentials > /dev/null
+    git fetch --quiet credentials
+end
+
+sleep {{ .scriptDelay }}
+{{ end -}}

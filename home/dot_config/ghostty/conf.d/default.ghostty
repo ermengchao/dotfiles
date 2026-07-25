@@ -1,0 +1,12 @@
+# == Import Config ==
+config-file = "appearance.ghostty"
+config-file = "clipboard.ghostty"
+config-file = "notification.ghostty"
+config-file = "pane.ghostty"
+config-file = "tab.ghostty"
+config-file = "window.ghostty"
+config-file = "quick-terminal.ghostty"
+config-file = "darwin.ghostty"
+config-file = "linux.ghostty"
+
+config-file = "keybinding/default.ghostty"

@@ -5,21 +5,21 @@
 {{ if eq .chezmoi.os "darwin" -}}
 
 begin
-{{     range $packagePrefix.homebrew.darwin.taps -}}
-  echo 'tap {{ . | quote }}'
-{{     end -}}
+    {{     range $packagePrefix.homebrew.darwin.taps -}}
+    echo 'tap {{ . | quote }}'
+    {{     end -}}
 
-{{     range $packagePrefix.homebrew.darwin.brews -}}
-  echo 'brew {{ . | quote }}'
-{{     end -}}
+    {{     range $packagePrefix.homebrew.darwin.brews -}}
+    echo 'brew {{ . | quote }}'
+    {{     end -}}
 
-{{     range $packagePrefix.homebrew.darwin.casks -}}
-  echo 'cask {{ . | quote }}'
-{{     end -}}
+    {{     range $packagePrefix.homebrew.darwin.casks -}}
+    echo 'cask {{ . | quote }}'
+    {{     end -}}
 
-{{     range $packagePrefix.homebrew.darwin.mas -}}
-  echo 'mas {{ .name | quote }}, id: {{ .id }}'
-{{     end -}}
+    {{     range $packagePrefix.homebrew.darwin.mas -}}
+    echo 'mas {{ .name | quote }}, id: {{ .id }}'
+    {{     end -}}
 end | /opt/homebrew/bin/brew bundle --file=/dev/stdin
 
 {{ end -}}
@@ -72,33 +72,33 @@ flatpak install --user --noninteractive {{ $remote }} {{ . | quote }}
 {{     if $isMinimal -}}
 
 begin
-{{       range $packagePrefix.homebrew.linux.taps -}}
-  echo 'tap {{ . | quote }}'
-{{       end -}}
+    {{       range $packagePrefix.homebrew.linux.taps -}}
+    echo 'tap {{ . | quote }}'
+    {{       end -}}
 
-{{       range $packagePrefix.homebrew.linux.brews -}}
-  echo 'brew {{ . | quote }}'
-{{       end -}}
+    {{       range $packagePrefix.homebrew.linux.brews -}}
+    echo 'brew {{ . | quote }}'
+    {{       end -}}
 
-{{       range $packagePrefix.homebrew.linux.casks -}}
-  echo 'cask {{ . | quote }}'
-{{       end -}}
+    {{       range $packagePrefix.homebrew.linux.casks -}}
+    echo 'cask {{ . | quote }}'
+    {{       end -}}
 end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
 
 {{     else -}}
 
 begin
-{{       range .packages.homebrew.linux.taps -}}
-  echo 'tap {{ . | quote }}'
-{{       end -}}
+    {{       range .packages.homebrew.linux.taps -}}
+    echo 'tap {{ . | quote }}'
+    {{       end -}}
 
-{{       range .packages.homebrew.linux.brews -}}
-  echo 'brew {{ . | quote }}'
-{{       end -}}
+    {{       range .packages.homebrew.linux.brews -}}
+    echo 'brew {{ . | quote }}'
+    {{       end -}}
 
-{{       range .packages.homebrew.linux.casks -}}
-  echo 'cask {{ . | quote }}'
-{{       end -}}
+    {{       range .packages.homebrew.linux.casks -}}
+    echo 'cask {{ . | quote }}'
+    {{       end -}}
 end | /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/dev/stdin
 
 {{     end -}}

@@ -1,6 +1,6 @@
 name: query datasource
 method: POST
-url: https://api.notion.com/v1/data_sources/2ba346a8-9c74-8073-844f-000b90ccd846/query
+url: https://api.notion.com/v1/data_sources/{{ gopass "notion/finance_tracker/transactions" }}/query
 body:
   content: |-
     {
@@ -14,7 +14,7 @@ body:
   content_type: application/json
 headers:
 - name: Authorization
-  value: Bearer {{ gopass "notion/bookkeeping" }}
+  value: Bearer {{ gopass "notion/finance_tracker/access_token" }}
 - name: Notion-Version
   value: '2026-03-11'
 - name: Content-Type

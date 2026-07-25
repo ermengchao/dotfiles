@@ -1,38 +1,41 @@
 {{ if eq .chezmoi.os "darwin" -}}
 abbr keychain-add "/usr/bin/ssh-add --apple-use-keychain"
 abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
-abbr xcode "open -a Xcode"
+abbr xcode "open -a Xcode.app"
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
+{{   if eq .chezmoi.version.builtBy "Homebrew" -}}
+eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+{{   end -}}
 eval "$(ssh-agent -c 2>/dev/null)" >/dev/null
 
-abbr psg /usr/lib/systemd/system-generators/podman-system-generator
 abbr sc systemctl
 abbr scu "systemctl --user"
+alias open xdg-open
 # alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
 {{ end -}}
 
 if status is-interactive
 else
-  return
+    return
 end
 
 # Key Binding
 function fish_user_key_bindings
-  bind \t complete
-  bind -M insert \cr reload_appearance
-  bind -M insert \cn _fzf_lsof
-  bind -M insert \co launch_opencode
+    bind \t complete
+    bind -M insert \cr reload_appearance
+    bind -M insert \cn _fzf_lsof
+    bind -M insert \co launch_opencode
 end
 
 # Initialization
 if type -q mise
-  mise activate fish | source
+    mise activate fish | source
 end
 
 if type -q zoxide
-  zoxide init fish --cmd cd | source
+    zoxide init fish --cmd cd | source
 end
 
 # Plugins
@@ -48,6 +51,6 @@ abbr activate "source .venv/bin/activate.fish"
 abbr conf chezmoi
 abbr dv deactivate
 abbr fzfp "fzf --style full --preview 'fzf-preview.sh {}'"
-alias ls "eza --git --header --hyperlink"
+alias ls "eza --git --header --hyperlink=auto"
 abbr n nvim
 alias posting "posting --collection $XDG_CONFIG_HOME/posting/collections"

@@ -1,8 +1,20 @@
 encryption = "age"
+format = "json"
 mode = "file"
 progress = true
-useBuiltinAge = false
-useBuiltinGit = false
+
+[add]
+secrets = "error"
+
+[age]
+identity = "{{ .chezmoi.homeDir }}/.ssh/id_ed25519"
+recipientsFile = "{{ .chezmoi.homeDir }}/.ssh/id_ed25519.pub"
+
+[docker]
+command = "podman"
+
+[edit]
+apply = true
 
 [env]
 XDG_CACHE_HOME = "{{ .chezmoi.homeDir }}/.cache"
@@ -10,18 +22,15 @@ XDG_CONFIG_HOME = "{{ .chezmoi.homeDir }}/.config"
 XDG_DATA_HOME = "{{ .chezmoi.homeDir }}/.local/share"
 XDG_STATE_HOME = "{{ .chezmoi.homeDir }}/.local/state"
 
-[add]
-secrets = "error"
+[git]
+autoAdd = true
+autoCommit = true
+autoPush = true
 
-[age]
-identity = "{{ .chezmoi.workingTree }}/key.txt"
-recipient = "age15fguepjnfkjt84ma9wjpyjhlrax8fpedv3wergqm2tnppup7py5s68qz4m"
+[gopass]
+mode = "builtin"
 
-[docker]
-command = "podman"
-
-[edit]
-apply = true
+[hooks]
 
 [interpreters]
 [interpreters.fish]
@@ -37,13 +46,19 @@ command = "pinentry"
 [update]
 apply = true
 
+[warnings]
+configFileTemplateHasChanged = false
+
 [data]
 username = "chao"
 fullname = "ermengchao"
 email = "zhangchao050530@gmail.com"
 gitHostUrl = "https://github.com"
+rootConfigPath = "{{ .chezmoi.workingTree }}/root"
+
+agentTimeout = 7200
 mediaPath = "/Volumes/HDD/Infuse"
-rootPath = "{{ .chezmoi.workingTree }}/root"
+scriptDelay = 1
 
 [data.meta]
 {{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "nixos") -}}

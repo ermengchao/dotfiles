@@ -2,9 +2,9 @@
 
 {{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
 if type -q fastfetch
-  cd $XDG_CONFIG_HOME/fastfetch
-  set os (string lower (uname -s))
+    cd $XDG_CONFIG_HOME/fastfetch
+    set os (string lower (uname -s))
 
-  jq -s '.[0] * .[1]' common.json "$os.json" >config.json
+    jq -s '.[0] * .[1]' common.json "$os.json" >config.json
 end
 {{ end -}}

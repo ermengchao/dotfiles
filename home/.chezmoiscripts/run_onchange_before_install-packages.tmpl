@@ -13,37 +13,36 @@ set brew_prefix /home/linuxbrew/.linuxbrew
 {{     end -}}
 
 {{ range index $packageMap $.chezmoi.os "taps" -}}
-$brew_prefix/bin/brew trust {{ . | quote }}
+$brew_prefix/bin/brew trust {{ . | quote }} > /dev/null
 {{ end -}}
 
 begin
 
-{{ range index $packageMap $.chezmoi.os "taps" -}}
-echo 'tap {{ . | quote }}'
-{{ end -}}
+    {{ range index $packageMap $.chezmoi.os "taps" -}}
+    echo 'tap {{ . | quote }}'
+    {{ end -}}
 
-{{ range index $packageMap $.chezmoi.os "brews" -}}
-echo 'brew {{ . | quote }}'
-{{ end -}}
+    {{ range index $packageMap $.chezmoi.os "brews" -}}
+    echo 'brew {{ . | quote }}'
+    {{ end -}}
 
-{{ range index $packageMap $.chezmoi.os "casks" -}}
-echo 'cask {{ . | quote }}'
-{{ end -}}
+    {{ range index $packageMap $.chezmoi.os "casks" -}}
+    echo 'cask {{ . | quote }}'
+    {{ end -}}
 
-{{ with index $packageMap $.chezmoi.os "mas" -}}
+    {{ with index $packageMap $.chezmoi.os "mas" -}}
 
-{{ range . -}}
-echo 'mas {{ .name | quote }}, id: {{ .id }}'
-{{ end -}}
+    {{ range . -}}
+    echo 'mas {{ .name | quote }}, id: {{ .id }}'
+    {{ end -}}
 
-{{ end -}}
+    {{ end -}}
 
-end | $brew_prefix/bin/brew bundle --file=/dev/stdin
+end | $brew_prefix/bin/brew bundle --file=/dev/stdin > /dev/null
 {{     if eq $.chezmoi.os "darwin" -}}
+printf "🧑‍💻 Linking Xcode tools to /Applications...\n"
 sudo ln -sf /Applications/Xcode.app/Contents/Applications /Applications/Developer\ Tools
-
-brew uninstall --ignore-dependencies --force pinentry
-ln -sf $brew_prefix/bin/pinentry-mac $brew_prefix/bin/pinentry
+printf "✅ Done.\n"
 
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
 {{     end -}}
@@ -59,4 +58,6 @@ defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/i
 
 {{   end -}}
 {{ end -}}
+
+sleep {{ .scriptDelay }}
 {{ end -}}

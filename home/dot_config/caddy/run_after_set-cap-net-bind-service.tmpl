@@ -2,9 +2,9 @@
 
 {{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
 if type -q caddy
-  printf "🧑‍💻 Add cap_net_bind_service for caddy...\n"
+    printf "🧑‍💻 Add cap_net_bind_service for caddy...\n"
 
-  sudo setcap cap_net_bind_service=+ep (readlink -f (command -v caddy))
-  printf "✅ Done.\n"
+    sudo setcap cap_net_bind_service=+ep (readlink -f (command -v caddy))
+    printf "✅ Done.\n"
 end
 {{ end -}}

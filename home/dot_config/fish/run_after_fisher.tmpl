@@ -2,15 +2,15 @@
 
 {{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
 if type -q fisher
-  printf "📦 Checking for updates for fish plugins...\n"
-  fisher update >/dev/null
+    printf "📦 Checking for updates for fish plugins...\n"
+    fisher update >/dev/null
 
-  printf "✅ Done.\n"
+    printf "✅ Done.\n"
 else
-  printf "‼️ Fisher is not installed. Skip installing.\n"
+    printf "‼️ Fisher is not installed. Skip installing.\n"
 end
 {{ end -}}
 
 if type -q tide
-  tide configure --auto --style=Rainbow --prompt_colors='True color' --show_time=No --rainbow_prompt_separators=Round --powerline_prompt_heads=Round --powerline_prompt_tails=Round --powerline_prompt_style='Two lines, character' --prompt_connection=Disconnected --powerline_right_prompt_frame=No --prompt_spacing=Sparse --icons='Many icons' --transient=Yes >/dev/null
+    tide configure --auto --style=Rainbow --prompt_colors='True color' --show_time=No --rainbow_prompt_separators=Round --powerline_prompt_heads=Round --powerline_prompt_tails=Round --powerline_prompt_style='Two lines, character' --prompt_connection=Disconnected --powerline_right_prompt_frame=No --prompt_spacing=Sparse --icons='Many icons' --transient=Yes >/dev/null
 end

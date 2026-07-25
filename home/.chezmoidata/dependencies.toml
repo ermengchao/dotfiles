@@ -1,7 +1,5 @@
 dependencies = [
-  "age",
   "fish",
-  "git",
   "gopass",
   "jq",
 ]

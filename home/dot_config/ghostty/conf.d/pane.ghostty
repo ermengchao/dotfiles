@@ -1,0 +1,7 @@
+split-inherit-working-directory = true
+# unfocused-split-opacity
+# unfocused-split-fill
+# split-divider-color
+# split-preserve-zoom = navigation
+
+focus-follows-mouse = true

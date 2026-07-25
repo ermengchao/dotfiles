@@ -1,0 +1,41 @@
+# == Import Config ==
+config-file = "conf.d/default.ghostty"
+# config-default-files
+
+# == Start up ==
+# command
+# input
+# initial-command
+# initial-window
+
+# == Runtime ==
+# env
+# title-report
+mouse-reporting = true
+mouse-shift-capture = true
+# mouse-scroll-multiplier
+# scrollback-limit
+# scroll-to-bottom
+# osc-color-report-format
+right-click-action = "context-menu"
+working-directory = "home"
+shell-integration-features = "cursor,sudo,title,ssh-env,ssh-terminfo"
+shell-integration = "fish"
+async-backend = "auto"
+image-storage-limit = 4294967295
+progress-style = true
+# command-palette-entry
+# click-repeat-interval
+# vt-kam-allowed
+# enquiry-response
+# custom-shader
+# custom-shader-animation
+
+# == Shell Exit ==
+# wait-after-command
+# abnormal-command-exit-runtime
+
+# == Program Quit ==
+confirm-close-surface = true
+quit-after-last-window-closed = false
+# quit-after-last-window-closed-delay

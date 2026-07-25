@@ -1,0 +1,35 @@
+auto-update = "check"
+auto-update-channel = "stable"
+
+macos-applescript = true
+macos-shortcuts = "ask"
+macos-non-native-fullscreen = false
+macos-window-buttons = "visible"
+macos-titlebar-style = "transparent"
+macos-titlebar-proxy-icon = "visible"
+macos-dock-drop-behavior = "new-tab"
+macos-option-as-alt = true
+macos-window-shadow = true
+macos-hidden = "never"
+macos-auto-secure-input = true
+macos-secure-input-indication = true
+undo-timeout = "5s"
+
+# == Icon ==
+macos-icon = "official"
+# macos-custom-icon
+# macos-icon-frame
+# macos-icon-ghost-color
+# macos-icon-screen-color
+
+# == Window ==
+window-colorspace = "display-p3"
+# window-position-x
+# window-position-y
+# window-vsync
+# window-step-resize
+
+# == Quick Terminal ==
+quick-terminal-screen = "main"
+quick-terminal-animation-duration = 0.2
+quick-terminal-space-behavior = "move"

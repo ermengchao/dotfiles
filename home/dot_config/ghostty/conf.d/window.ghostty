@@ -1,0 +1,23 @@
+# title = " "
+# window-title-font-family
+
+window-theme = "auto"
+window-decoration = "auto"
+window-height = 40
+window-width = 112
+window-padding-x = 10
+window-padding-y = 10
+# window-padding-balance
+# window-padding-color
+
+# maximize
+# fullscreen
+
+window-save-state = "default"
+window-inherit-font-size = true
+window-inherit-working-directory = false
+
+# == Resize ==
+resize-overlay = "after-first"
+resize-overlay-position = "center"
+# resize-overlay-duration

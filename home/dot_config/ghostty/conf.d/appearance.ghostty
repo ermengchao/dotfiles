@@ -1,0 +1,76 @@
+theme = "light:Catppuccin Latte,dark:Catppuccin Mocha"
+term = "xterm-256color"
+scrollbar = "system"
+# alpha-blending
+
+# == Cell ==
+# adjust-cell-width
+# adjust-cell-height
+# adjust-font-baseline
+# adjust-underline-position
+# adjust-underline-thickness
+# adjust-strikethrough-position
+# adjust-strikethrough-thickness
+# adjust-overline-position
+# adjust-overline-thickness
+# adjust-cursor-thickness
+# adjust-cursor-height
+# adjust-box-thickness
+# adjust-icon-height
+# grapheme-width-method
+
+# == Foreground ==
+# foreground
+
+# == Background ==
+# background
+background-opacity = 1
+background-blur = 100
+background-opacity-cells = true
+# background-image
+# background-image-opacity
+# background-image-position
+# background-image-fit
+# background-image-repeat
+# minimum-contrast
+
+# == Font ==
+font-family = "SF Mono Nerd Font"
+font-family = "PingFang SC"
+font-family = "FiraMonoNerdFont"
+font-family = "Sarasa"
+font-size = 14
+font-shaping-break = "cursor"
+font-synthetic-style = false
+font-feature = "-calt, -liga, -dlig"
+faint-opacity = 1
+# font-variation
+# font-codepoint-map
+# font-thicken
+# font-thicken-strength
+# bold-color
+
+# == Cursor ==
+# cursor-color
+# cursor-opacity
+cursor-style = "bar"
+cursor-style-blink = true
+# cursor-text
+cursor-click-to-move = true
+mouse-hide-while-typing = true
+
+# == Link ==
+# link
+link-url = true
+link-previews = "osc8"
+
+# == Palette ==
+# palette
+# palette-generate
+# palette-harmonious
+
+# == Search ==
+# search-foreground
+# search-background
+# search-selected-foreground
+# search-selected-background

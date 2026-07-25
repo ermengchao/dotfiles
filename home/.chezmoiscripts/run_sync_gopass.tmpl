@@ -2,5 +2,7 @@
 
 set root_password_store (gopass config mounts.path)
 if test -n (ls -A "$root_password_store" | string collect)
-  gopass --yes sync
+    gopass --yes sync
 end
+
+sleep {{ .scriptDelay }}

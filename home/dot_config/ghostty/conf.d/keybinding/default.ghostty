@@ -1,0 +1,4 @@
+# == Import Config ==
+# config-file = tmux.ghostty
+
+keybind = "global:ctrl+backquote=toggle_quick_terminal"

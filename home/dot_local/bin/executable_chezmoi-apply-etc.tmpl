@@ -3,12 +3,12 @@
 {{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
   {{ if eq .chezmoi.version.builtBy "Homebrew" -}}
 sudo {{ env "HOMEBREW_PREFIX" }}/bin/chezmoi apply \
-    --source {{ .rootPath }} \
+    --source {{ .rootConfigPath }} \
     --destination / \
     --mode symlink
   {{ else -}}
 sudo /usr/bin/chezmoi apply \
-    --source {{ .rootPath }} \
+    --source {{ .rootConfigPath }} \
     --config {{ env "XDG_CONFIG_HOME" }}/chezmoi/chezmoi.toml \
     --persistent-state {{ env "XDG_CONFIG_HOME" }}/chezmoi/rootstate.boltdb \
     --destination / \

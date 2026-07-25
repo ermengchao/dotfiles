@@ -1,0 +1,14 @@
+copy-on-select = "clipboard"
+# clipboard-codepoint-map
+clipboard-read = "allow"
+clipboard-write = "allow"
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+clipboard-paste-bracketed-safe = true
+
+# == Selection ==
+# selection-foreground
+# selection-background
+# selection-word-chars
+selection-clear-on-typing = true
+selection-clear-on-copy = true

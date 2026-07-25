@@ -4,6 +4,8 @@ Host *
   TCPKeepAlive yes
   SendEnv LANG LC_*
   SendEnv IS_DARK_MODE
+  SendEnv COLORTERM TERM_PROGRAM TERM_PROGRAM_VERSION
+  SetEnv TERM=xterm-256color
   AddKeysToAgent yes
   IdentityFile ~/.ssh/keys/%n/%n
   IdentitiesOnly yes
@@ -36,10 +38,10 @@ Host minisforum
   HostName 100.100.20.3
   User chao
 
-Host raspberrypi
-  HostName 100.100.10.4
-  User chao
-
 Host r2s
   Hostname 100.100.20.1
+  User chao
+
+Host pi
+  HostName 100.100.10.4
   User chao
