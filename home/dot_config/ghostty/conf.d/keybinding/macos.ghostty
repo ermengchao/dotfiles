@@ -1,0 +1,5 @@
+keybind = "alt+arrow_left=esc:b"
+keybind = "alt+arrow_right=esc:f"
+
+keybind = "super+arrow_left=csi:H"
+keybind = "super+arrow_right=csi:F"
