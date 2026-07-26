@@ -1,7 +1,0 @@
-{
-    "dependencies": {},
-    "devDependencies": {
-        "@commitlint/cli": latest,
-        "gitmoji": latest
-    }
-}
