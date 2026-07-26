@@ -6,9 +6,15 @@ if not type -q gopass
     exit 1
 end
 
-if not set -q GPG_TTY
-    printf "‼️ GPG_TTY not set. Run set GPG_TTY (tty) to set.\n"
-    exit 1
+if not set -q GOPASS_AGE_PASSWORD
+    printf "⚠️ GOPASS_AGE_PASSWORD not set. Falling back to interactive mode.\n"
+    sleep {{ .scriptDelay }}
+    sleep {{ .scriptDelay }}
+
+    if not set -q GPG_TTY
+        printf "‼️ GPG_TTY not set. Run `set GPG_TTY (tty)` to set it.\n"
+        exit 1
+    end
 end
 
 printf "🧑‍💻 Setting gopass...\n"
