@@ -8,7 +8,7 @@ abbr xcode "open -a Xcode.app"
 {{   if eq .chezmoi.version.builtBy "Homebrew" -}}
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 {{   end -}}
-eval "$(ssh-agent -c 2>/dev/null)" >/dev/null
+eval "$(ssh-agent -c 2> /dev/null)" > /dev/null
 
 abbr sc systemctl
 abbr scu "systemctl --user"

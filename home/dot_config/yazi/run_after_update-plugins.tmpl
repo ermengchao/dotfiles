@@ -4,7 +4,7 @@
 printf "📦 Checking for updates for yazi plugins...\n"
 
 if type -q yazi
-    ya pkg install --discard >/dev/null
+    ya pkg install --discard > /dev/null 2> /dev/null
 
     printf "✅ Done.\n"
 else

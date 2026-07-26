@@ -11,7 +11,7 @@ eval "$(uv generate-shell-completion zsh)"
 source <(fzf --zsh)
 
 # OrbStack
-source $HOME/.orbstack/shell/init.zsh 2>/dev/null || :
+source $HOME/.orbstack/shell/init.zsh 2> /dev/null || :
 
 # Aliases
 alias apy="source .venv/bin/activate"
