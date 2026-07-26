@@ -5,7 +5,7 @@ if test -n (ls -A "$root_password_store" | string collect)
     set -x GIT_AUTHOR_NAME {{ .username | quote }}
     set -x GIT_AUTHOR_EMAIL {{ .email | quote }}
 
-    gopass --yes sync
+    gopass --yes git pull --ff-only > /dev/null
 end
 
 sleep {{ .scriptDelay }}

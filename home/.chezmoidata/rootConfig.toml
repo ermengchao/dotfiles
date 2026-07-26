@@ -1,7 +1,0 @@
-rootConfig = [
-  "bat",
-  "chezmoi",
-  "fish",
-  "nvim",
-  "yazi",
-]

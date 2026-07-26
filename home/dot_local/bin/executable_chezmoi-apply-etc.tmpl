@@ -4,14 +4,12 @@
   {{ if eq .chezmoi.version.builtBy "Homebrew" -}}
 sudo {{ env "HOMEBREW_PREFIX" }}/bin/chezmoi apply \
     --source {{ .rootConfigPath }} \
-    --destination / \
-    --mode symlink
+    --destination /
   {{ else -}}
 sudo /usr/bin/chezmoi apply \
     --source {{ .rootConfigPath }} \
     --config {{ env "XDG_CONFIG_HOME" }}/chezmoi/chezmoi.toml \
     --persistent-state {{ env "XDG_CONFIG_HOME" }}/chezmoi/rootstate.boltdb \
-    --destination / \
-    --mode symlink
+    --destination /
   {{ end -}}
 {{ end -}}
