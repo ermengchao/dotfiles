@@ -31,7 +31,7 @@ if not type -q paru
     set -x CARGO_HOME ~/.local/share/cargo
     set -x RUSTUP_HOME ~/.local/share/rustup
 
-    sudo pacman -S --needed --noconfirm base-devel rustup
+    sudo pacman -S --needed --noconfirm base-devel rustup > /dev/null
 
     if test -d $paru_path/.git
         git -C $paru_path pull --ff-only
@@ -44,7 +44,7 @@ if not type -q paru
     end
 
     cd $paru_path
-    rustup default stable
+    rustup default stable > /dev/null
     makepkg -si --noconfirm
 
     printf "✅ Done.\n"
