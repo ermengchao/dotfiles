@@ -1,0 +1,13 @@
+#!/usr/bin/env fish
+
+{{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
+printf "📦 Checking for updates for yazi plugins...\n"
+
+if type -q yazi
+    ya pkg install --discard >/dev/null
+
+    printf "✅ Done.\n"
+else
+    printf "‼️ Yazi is not installed. Skip installing.\n"
+end
+{{ end -}}
