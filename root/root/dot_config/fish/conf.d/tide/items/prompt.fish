@@ -1,0 +1,2 @@
+set -U tide_prompt_color_frame_and_connection $_thm_overlay_0
+set -U tide_prompt_color_separator_same_color $_thm_overlay_0

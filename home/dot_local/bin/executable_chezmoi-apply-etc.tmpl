@@ -2,11 +2,23 @@
 
 {{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
   {{ if eq .chezmoi.version.builtBy "Homebrew" -}}
-sudo {{ env "HOMEBREW_PREFIX" }}/bin/chezmoi apply \
+sudo /usr/bin/env \
+    HOME=/root \
+    XDG_CONFIG_HOME=/root/.config \
+    XDG_DATA_HOME=/root/.local/share \
+    XDG_STATE_HOME=/root/.local/state \
+    XDG_CACHE_HOME=/root/.cache \
+    {{ env "HOMEBREW_PREFIX" }}/bin/chezmoi apply \
     --source {{ .rootConfigPath }} \
     --destination /
   {{ else -}}
-sudo /usr/bin/chezmoi apply \
+sudo /usr/bin/env \
+    HOME=/root \
+    XDG_CONFIG_HOME=/root/.config \
+    XDG_DATA_HOME=/root/.local/share \
+    XDG_STATE_HOME=/root/.local/state \
+    XDG_CACHE_HOME=/root/.cache \
+    /usr/bin/chezmoi apply \
     --source {{ .rootConfigPath }} \
     --config {{ env "XDG_CONFIG_HOME" }}/chezmoi/chezmoi.toml \
     --persistent-state {{ env "XDG_CONFIG_HOME" }}/chezmoi/rootstate.boltdb \
