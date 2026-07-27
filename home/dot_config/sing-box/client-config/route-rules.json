@@ -125,6 +125,10 @@
         "outbound": "🌐 Proxy"
       },
       {
+        "rule_set": "siri",
+        "outbound": "🌐 Proxy"
+      },
+      {
         "rule_set": "geoip-cn",
         "outbound": "🟢 Direct"
       }
