@@ -17,6 +17,9 @@ Environment=UMASK=022
 
 Network=bridge
 PublishPort=0.0.0.0:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
+PublishPort=0.0.0.0:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
+PublishPort=[::]:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
+PublishPort=[::]:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
 
 Volume={{ env "XDG_CONFIG_HOME" }}/auto_bangumi/entry-host.sh:/entry-host.sh:ro
 Volume={{ env "XDG_CONFIG_HOME" }}/auto_bangumi:/app/config
