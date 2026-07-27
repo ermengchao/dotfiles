@@ -12,7 +12,8 @@ AutoUpdate=registry
 Environment=JM2EPUB_API_KEY={{ gopass "jm2epub/api_key" }}
 Environment=PORT={{ .ports.jm2epub }}
 
-PublishPort={{ .ports.jm2epub }}:{{ .ports.jm2epub }}
+Network=bridge
+PublishPort=[::]{{ .ports.jm2epub }}:{{ .ports.jm2epub }}
 
 [Install]
 WantedBy=default.target

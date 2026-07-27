@@ -16,8 +16,6 @@ Environment=TZ={{ template "getSystemTimezone" . }}
 Environment=UMASK=022
 
 Network=bridge
-PublishPort=0.0.0.0:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
-PublishPort=0.0.0.0:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
 PublishPort=[::]:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
 PublishPort=[::]:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
 

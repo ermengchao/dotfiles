@@ -18,9 +18,7 @@ Environment=UMASK=022
 Environment=START_NOGOSU=true
 
 Network=bridge
-PublishPort=0.0.0.0:{{ .ports.movie_pilot.nginx_port }}:{{ .ports.movie_pilot.nginx_port }}
 PublishPort=[::]:{{ .ports.movie_pilot.nginx_port }}:{{ .ports.movie_pilot.nginx_port }}
-PublishPort=0.0.0.0:{{ .ports.movie_pilot.port }}:{{ .ports.movie_pilot.port }}
 PublishPort=[::]:{{ .ports.movie_pilot.port }}:{{ .ports.movie_pilot.port }}
 
 Volume={{ env "XDG_CONFIG_HOME" }}/movie-pilot:/config

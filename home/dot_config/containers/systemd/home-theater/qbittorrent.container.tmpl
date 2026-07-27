@@ -16,11 +16,8 @@ Environment=WEBUI_PORT=3000
 Environment=TORRENTING_PORT=3001
 
 Network=bridge
-PublishPort=0.0.0.0:{{ .ports.qbittorrent.webui }}:{{ .ports.qbittorrent.webui }}
 PublishPort=[::]:{{ .ports.qbittorrent.webui }}:{{ .ports.qbittorrent.webui }}
-PublishPort=0.0.0.0:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.session }}
 PublishPort=[::]:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.session }}
-PublishPort=0.0.0.0:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.session }}/udp
 PublishPort=[::]:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.session }}/udp
 
 Volume={{ env "XDG_CONFIG_HOME" }}/qbittorrent:/config
