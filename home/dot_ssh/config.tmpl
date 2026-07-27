@@ -22,11 +22,6 @@ Host orb
   ProxyUseFdpass yes
 {{ end -}}
 
-Host arch.mac-mini
-  Hostname 100.100.10.4
-  User chao
-  IdentityFile ~/.ssh/keys/mac-mini
-
 Host apne*-*
   Hostname %h.proxy.er-meng.com
   User chao
@@ -34,6 +29,11 @@ Host apne*-*
 Host mac-mini
   Hostname 100.100.10.3
   User chao
+
+Host *.mac-mini
+  Hostname 100.100.10.4
+  User chao
+  IdentityFile ~/.ssh/keys/mac-mini
 
 Host macbook-air
   Hostname 100.100.10.128

@@ -36,16 +36,16 @@ if not type -q paru
     if test -d $paru_path/.git
         git -C $paru_path pull --ff-only
     else if test -e $paru_path
-        printf "❌ $paru_path exists but is not a Git repository.\n" >&2
+        printf "❌ $paru_path exists but is not a Git repository.\n"
         exit 1
     else
         mkdir -p (path dirname $paru_path)
-        git clone https://aur.archlinux.org/paru.git $paru_path
+        git clone https://aur.archlinux.org/paru.git $paru_path > /dev/null
     end
 
     cd $paru_path
     rustup default stable > /dev/null
-    makepkg -si --noconfirm
+    makepkg -si --noconfirm > /dev/null 2> /dev/null
 
     printf "✅ Done.\n"
 end
