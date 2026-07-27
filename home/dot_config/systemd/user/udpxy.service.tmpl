@@ -1,0 +1,11 @@
+[Unit]
+Description=udpxy multicast-to-HTTP proxy
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/udpxy -p {{ .ports.udpxy }} -m enu1 -T
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
