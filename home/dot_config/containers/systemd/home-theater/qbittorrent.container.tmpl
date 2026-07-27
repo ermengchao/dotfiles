@@ -21,3 +21,6 @@ PublishPort=3001:3001/udp
 
 Volume={{ env "XDG_CONFIG_HOME" }}/qbittorrent:/config
 Volume={{ .mediaPath }}:/downloads
+
+[Install]
+WantedBy=default.target

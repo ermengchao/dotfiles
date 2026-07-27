@@ -11,3 +11,6 @@ Image=docker.io/haishanh/yacd:latest
 AutoUpdate=registry
 
 PublishPort={{ .ports.yacd }}:80
+
+[Install]
+WantedBy=default.target

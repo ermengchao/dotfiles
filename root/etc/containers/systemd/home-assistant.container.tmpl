@@ -16,3 +16,6 @@ Environment=TZ={{ template "getSystemTimezone" . }}
 Volume=/etc/home-assistant:/config
 Volume=/etc/localtime:/etc/localtime:ro
 Volume=/run/dbus:/run/dbus:ro
+
+[Install]
+WantedBy=multi-user.target

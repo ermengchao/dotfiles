@@ -20,3 +20,6 @@ PublishPort={{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
 Volume={{ env "XDG_CONFIG_HOME" }}/auto_bangumi/entry-host.sh:/entry-host.sh:ro
 Volume={{ env "XDG_CONFIG_HOME" }}/auto_bangumi:/app/config
 Volume={{ env "XDG_DATA_HOME" }}/auto_bangumi:/app/data
+
+[Install]
+WantedBy=default.target
