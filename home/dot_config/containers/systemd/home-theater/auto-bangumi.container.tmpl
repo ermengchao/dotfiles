@@ -15,7 +15,8 @@ Entrypoint=/entry-host.sh
 Environment=TZ={{ template "getSystemTimezone" . }}
 Environment=UMASK=022
 
-PublishPort={{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
+Network=bridge
+PublishPort=0.0.0.0:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
 
 Volume={{ env "XDG_CONFIG_HOME" }}/auto_bangumi/entry-host.sh:/entry-host.sh:ro
 Volume={{ env "XDG_CONFIG_HOME" }}/auto_bangumi:/app/config

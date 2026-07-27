@@ -15,9 +15,10 @@ Environment=TZ={{ template "getSystemTimezone" . }}
 Environment=WEBUI_PORT=3000
 Environment=TORRENTING_PORT=3001
 
-PublishPort=3000:3000
-PublishPort=3001:3001
-PublishPort=3001:3001/udp
+Network=bridge
+PublishPort=0.0.0.0:{{ .ports.qbittorrent.webui }}:{{ .ports.qbittorrent.webui }}
+PublishPort=0.0.0.0:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.session }}
+PublishPort=0.0.0.0:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.session }}/udp
 
 Volume={{ env "XDG_CONFIG_HOME" }}/qbittorrent:/config
 Volume={{ .mediaPath }}:/downloads
