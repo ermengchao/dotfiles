@@ -13,6 +13,6 @@ Network=host
 
 Environment=TZ={{ template "getSystemTimezone" . }}
 
-Volume={{ env "XDG_CONFIG_HOME" }}/home-assistant:/config
+Volume=/etc/home-assistant:/config
 Volume=/etc/localtime:/etc/localtime:ro
 Volume=/run/dbus:/run/dbus:ro
