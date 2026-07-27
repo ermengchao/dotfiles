@@ -1,27 +1,27 @@
 [Unit]
-Description=Auto Bangumi Container
+Description = Auto Bangumi Container
 
 [Service]
-Restart=on-failure
+Restart = on-failure
 
 [Container]
-ContainerName=auto_bangumi
-Image=ghcr.io/estrellaxd/auto_bangumi:latest
-AutoUpdate=registry
+ContainerName = auto_bangumi
+Image = ghcr.io/estrellaxd/auto_bangumi:latest
+AutoUpdate = registry
 
-UserNS=keep-id
-Entrypoint=/entry-host.sh
+UserNS = keep-id
+Entrypoint = /entry-host.sh
 
-Environment=TZ={{ template "getSystemTimezone" . }}
-Environment=UMASK=022
+Environment = TZ={{ template "getSystemTimezone" . }}
+Environment = UMASK=022
 
-Network=bridge
-PublishPort=[::]:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
-PublishPort=[::]:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
+Network = bridge
+PublishPort = [::]:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
+PublishPort = [::]:{{ .ports.auto_bangumi }}:{{ .ports.auto_bangumi }}
 
-Volume={{ env "XDG_CONFIG_HOME" }}/auto_bangumi/entry-host.sh:/entry-host.sh:ro
-Volume={{ env "XDG_CONFIG_HOME" }}/auto_bangumi:/app/config
-Volume={{ env "XDG_DATA_HOME" }}/auto_bangumi:/app/data
+Volume = {{ env "XDG_CONFIG_HOME" }}/auto_bangumi/entry-host.sh:/entry-host.sh:ro
+Volume = {{ env "XDG_CONFIG_HOME" }}/auto_bangumi:/app/config
+Volume = {{ env "XDG_DATA_HOME" }}/auto_bangumi:/app/data
 
 [Install]
-WantedBy=default.target
+WantedBy = default.target

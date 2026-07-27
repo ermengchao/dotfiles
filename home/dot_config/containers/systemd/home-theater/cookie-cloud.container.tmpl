@@ -1,0 +1,13 @@
+[Unit]
+Description = Movie Pilot Container
+
+[Service]
+Restart = on-failure
+
+[Container]
+ContainerName = cookie-cloud
+Image = easychen/cookiecloud:latest
+AutoUpdate = registry
+
+Network = bridge
+PublishPort = [::]:{{ .ports.cookie_cloud }}:8088

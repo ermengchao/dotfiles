@@ -1,19 +1,19 @@
 [Unit]
-Description=JM2Epub Container
+Description = JM2Epub Container
 
 [Service]
-Restart=on-failure
+Restart = on-failure
 
 [Container]
-ContainerName=jm2epub
-Image=ghcr.io/ermengchao/jm2epub
-AutoUpdate=registry
+ContainerName = jm2epub
+Image = ghcr.io/ermengchao/jm2epub
+AutoUpdate = registry
 
-Environment=JM2EPUB_API_KEY={{ gopass "jm2epub/api_key" }}
-Environment=PORT={{ .ports.jm2epub }}
+Environment = JM2EPUB_API_KEY={{ gopass "jm2epub/api_key" }}
+Environment = PORT={{ .ports.jm2epub }}
 
-Network=bridge
-PublishPort=[::]{{ .ports.jm2epub }}:{{ .ports.jm2epub }}
+Network = bridge
+PublishPort = [::]{{ .ports.jm2epub }}:{{ .ports.jm2epub }}
 
 [Install]
-WantedBy=default.target
+WantedBy = default.target

@@ -1,27 +1,27 @@
 [Unit]
-Description=qBittorrent Container
+Description = qBittorrent Container
 
 [Service]
-Restart=on-failure
+Restart = on-failure
 
 [Container]
-ContainerName=qbittorrent
-Image=lscr.io/linuxserver/qbittorrent:latest
-AutoUpdate=registry
+ContainerName = qbittorrent
+Image = lscr.io/linuxserver/qbittorrent:latest
+AutoUpdate = registry
 
-UserNS=keep-id
+UserNS = keep-id
 
-Environment=TZ={{ template "getSystemTimezone" . }}
-Environment=WEBUI_PORT=3000
-Environment=TORRENTING_PORT=3001
+Environment = TZ={{ template "getSystemTimezone" . }}
+Environment = WEBUI_PORT=3000
+Environment = TORRENTING_PORT=3001
 
-Network=bridge
-PublishPort=[::]:{{ .ports.qbittorrent.webui }}:{{ .ports.qbittorrent.webui }}
-PublishPort=[::]:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.session }}
-PublishPort=[::]:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.session }}/udp
+Network = bridge
+PublishPort = [::]:{{ .ports.qbittorrent.webui }}:{{ .ports.qbittorrent.webui }}
+PublishPort = [::]:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.session }}
+PublishPort = [::]:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.session }}/udp
 
-Volume={{ env "XDG_CONFIG_HOME" }}/qbittorrent:/config
-Volume={{ .mediaPath }}:/downloads
+Volume = {{ env "XDG_CONFIG_HOME" }}/qbittorrent:/config
+Volume = {{ .mediaPath }}:/downloads
 
 [Install]
-WantedBy=default.target
+WantedBy = default.target
