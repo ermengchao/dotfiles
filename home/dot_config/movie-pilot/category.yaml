@@ -1,8 +1,8 @@
 movie:
   Action:
-    genre-ids: '28'
+    genre_ids: '28'
   Adventure:
-    genre-ids: '12'
+    genre_ids: '12'
   Comedy:
     genre_ids: '35'
   Documentary:
@@ -23,10 +23,8 @@ movie:
     genre_ids: '53'
   Uncategorize: {}
 tv:
-  Action:
-    genre-ids: '28'
-  Adventure:
-    genre-ids: '12'
+  Action&Adventure:
+    genre_ids: '10759'
   Comedy:
     genre_ids: '35'
   Documentary:
