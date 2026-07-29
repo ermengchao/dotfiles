@@ -1,0 +1,6 @@
+#!/usr/bin/env fish
+
+{{ if eq .chezmoi.os "darwin" -}}
+rm -rf /opt/homebrew/var/transmission
+ln -sf {{ env "XDG_CONFIG_HOME" }}/transmission /opt/homebrew/var/transmission
+{{ end }}
