@@ -21,7 +21,7 @@ PublishPort = [::]:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.sessio
 PublishPort = [::]:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.session }}/udp
 
 Volume = {{ env "XDG_CONFIG_HOME" }}/qbittorrent:/config
-Volume = {{ .mediaPath }}/qbittorrent:/downloads
+Volume = {{ .mediaPath }}/raw/qbittorrent:/downloads
 
 [Install]
 WantedBy = default.target
