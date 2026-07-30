@@ -1,0 +1,26 @@
+[Unit]
+Description = Transmission Container
+
+[Service]
+Restart = on-failure
+
+[Container]
+ContainerName = transmission
+Image = lscr.io/linuxserver/transmission:latest
+AutoUpdate = registry
+
+UserNS = keep-id
+
+Environment = TZ={{ template "getSystemTimezone" . }}
+Environment = PEERPORT={{ .ports.transmission.peer }}
+
+Network = bridge
+PublishPort = [::]:{{ .ports.transmission.rpc }}:9091
+PublishPort = [::]:{{ .ports.transmission.peer }}:{{ .ports.transmission.peer }}
+PublishPort = [::]:{{ .ports.transmission.peer }}:{{ .ports.transmission.peer }}/udp
+
+Volume = {{ env "XDG_CONFIG_HOME" }}/transmission:/config
+Volume = {{ .paths.media }}/downloads/transmission:/downloads
+
+[Install]
+WantedBy = default.target

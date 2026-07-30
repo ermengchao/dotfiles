@@ -51,10 +51,8 @@ username = "chao"
 fullname = "ermengchao"
 email = "zhangchao050530@gmail.com"
 gitHostUrl = "https://github.com"
-rootConfigPath = "{{ .chezmoi.workingTree }}/root"
 
 agentTimeout = 7200
-mediaPath = "/Volumes/HDD/Infuse"
 scriptDelay = 1
 
 [data.meta]
@@ -71,6 +69,10 @@ packageManager = {{ promptMultichoiceOnce . "meta.packageManager" "📦 Package 
 {{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
 isProxyServer = {{ promptBoolOnce . "meta.isProxyServer" "🌐 Whether a proxy server" false | toToml }}
 {{ end -}}
+
+[data.paths]
+rootSourceDir = "{{ .chezmoi.workingTree }}/root"
+media = "/Volumes/HDD/Media"
 
 [data.ports]
 # Reserved

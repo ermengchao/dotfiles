@@ -22,8 +22,9 @@ PublishPort = [::]:{{ .ports.movie_pilot.nginx_port }}:{{ .ports.movie_pilot.ngi
 PublishPort = [::]:{{ .ports.movie_pilot.port }}:{{ .ports.movie_pilot.port }}
 
 Volume = {{ env "XDG_CONFIG_HOME" }}/movie-pilot:/config
-Volume = {{ env "XDG_CONFIG_HOME" }}/qbittorrent/qBittorrent/BT_backup:/BT_backup
-Volume = {{ .mediaPath }}:/media
+Volume = {{ .paths.media }}:/media
+Volume = {{ env "XDG_CONFIG_HOME" }}/qbittorrent/qBittorrent/BT_backup:/torrents/qbittorrent
+Volume = {{ env "XDG_CONFIG_HOME" }}/transmission/torrents:/torrents/transmission
 
 [Install]
 WantedBy = default.target
