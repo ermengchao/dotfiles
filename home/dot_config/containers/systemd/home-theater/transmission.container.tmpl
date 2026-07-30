@@ -15,7 +15,7 @@ Environment = TZ={{ template "getSystemTimezone" . }}
 Environment = PEERPORT={{ .ports.transmission.peer }}
 
 Network = bridge
-PublishPort = [::]:{{ .ports.transmission.rpc }}:9091
+PublishPort = [::]:{{ .ports.transmission.rpc }}:{{ .ports.transmission.rpc }}
 PublishPort = [::]:{{ .ports.transmission.peer }}:{{ .ports.transmission.peer }}
 PublishPort = [::]:{{ .ports.transmission.peer }}:{{ .ports.transmission.peer }}/udp
 
