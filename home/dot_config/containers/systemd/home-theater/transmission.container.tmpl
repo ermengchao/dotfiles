@@ -11,6 +11,8 @@ AutoUpdate = registry
 
 UserNS = keep-id
 
+Environment = USER=chao
+Environment = PASS={{ gopass "chao/password" }}
 Environment = TZ={{ template "getSystemTimezone" . }}
 Environment = PEERPORT={{ .ports.transmission.peer }}
 
