@@ -54,10 +54,17 @@ desc = "Yank selected files (copy)"
 
 [[mgr.prepend_keymap]]
 
-on   = "<Enter>"
+on   = "<Space>"
 for  = "macos"
 run  = "shell -- qlmanage -p %s"
 desc = "Preview selected files via QuickLook on macOS"
+
+[[mgr.prepend_keymap]]
+
+on   = "<Enter>"
+for  = "macos"
+run  = [ "toggle", "arrow 1" ]
+desc = "Toggle the current selection state"
 
 [[mgr.prepend_keymap]]
 
