@@ -8,8 +8,6 @@ end
 
 if not set -q GOPASS_AGE_PASSWORD
     printf "⚠️ GOPASS_AGE_PASSWORD not set. Falling back to interactive mode.\n"
-    sleep {{ .scriptDelay }}
-    sleep {{ .scriptDelay }}
 
     if not set -q GPG_TTY
         printf "‼️ GPG_TTY not set. Run `set GPG_TTY (tty)` to set it.\n"
@@ -21,8 +19,6 @@ printf "🧑‍💻 Setting gopass...\n"
 gopass config age.agent-enabled true > /dev/null
 gopass config age.agent-timeout {{ .agentTimeout }} > /dev/null
 printf "✅ Done.\n"
-
-sleep {{ .scriptDelay }}
 
 set -gx GOPASS_SSH_DIR ~/.ssh
 if not test -f ~/.ssh/id_ed25519
@@ -50,5 +46,4 @@ if not string match -q "credentials" (git remote | string trim)
     git fetch --quiet credentials
 end
 
-sleep {{ .scriptDelay }}
 {{ end -}}

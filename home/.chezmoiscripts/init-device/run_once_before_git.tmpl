@@ -10,6 +10,5 @@ if not string match -q "dotfiles" (git remote | string trim)
     git branch --set-upstream-to=dotfiles/main main > /dev/null
 
     printf "✅ Done.\n"
-    sleep {{ .scriptDelay }}
 end
 {{ end -}}
