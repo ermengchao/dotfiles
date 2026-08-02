@@ -8,6 +8,7 @@ sudo /usr/bin/env \
     XDG_DATA_HOME=/root/.local/share \
     XDG_STATE_HOME=/root/.local/state \
     XDG_CACHE_HOME=/root/.cache \
+    HOMEBREW_PREFIX={{ env "HOMEBREW_PREFIX" }} \
     PATH={{ env "HOMEBREW_PREFIX" }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     {{ env "HOMEBREW_PREFIX" }}/bin/chezmoi apply \
     --init \
