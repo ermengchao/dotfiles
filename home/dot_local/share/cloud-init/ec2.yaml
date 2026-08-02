@@ -1,8 +1,8 @@
 #cloud-config
 
 # Meta
-preserve_hostname: true
-hostname: ec2
+# preserve_hostname: true
+# hostname: ec2
 # fqdn: ec2.er-meng.com
 # prefer_fqdn_over_hostname: false
 timezone: Asia/Tokyo
@@ -17,25 +17,13 @@ users:
     sudo: ALL=(ALL) ALL
     shell: /bin/bash
     ssh_authorized_keys: 
-      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJVHXrNokh6IByZC0FxTkRY18chyBtRsS0Gb1NQj60R/ zhangchao050530@gmail.com"
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMiTuWJDyAsg1BpehtZe5WPVA5sx0QbRVK0KEvd4oxvA apne1-01"
 
 # SSH
 allow_public_ssh_keys: true
 disable_root: true
 disable_root_opts: no-port-forwarding,no-agent-forwarding,no-X11-forwarding
 ssh_pwauth: false
-write_files:
-  - path: /etc/ssh/sshd_config.d/10-chao.conf
-    owner: root:root
-    permissions: '0644'
-    content: |
-      KexAlgorithms sntrup761x25519-sha512,mlkem768x25519-sha256
-  - path: /etc/ssh/sshd_config.d/90-connection-keepalive.conf
-    owner: root:root
-    permissions: '0644'
-    content: |
-      ClientAliveInterval 60
-      ClientAliveCountMax 3
 
 # Swap
 swap:
