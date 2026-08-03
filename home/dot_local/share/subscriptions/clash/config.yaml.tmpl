@@ -151,18 +151,23 @@ listeners:
 proxies:
   - name: "🇯🇵 Japan 01"
     type: "ss"
-    server: "proxy.er-meng.com"
+    server: "apne1-01.proxy.er-meng.com"
     port: {{ .ports.proxy.shadowsocks }}
     password: {{ gopass "proxy/shadowsocks" | quote }}
     cipher: "2022-blake3-aes-128-gcm"
   - name: "🇯🇵 Japan 02"
+    type: "vmess"
+    server: "apne1-01.proxy.er-meng.com"
+    port: {{ .ports.proxy.vmess }}
+    password: {{ gopass "proxy/trojan" | quote }}
+  - name: "🇯🇵 Japan 03"
     type: "trojan"
-    server: "proxy.er-meng.com"
+    server: "apne1-01.proxy.er-meng.com"
     port: {{ .ports.proxy.trojan }}
     password: {{ gopass "proxy/trojan" | quote }}
   - name: "🇯🇵 Japan 03"
     type: "hysteria2"
-    server: "proxy.er-meng.com"
+    server: "apne1-01.proxy.er-meng.com"
     port: {{ .ports.proxy.hysteria2 }}
     password: {{ gopass "proxy/hysteria2" | quote }}
 

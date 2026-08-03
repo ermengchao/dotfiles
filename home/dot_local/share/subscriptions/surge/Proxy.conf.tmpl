@@ -2,32 +2,33 @@
 loglevel = notify
 show-error-page = true
 show-error-page-for-reject = true
-ipv6 = false
+ipv6 = true
 ipv6-vif = auto
 block-quic = always-allow
 proxy-test-url = http://www.google.com/generate_204
 test-timeout = 2
 geoip-maxmind-url = https://github.com/Hackl0us/GeoIP2-CN/raw/release/Country.mmdb
+always-real-ip = *.taileee60e.ts.net, xbox.*.microsoft.com, *.xboxlive.com, *.stun.playstation.net, *.srv.nintendo.net, *.battlenet.com.cn, *.battlenet.com, *.blzstatic.cn, *.battle.net, *proxy.er-meng.com
+skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, fd7a:115c:a1e0::/48, 17.0.0.0/8, 169.254.0.0/16, 0.0.0.0, localhost, *.local, *.taileee60e.ts.net, *.tailscale.io, *.crashlytics.com
 exclude-simple-hostnames = true
-skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, 17.0.0.0/8, 169.254.0.0/16, 0.0.0.0, localhost, *.local, *.crashlytics.com
-hijack-dns = 8.8.8.8:53, 8.8.4.4:53
-always-real-ip = *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com*.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com, *.battlenet.com.cn, *.battlenet.com, *.blzstatic.cn, *.battle.net
-external-controller-access = {{ gopass "chao/password" }}@0.0.0.0:9091
+external-controller-access = {{ gopass "chao/password" }}@0.0.0.0:{{ .ports.yacd }}
 http-api-web-dashboard = true
 http-api = {{ gopass "chao/password" }}@0.0.0.0:{{ .ports.clash_api }}
 http-api-tls = false
 
 # DNS
-# encrypted-dns-server = https://dns.alidns.com/dns-query, https://cloudflare-dns.com/dns-query, https://dns.google/dns-query
-# encrypted-dns-follow-outbound-mode = true
-# encrypted-dns-skip-cert-verification = true
+dns-server = 1.1.1.1, 223.5.5.5
+encrypted-dns-server = https://cloudflare-dns.com/dns-query
+encrypted-dns-follow-outbound-mode = true
+encrypted-dns-skip-cert-verification = false
 auto-suspend = true
+hijack-dns = *:53
 
 # iOS only
-wifi-access-http-port = 8080
-wifi-access-socks5-port = 1080
-wifi-assist = true
-all-hybrid = false
+wifi-access-http-port = {{ .ports.proxy.http }}
+wifi-access-socks5-port = {{ .ports.proxy.socks }}
+wifi-assist = false
+all-hybrid = true
 allow-wifi-access = true
 allow-hotspot-access = true
 hide-vpn-icon = false
@@ -39,21 +40,27 @@ include-local-networks = false
 # macOS only
 http-listen = 0.0.0.0:{{ .ports.proxy.http }}
 socks5-listen = 0.0.0.0:{{ .ports.proxy.socks }}
+proxy-restricted-to-lan = false
 read-etc-hosts = true
 set-system-socks-proxy = true
 udp-policy-not-supported-behaviour = DIRECT
-dns-server = system, 100.100.100.100
+use-local-host-item-for-proxy = true
+internet-test-url = http://apple.com/
 
 [Proxy]
 🟢 Direct = direct
 🔴 Reject = reject
-🇯🇵 Japan 01 = ss, {{ .meta.hostname }}.proxy.er-meng.com, {{ .ports.proxy.shadowsocks }}, encrypt-method=2022-blake3-aes-128-gcm, password={{ gopass "proxy/shadowsocks" }}
-🇯🇵 Japan 02 = trojan, {{ .meta.hostname }}.proxy.er-meng.com, {{ .ports.proxy.trojan }}, username=chao, password={{ gopass "proxy/trojan" }}
-🇯🇵 Japan 03 = hysteria2, {{ .meta.hostname }}.proxy.er-meng.com, {{ .ports.proxy.hysteria2 }}, password={{ gopass "proxy/hysteria2" }}
+🇯🇵 Japan 01 = ss, apne1-01.proxy.er-meng.com, {{ .ports.proxy.shadowsocks }}, encrypt-method=2022-blake3-aes-128-gcm, password={{ gopass "proxy/shadowsocks" | quote }}
+🇯🇵 Japan 02 = vmess, apne1-01.proxy.er-meng.com, 443, username={{ gopass "proxy/vmess" | quote }}, ws=true, ws-path=/{{ gopass "proxy/vmess" }}, ws-headers=Host:"apne1-01.proxy.er-meng.com", vmess-aead=true, tls=true, tfo=true, sni=apne1-01.proxy.er-meng.com
+🇯🇵 Japan 03 = trojan, apne1-01.proxy.er-meng.com, {{ .ports.proxy.trojan }}, username=chao, password={{ gopass "proxy/trojan" | quote }}
+🇯🇵 Japan 04 = snell, apne1-01.proxy.er-meng.com, {{ .ports.proxy.snell }}, psk={{ gopass "proxy/snell" | quote }}, version=5, reuse=true
+🇯🇵 Japan 05 = tuic-v5, apne1-01.proxy.er-meng.com, {{ .ports.proxy.tuic }}, password={{ gopass "proxy/tuic" | quote }}, uuid={{ gopass "proxy/tuic" | quote }}, sni=apne1-01.proxy.er-meng.com, alpn=h3
+🇯🇵 Japan 06 = hysteria2, apne1-01.proxy.er-meng.com, {{ .ports.proxy.hysteria2 }}, password={{ gopass "proxy/hysteria2" | quote }}
+🇯🇵 Japan 07 = anytls, apne1-01.proxy.er-meng.com, {{ .ports.proxy.anytls }}, password={{ gopass "proxy/anytls" | quote }}
 
 [Proxy Group]
-🌐 Proxy = select, "✨ Auto", "🇯🇵 Japan 01", "🇯🇵 Japan 02", "🇯🇵 Japan 03"
-✨ Auto = smart, "🇯🇵 Japan 01", "🇯🇵 Japan 02", "🇯🇵 Japan 03"
+🌐 Proxy = select, "✨ Auto", "🇯🇵 Japan 01", "🇯🇵 Japan 02", "🇯🇵 Japan 03", "🇯🇵 Japan 04", "🇯🇵 Japan 05", "🇯🇵 Japan 06", "🇯🇵 Japan 07"
+✨ Auto = smart, "🇯🇵 Japan 01", "🇯🇵 Japan 02", "🇯🇵 Japan 03", "🇯🇵 Japan 04", "🇯🇵 Japan 05", "🇯🇵 Japan 06", "🇯🇵 Japan 07", hidden=true
 📺 AD = select, "🌐 Proxy", "🟢 Direct", "🔴 Reject", default=🔴 Reject
 🧠 AI = select, "🌐 Proxy", "🟢 Direct"
 🎮 Game = select, "🌐 Proxy", "🟢 Direct"
@@ -99,11 +106,12 @@ RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/r
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GitHub/GitHub.list,"🌐 Proxy","update-interval=86400"
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Global/Global_All.list,"🌐 Proxy","update-interval=86400"
 RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list,"🌐 Proxy","update-interval=86400"
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Siri/Siri.list,"🌐 Proxy","update-interval=86400"
 
 # IP
 GEOIP,CN,"🟢 Direct"
-
-FINAL,🐟 Final
+FINAL,🐟 Final,dns-failed
 
 [Host]
-*.ts.net = server:100.100.100.100
+*.taileee60e.ts.net = server:100.100.100.100
+*.proxy.er-meng.com = server:223.5.5.5
