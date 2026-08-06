@@ -1,0 +1,3 @@
+{{ $base := includeTemplate "dot_config/fastfetch/base.json" | fromJson -}}
+{{ $os := includeTemplate (printf "dot_config/fastfetch/%s.json" .chezmoi.os) | fromJson -}}
+{{ list $base $os | jq ".[0] * .[1]" | first | toPrettyJson -}}

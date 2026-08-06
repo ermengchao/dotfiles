@@ -1,0 +1,3 @@
+{{ $base := includeTemplate "dot_config/codesnap/base.json.tmpl" | fromJson -}}
+{{ $theme := includeTemplate "dot_config/codesnap/catppuccin-mocha-colors.json" | fromJson -}}
+{{ list $base $theme | jq ".[0] * .[1]" | first | toPrettyJson -}}

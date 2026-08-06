@@ -3,3 +3,5 @@ config-file = macos.ghostty
 # config-file = tmux.ghostty
 
 keybind = "global:ctrl+backquote=toggle_quick_terminal"
+
+keybind = "command+r=text:\x1b\x12"

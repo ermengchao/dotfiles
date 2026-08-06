@@ -1,0 +1,21 @@
+{
+  "snapshot_config": {
+    "theme": "Catppuccin Mocha",
+    "line_number_color": "#7f849c",
+    "window": {
+      "title_config": {
+        "color": "#cdd6f4"
+      }
+    },
+    "code_config": {
+      "breadcrumbs": {
+        "color": "#7f849c"
+      }
+    },
+    "command_output_config": {
+      "prompt_color": "#a6e3a1",
+      "command_color": "#89b4fa",
+      "string_arg_color": "#a6e3a1"
+    }
+  }
+}

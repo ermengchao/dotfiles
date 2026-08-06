@@ -1,0 +1,21 @@
+{
+  "snapshot_config": {
+    "theme": "Catppuccin Latte",
+    "line_number_color": "#8c8fa1",
+    "window": {
+      "title_config": {
+        "color": "#4c4f69"
+      }
+    },
+    "code_config": {
+      "breadcrumbs": {
+        "color": "#8c8fa1"
+      }
+    },
+    "command_output_config": {
+      "prompt_color": "#40a02b",
+      "command_color": "#1e66f5",
+      "string_arg_color": "#40a02b"
+    }
+  }
+}

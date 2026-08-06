@@ -43,7 +43,6 @@
           - age
           - git
           - gopass
-          - jq
         state: present
         update_cache: true
 

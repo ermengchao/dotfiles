@@ -14,13 +14,15 @@ Host apne*-*
   User chao
 
 Host arch.mac-mini
-  Hostname arch.{{ tailnet }}
+  Hostname arch.{{ .tailnet }}
   User chao
   IdentityFile ~/.ssh/keys/mac-mini
 
-Host *
-  Hostname %n.{{ tailnet }}
+Host * !*.*
+  Hostname %h.{{ .tailnet }}
   User chao
+
+Host *
   ServerAliveInterval 60
   ServerAliveCountMax 3
   TCPKeepAlive yes

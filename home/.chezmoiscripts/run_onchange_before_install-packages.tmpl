@@ -40,8 +40,11 @@ begin
 
 end | $brew_prefix/bin/brew bundle --file=/dev/stdin > /dev/null
 {{     if eq $.chezmoi.os "darwin" -}}
+printf "🧑‍💻 Linking core services to /Applications...\n"
+sudo ln -s "/System/Library/CoreServices/Applications" "/Applications/CoreServices"
+printf "✅ Done.\n"
 printf "🧑‍💻 Linking Xcode tools to /Applications...\n"
-sudo ln -sf /Applications/Xcode.app/Contents/Applications /Applications/Developer\ Tools
+sudo ln -s "/Applications/Xcode.app/Contents/Applications" "/Applications/Developer Tools"
 printf "✅ Done.\n"
 
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"

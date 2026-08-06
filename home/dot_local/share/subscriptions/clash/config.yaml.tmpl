@@ -1,98 +1,80 @@
 # General
 mode: rule
 log-level: warning
+ipv6: true
+find-process-mode: strict
+tcp-concurrent: true
+unified-delay: true
+
 profile:
   store-selected: true
   store-fake-ip: false
+
 geodata-mode: true
 geo-auto-update: true
 geo-update-interval: 24
 geox-url:
   geoip: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
   geosite: https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
-find-process-mode: strict
-tcp-concurrent: true
-ipv6: true
-unified-delay: true
 
-# External Access
+# External access
 allow-lan: true
 bind-address: "*"
-#authentication:
-#  - 'chao:{{ gopass "chao/password" }}'
-skip-auth-prefixes:
-  - 127.0.0.1/8
-  - 10.0.0.0/8
-  - 172.16.0.0/12
-  - 192.168.0.0/16
-  - 100.64.0.0/10
-  - ::1/128
-  - fd7a:115c:a1e0::/48
-external-controller: 0.0.0.0:9090
-external-controller-tls: 0.0.0.0:9091
-# secret: {{ gopass "chao/password" }}
+port: {{ .ports.proxy.http }}
+socks-port: {{ .ports.proxy.socks }}
+external-controller: 0.0.0.0:{{ .ports.clash_api }}
+secret: {{ gopass "chao/password" | quote }}
 external-controller-cors:
   allow-origins:
-    - '*'
+    - "*"
   allow-private-network: true
-routing-mark: 8080
 
+# DNS
 dns:
   enable: true
-  enhanced-mode: fake-ip
-  nameserver:
-    - system
-    - https://dns.alidns.com/dns-query
-    - https://dns.cloudflare.com/dns-query
-  default-nameserver:
-    - 223.5.5.5
-    - 1.1.1.1
-  cache-algorithm: arc
-  prefer-h3: true
-  use-hosts: true
-  use-system-hosts: false
-  respect-rules: false
   listen: 0.0.0.0:1053
   ipv6: true
+  enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - "+.lan"
-    - "+.argotunnel.com"
-    - "+.msftconnecttest.com"
-    - "+.msftncsi.com"
-    - "localhost.ptlogin2.qq.com"
-    - "nmcheck.gnome.org"
-    - "nominatim.gnome.org"
-    - "location.services.mozilla.com"
-    - "ping.archlinux.org"
-  nameserver-policy:
-    "+.arpa": "10.0.0.1"
-    "*.ts.net": "100.100.100.100"
-  fallback:
-    - https://doh.pub/dns-query
-    - tls://1.1.1.1
-    - tls://8.8.8.8
-  proxy-server-nameserver:
+    - "localhost"
+    - "*.local"
+    - "*.taileee60e.ts.net"
+    - "xbox.*.microsoft.com"
+    - "*.xboxlive.com"
+    - "*.stun.playstation.net"
+    - "*.srv.nintendo.net"
+    - "*.battlenet.com.cn"
+    - "*.battlenet.com"
+    - "*.blzstatic.cn"
+    - "*.battle.net"
+    - "*proxy.er-meng.com"
+  cache-algorithm: arc
+  prefer-h3: false
+  use-hosts: true
+  use-system-hosts: true
+  respect-rules: true
+  default-nameserver:
     - 1.1.1.1
-    - 8.8.8.8
-  direct-nameserver:
-    - system
     - 223.5.5.5
+  nameserver:
+    - 1.1.1.1
+    - 223.5.5.5
+    - https://cloudflare-dns.com/dns-query
+  proxy-server-nameserver:
+    - 223.5.5.5
+    - 1.1.1.1
+  direct-nameserver:
+    - 223.5.5.5
+    - 1.1.1.1
   direct-nameserver-follow-policy: true
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    nameserver-policy:
-      - gfw
-    ipcidr:
-      - 240.0.0.0/4
-    domain:
-      - '+.google.com'
-      - '+.facebook.com'
-      - '+.youtube.com'
+  nameserver-policy:
+    "*.taileee60e.ts.net": 100.100.100.100
+    "*.proxy.er-meng.com": 223.5.5.5
+
 hosts:
-  '*.ts.net': '100.100.100.100'
+  "*.taileee60e.ts.net": 100.100.100.100
 
 sniffer:
   enable: true
@@ -101,75 +83,111 @@ sniffer:
   override-destination: false
   sniff:
     HTTP:
-      ports: 
+      ports:
         - 80
       override-destination: true
     TLS:
-      ports: 
+      ports:
         - 443
         - 8443
     QUIC:
-      ports: 
+      ports:
         - 443
         - 8443
-  skip-domain:
-    - 'Mijia Cloud'
-    - 'dlg.io.mi.com'
-    - '+.apple.com'
-  force-domain:
-    - 'google.com'
 
-# Inbounds
-listeners:
-  - name: http
-    type: http
-    port: {{ .ports.proxy.http }}
-    listen: 0.0.0.0
-  - name: socks
-    type: socks
-    port: {{ .ports.proxy.socks }}
-    listen: 0.0.0.0
-  - name: tun
-    type: tun
-    stack: mixed
-    auto-route: true
-    auto-redirect: true
-    auto-detect-interface: true
-    strict-route: false
-    device: mihomo
-    dns-hijack:
+# TUN
+tun:
+  enable: true
+  stack: mixed
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  strict-route: false
+  dns-hijack:
     - any:53
     - tcp://any:53
-    exclude-interface:
-    - Tailscale
-    - tailscale0
-    route-exclude-address:
+  route-exclude-address:
+    - 0.0.0.0/32
+    - 10.0.0.0/8
+    - 17.0.0.0/8
     - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+    - 192.168.0.0/16
     - fd7a:115c:a1e0::/48
 
 # Outbounds
 proxies:
   - name: "🇯🇵 Japan 01"
-    type: "ss"
-    server: "apne1-01.proxy.er-meng.com"
+    type: ss
+    server: apne1-01.proxy.er-meng.com
     port: {{ .ports.proxy.shadowsocks }}
+    cipher: 2022-blake3-aes-128-gcm
     password: {{ gopass "proxy/shadowsocks" | quote }}
-    cipher: "2022-blake3-aes-128-gcm"
+    udp: true
+
   - name: "🇯🇵 Japan 02"
-    type: "vmess"
-    server: "apne1-01.proxy.er-meng.com"
-    port: {{ .ports.proxy.vmess }}
-    password: {{ gopass "proxy/trojan" | quote }}
+    type: vmess
+    server: apne1-01.proxy.er-meng.com
+    port: 443
+    uuid: {{ gopass "proxy/vmess" | quote }}
+    alterId: 0
+    cipher: auto
+    udp: true
+    tls: true
+    servername: apne1-01.proxy.er-meng.com
+    tfo: true
+    network: ws
+    ws-opts:
+      path: /{{ gopass "proxy/vmess" }}
+      headers:
+        Host: apne1-01.proxy.er-meng.com
+
   - name: "🇯🇵 Japan 03"
-    type: "trojan"
-    server: "apne1-01.proxy.er-meng.com"
+    type: trojan
+    server: apne1-01.proxy.er-meng.com
     port: {{ .ports.proxy.trojan }}
     password: {{ gopass "proxy/trojan" | quote }}
-  - name: "🇯🇵 Japan 03"
-    type: "hysteria2"
-    server: "apne1-01.proxy.er-meng.com"
+    sni: apne1-01.proxy.er-meng.com
+    udp: true
+
+  - name: "🇯🇵 Japan 04"
+    type: snell
+    server: apne1-01.proxy.er-meng.com
+    port: {{ .ports.proxy.snell }}
+    psk: {{ gopass "proxy/snell" | quote }}
+    version: 5
+    reuse: true
+    udp: true
+
+  - name: "🇯🇵 Japan 05"
+    type: tuic
+    server: apne1-01.proxy.er-meng.com
+    port: {{ .ports.proxy.tuic }}
+    uuid: {{ gopass "proxy/tuic" | quote }}
+    password: {{ gopass "proxy/tuic" | quote }}
+    sni: apne1-01.proxy.er-meng.com
+    alpn:
+      - h3
+    congestion-controller: bbr
+    reduce-rtt: false
+    udp-relay-mode: native
+
+  - name: "🇯🇵 Japan 06"
+    type: hysteria2
+    server: apne1-01.proxy.er-meng.com
     port: {{ .ports.proxy.hysteria2 }}
     password: {{ gopass "proxy/hysteria2" | quote }}
+    sni: apne1-01.proxy.er-meng.com
+
+  - name: "🇯🇵 Japan 07"
+    type: anytls
+    server: apne1-01.proxy.er-meng.com
+    port: {{ .ports.proxy.anytls }}
+    password: {{ gopass "proxy/anytls" | quote }}
+    sni: apne1-01.proxy.er-meng.com
+    udp: true
 
 proxy-groups:
   - name: "🟢 Direct"
@@ -177,11 +195,13 @@ proxy-groups:
     proxies:
       - DIRECT
     hidden: true
+
   - name: "🔴 Reject"
     type: select
     proxies:
       - REJECT
     hidden: true
+
   - name: "🌐 Proxy"
     type: select
     proxies:
@@ -189,35 +209,51 @@ proxy-groups:
       - "🇯🇵 Japan 01"
       - "🇯🇵 Japan 02"
       - "🇯🇵 Japan 03"
+      - "🇯🇵 Japan 04"
+      - "🇯🇵 Japan 05"
+      - "🇯🇵 Japan 06"
+      - "🇯🇵 Japan 07"
+
   - name: "✨ Auto"
     type: url-test
-    url: 'https://www.gstatic.com/generate_204'
+    url: http://www.google.com/generate_204
     interval: 300
+    timeout: 2000
+    hidden: true
     proxies:
       - "🇯🇵 Japan 01"
       - "🇯🇵 Japan 02"
       - "🇯🇵 Japan 03"
+      - "🇯🇵 Japan 04"
+      - "🇯🇵 Japan 05"
+      - "🇯🇵 Japan 06"
+      - "🇯🇵 Japan 07"
+
   - name: "📺 AD"
     type: select
     proxies:
+      - "🔴 Reject"
       - "🌐 Proxy"
       - "🟢 Direct"
-      - "🔴 Reject"
+
   - name: "🧠 AI"
     type: select
     proxies:
       - "🌐 Proxy"
       - "🟢 Direct"
+
   - name: "🎮 Game"
     type: select
     proxies:
       - "🌐 Proxy"
       - "🟢 Direct"
+
   - name: "🎥 Media"
     type: select
     proxies:
       - "🌐 Proxy"
       - "🟢 Direct"
+
   - name: "🐟 Final"
     type: select
     proxies:
@@ -225,11 +261,14 @@ proxy-groups:
       - "🟢 Direct"
 
 rules:
+  # Match Surge's skip-proxy domains before remote rule sets.
+  - DOMAIN-SUFFIX,local,🟢 Direct
+  - DOMAIN-SUFFIX,taileee60e.ts.net,🟢 Direct
+  - DOMAIN-SUFFIX,tailscale.io,🟢 Direct
+  - DOMAIN-SUFFIX,crashlytics.com,🟢 Direct
+
   # 📺 AD
-  - RULE-SET,advertising,REJECT
-  - RULE-SET,zhihu_ads,REJECT
-  - RULE-SET,hijacking,REJECT
-  - RULE-SET,privacy,REJECT
+  - RULE-SET,advertising,🔴 Reject
 
   # 🧠 AI
   - RULE-SET,ai_chao,🧠 AI
@@ -239,11 +278,11 @@ rules:
   - RULE-SET,openai,🧠 AI
 
   # 🟢 Direct
-  - RULE-SET,direct_chao,DIRECT
-  - RULE-SET,apple,DIRECT
-  - RULE-SET,china_max,DIRECT
-  - RULE-SET,download,DIRECT
-  - RULE-SET,lan,DIRECT
+  - RULE-SET,apple,🟢 Direct
+  - RULE-SET,china_max,🟢 Direct
+  - RULE-SET,direct_chao,🟢 Direct
+  - RULE-SET,download,🟢 Direct
+  - RULE-SET,lan,🟢 Direct
 
   # 🎮 Game
   - RULE-SET,game_chao,🎮 Game
@@ -260,14 +299,16 @@ rules:
 
   # 🌐 Proxy
   - RULE-SET,proxy_chao,🌐 Proxy
+  - RULE-SET,amazon_cloud,🌐 Proxy
+  - RULE-SET,apple_proxy,🌐 Proxy
   - RULE-SET,developer,🌐 Proxy
-  - RULE-SET,google,🌐 Proxy
   - RULE-SET,github,🌐 Proxy
+  - RULE-SET,global,🌐 Proxy
+  - RULE-SET,google,🌐 Proxy
+  - RULE-SET,siri,🌐 Proxy
 
-  # IP
-  - GEOIP, CN, DIRECT
-  - RULE-SET,amazon_cloud,🌐 Proxy, no-resolve
-
+  # IP and final
+  - GEOIP,CN,🟢 Direct
   - MATCH,🐟 Final
 
 rule-providers:
@@ -275,29 +316,8 @@ rule-providers:
   advertising:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Advertising/Advertising_Classical.yaml
     path: ./rule-providers/AD/advertising.yaml
-    interval: 86400
-
-  zhihu_ads:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ZhihuAds/ZhihuAds.yaml
-    path: ./rule-providers/AD/zhihu_ads.yaml
-    interval: 86400
-
-  hijacking:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hijacking/Hijacking.yaml
-    path: ./rule-providers/AD/hijacking.yaml
-    interval: 86400
-
-  privacy:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Privacy/Privacy.yaml
-    path: ./rule-providers/AD/privacy.yaml
     interval: 86400
 
   # 🧠 AI
@@ -314,7 +334,7 @@ rule-providers:
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml
     path: ./rule-providers/AI/claude.yaml
     interval: 86400
-    
+
   copilot:
     type: http
     behavior: classical
@@ -337,25 +357,25 @@ rule-providers:
     interval: 86400
 
   # 🟢 Direct
-  direct_chao:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/ermengchao/proxy_rule_script/main/rule/Clash/Direct/Direct.yaml
-    path: ./rule-providers/Direct/direct_chao.yaml
-    interval: 86400
-
   apple:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Classical.yaml
     path: ./rule-providers/Direct/apple.yaml
     interval: 86400
 
   china_max:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml
     path: ./rule-providers/Direct/china_max.yaml
+    interval: 86400
+
+  direct_chao:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/ermengchao/proxy_rule_script/main/rule/Clash/Direct/Direct.yaml
+    path: ./rule-providers/Direct/direct_chao.yaml
     interval: 86400
 
   download:
@@ -398,7 +418,7 @@ rule-providers:
   netflix:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_Classical.yaml
     path: ./rule-providers/Media/netflix.yaml
     interval: 86400
 
@@ -445,6 +465,20 @@ rule-providers:
     path: ./rule-providers/Proxy/proxy_chao.yaml
     interval: 86400
 
+  amazon_cloud:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Cloud/AmazonCloud/AmazonCloud_Classical.yaml
+    path: ./rule-providers/Proxy/amazon_cloud.yaml
+    interval: 86400
+
+  apple_proxy:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AppleProxy/AppleProxy.yaml
+    path: ./rule-providers/Proxy/apple_proxy.yaml
+    interval: 86400
+
   developer:
     type: http
     behavior: classical
@@ -452,11 +486,18 @@ rule-providers:
     path: ./rule-providers/Proxy/developer.yaml
     interval: 86400
 
-  amazon_cloud:
+  github:
     type: http
-    behavior: ipcidr
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Cloud/AmazonCloud/AmazonCloud_IP.yaml
-    path: ./rule-providers/Proxy/amazon_cloud.yaml
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml
+    path: ./rule-providers/Proxy/github.yaml
+    interval: 86400
+
+  global:
+    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global_Classical.yaml
+    path: ./rule-providers/Proxy/global.yaml
     interval: 86400
 
   google:
@@ -466,9 +507,9 @@ rule-providers:
     path: ./rule-providers/Proxy/google.yaml
     interval: 86400
 
-  github:
+  siri:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml
-    path: ./rule-providers/Proxy/github.yaml
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Siri/Siri.yaml
+    path: ./rule-providers/Proxy/siri.yaml
     interval: 86400

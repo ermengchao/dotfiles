@@ -1,6 +1,10 @@
-vim.pack.add {{
-  name = 'nvim-autopairs',
-  src = 'https://github.com/windwp/nvim-autopairs',
-}}
+vim.pack.add ({
+  {
+    name = 'nvim-autopairs',
+    src = 'https://github.com/windwp/nvim-autopairs',
+  },
+})
 
-require('nvim-autopairs').setup {}
+require('nvim-autopairs').setup ({
+
+})
