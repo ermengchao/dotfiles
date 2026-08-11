@@ -28,5 +28,12 @@ use = "yazi-rs/plugins:piper"
 rev = "5d5c480"
 hash = "384464b6df8cb807425c521f8cd790f3"
 
-[flavor]
-deps = []
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-latte"
+rev = "1a5f787"
+hash = "b8f46853c27707115f25f3423a47bd38"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "1a5f787"
+hash = "7dfe41c9c3d9be76da8a844263d0bbed"

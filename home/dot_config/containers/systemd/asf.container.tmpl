@@ -1,0 +1,25 @@
+[Unit]
+Description=ArchiSteamFarm
+Documentation=https://github.com/JustArchiNET/ArchiSteamFarm
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=900
+TimeoutStopSec=90
+
+[Container]
+ContainerName=asf
+Image=docker.io/justarchi/archisteamfarm
+AutoUpdate=registry
+
+UserNS=keep-id
+Environment=ASF_UID=%U
+
+Volume={{ env "XDG_CONFIG_HOME" }}/asf:/app/config:Z
+PublishPort = [::]:{{ .ports.asf }}:1242
+
+[Install]
+WantedBy=default.target
