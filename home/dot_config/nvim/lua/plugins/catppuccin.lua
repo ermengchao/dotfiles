@@ -1,22 +1,24 @@
-vim.pack.add {{
-  name = 'catppuccin',
-  src = 'https://github.com/catppuccin/nvim',
-}}
+vim.pack.add({
+  {
+    name = 'catppuccin',
+    src = 'https://github.com/catppuccin/nvim',
+  },
+})
 
 require("catppuccin").setup({
-    flavour = "auto", -- latte, frappe, macchiato, mocha
+    flavour = "auto",
     background = { -- :h background
         light = "latte",
         dark = "mocha",
     },
-    transparent_background = false, -- disables setting the background color.
+    transparent_background = false,
     float = {
         transparent = false, -- enable transparent floating windows
         solid = false, -- use solid styling for floating windows, see |winborder|
     },
     term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
     dim_inactive = {
-        enabled = false, -- dims the background color of inactive window
+        enabled = true, -- dims the background color of inactive window
         shade = "dark",
         percentage = 0.15, -- percentage of the shade to apply to the inactive window
     },
@@ -74,5 +76,4 @@ require("catppuccin").setup({
     },
 })
 
--- setup must be called before loading
 vim.cmd.colorscheme "catppuccin-nvim"

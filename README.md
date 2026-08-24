@@ -43,9 +43,11 @@
 
 2. How to manage files outside the home directory, like `etc/caddy`, etc.?
 
-    According to [chezmoi's design principle](<https://www.chezmoi.io/user-guide/frequently-asked-questions/design/#can-i-use-chezmoi-to-manage-files-outside-my-home-directory>), `chezmoi` is designed as a user scope dotfiles' manager. The best practise to organize files outside, I think, is to manage file in the repository but deploy them manually. It can be a script, or a symlink just like [GNU Stow](<https://www.gnu.org/software/stow/>)
+    According to [chezmoi's design principles](<https://www.chezmoi.io/user-guide/frequently-asked-questions/design/#can-i-use-chezmoi-to-manage-files-outside-my-home-directory>), `chezmoi` is primarily a user-scoped dotfiles manager. Files outside the user's home directory are therefore kept in this repository under a separate `root` source tree and deployed explicitly.
 
-    In my practice, I use the `chezmoi`'s plugin system. I create a executable file under `dot_local/bin`, which name is `chezmoi-apply-etc`. Once user run `chezmoi apply-etc`, it will symlink all the directories under {{ .chezmoi.workingTree }}/root to the exact `/` path.
+    On Linux systems other than NixOS, the executable template `home/dot_local/bin/executable_chezmoi-apply-etc.tmpl` installs the external command `chezmoi-apply-etc`. Running `chezmoi apply-etc` starts a second Chezmoi process with `sudo`, uses `{{ .chezmoi.workingTree }}/root` as its source directory, and uses `/` as its destination. Consequently, paths are mapped directly to their system locations: `root/etc/...` becomes `/etc/...`, `root/root/...` becomes `/root/...`, and `root/usr/...` becomes `/usr/...`. These files are applied by Chezmoi; they are not deployed as symlinks.
+
+    The root source tree is not applied by the regular `chezmoi apply` command. Its pending changes can be inspected with `chezmoi apply-etc --dry-run --verbose` and applied explicitly with `chezmoi apply-etc`.
 
 3. How to manage the encrypted files?
 

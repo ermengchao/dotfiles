@@ -28,13 +28,20 @@ prepend_dirs = [
   { name = "Music", text = "󱍙" },
   { name = "Pictures", text = "󰉏" },
   { name = "Public", text = "" },
-  { name = "Shared", text = "" }
+  { name = "Shared", text = "" },
 ]
 
 prepend_globs = [
-  { url = "**/*ssh*/",     text = "󰢬" },
-  { url = "**/*trash*/",   text = "" },
-  { url = "**/*trash*/**", text = "" },
+  { url = "**/containers/",   text = "" },
+  { url = "**/**.container",  text = "" },
+  { url = "**/share/",        text = "" },
+  { url = "**/systemd/",      text = "" },
+  { url = "**/**.service",    text = "" },
+  { url = "**/**.timer",      text = "󱤦" },
+  { url = "**/ssh*/",         text = "󰢬" },
+  { url = "**/**.tmpl",       text = "󰅩" },
+  { url = "**/*trash*/",      text = "" },
+  { url = "**/*trash*/**",    text = "" },
   {
     url  = "**/*.{7z,bz,bz2,bz3,gz,lz,lz4,lzma,rar,tar,tbz,tbz2,tgz,txz,xz,zst,zip}",
     text = ""

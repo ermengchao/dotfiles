@@ -1,0 +1,11 @@
+[common]
+bind_addr = 0.0.0.0
+bind_port = 33333
+dashboard_port = 33334
+dashboard_user = chao
+dashboard_pwd = {{ gopass "chao/password" }}
+vhost_http_port = 80
+vhost_https_port = 443
+token = 
+subdomain_host =
+tcp_mux = true

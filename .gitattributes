@@ -1,0 +1,15 @@
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-SemiBold.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-SemiBoldItalic.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-Heavy.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-Bold.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-Light.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-RegularItalic.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-BoldItalic.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-Medium.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-MediumItalic.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-Regular.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/Apple[[:space:]]Color[[:space:]]Emoji.ttc filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-HeavyItalic.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/SF-Mono-NerdFont/SFMonoNerdFont-LightItalic.otf filter=lfs diff=lfs merge=lfs -text
+home/dot_local/share/fonts/Xiao[[:space:]]Zhang[[:space:]]Time.ttf filter=lfs diff=lfs merge=lfs -text
