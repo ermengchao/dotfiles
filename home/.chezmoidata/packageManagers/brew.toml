@@ -38,6 +38,7 @@ brews = [
   "iperf3",
   "jq",
   "lazygit",
+  "libmtp",
   "librsvg",
   "mermaid-cli",
   "mise",
@@ -95,6 +96,14 @@ casks = [
   "tailscale-app",
   "whatcable"
 ]
+
+[[packageManagers.brew.darwin.mas]]
+name = "Apple Configurator"
+id = 1037126344
+
+[[packageManagers.brew.darwin.mas]]
+name = "Blackmagic Disk Speed Test"
+id = 425264550
 
 [[packageManagers.brew.darwin.mas]]
 name = "Compressor"
