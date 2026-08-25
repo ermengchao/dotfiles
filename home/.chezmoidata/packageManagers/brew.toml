@@ -8,20 +8,13 @@ args = [
 
 [packageManagers.brew.darwin]
 
-taps = [
-  "darrylmorley/whatcable",
-  "oven-sh/bun",
-  "waydabber/betterdisplay",
-]
-
 brews = [
   "age",
   "aria2",
   "awscli",
   "bat",
-  "waydabber/betterdisplay/betterdisplaycli",
   "bottom",
-  "oven-sh/bun/bun",
+  "bun",
   "chezmoi",
   "codesnap",
   # "container",
@@ -100,7 +93,7 @@ casks = [
   "stats",
   "surge",
   "tailscale-app",
-  "darrylmorley/whatcable/whatcable",
+  "whatcable"
 ]
 
 [[packageManagers.brew.darwin.mas]]
@@ -170,15 +163,12 @@ id = 497799835
 [packageManagers.brew.minimal]
 
 [packageManagers.brew.minimal.darwin]
-taps = [
-  "oven-sh/bun",
-]
 
 brews = [
   "age",
   "bat",
   "bottom",
-  "oven-sh/bun/bun",
+  "bun",
   "chezmoi",
   "coreutils",
   "eza",
@@ -244,16 +234,12 @@ id = 899247664
 
 [packageManagers.brew.linux]
 
-taps = [
-  "oven-sh/bun",
-]
-
 brews = [
   "age",
   "aria2",
   "bat",
   "bottom",
-  "oven-sh/bun/bun",
+  "bun",
   "caddy",
   "chezmoi",
   "eza",
@@ -300,15 +286,12 @@ casks = [
 ]
 
 [packageManagers.brew.minimal.linux]
-taps = [
-  "oven-sh/bun"
-]
 
 brews = [
   "age",
   "bat",
   "bottom",
-  "oven-sh/bun/bun",
+  "bun",
   "chezmoi",
   "eza",
   "fastfetch",
