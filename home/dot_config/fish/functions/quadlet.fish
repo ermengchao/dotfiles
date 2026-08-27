@@ -202,53 +202,29 @@ function _quadlet_disable --argument-names user_mode name
     printf 'Disabled: %s\n' "$install_file"
 end
 
-function _quadlet_original
-    if set -q QUADLET_ORIGINAL; and test -x "$QUADLET_ORIGINAL"
-        printf '%s\n' "$QUADLET_ORIGINAL"
-        return 0
-    end
-
-    set -l self (path resolve (status filename))
-    set -l candidates (type -a -p quadlet 2>/dev/null) \
-        /usr/libexec/podman/quadlet \
-        /usr/lib/podman/quadlet \
-        /usr/libexec/quadlet
-
-    for candidate in $candidates
-        if test -x "$candidate"; and test (path resolve "$candidate") != "$self"
-            printf '%s\n' "$candidate"
-            return 0
-        end
-    end
-
-    printf '%s\n' 'quadlet: original executable not found; set QUADLET_ORIGINAL to its path' >&2
-    return 127
-end
-
-if test (count $argv) -gt 0; and contains -- "$argv[1]" enable disable
-    set -l action "$argv[1]"
-    set -e argv[1]
-    set -l user_mode 0
-
-    if test (count $argv) -gt 0; and contains -- "$argv[1]" --user -user
-        set user_mode 1
+function quadlet
+    if test (count $argv) -gt 0; and contains -- "$argv[1]" enable disable
+        set -l action "$argv[1]"
         set -e argv[1]
+        set -l user_mode 0
+
+        if test (count $argv) -gt 0; and contains -- "$argv[1]" --user -user
+            set user_mode 1
+            set -e argv[1]
+        end
+
+        if test (count $argv) -ne 1
+            _quadlet_usage >&2
+            return 2
+        end
+
+        if test "$action" = enable
+            _quadlet_enable "$user_mode" "$argv[1]"
+        else
+            _quadlet_disable "$user_mode" "$argv[1]"
+        end
+        return $status
     end
 
-    if test (count $argv) -ne 1
-        _quadlet_usage >&2
-        exit 2
-    end
-
-    if test "$action" = enable
-        _quadlet_enable "$user_mode" "$argv[1]"
-    else
-        _quadlet_disable "$user_mode" "$argv[1]"
-    end
-    exit $status
+    command quadlet $argv
 end
-
-set -l original (_quadlet_original)
-or exit $status
-command "$original" $argv
-exit $status
