@@ -16,6 +16,3 @@ Network = bridge
 PublishPort = [::]:{{ .ports.syncclipboard_server }}:5033
 
 Volume = {{ env "XDG_DATA_HOME" }}/syncclipboard-server:/app/data
-
-[Install]
-WantedBy = default.target

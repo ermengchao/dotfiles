@@ -15,6 +15,3 @@ PublishPort = [::]:{{ .ports.open_webui }}:8080
 Volume = {{ env "XDG_DATA_HOME" }}/open-webui:/app/backend/data
 Volume = ~/.ollama/models:/root/.ollama/models
 Environment = OLLAMA_BASE_URL=http://host.orb.internal:11434
-
-[Install]
-WantedBy = default.target
