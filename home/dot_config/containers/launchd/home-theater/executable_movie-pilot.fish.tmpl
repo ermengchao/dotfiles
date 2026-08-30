@@ -1,0 +1,35 @@
+#!{{ env "HOMEBREW_PREFIX" }}/bin/fish
+
+source "{{ env "XDG_CONFIG_HOME" }}/containers/launchd/_container_helpers.fish"
+
+set -g container_name movie_pilot
+
+function create_container
+    container_exists; and return 0
+
+    command mkdir -p \
+        "{{ env "XDG_CONFIG_HOME" }}/movie-pilot" \
+        "{{ .paths.media }}" \
+        "{{ env "XDG_CONFIG_HOME" }}/qbittorrent/qBittorrent/BT_backup" \
+        "{{ env "XDG_CONFIG_HOME" }}/transmission/torrents"
+    $container_bin image pull ghcr.io/jxxghp/moviepilot:latest >/dev/null; or return 1
+
+    # Apple container has no GroupAdd=keep-groups equivalent. Host bind-mount
+    # permissions must allow the container process to access these paths.
+    $container_bin create \
+        --name $container_name \
+        --env 'NGINX_PORT={{ .ports.movie_pilot.nginx_port }}' \
+        --env 'PORT={{ .ports.movie_pilot.port }}' \
+        --env 'TZ={{ template "getSystemTimezone" . }}' \
+        --env UMASK=022 \
+        --env START_NOGOSU=true \
+        --publish '[::]:{{ .ports.movie_pilot.nginx_port }}:{{ .ports.movie_pilot.nginx_port }}' \
+        --publish '[::]:{{ .ports.movie_pilot.port }}:{{ .ports.movie_pilot.port }}' \
+        --volume '{{ env "XDG_CONFIG_HOME" }}/movie-pilot:/config' \
+        --volume '{{ .paths.media }}:/media' \
+        --volume '{{ env "XDG_CONFIG_HOME" }}/qbittorrent/qBittorrent/BT_backup:/torrents/qbittorrent' \
+        --volume '{{ env "XDG_CONFIG_HOME" }}/transmission/torrents:/torrents/transmission' \
+        ghcr.io/jxxghp/moviepilot:latest
+end
+
+container_main $argv

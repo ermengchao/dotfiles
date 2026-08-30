@@ -1,0 +1,29 @@
+#!{{ env "HOMEBREW_PREFIX" }}/bin/fish
+
+source "{{ env "XDG_CONFIG_HOME" }}/containers/launchd/_container_helpers.fish"
+
+set -g container_name transmission
+
+function create_container
+    container_exists; and return 0
+
+    command mkdir -p \
+        "{{ env "XDG_CONFIG_HOME" }}/transmission" \
+        "{{ .paths.media }}/downloads/transmission"
+    $container_bin image pull lscr.io/linuxserver/transmission:latest >/dev/null; or return 1
+
+    $container_bin create \
+        --name $container_name \
+        --env USER=chao \
+        --env 'PASS={{ gopass "chao/password" }}' \
+        --env 'TZ={{ template "getSystemTimezone" . }}' \
+        --env 'PEERPORT={{ .ports.transmission.peer }}' \
+        --publish '[::]:{{ .ports.transmission.rpc }}:{{ .ports.transmission.rpc }}' \
+        --publish '[::]:{{ .ports.transmission.peer }}:{{ .ports.transmission.peer }}' \
+        --publish '[::]:{{ .ports.transmission.peer }}:{{ .ports.transmission.peer }}/udp' \
+        --volume '{{ env "XDG_CONFIG_HOME" }}/transmission:/config' \
+        --volume '{{ .paths.media }}/downloads/transmission:/downloads' \
+        lscr.io/linuxserver/transmission:latest
+end
+
+container_main $argv

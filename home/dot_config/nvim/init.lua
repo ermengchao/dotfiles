@@ -79,5 +79,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('user-highlight-yank', { clear = true }),
   callback = function() vim.hl.on_yank() end,
 })
+vim.api.nvim_create_user_command("W", function()
+  local file = vim.fn.shellescape(vim.fn.expand("%:p"))
+  vim.cmd("write !sudo tee " .. file .. " > /dev/null")
+end, {})
 
 require('plugins')

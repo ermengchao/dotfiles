@@ -1,0 +1,24 @@
+#!{{ env "HOMEBREW_PREFIX" }}/bin/fish
+
+source "{{ env "XDG_CONFIG_HOME" }}/containers/launchd/_container_helpers.fish"
+
+set -g container_name open-webui
+
+function create_container
+    container_exists; and return 0
+
+    command mkdir -p \
+        "{{ env "XDG_DATA_HOME" }}/open-webui" \
+        "{{ .chezmoi.homeDir }}/.ollama/models"
+    $container_bin image pull ghcr.io/open-webui/open-webui:main >/dev/null; or return 1
+
+    $container_bin create \
+        --name $container_name \
+        --env OLLAMA_BASE_URL=http://host.container.internal:11434 \
+        --publish '[::]:{{ .ports.open_webui }}:8080' \
+        --volume '{{ env "XDG_DATA_HOME" }}/open-webui:/app/backend/data' \
+        --volume '{{ .chezmoi.homeDir }}/.ollama/models:/root/.ollama/models' \
+        ghcr.io/open-webui/open-webui:main
+end
+
+container_main $argv

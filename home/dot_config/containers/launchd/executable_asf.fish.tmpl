@@ -1,0 +1,22 @@
+#!{{ env "HOMEBREW_PREFIX" }}/bin/fish
+
+source "{{ env "XDG_CONFIG_HOME" }}/containers/launchd/_container_helpers.fish"
+
+set -g container_name asf
+
+function create_container
+    container_exists; and return 0
+
+    command mkdir -p "{{ env "XDG_CONFIG_HOME" }}/asf"
+    $container_bin image pull docker.io/justarchi/archisteamfarm >/dev/null; or return 1
+
+    set -l uid (id -u)
+    $container_bin create \
+        --name $container_name \
+        --env "ASF_UID=$uid" \
+        --publish '[::]:{{ .ports.asf }}:1242' \
+        --volume '{{ env "XDG_CONFIG_HOME" }}/asf:/app/config' \
+        docker.io/justarchi/archisteamfarm
+end
+
+container_main $argv

@@ -1,0 +1,19 @@
+#!{{ env "HOMEBREW_PREFIX" }}/bin/fish
+
+source "{{ env "XDG_CONFIG_HOME" }}/containers/launchd/_container_helpers.fish"
+
+set -g container_name jm2epub
+
+function create_container
+    container_exists; and return 0
+
+    $container_bin image pull ghcr.io/ermengchao/jm2epub >/dev/null; or return 1
+    $container_bin create \
+        --name $container_name \
+        --env 'JM2EPUB_API_KEY={{ gopass "jm2epub/api_key" }}' \
+        --env 'PORT={{ .ports.jm2epub }}' \
+        --publish '[::]:{{ .ports.jm2epub }}:{{ .ports.jm2epub }}' \
+        ghcr.io/ermengchao/jm2epub
+end
+
+container_main $argv
