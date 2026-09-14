@@ -1,22 +1,23 @@
-#!{{ env "HOMEBREW_PREFIX" }}/bin/fish
-
-source "{{ env "XDG_CONFIG_HOME" }}/containers/launchd/_container_helpers.fish"
+#!/usr/bin/env fish
 
 set -g container_name movie_pilot
 
 function create_container
-    container_exists; and return 0
+    if command container inspect $container_name >/dev/null 2>&1
+        echo "$container_name already exists"
+        return 0
+    end
 
     command mkdir -p \
         "{{ env "XDG_CONFIG_HOME" }}/movie-pilot" \
         "{{ .paths.media }}" \
         "{{ env "XDG_CONFIG_HOME" }}/qbittorrent/qBittorrent/BT_backup" \
         "{{ env "XDG_CONFIG_HOME" }}/transmission/torrents"
-    $container_bin image pull ghcr.io/jxxghp/moviepilot:latest >/dev/null; or return 1
+    command container image pull ghcr.io/jxxghp/moviepilot:latest >/dev/null; or return 1
 
     # Apple container has no GroupAdd=keep-groups equivalent. Host bind-mount
     # permissions must allow the container process to access these paths.
-    $container_bin create \
+    command container create \
         --name $container_name \
         --env 'NGINX_PORT={{ .ports.movie_pilot.nginx_port }}' \
         --env 'PORT={{ .ports.movie_pilot.port }}' \
@@ -32,4 +33,4 @@ function create_container
         ghcr.io/jxxghp/moviepilot:latest
 end
 
-container_main $argv
+create_container

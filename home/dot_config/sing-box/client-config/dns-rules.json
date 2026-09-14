@@ -2,8 +2,14 @@
   "dns": {
     "rules": [
       {
+        "preferred_by": "dns-hosts",
+        "action": "route",
+        "server": "dns-hosts"
+      },
+      {
         "domain_suffix": [
-          "arpa"
+          "arpa",
+          "local"
         ],
         "action": "route",
         "server": "dns-dhcp"
@@ -14,12 +20,42 @@
           "time.apple.com"
         ],
         "action": "route",
-        "server": "dns-cloudflare"
+        "server": "doh-cloudflare"
+      },
+      {
+        "domain_suffix": [
+          "taileee60e.ts.net"
+        ],
+        "action": "route",
+        "server": "dns-local"
+      },
+      {
+        "domain_suffix": [
+          "proxy.er-meng.com"
+        ],
+        "action": "route",
+        "server": "dns-aliyun-bootstrap"
+      },
+      {
+        "domain_regex": [
+          "^xbox\\.[^.]+\\.microsoft\\.com$"
+        ],
+        "domain_suffix": [
+          "xboxlive.com",
+          "stun.playstation.net",
+          "srv.nintendo.net",
+          "battlenet.com.cn",
+          "battlenet.com",
+          "blzstatic.cn",
+          "battle.net"
+        ],
+        "action": "route",
+        "server": "doh-cloudflare"
       },
       {
         "clash_mode": "direct",
         "action": "route",
-        "server": "dns-local"
+        "server": "doh-cloudflare"
       },
       {
         "clash_mode": "global",
@@ -87,6 +123,10 @@
           "socks-in",
           "http-in",
           "tun-in"
+        ],
+        "query_type": [
+          "A",
+          "AAAA"
         ],
         "action": "route",
         "server": "dns-fakeip"

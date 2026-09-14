@@ -1,18 +1,19 @@
-#!{{ env "HOMEBREW_PREFIX" }}/bin/fish
-
-source "{{ env "XDG_CONFIG_HOME" }}/containers/launchd/_container_helpers.fish"
+#!/usr/bin/env fish
 
 set -g container_name auto_bangumi
 
 function create_container
-    container_exists; and return 0
+    if command container inspect $container_name >/dev/null 2>&1
+        echo "$container_name already exists"
+        return 0
+    end
 
     command mkdir -p \
         "{{ env "XDG_CONFIG_HOME" }}/auto_bangumi" \
         "{{ env "XDG_DATA_HOME" }}/auto_bangumi"
-    $container_bin image pull ghcr.io/estrellaxd/auto_bangumi:latest >/dev/null; or return 1
+    command container image pull ghcr.io/estrellaxd/auto_bangumi:latest >/dev/null; or return 1
 
-    $container_bin create \
+    command container create \
         --name $container_name \
         --entrypoint /entry-host.sh \
         --env 'TZ={{ template "getSystemTimezone" . }}' \
@@ -24,4 +25,4 @@ function create_container
         ghcr.io/estrellaxd/auto_bangumi:latest
 end
 
-container_main $argv
+create_container

@@ -1,4 +1,5 @@
 local reloadAppearance = hs.loadSpoon("ReloadAppearance")
+local lockGopassAgeAgent = hs.loadSpoon("LockGopassAgeAgent")
 local switchInputSource = hs.loadSpoon("SwitchInputSource")
 local openScreenSaver = hs.loadSpoon("OpenScreenSaver")
 local toggleAppearance = hs.loadSpoon("ToggleAppearance")
@@ -11,6 +12,7 @@ toggleAppearance.hotkeyModifiers = { "fn", "ctrl" }
 toggleAppearance.hotkeyKey = "t"
 
 reloadAppearance:start()
+lockGopassAgeAgent:start()
 switchInputSource:start()
 openScreenSaver:start()
 toggleAppearance:start()

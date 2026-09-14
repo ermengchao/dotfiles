@@ -21,19 +21,19 @@
       },
       {
         "tag": "doh-cloudflare",
-        "type": "h3",
-        "server": "dns.cloudflare.com",
+        "type": "https",
+        "server": "cloudflare-dns.com",
         "path": "/dns-query",
-        "domain_resolver": "dns-cloudflare",
+        "domain_resolver": "dns-cloudflare-bootstrap",
         "detour": "🌐 Proxy"
       },
       {
-        "tag": "dns-cloudflare",
+        "tag": "dns-cloudflare-bootstrap",
         "type": "udp",
         "server": "1.1.1.1"
       },
       {
-        "tag": "dns-aliyun",
+        "tag": "dns-aliyun-bootstrap",
         "type": "udp",
         "server": "223.5.5.5"
       }

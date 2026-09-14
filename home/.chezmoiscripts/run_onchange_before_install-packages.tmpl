@@ -48,6 +48,7 @@ sudo ln -s "/Applications/Xcode.app/Contents/Applications" "/Applications/Develo
 printf "✅ Done.\n"
 
 defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
+defaults write org.gpgtools.common UseKeychain -bool false
 {{     end -}}
 {{   else -}}
 {{ $installer := "" }}{{ if (index $.packageManagers .).root }}{{ $installer = "sudo " }}{{ end -}}

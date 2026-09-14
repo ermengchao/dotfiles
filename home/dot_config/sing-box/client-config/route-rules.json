@@ -9,6 +9,28 @@
         "action": "hijack-dns"
       },
       {
+        "domain_suffix": [
+          "local",
+          "taileee60e.ts.net",
+          "tailscale.io",
+          "crashlytics.com"
+        ],
+        "outbound": "🟢 Direct"
+      },
+      {
+        "ip_cidr": [
+          "100.64.0.0/10",
+          "fd7a:115c:a1e0::/48"
+        ],
+        "outbound": "🟢 Direct"
+      },
+      {
+        "ip_cidr": [
+          "17.0.0.0/8"
+        ],
+        "outbound": "🟢 Direct"
+      },
+      {
         "ip_is_private": true,
         "outbound": "🟢 Direct"
       },
@@ -127,6 +149,11 @@
       {
         "rule_set": "siri",
         "outbound": "🌐 Proxy"
+      },
+      {
+        "action": "resolve",
+        "server": "doh-cloudflare",
+        "strategy": "prefer_ipv4"
       },
       {
         "rule_set": "geoip-cn",

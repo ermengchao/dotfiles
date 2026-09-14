@@ -9,9 +9,10 @@ end
 if not set -q GOPASS_AGE_PASSWORD
     printf "⚠️ GOPASS_AGE_PASSWORD not set. Falling back to interactive mode.\n"
 
-    if not set -q GPG_TTY
-        printf "‼️ GPG_TTY not set. Run `set GPG_TTY (tty)` to set it.\n"
-        exit 1
+    if set -q SSH_TTY
+        set -gx GOPASS_AGE_STDIN_PASSPHRASE true
+    else if test -t 0
+        set -gx GPG_TTY (tty)
     end
 end
 
@@ -30,7 +31,9 @@ set root_password_store (gopass config mounts.path)
 if test -z (ls -A "$root_password_store" | string collect)
     printf "🧑‍💻 Cloning root password store...\n"
 
-    set -x GOPASS_AGE_PASSWORD $GOPASS_AGE_PASSWORD
+    if set -q GOPASS_AGE_PASSWORD
+        set -x GOPASS_AGE_PASSWORD $GOPASS_AGE_PASSWORD
+    end
     set -x GIT_AUTHOR_NAME {{ .username | quote }}
     set -x GIT_AUTHOR_EMAIL {{ .email | quote }}
     gopass --yes clone --crypto age {{ .gitHostUrl }}/{{ .fullname }}/credentials

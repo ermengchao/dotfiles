@@ -1,16 +1,17 @@
-#!{{ env "HOMEBREW_PREFIX" }}/bin/fish
-
-source "{{ env "XDG_CONFIG_HOME" }}/containers/launchd/_container_helpers.fish"
+#!/usr/bin/env fish
 
 set -g container_name syncclipboard-server
 
 function create_container
-    container_exists; and return 0
+    if command container inspect $container_name >/dev/null 2>&1
+        echo "$container_name already exists"
+        return 0
+    end
 
     command mkdir -p "{{ env "XDG_DATA_HOME" }}/syncclipboard-server"
-    $container_bin image pull docker.io/jericx/syncclipboard-server:latest >/dev/null; or return 1
+    command container image pull docker.io/jericx/syncclipboard-server:latest >/dev/null; or return 1
 
-    $container_bin create \
+    command container create \
         --name $container_name \
         --env SYNCCLIPBOARD_USERNAME=chao \
         --env 'SYNCCLIPBOARD_PASSWORD={{ gopass "chao/password" }}' \
@@ -19,4 +20,4 @@ function create_container
         docker.io/jericx/syncclipboard-server:latest
 end
 
-container_main $argv
+create_container
