@@ -373,5 +373,15 @@ function container
         return $status
     end
 
-    command container $argv
+    if test (uname -s) = Darwin
+        command container $argv
+    else
+        # Accept Apple's completion request when this wrapper is used on Linux.
+        if test (count $argv) -eq 2; and test "$argv[1]" = --generate-completion-script; and test "$argv[2]" = fish
+            command podman completion fish; or return
+            printf '\ncomplete -c container -w podman\n'
+        else
+            command podman $argv
+        end
+    end
 end
