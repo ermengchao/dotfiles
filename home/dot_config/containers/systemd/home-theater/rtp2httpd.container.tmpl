@@ -1,0 +1,16 @@
+[Unit]
+Description = rtp2httpd
+
+[Service]
+Restart = on-failure
+
+[Container]
+ContainerName = rtp2httpd
+Image = ghcr.io/stackia/rtp2httpd:latest
+AutoUpdate = registry
+
+AddCapability = NET_ADMIN
+
+Network = host
+
+Volume = {{ env "XDG_CONFIG_HOME" }}/rtp2httpd/rtp2httpd.conf:/usr/local/etc/rtp2httpd.conf:ro

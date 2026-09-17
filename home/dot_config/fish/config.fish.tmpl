@@ -21,15 +21,11 @@ else
     return
 end
 
-# Key Binding
-function fish_user_key_bindings
-    bind \t complete
-    bind -M insert \cn _fzf_lsof
-    bind -M insert \co launch_opencode
-    bind -M insert ctrl-alt-r reload_appearance
+# Initialization
+if type -q fzf
+    fzf --fish | source
 end
 
-# Initialization
 if type -q mise
     mise activate fish | source
 end
@@ -40,7 +36,7 @@ end
 
 # Plugins
 fish_config theme choose catppuccin-mocha
-fzf_configure_bindings --directory=ctrl-alt-f --history=ctrl-alt-h --processes=ctrl-alt-p --variables=ctrl-alt-v; or true
+# fzf_configure_bindings --directory=ctrl-alt-f --history=ctrl-alt-h --processes=ctrl-alt-p --variables=ctrl-alt-v; or true
 
 # Abbreviation
 abbr -a --position anywhere -- --help '--help | bat -plhelp'
@@ -52,6 +48,17 @@ abbr conf chezmoi
 abbr dv deactivate
 abbr f fastfetch
 abbr fzfp "fzf --style full --preview 'fzf-preview.sh {}'"
-alias ls "eza --git --header --hyperlink=auto"
 abbr n nvim
+
+alias ls "eza --git --header --hyperlink=auto"
 alias posting "posting --collection $XDG_CONFIG_HOME/posting/collections"
+
+# Key Binding
+function fish_user_key_bindings
+    bind tab complete
+    bind -M insert tab complete
+
+    bind -M insert \cn _fzf_lsof
+    bind -M insert \co launch_opencode
+    bind -M insert ctrl-alt-r reload_appearance
+end

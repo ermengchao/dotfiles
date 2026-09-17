@@ -6,20 +6,8 @@ if not type -q gopass
     exit 1
 end
 
-if not set -q GOPASS_AGE_PASSWORD
-    printf "⚠️ GOPASS_AGE_PASSWORD not set. Falling back to interactive mode.\n"
-
-    if set -q SSH_TTY
-        set -gx GOPASS_AGE_STDIN_PASSPHRASE true
-    else if test -t 0
-        set -gx GPG_TTY (tty)
-    end
-end
-
-printf "🧑‍💻 Setting gopass...\n"
 gopass config age.agent-enabled true > /dev/null
 gopass config age.agent-timeout {{ .agentTimeout }} > /dev/null
-printf "✅ Done.\n"
 
 set -gx GOPASS_SSH_DIR ~/.ssh
 if not test -f ~/.ssh/id_ed25519
@@ -31,16 +19,23 @@ set root_password_store (gopass config mounts.path)
 if test -z (ls -A "$root_password_store" | string collect)
     printf "🧑‍💻 Cloning root password store...\n"
 
-    if set -q GOPASS_AGE_PASSWORD
+    if not set -q GOPASS_AGE_PASSWORD
+        printf "ℹ️ GOPASS_AGE_PASSWORD not set. Falling back to interactive mode.\n"
+
+        if set -q SSH_TTY
+            set -gx GOPASS_AGE_STDIN_PASSPHRASE true
+        else if test -t 0
+            set -gx GPG_TTY (tty)
+        end
+    else
         set -x GOPASS_AGE_PASSWORD $GOPASS_AGE_PASSWORD
     end
+
     set -x GIT_AUTHOR_NAME {{ .username | quote }}
     set -x GIT_AUTHOR_EMAIL {{ .email | quote }}
     gopass --yes clone --crypto age {{ .gitHostUrl }}/{{ .fullname }}/credentials
 
     printf "✅ Done.\n"
-else
-    printf "ℹ️ Root password store already exists.\n"
 end
 
 cd $root_password_store

@@ -1,5 +1,6 @@
 if set -q IS_DARK_MODE; and test $IS_DARK_MODE = true
     source ~/.config/fish/conf.d/tide/colors/catppuccin_mocha.fish
+    set -Ux BAT_THEME dark
     set -Ux EZA_CONFIG_DIR $XDG_CONFIG_HOME/eza/catppuccin-mocha
     set -Ux FZF_DEFAULT_OPTS "--exact \
                             --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
@@ -11,6 +12,7 @@ if set -q IS_DARK_MODE; and test $IS_DARK_MODE = true
     set -Ux POSTING_THEME catppuccin-mocha
 else
     source ~/.config/fish/conf.d/tide/colors/catppuccin_latte.fish
+    set -Ux BAT_THEME light
     set -Ux EZA_CONFIG_DIR $XDG_CONFIG_HOME/eza/catppuccin-latte
     set -Ux FZF_DEFAULT_OPTS "--exact \
                             --color=bg+:#CCD0DA,bg:#EFF1F5,spinner:#DC8A78,hl:#D20F39 \
