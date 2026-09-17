@@ -1,7 +1,7 @@
 [global]
 
 verbosity = 3
-access-log = /var/log/rtp2httpd/access.log
+access-log = /dev/stdout
 log-format = $client_addr [$time_iso8601] "$service_url" $service_type "$upstream_url"
 ;pid-file = /var/run/rtp2httpd.pid
 
