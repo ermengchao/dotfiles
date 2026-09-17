@@ -38,5 +38,5 @@ When a preferred tool is unavailable or incompatible with the project, use the n
 ## Tools
 
 ### graphify
-- **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
-When the user types `/graphify`, invoke the Skill tool with `skill: "graphify"` before doing anything else.
+- **graphify** — create, update, and query knowledge graphs.
+When the user explicitly invokes `/graphify`, read the currently available `graphify` skill and follow its instructions using the tools available in the current environment.

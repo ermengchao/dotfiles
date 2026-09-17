@@ -27,8 +27,8 @@ description: 汇总常见 UML、软件设计图表、论文/报告图表和表�
 | 权限模型图 | Mermaid `flowchart` | 表达角色、权限、资源和访问关系。 |
 | 部署架构图 | Mermaid `architecture` | 表达节点、服务、数据库、网络和部署依赖。 |
 | 项目进程安排图 | Mermaid `gantt` | 表达任务、阶段、日期和依赖。 |
-| 功能模块图 | SVG XML | 使用 `function-module-diagram/SKILL.md`，手写正式论文风格 SVG。 |
-| UML 用例图 | Figma | 使用 `use-case-diagram/SKILL.md`，在 Figma 中创建可编辑 UML 用例图。 |
+| 功能模块图 | SVG XML | 使用 `../svg-function-module-diagram/SKILL.md`，手写正式论文风格 SVG。 |
+| UML 用例图 | Figma | 使用 `../figma-use-case-diagram/SKILL.md`，在 Figma 中创建可编辑 UML 用例图。 |
 
 ## Mermaid 图规则
 
@@ -40,7 +40,7 @@ description: 汇总常见 UML、软件设计图表、论文/报告图表和表�
 
 ## 功能模块图
 
-当用户要求“功能模块图”“系统功能模块图”“毕业论文功能模块图”等，读取并遵循 `function-module-diagram/SKILL.md`。
+当用户要求“功能模块图”“系统功能模块图”“毕业论文功能模块图”等，读取并遵循 `../svg-function-module-diagram/SKILL.md`。
 
 关键约束：
 
@@ -51,7 +51,7 @@ description: 汇总常见 UML、软件设计图表、论文/报告图表和表�
 
 ## UML 用例图
 
-当用户要求“UML 用例图”“用例图”“Figma 用例图”“修复用例图重叠”等，读取并遵循 `use-case-diagram/SKILL.md`。
+当用户要求“UML 用例图”“用例图”“Figma 用例图”“修复用例图重叠”等，读取并遵循 `../figma-use-case-diagram/SKILL.md`。
 
 关键约束：
 
