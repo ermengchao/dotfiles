@@ -22,3 +22,6 @@ PublishPort = [::]:{{ .ports.qbittorrent.session }}:{{ .ports.qbittorrent.sessio
 
 Volume = {{ env "XDG_CONFIG_HOME" }}/qbittorrent:/config
 Volume = {{ .paths.media }}/downloads/qbittorrent:/downloads
+
+[Quadlet]
+DefaultDependencies = false

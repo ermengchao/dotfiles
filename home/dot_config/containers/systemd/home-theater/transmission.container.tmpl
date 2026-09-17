@@ -23,3 +23,6 @@ PublishPort = [::]:{{ .ports.transmission.peer }}:{{ .ports.transmission.peer }}
 
 Volume = {{ env "XDG_CONFIG_HOME" }}/transmission:/config
 Volume = {{ .paths.media }}/downloads/transmission:/downloads
+
+[Quadlet]
+DefaultDependencies = false

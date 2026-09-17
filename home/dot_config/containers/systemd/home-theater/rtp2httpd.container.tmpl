@@ -14,3 +14,6 @@ AddCapability = NET_ADMIN
 Network = host
 
 Volume = {{ env "XDG_CONFIG_HOME" }}/rtp2httpd/rtp2httpd.conf:/usr/local/etc/rtp2httpd.conf:ro
+
+[Quadlet]
+DefaultDependencies = false
