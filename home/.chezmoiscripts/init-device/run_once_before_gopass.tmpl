@@ -15,8 +15,8 @@ if not test -f ~/.ssh/id_ed25519
     exit 1
 end
 
-set root_password_store (gopass config mounts.path)
-if test -z (ls -A "$root_password_store" | string collect)
+set root_password_store (string replace -r '^~/' "$HOME/" -- (gopass config mounts.path))
+if not test -d "$root_password_store"; or test -z (ls -A "$root_password_store" | string collect)
     printf "🧑‍💻 Cloning root password store...\n"
 
     if not set -q GOPASS_AGE_PASSWORD
@@ -38,7 +38,7 @@ if test -z (ls -A "$root_password_store" | string collect)
     printf "✅ Done.\n"
 end
 
-cd $root_password_store
+cd "$root_password_store"
 if not string match -q "credentials" (git remote | string trim)
     git remote add credentials {{ .gitHostUrl }}/{{ .fullname }}/credentials > /dev/null
     git fetch --quiet credentials

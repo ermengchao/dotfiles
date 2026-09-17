@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
-set root_password_store (gopass config mounts.path)
-if test -n (ls -A "$root_password_store" | string collect)
+set root_password_store (string replace -r '^~/' "$HOME/" -- (gopass config mounts.path))
+if test -d "$root_password_store"; and test -n (ls -A "$root_password_store" | string collect)
     set -x GIT_AUTHOR_NAME {{ .username | quote }}
     set -x GIT_AUTHOR_EMAIL {{ .email | quote }}
 
