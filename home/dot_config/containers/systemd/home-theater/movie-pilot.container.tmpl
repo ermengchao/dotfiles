@@ -1,5 +1,7 @@
 [Unit]
 Description = Movie Pilot Container
+Requires=qbittorrent.service transmission.service
+After=qbittorrent.service transmission.service
 
 [Service]
 Restart = on-failure
