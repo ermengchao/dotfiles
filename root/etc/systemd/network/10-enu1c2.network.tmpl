@@ -1,0 +1,17 @@
+{{ if eq .meta.hostname "arch" -}}
+[Match]
+Name=enu1c2
+
+[Network]
+DHCP=yes
+IPv6AcceptRA=yes
+DNSSEC=no
+
+[DHCPv4]
+RouteMetric=2000
+UseDNS=no
+
+[IPv6AcceptRA]
+UseGateway=no
+UseDNS=no
+{{ end -}}
