@@ -4,4 +4,5 @@ config-file = macos.ghostty
 
 keybind = "global:ctrl+backquote=toggle_quick_terminal"
 
+keybind = "command+c=copy_to_clipboard:plain"
 keybind = "command+r=text:\x1b\x12"
