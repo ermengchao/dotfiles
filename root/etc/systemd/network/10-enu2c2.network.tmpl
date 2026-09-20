@@ -1,0 +1,12 @@
+{{ if eq .meta.hostname "arch" -}}
+[Match]
+Name=enu2c2
+
+[Link]
+RequiredForOnline=no
+
+[Network]
+DHCP=no
+LinkLocalAddressing=no
+IPv6AcceptRA=no
+{{ end -}}
