@@ -17,6 +17,7 @@ local parsers = {
   'bash',
   'c',
   'diff',
+  'gotmpl',
   'html',
   'javascript',
   'jsdoc',

@@ -1,6 +1,7 @@
 require('plugins.autopairs')
 require('plugins.blink')
 require('plugins.catppuccin')
+require('plugins.chezmoi-template')
 require('plugins.codesnap')
 require('plugins.conform')
 require('plugins.dap')
