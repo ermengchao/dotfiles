@@ -1,3 +1,5 @@
+require("hs.ipc")
+
 local reloadAppearance = hs.loadSpoon("ReloadAppearance")
 local lockGopassAgeAgent = hs.loadSpoon("LockGopassAgeAgent")
 local switchInputSource = hs.loadSpoon("SwitchInputSource")

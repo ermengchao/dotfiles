@@ -7,7 +7,11 @@ local function isDarkMode()
 end
 
 function obj:reloadAppearance()
-  local ok, _, _, rc = hs.execute("fish -c reload_appearance", true)
+  local mode = isDarkMode() and "true" or "false"
+  local ok, _, _, rc = hs.execute(
+    ("fish -c 'set -Ux IS_DARK_MODE %s'"):format(mode),
+    true
+  )
   if not ok or rc ~= 0 then
     return
   end
