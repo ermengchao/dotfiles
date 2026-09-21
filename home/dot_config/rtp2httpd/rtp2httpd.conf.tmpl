@@ -114,7 +114,7 @@ upstream-interface = enu2c2
 * {{ .ports.rtp2httpd }}
 
 [services]
-#EXTM3U x-tvg-url="https://epg.aptv.app/pp.xml.gz,https://epg.aptv.app/xml" catchup="default"
+#EXTM3U x-tvg-url="https://epg.aptv.app/pp.xml.gz,https://epg.aptv.app/xml" catchup="default" catchup-days="3"
 
 #EXTINF:-1 tvg-id="CCTV1" tvg-name="CCTV1" group-title="央视IPV4" catchup-source="http://gslb.itv.jsinfo.net:6060/00000002/01000000000009320253000002939369/index.m3u8?Playtype=1&Playseek={utc:YmdHMS}-{utcend:YmdHMS}",CCTV1
 rtp://239.49.8.19:9614/?fcc=180.100.72.185:15970
