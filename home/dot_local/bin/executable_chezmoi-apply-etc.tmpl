@@ -1,34 +1,24 @@
 #!/usr/bin/env fish
 
 {{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
-set -gx GOPASS_MOUNTS_PATH (/usr/bin/env gopass config mounts.path | string replace -r '^~' {{ .chezmoi.homeDir | quote }})
-set -gx SSH_KEY_PATH "{{ .chezmoi.homeDir }}/.ssh"
+set -l env_args \
+    HOME=/root \
+    XDG_CONFIG_HOME=/root/.config \
+    XDG_DATA_HOME=/root/.local/share \
+    XDG_STATE_HOME=/root/.local/state \
+    XDG_CACHE_HOME=/root/.cache \
+    GOPASS_MOUNTS_PATH=(/usr/bin/env gopass config mounts.path | string replace -r '^~' {{ .chezmoi.homeDir | quote }}) \
+    SSH_KEY_PATH="{{ .chezmoi.homeDir }}/.ssh"
 
-  {{ if eq .chezmoi.version.builtBy "Homebrew" -}}
-sudo /usr/bin/env \
-    HOME=/root \
-    XDG_CONFIG_HOME=/root/.config \
-    XDG_DATA_HOME=/root/.local/share \
-    XDG_STATE_HOME=/root/.local/state \
-    XDG_CACHE_HOME=/root/.cache \
+{{ if eq .chezmoi.version.builtBy "Homebrew" -}}
+set -a env_args \
     HOMEBREW_PREFIX={{ env "HOMEBREW_PREFIX" }} \
-    PATH={{ env "HOMEBREW_PREFIX" }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
-    {{ env "HOMEBREW_PREFIX" }}/bin/chezmoi apply \
+    PATH={{ env "HOMEBREW_PREFIX" }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+{{ end -}}
+
+sudo /usr/bin/env $env_args chezmoi apply \
     --init \
     --source {{ .paths.rootSourceDir }} \
     --destination / \
     $argv
-  {{ else -}}
-sudo /usr/bin/env \
-    HOME=/root \
-    XDG_CONFIG_HOME=/root/.config \
-    XDG_DATA_HOME=/root/.local/share \
-    XDG_STATE_HOME=/root/.local/state \
-    XDG_CACHE_HOME=/root/.cache \
-    /usr/bin/chezmoi apply \
-    --init \
-    --source {{ .paths.rootSourceDir }} \
-    --destination / \
-    $argv
-  {{ end -}}
 {{ end -}}
