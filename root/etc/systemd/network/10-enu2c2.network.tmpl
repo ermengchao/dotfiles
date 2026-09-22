@@ -6,7 +6,19 @@ Name=enu2c2
 RequiredForOnline=no
 
 [Network]
-DHCP=no
+DHCP=ipv4
 LinkLocalAddressing=no
 IPv6AcceptRA=no
+
+[DHCPv4]
+ClientIdentifier=mac
+SendHostname=no
+UseRoutes=no
+UseDNS=no
+UseNTP=no
+SendOption=60:string:{{ gopass "iptv/option60" | replaceAllRegex "([0-9a-f]{2})" "\\x$1" }}
+
+[Route]
+Destination=224.0.0.0/4
+Scope=link
 {{ end -}}
