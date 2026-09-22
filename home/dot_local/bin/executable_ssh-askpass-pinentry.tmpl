@@ -1,0 +1,23 @@
+#!/usr/bin/env fish
+
+{{ if eq .chezmoi.os "darwin" -}}
+set -l response (
+    printf '%s\n' \
+        'SETTITLE OpenSSH' \
+        'SETDESC Enter the passphrase for your SSH private key.' \
+        'SETPROMPT Passphrase:' \
+        'GETPIN' \
+        'BYE' | /opt/homebrew/bin/pinentry-mac
+)
+
+for line in $response
+    if string match --quiet --regex '^D ' -- $line
+        string replace --regex '^D ' '' -- $line | string unescape --style=url
+        exit 0
+    end
+end
+
+exit 1
+{{ else -}}
+exit 1
+{{ end -}}

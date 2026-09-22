@@ -35,6 +35,38 @@ Use the following tools by default:
 
 When a preferred tool is unavailable or incompatible with the project, use the necessary alternative and briefly explain why.
 
+## OrbStack virtual machines
+
+When accessing the Arch virtual machine managed by OrbStack:
+
+- Prefer `ssh orb '<command>'` for non-interactive diagnostics and `orb` for an interactive shell.
+- Commands using `orb`, `orbctl`, or `ssh orb` may require access outside the Codex sandbox because they communicate with OrbStack Helper through local IPC, a proxy command, and local network forwarding.
+- If an OrbStack command hangs, reports `Operation not permitted`, or reports `timed out waiting for VM to start` inside the sandbox:
+  1. Stop the hanging command.
+  2. Retry the same read-only command with escalated sandbox permissions.
+  3. Do not conclude that OrbStack or the guest VM is unavailable unless the escalated command also fails.
+- Use a harmless probe such as:
+
+  ```fish
+  orb -m arch -u chao uname -a
+  ```
+
+  or:
+
+  ```fish
+  ssh -o BatchMode=yes -o ConnectTimeout=10 orb true
+  ```
+
+- `ssh orb` is an OrbStack SSH alias. It may use `127.0.0.1`, a forwarded port, `ProxyCommand`, and OrbStack's private SSH key. Do not replace it with a direct connection to the guest IP on port 22 unless specifically testing the guest's own SSH server.
+- A failure connecting directly to `<guest-ip>:22` does not prove that `ssh orb` is unavailable.
+- Do not stop, restart, or otherwise modify OrbStack or its virtual machines based only on a failure observed inside the Codex sandbox.
+- Before restarting a VM, verify the failure outside the sandbox and obtain the user's approval if the restart may interrupt running processes.
+- When reporting a connection problem, explicitly distinguish among:
+  - Codex sandbox restrictions;
+  - OrbStack Helper or proxy failures;
+  - guest-agent failures;
+  - the guest operating system's own network configuration.
+
 ## Tools
 
 ### graphify

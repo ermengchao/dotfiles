@@ -1,0 +1,18 @@
+#!/usr/bin/env fish
+
+set -l key_dir "$HOME/.ssh/keys"
+install -d -m 700 "$key_dir"
+
+{{ range .sshKeys -}}
+set -l name {{ . | quote }}
+set -l temporary (mktemp "$key_dir/.$name.XXXXXX")
+
+if gopass cat "ssh/$name" >"$temporary"
+    chmod 600 "$temporary"
+    mv -f "$temporary" "$key_dir/$name"
+else
+    rm -f "$temporary"
+    printf "‼️ Failed to generate SSH key: $name" >&2
+    exit 1
+end
+{{ end -}}
