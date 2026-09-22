@@ -1,8 +1,8 @@
 #!/usr/bin/env fish
 
 {{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
-set -gx GOPASS_MOUNTS_PATH (/usr/bin/env gopass config mounts.path)
-set -gx SSH_KEY_PATH /home/{{ .username }}/.ssh
+set -gx GOPASS_MOUNTS_PATH (/usr/bin/env gopass config mounts.path | string replace -r '^~' {{ .chezmoi.homeDir | quote }})
+set -gx SSH_KEY_PATH "{{ .chezmoi.homeDir }}/.ssh"
 
   {{ if eq .chezmoi.version.builtBy "Homebrew" -}}
 sudo /usr/bin/env \

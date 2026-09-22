@@ -16,7 +16,7 @@ if not test -f ~/.ssh/id_ed25519
     exit 1
 end
 
-set root_password_store (string replace -r '^~/' "$HOME/" -- (gopass config mounts.path))
+set root_password_store (/usr/bin/env gopass config mounts.path | string replace -r '^~' {{ .chezmoi.homeDir | quote }})
 if not test -d "$root_password_store"; or test -z (ls -A "$root_password_store" | string collect)
     printf "🧑‍💻 Cloning root password store...\n"
 
