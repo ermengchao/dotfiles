@@ -10,6 +10,7 @@ Image = ghcr.io/open-webui/open-webui:main
 AutoUpdate = registry
 
 Network = bridge
+PublishPort = 0.0.0.0:{{ .ports.open_webui }}:8080
 PublishPort = [::]:{{ .ports.open_webui }}:8080
 
 Volume = {{ env "XDG_DATA_HOME" }}/open-webui:/app/backend/data

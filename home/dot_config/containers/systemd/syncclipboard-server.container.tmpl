@@ -13,6 +13,7 @@ Environment = SYNCCLIPBOARD_USERNAME=chao
 Environment = SYNCCLIPBOARD_PASSWORD={{ gopass "chao/password" }}
 
 Network = bridge
+PublishPort = 0.0.0.0:{{ .ports.syncclipboard_server }}:5033
 PublishPort = [::]:{{ .ports.syncclipboard_server }}:5033
 
 Volume = {{ env "XDG_DATA_HOME" }}/syncclipboard-server:/app/data

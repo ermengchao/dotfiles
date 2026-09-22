@@ -19,4 +19,5 @@ UserNS=keep-id
 Environment=ASF_UID=%U
 
 Volume={{ env "XDG_CONFIG_HOME" }}/asf:/app/config:Z
+PublishPort = 0.0.0.0:{{ .ports.asf }}:1242
 PublishPort = [::]:{{ .ports.asf }}:1242

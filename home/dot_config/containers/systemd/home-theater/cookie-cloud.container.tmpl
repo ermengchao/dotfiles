@@ -10,4 +10,5 @@ Image = docker.io/easychen/cookiecloud:latest
 AutoUpdate = registry
 
 Network = bridge
+PublishPort = 0.0.0.0:{{ .ports.cookie_cloud }}:8088
 PublishPort = [::]:{{ .ports.cookie_cloud }}:8088

@@ -18,8 +18,13 @@ Environment = TZ={{ template "getSystemTimezone" . }}
 Environment = PEERPORT={{ .ports.transmission.peer }}
 
 Network = bridge
+PublishPort = 0.0.0.0:{{ .ports.transmission.rpc }}:{{ .ports.transmission.rpc }}
 PublishPort = [::]:{{ .ports.transmission.rpc }}:{{ .ports.transmission.rpc }}
+
+PublishPort = 0.0.0.0:{{ .ports.transmission.peer }}:{{ .ports.transmission.peer }}
 PublishPort = [::]:{{ .ports.transmission.peer }}:{{ .ports.transmission.peer }}
+
+PublishPort = 0.0.0.0:{{ .ports.transmission.peer }}:{{ .ports.transmission.peer }}/udp
 PublishPort = [::]:{{ .ports.transmission.peer }}:{{ .ports.transmission.peer }}/udp
 
 Volume = {{ env "XDG_CONFIG_HOME" }}/transmission:/config

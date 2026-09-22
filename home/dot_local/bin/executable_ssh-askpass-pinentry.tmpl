@@ -1,13 +1,24 @@
 #!/usr/bin/env fish
 
 {{ if eq .chezmoi.os "darwin" -}}
+set -l pinentry /opt/homebrew/bin/pinentry-mac
+{{ else if eq .chezmoi.os "linux" -}}
+set -l pinentry /usr/bin/pinentry-gtk
+{{ else -}}
+exit 1
+{{ end -}}
+
+if not test -x "$pinentry"
+    exit 1
+end
+
 set -l response (
     printf '%s\n' \
         'SETTITLE OpenSSH' \
         'SETDESC Enter the passphrase for your SSH private key.' \
         'SETPROMPT Passphrase:' \
         'GETPIN' \
-        'BYE' | /opt/homebrew/bin/pinentry-mac
+        'BYE' | $pinentry
 )
 
 for line in $response
@@ -18,6 +29,3 @@ for line in $response
 end
 
 exit 1
-{{ else -}}
-exit 1
-{{ end -}}
