@@ -8,7 +8,8 @@ set -l env_args \
     XDG_STATE_HOME=/root/.local/state \
     XDG_CACHE_HOME=/root/.cache \
     GOPASS_MOUNTS_PATH=(/usr/bin/env gopass config mounts.path | string replace -r '^~' {{ .chezmoi.homeDir | quote }}) \
-    SSH_KEY_PATH="{{ .chezmoi.homeDir }}/.ssh"
+    SSH_KEY_PATH="{{ .chezmoi.homeDir }}/.ssh" \
+    GOPASS_AGE_PASSWORD={{ gopass "chao/password" }}
 
 {{ if eq .chezmoi.version.builtBy "Homebrew" -}}
 set -a env_args \
