@@ -6,10 +6,10 @@ set gopass {{ env "HOMEBREW_PREFIX" }}/bin/gopass
 set gopass /usr/bin/gopass
 {{ end -}}
 
-$gopass config core autopush false
-$gopass config core autosync true
+$gopass config core.autopush false
+$gopass config core.autosync true
 
-$gopass config age ssh-key-path $SSH_KEY_PATH
-$gopass config age agent-enabled false
+$gopass config age.ssh-key-path $SSH_KEY_PATH
+$gopass config age.agent-enabled false
 
-$gopass config mounts path $GOPASS_MOUNTS_PATH
+$gopass config mounts.path $GOPASS_MOUNTS_PATH
