@@ -5,9 +5,15 @@ vim.pack.add({
   },
 })
 
-require("hex").setup({
+local hex = require("hex")
+local default_pre_read = hex.cfg.is_file_binary_pre_read
+
+hex.setup({
   dump_cmd = "xxd -g 1 -u",
   assemble_cmd = "xxd -r",
+  is_file_binary_pre_read = function()
+    return vim.fn.expand("%:e"):lower() == "mfd" or default_pre_read()
+  end,
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
