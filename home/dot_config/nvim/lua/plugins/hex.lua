@@ -10,6 +10,14 @@ require("hex").setup({
   assemble_cmd = "xxd -r",
 })
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*.mfd",
+  callback = function()
+    vim.bo.binary = true
+    vim.bo.fileencoding = ""
+  end,
+})
+
 vim.keymap.set("n", "<leader>tx", "<cmd>HexToggle<CR>", {
   desc = "[T]oggle he[x] view",
 })
