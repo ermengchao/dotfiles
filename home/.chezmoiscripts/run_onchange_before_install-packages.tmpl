@@ -5,15 +5,8 @@
 {{ $packageMap := index $.packageManagers . }}{{ if $.meta.isMinimal }}{{ $packageMap = index $.packageManagers . "minimal" }}{{ end -}}
 
 {{   if eq . "brew" -}}
-{{     if eq $.chezmoi.os "darwin" -}}
-set brew_prefix /opt/homebrew
-{{     end -}}
-{{     if eq $.chezmoi.os "linux" -}}
-set brew_prefix /home/linuxbrew/.linuxbrew
-{{     end -}}
-
 {{ range index $packageMap $.chezmoi.os "taps" -}}
-$brew_prefix/bin/brew trust {{ . | quote }} > /dev/null
+{{ env "HOMEBREW_PREFIX" }}/bin/brew trust {{ . | quote }} > /dev/null
 {{ end -}}
 
 begin
@@ -38,18 +31,7 @@ begin
 
     {{ end -}}
 
-end | $brew_prefix/bin/brew bundle --file=/dev/stdin > /dev/null
-{{     if eq $.chezmoi.os "darwin" -}}
-printf "🧑‍💻 Linking core services to /Applications...\n"
-sudo ln -s "/System/Library/CoreServices/Applications" "/Applications/CoreServices"
-printf "✅ Done.\n"
-printf "🧑‍💻 Linking Xcode tools to /Applications...\n"
-sudo ln -s "/Applications/Xcode.app/Contents/Applications" "/Applications/Developer Tools"
-printf "✅ Done.\n"
-
-defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
-defaults write org.gpgtools.common UseKeychain -bool false
-{{     end -}}
+end | {{ env "HOMEBREW_PREFIX" }}/bin/brew bundle --file=/dev/stdin > /dev/null
 {{   else -}}
 {{ $installer := "" }}{{ if (index $.packageManagers .).root }}{{ $installer = "sudo " }}{{ end -}}
 {{ $manager := . -}}

@@ -1,17 +1,20 @@
 {{ if eq .chezmoi.os "darwin" -}}
+brew shellenv fish | source
+
 abbr keychain-add "/usr/bin/ssh-add --apple-use-keychain"
-abbr x86 "arch -arm64 env ZDOTDIR='$HOME/.zsh@x86' zsh"
-abbr xcode "open -a Xcode.app"
+
+alias xcode "open -a Xcode.app"
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
 {{   if eq .chezmoi.version.builtBy "Homebrew" -}}
-eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+brew shellenv fish | source
 {{   end -}}
-eval "$(ssh-agent -c 2> /dev/null)" > /dev/null
+ssh-agent -c | source > /dev/null
 
 abbr sc systemctl
 abbr scu "systemctl --user"
+
 alias open xdg-open
 # alias tailscale "tailscale --socket $XDG_RUNTIME_DIR/tailscale/tailscaled.sock"
 {{ end -}}
@@ -42,13 +45,9 @@ fish_config theme choose catppuccin-mocha
 abbr -a --position anywhere -- --help '--help | bat -plhelp'
 abbr -a --position anywhere -- -h '-h | bat -plhelp'
 
-abbr av "source ./.venv/bin/activate.fish"
-abbr activate "source .venv/bin/activate.fish"
 abbr conf chezmoi
-abbr dv deactivate
 abbr f fastfetch
 abbr fzfp "fzf --style full --preview 'fzf-preview.sh {}'"
-abbr n nvim
 
 alias ls "eza --git --header --hyperlink=auto"
 alias posting "posting --collection $XDG_CONFIG_HOME/posting/collections"

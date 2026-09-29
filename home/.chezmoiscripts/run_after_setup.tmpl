@@ -1,13 +1,18 @@
 #!/usr/bin/env fish
 
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq $.chezmoi.os "darwin" -}}
+sudo ln -s "/System/Library/CoreServices/Applications" "/Applications/CoreServices"
+sudo ln -s "/Applications/Xcode.app/Contents/Applications" "/Applications/Developer Tools"
+
 if test -d "/Applications/.Karabiner-VirtualHIDDevice-Manager.app"; and test -d "/Applications/Karabiner-Elements.app"
     sudo mkdir -p "/Applications/Karabiner-Elements.app/Contents/Applications"
     sudo mv "/Applications/.Karabiner-VirtualHIDDevice-Manager.app" "/Applications/Karabiner-Elements.app/Contents/Applications"
 end
-
 if test -d "/Applications/Karabiner-EventViewer.app"; and test -d "/Applications/Karabiner-Elements.app"
     sudo mkdir -p "/Applications/Karabiner-Elements.app/Contents/Applications"
     sudo mv "/Applications/Karabiner-EventViewer.app" "/Applications/Karabiner-Elements.app/Contents/Applications"
 end
+
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "{{ env "XDG_CONFIG_HOME" }}/hammerspoon/init.lua"
+defaults write org.gpgtools.common UseKeychain -bool false
 {{ end -}}
