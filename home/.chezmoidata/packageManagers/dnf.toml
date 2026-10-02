@@ -6,6 +6,10 @@ args = [
   "-y",
 ]
 
+groups = [
+  "development-tools",
+]
+
 packages = [
   "clang",
   "flatpak",
