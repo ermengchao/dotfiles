@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-{{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
+{{ if ne .os "nixos" -}}
 cd {{ .chezmoi.workingTree }}
 if not string match -q "dotfiles" (git remote | string trim)
     printf "🧑‍💻 Setting dotfiles repo...\n"

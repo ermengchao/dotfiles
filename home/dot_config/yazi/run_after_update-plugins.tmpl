@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-{{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
+{{ if ne .os "nixos" -}}
 printf "📦 Checking for updates for yazi plugins...\n"
 
 if type -q yazi

@@ -1,11 +1,9 @@
 #!/usr/bin/env fish
 
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq .os "darwin" -}}
 set -l pinentry /opt/homebrew/bin/pinentry-mac
-{{ else if eq .chezmoi.os "linux" -}}
-set -l pinentry /usr/bin/pinentry-gtk
 {{ else -}}
-exit 1
+set -l pinentry /usr/bin/pinentry-gtk
 {{ end -}}
 
 if not test -x "$pinentry"

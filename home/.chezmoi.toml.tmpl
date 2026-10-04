@@ -1,3 +1,8 @@
+{{ $os := .chezmoi.os -}}
+{{ if hasKey .chezmoi.osRelease "id" -}}
+{{   $os = .chezmoi.osRelease.id -}}
+{{ end -}}
+
 encryption = "age"
 format = "json"
 mode = "file"
@@ -6,9 +11,9 @@ progress = true
 [add]
 secrets = "error"
 
-[age]
-identity = "{{ .chezmoi.homeDir }}/.ssh/id_ed25519"
-recipientsFile = "{{ .chezmoi.homeDir }}/.ssh/id_ed25519.pub"
+# [age]
+# identity = "{{ .chezmoi.homeDir }}/.ssh/id_ed25519"
+# recipientsFile = "{{ .chezmoi.homeDir }}/.ssh/id_ed25519.pub"
 
 [docker]
 command = "podman"
@@ -34,7 +39,7 @@ autoPush = true
 command = "fish"
 
 [pinentry]
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq $os "darwin" -}}
 command = "pinentry-mac"
 {{ else -}}
 command = "pinentry"
@@ -54,20 +59,18 @@ gitHostUrl = "https://github.com"
 tailnet = "taileee60e.ts.net"
 
 agentTimeout = 7200
+os = {{ $os | quote }}
 scriptDelay = 1
 
 [data.meta]
-{{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "nixos") -}}
+{{ if eq $os "nixos" -}}
 hostname = {{ .chezmoi.hostname | toToml }}
 {{ else -}}
 hostname = {{ promptStringOnce . "meta.hostname" "💥 Hostname" $.chezmoi.hostname | toToml }}
 prettyHostname = {{ promptStringOnce . "meta.prettyHostname" "👀 Pretty hostname" | toToml }}
-isMinimal = {{ promptBoolOnce . "meta.isMinimal" "🧩 Minimal installation" true | toToml }}
+isRootNode = {{ promptBoolOnce . "meta.isRootNode" "☘️ Root device" false | toToml }}
 {{ $packageManagerList := list "brew" "apt" "dnf" "flatpak" "pacman" "paru" -}}
 packageManager = {{ promptMultichoiceOnce . "meta.packageManager" "📦 Package manager" $packageManagerList | toToml }}
-{{ end -}}
-
-{{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
 isProxyServer = {{ promptBoolOnce . "meta.isProxyServer" "🌐 Whether a proxy server" false | toToml }}
 {{ end -}}
 

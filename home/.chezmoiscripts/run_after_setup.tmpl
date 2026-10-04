@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-{{ if eq $.chezmoi.os "darwin" -}}
+{{ if eq .os "darwin" -}}
 sudo ln -s "/System/Library/CoreServices/Applications" "/Applications/CoreServices"
 sudo ln -s "/Applications/Xcode.app/Contents/Applications" "/Applications/Developer Tools"
 

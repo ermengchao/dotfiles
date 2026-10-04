@@ -1,12 +1,11 @@
 #!/usr/bin/env fish
 
-{{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
+{{ if ne .os "nixos" -}}
 {{ range .meta.packageManager -}}
 {{   if eq . "brew" -}}
-{{     if eq $.chezmoi.os "darwin" -}}
+{{     if eq $.os "darwin" -}}
 set brew_path /opt/homebrew/bin/brew
-{{     end -}}
-{{     if eq $.chezmoi.os "linux" -}}
+{{     else -}}
 set brew_path /home/linuxbrew/.linuxbrew/bin/brew
 {{     end -}}
 

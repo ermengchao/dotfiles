@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-{{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
+{{ if ne .os "nixos" -}}
 if not type -q gopass
     printf "‼️ Gopass is not available. Applying abort.\n"
     exit 1
@@ -8,13 +8,26 @@ end
 
 gopass config age.agent-enabled true > /dev/null
 gopass config age.agent-timeout {{ .agentTimeout }} > /dev/null
-gopass config age.ssh-key-path "$HOME/.ssh" > /dev/null
 
-set -gx GOPASS_SSH_DIR ~/.ssh
+{{   if .meta.isRootNode -}}
+if not test -s ~/.config/gopass/age/identities
+    printf "‼️ Gopass age identity file not found. Import your native age identity with 'gopass age identities add' before applying.\n"
+    exit 1
+end
+
+gopass config core.autopush true
+gopass config core.autosync true
+{{   else -}}
 if not test -f ~/.ssh/id_ed25519
     printf "‼️ SSH private key, which is used as gopass age identity could not found. Applying abort.\n"
     exit 1
 end
+
+gopass config core.autopush false
+gopass config core.autosync false
+gopass config age.ssh-key-path "$HOME/.ssh" > /dev/null
+set -gx GOPASS_SSH_DIR ~/.ssh
+{{   end -}}
 
 set root_password_store (/usr/bin/env gopass config mounts.path | string replace -r '^~' {{ .chezmoi.homeDir | quote }})
 if not test -d "$root_password_store"; or test -z (ls -A "$root_password_store" | string collect)

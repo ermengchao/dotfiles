@@ -5,5 +5,5 @@ if test -d "$root_password_store"; and test -n (ls -A "$root_password_store" | s
     set -x GIT_AUTHOR_NAME {{ .username | quote }}
     set -x GIT_AUTHOR_EMAIL {{ .email | quote }}
 
-    gopass --yes git -- pull --ff-only > /dev/null
+    gopass --yes --nosync git -- pull --ff-only > /dev/null
 end

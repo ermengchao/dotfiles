@@ -12,3 +12,15 @@ packages = [
   "com.google.Chrome",
   "com.valvesoftware.Steam",
 ]
+
+[packageManagers.flatpak.minimal]
+
+root = false
+command = "install"
+args = [
+  "--user",
+  "--noninteractive",
+]
+
+packages = [
+]

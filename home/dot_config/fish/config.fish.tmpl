@@ -1,12 +1,12 @@
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq .os "darwin" -}}
 brew shellenv fish | source
 
 abbr keychain-add "/usr/bin/ssh-add --apple-use-keychain"
 
 alias xcode "open -a Xcode.app"
-{{ end -}}
 
-{{ if eq .chezmoi.os "linux" -}}
+{{ else -}}
+
 {{   if eq .chezmoi.version.builtBy "Homebrew" -}}
 brew shellenv fish | source
 {{   end -}}

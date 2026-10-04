@@ -1,8 +1,8 @@
 #!/usr/bin/env fish
 
-{{ if or (eq .chezmoi.os "darwin") (and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos")) -}}
+{{ if ne .os "nixos" -}}
 {{ range .meta.packageManager -}}
-{{ $packageMap := index $.packageManagers . }}{{ if $.meta.isMinimal }}{{ $packageMap = index $.packageManagers . "minimal" }}{{ end -}}
+{{ $packageMap := index $.packageManagers . }}{{ if not $.meta.isRootNode }}{{ $packageMap = index $.packageManagers . "minimal" }}{{ end -}}
 
 {{   if eq . "brew" -}}
 {{ range index $packageMap $.chezmoi.os "taps" -}}

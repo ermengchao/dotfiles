@@ -8,7 +8,7 @@ function is_dark_mode
         end
     end
 
-    {{ if eq .chezmoi.os "darwin" -}}
+    {{ if eq .os "darwin" -}}
     if test "$(defaults read -g AppleInterfaceStyle 2> /dev/null)" = Dark
         set -Ux IS_DARK_MODE true
         return 0
@@ -16,9 +16,9 @@ function is_dark_mode
         set -Ux IS_DARK_MODE false
         return 1
     end
-    {{ end -}}
 
-    {{ if eq .chezmoi.os "linux" -}}
+    {{ else -}}
+
     if test "$(gsettings get org.gnome.desktop.interface color-scheme 2> /dev/null)" = "'prefer-dark'"
         set -Ux IS_DARK_MODE true
         return 0

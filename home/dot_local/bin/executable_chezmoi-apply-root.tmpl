@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-{{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
+{{ if ne .os "nixos" }}
 set -l env_args \
     HOME=/root \
     XDG_CONFIG_HOME=/root/.config \
@@ -11,11 +11,11 @@ set -l env_args \
     SSH_KEY_PATH="{{ .chezmoi.homeDir }}/.ssh" \
     GOPASS_AGE_PASSWORD={{ gopass "chao/password" }}
 
-{{ if eq .chezmoi.version.builtBy "Homebrew" -}}
+{{   if eq .chezmoi.version.builtBy "Homebrew" -}}
 set -a env_args \
     HOMEBREW_PREFIX={{ env "HOMEBREW_PREFIX" }} \
     PATH={{ env "HOMEBREW_PREFIX" }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-{{ end -}}
+{{   end -}}
 
 sudo /usr/bin/env $env_args chezmoi apply \
     --init \

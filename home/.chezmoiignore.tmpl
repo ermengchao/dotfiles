@@ -1,5 +1,5 @@
-{{ if eq .chezmoi.os "darwin" -}}
-{{   if .meta.isMinimal -}}
+{{ if eq .os "darwin" -}}
+{{   if not .meta.isRootNode -}}
 .config/marimo
 {{   end -}}
 
@@ -16,22 +16,23 @@
 .config/transmission
 .config/vector
 .config/wayvnc
-.local/bin/chezmoi-apply-etc
-.local/share/subscription
-{{ end -}}
+.local/bin/chezmoi-apply-root
+.local/bin/snell-server
+.local/share/subscriptions
 
-{{ if eq .chezmoi.os "linux" -}}
-{{   if eq .chezmoi.osRelease.id "nixos" -}}
+{{ else -}}
+
+{{   if eq .os "nixos" -}}
 .config/fish/config.fish
 .config/systemd
 {{   else -}}
 
 {{     if not .meta.isProxyServer  -}}
 .config/snell-server
-.local/share/subscription
+.local/share/subscriptions
 {{     end -}}
 
-{{     if .meta.isMinimal -}}
+{{     if not .meta.isRootNode -}}
 .config/ghostty
 .config/marimo
 .config/wayvnc
