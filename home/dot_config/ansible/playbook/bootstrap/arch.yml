@@ -3,12 +3,16 @@
   hosts: arch
   become: true
 
+  vars_prompt:
+    - name: gopass_age_password
+      prompt: "请输入 gopass age 解锁密码"
+      private: true
+
   vars:
     normal_user: "{{ ansible_user }}"
     normal_user_home: "/home/{{ normal_user }}"
     chezmoi_hostname: "arch"
     chezmoi_pretty_hostname: "Arch"
-    gopass_age_password: "050530"
     user_env:
       HOME: "{{ normal_user_home }}"
       USER: "{{ normal_user }}"
@@ -67,6 +71,7 @@
         mode: "0600"
 
     - name: Run chezmoi apply
+      no_log: true
       become: true
       become_user: "{{ normal_user }}"
       command: >
