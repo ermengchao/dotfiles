@@ -68,6 +68,7 @@ brews = [
   "xz",
   "yazi",
   "zoxide",
+  "zstd",
   "7zip",
 ]
 
@@ -195,6 +196,7 @@ brews = [
   "tmux",
   "xz",
   "yazi",
+  "zstd",
   "zoxide",
   "7zip",
 ]
@@ -283,6 +285,7 @@ brews = [
   "tree-sitter-cli",
   "xz",
   "yazi",
+  "zstd",
   "zoxide",
   "7zip",
 ]
@@ -322,6 +325,7 @@ brews = [
   "tree-sitter-cli",
   "xz",
   "yazi",
+  "zstd",
   "zoxide",
   "7zip",
 ]
