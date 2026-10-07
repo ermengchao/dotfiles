@@ -1,12 +1,22 @@
 function is_proxy_listening
-    if {{ or (eq .os "nixos") (.meta.isProxyServer) }}
+    if {{ eq .os "nixos" }}
         return 1
     end
 
-    set status_code (curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:{{ .ports.clash_api }} -L -H "Authorization: Bearer {{ gopass "chao/password" }}")
-    if test $status_code -eq 200
-        return 0
-    else
-        return 1
+    for port in {{ .ports.proxy.http }} {{ .ports.proxy.socks }}
+        set -l connections (command curl -q \
+            --noproxy '*' \
+            --connect-timeout 1 \
+            --max-time 2 \
+            --silent \
+            --output /dev/null \
+            --write-out '%{num_connects}' \
+            "http://127.0.0.1:$port")
+
+        if test "$connections" = 1
+            return 0
+        end
     end
+
+    return 1
 end

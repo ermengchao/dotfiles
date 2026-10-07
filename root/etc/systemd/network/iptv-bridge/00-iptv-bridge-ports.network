@@ -1,0 +1,11 @@
+[Match]
+Name=enu1c2 enu2c2
+
+[Link]
+RequiredForOnline=no
+
+[Network]
+Bridge=br-iptv
+DHCP=no
+LinkLocalAddressing=no
+IPv6AcceptRA=no

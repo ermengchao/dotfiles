@@ -1,0 +1,10 @@
+[Match]
+Name=br-iptv
+
+[Link]
+RequiredForOnline=no
+
+[Network]
+DHCP=no
+LinkLocalAddressing=no
+IPv6AcceptRA=no

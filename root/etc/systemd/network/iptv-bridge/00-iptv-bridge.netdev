@@ -1,0 +1,7 @@
+[NetDev]
+Name=br-iptv
+Kind=bridge
+
+[Bridge]
+STP=false
+MulticastSnooping=false
