@@ -15,16 +15,16 @@ if not test -s ~/.config/gopass/age/identities
     exit 1
 end
 
-gopass config core.autopush true
-gopass config core.autosync true
+gopass config core.autopush true > /dev/null
+gopass config core.autosync true > /dev/null
 {{   else -}}
 if not test -f ~/.ssh/id_ed25519
     printf "‼️ SSH private key, which is used as gopass age identity could not found. Applying abort.\n"
     exit 1
 end
 
-gopass config core.autopush false
-gopass config core.autosync false
+gopass config core.autopush false > /dev/null
+gopass config core.autosync false > /dev/null
 gopass config age.ssh-key-path "$HOME/.ssh" > /dev/null
 set -gx GOPASS_SSH_DIR ~/.ssh
 {{   end -}}
