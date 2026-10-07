@@ -1,0 +1,25 @@
+[Unit]
+Description = PS Portal Relay
+Wants = network-online.target
+Requires = sys-subsystem-net-devices-enu1c2.device
+After = network-online.target sys-subsystem-net-devices-enu1c2.device
+
+[Service]
+Restart = on-failure
+
+[Container]
+ContainerName = ps-portal-relay
+Image = localhost/ps-portal-relay:latest
+Pull = never
+
+AddCapability = NET_RAW
+Sysctl = net.ipv4.ip_forward=0
+RunInit = true
+Tmpfs = /run
+StopTimeout = 60
+
+Network = ps-portal-relay.network
+IP = 10.10.10.18
+
+Volume = /etc/ps-portal-relay/config:/etc/portal-bitrate
+Volume = /etc/ps-portal-relay/runtime:/var/lib/portal-bitrate-auto

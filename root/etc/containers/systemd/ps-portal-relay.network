@@ -1,0 +1,11 @@
+[Unit]
+Description=Portal relay LAN macvlan network
+Requires=sys-subsystem-net-devices-enu1c2.device
+After=sys-subsystem-net-devices-enu1c2.device
+
+[Network]
+NetworkName=ps-portal-relay
+Driver=macvlan
+Options=parent=enu1c2
+Subnet=10.10.10.0/24
+Gateway=10.10.10.2

@@ -1,6 +1,10 @@
-set -g _container_install_content "[Install]
-WantedBy=default.target
-"
+function _container_install_content --argument-names user_mode
+    set -l target multi-user.target
+    if test "$user_mode" = 1
+        set target default.target
+    end
+    printf '[Install]\nWantedBy=%s\n' "$target"
+end
 
 function _container_usage
     printf '%s\n' \
@@ -89,24 +93,15 @@ function _container_linux_enable --argument-names user_mode name
 
     set -l install_file (_container_dropin_file "$source")
     set -l install_dir (path dirname "$install_file")
-
-    if test -e "$install_file"
-        set -l current (string collect -N <"$install_file")
-        if test "$current" = "$_container_install_content"
-            printf 'Already enabled: %s\n' "$install_file"
-            return 0
-        end
-        printf 'container: refusing to overwrite existing %s\n' "$install_file" >&2
-        return 1
-    end
+    set -l install_content (_container_install_content "$user_mode" | string collect -N)
 
     if test "$user_mode" = 1; or test (id -u) -eq 0
         command mkdir -p -- "$install_dir"; or return
-        printf '%s' "$_container_install_content" >"$install_file"; or return
+        printf '%s' "$install_content" >"$install_file"; or return
     else
         set -l temp_file (mktemp)
         or return
-        printf '%s' "$_container_install_content" >"$temp_file"
+        printf '%s' "$install_content" >"$temp_file"
         or begin
             command rm -f -- "$temp_file"
             return 1
@@ -159,6 +154,7 @@ function _container_linux_disable --argument-names user_mode name
     set -l install_dir (_container_find_dropin "$user_mode" "$unit_name")
     or return $status
     set -l install_file "$install_dir/install.conf"
+    set -l install_content (_container_install_content "$user_mode" | string collect -N)
 
     if not test -f "$install_file"
         printf 'container: %s does not exist\n' "$install_file" >&2
@@ -166,7 +162,7 @@ function _container_linux_disable --argument-names user_mode name
     end
 
     set -l current (string collect -N <"$install_file")
-    if test "$current" != "$_container_install_content"
+    if test "$current" != "$install_content"
         printf 'container: refusing to remove modified %s\n' "$install_file" >&2
         return 1
     end

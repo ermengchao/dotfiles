@@ -1,21 +1,18 @@
 [Unit]
-Description=Home Assistant Container
+Description = Home Assistant Container
 
 [Service]
-Restart=on-failure
+Restart = on-failure
 
 [Container]
-ContainerName=home-assistant
-Image=ghcr.io/home-assistant/home-assistant:stable
-AutoUpdate=registry
+ContainerName = home-assistant
+Image = ghcr.io/home-assistant/home-assistant:stable
+AutoUpdate = registry
 
-Network=host
+Network = host
 
-Environment=TZ={{ template "getSystemTimezone" . }}
+Environment = TZ={{ template "getSystemTimezone" . }}
 
-Volume=/etc/home-assistant:/config
-Volume=/etc/localtime:/etc/localtime:ro
-Volume=/run/dbus:/run/dbus:ro
-
-[Install]
-WantedBy=multi-user.target
+Volume = /etc/home-assistant:/config
+Volume = /etc/localtime:/etc/localtime:ro
+Volume = /run/dbus:/run/dbus:ro

@@ -1,0 +1,10 @@
+{
+  "network": {
+    "interface": "eth0",
+    "ps5_ip": "10.10.10.65",
+    "portal_ip": "10.10.10.131"
+  },
+  "profile": "65",
+  "ps5_mac": "c8:4a:a0:44:a3:bf",
+  "portal_mac": "ec:74:8c:a7:96:48"
+}
