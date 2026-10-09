@@ -1,6 +1,5 @@
 require('plugins.catppuccin')
 require('plugins.hex')
-require('plugins.opencode')
 require('plugins.render_markdown')
 require('plugins.typst_preview')
 require('plugins.yazi')

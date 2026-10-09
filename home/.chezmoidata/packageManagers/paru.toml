@@ -16,7 +16,6 @@ drivers = [
 packages = [
   "bun-bin",
   "google-chrome",
-  "opencode-bin",
   "sesh",
   "sing-box",
   "tlrc",
