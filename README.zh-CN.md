@@ -73,7 +73,20 @@
 
     `gopass sync` 会先执行 Git pull，再执行 push，其中 pull 没有显式指定 `--ff-only`。关闭 `core.autopush` 只会停止本地修改后的自动推送，关闭 `core.autosync` 则停止自动双向同步；两者都不会阻止显式运行 `gopass sync`。因此，leaf 节点使用上述 pull 命令更新。Root 节点也会运行同一个 chezmoi pull 脚本。
 
-    在我的实际使用中，我从来没有通过 SSH 访问 root 节点的需求，也没有在这些节点上配置 SSH 私钥，而是仅使用原生的 age identity 解密。因此，每个节点都只需要维护一把用于密码库解密的密钥：root 节点使用 age 密钥，leaf 节点复用已有的 SSH 密钥。每个节点一把 key，简洁利落。
+    在我的实际使用中，我没有通过 SSH 访问 root 节点的需求。每个节点维护一个用于密码库解密的 identity：root 节点使用原生 age identity，leaf 节点复用已有的 SSH 密钥。SSH 登录使用独立的客户端身份：Mac root 节点通过 [Secretive](https://github.com/maxgoedjen/secretive) 将登录私钥保存在 Secure Enclave 中，其他客户端可以使用保留在本机的 SSH 私钥。
+
+    **节点初始化与授权**
+
+    - **Leaf 节点**首先生成 SSH 密钥对，只将公钥提交给 root 节点。Root 节点运行 `gopass recipients add`，将该公钥加入 recipient 列表，并重新加密密码库。Leaf 节点拉取更新后的密码库，即可使用保留在本地的 SSH 私钥解密。公钥和私钥都保存在 leaf 节点上，授权过程无需传输私钥。
+    - **Root 节点**使用保存在物理安全密钥中的 recovery 密钥，获得 gopass 密码库的初始解密权限。获得这一能力后，再将自身的原生 age identity 对应的 recipient 加入密码库并重新加密，之后使用该 identity 进行日常访问。
+
+    对于由 chezmoi 管理 SSH 配置的 leaf 节点，`home/dot_ssh/authorized_keys.tmpl` 会将 `~/.ssh/authorized_keys` 生成为普通文件，内容包括 leaf 本机的 `id_ed25519.pub`，以及 `home/.chezmoidata/rootNodeIdentities.toml` 中登记的 root 客户端公钥。NixOS 当前将 `.ssh` 排除在 chezmoi 管理范围之外。
+
+    Mac root 节点通过 Secretive 的 SSH 代理，使用自己的登录密钥认证。公钥由 chezmoi 部署到 leaf 节点；私钥无法导出，也不通过 gopass 分发。Leaf 的 Ed25519 私钥保留在 leaf 本机，用于 gopass 解密，root 客户端无需取得它的副本即可登录。
+
+    SSH 登录授权与密码库解密授权分别维护：`authorized_keys` 中的 root 客户端公钥授予登录权限，gopass recipients 授予解密权限。移除 SSH 登录公钥不会撤销密码库访问权限。由于授权文件仍保留 leaf 自身的公钥，仍持有对应私钥的客户端也可以登录。这些用户密钥与 SSH 服务端的 host key 相互独立。
+
+    可以将这套流程理解为：leaf 节点提交“身份”，root 节点“授权”身份。已经能够解密并修改密码库的 leaf 节点，在技术上也可以为新的 recipient 重新加密密码库，但我的原则是统一由 root 节点授权新节点。这是工作流约定，并非 age 加密机制强制施加的权限限制。
 
 3. 如何在 NixOS 上管理 dotfiles？
 

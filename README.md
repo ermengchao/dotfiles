@@ -73,7 +73,20 @@ English | [简体中文](README.zh-CN.md)
 
     `gopass sync` performs a Git pull followed by a push; its pull does not explicitly use `--ff-only`. Disabling `core.autopush` stops automatic pushes after local changes, while disabling `core.autosync` stops automatic bidirectional sync. Neither setting prevents an explicit `gopass sync`, so leaf nodes use the pull command above for updates. The same chezmoi pull script also runs on root nodes.
 
-    In my own setup, I never need to SSH into root nodes, and I do not configure SSH private keys on them either; I use only a native age identity for decryption. Each node therefore needs just one key for the secret store: an age key on root nodes, or an existing SSH key on leaf nodes. A neat, minimal setup.
+    In my own setup, I never need to SSH into root nodes. Each node maintains one identity for secret-store decryption: a native age identity on root nodes, or an existing SSH key on leaf nodes. SSH login uses a separate client identity: Mac root nodes use [Secretive](https://github.com/maxgoedjen/secretive) to keep their login private keys in the Secure Enclave, while other clients can use locally retained SSH private keys.
+
+    **Node initialization and authorization**
+
+    - **Leaf nodes** first generate an SSH key pair and submit only the public key to a root node. The root node runs `gopass recipients add` to add that public key as a recipient and re-encrypt the store. Once the leaf node pulls the updated store, it can decrypt the secrets with its locally retained SSH private key. Both halves of the key pair remain on the leaf node; the private key does not need to be transferred for authorization.
+    - **Root nodes** bootstrap access to the gopass store using the recovery key stored on a physical security key. With that initial decryption capability, a root node can authorize its own native age identity as a recipient and re-encrypt the store, then use that identity for everyday access.
+
+    On chezmoi-managed leaf nodes, `home/dot_ssh/authorized_keys.tmpl` generates `~/.ssh/authorized_keys` as a regular file. It includes the leaf node's own `id_ed25519.pub` and the root client public keys listed in `home/.chezmoidata/rootNodeIdentities.toml`. NixOS currently excludes `.ssh` from chezmoi management.
+
+    Mac root nodes authenticate through Secretive's SSH agent using their own login keys. Their public keys are deployed to leaf nodes through chezmoi; their private keys cannot be exported and are not distributed through gopass. The leaf's Ed25519 private key stays on the leaf for gopass decryption, so root clients no longer need a copy of it to log in.
+
+    SSH login authorization and secret-store decryption authorization are maintained separately: root client public keys in `authorized_keys` grant login access, while gopass recipients grant decryption access. Removing an SSH login key does not revoke secret-store access. The leaf's own public key remains in `authorized_keys`, so a client that still holds its private key can also authenticate. These user keys are separate from the SSH server's host keys.
+
+    In this workflow, a leaf node submits its “identity,” and a root node “authorizes” it. A leaf node that can already decrypt and modify the store could technically re-encrypt it for another recipient, but my policy is to perform all new-node authorizations on root nodes. This is a workflow convention, not a restriction enforced by age encryption.
 
 3. How to manage dotfiles on NixOS?
 

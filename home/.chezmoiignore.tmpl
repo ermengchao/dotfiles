@@ -1,3 +1,7 @@
+{{ if .meta.isRootNode -}}
+.ssh/authorized_keys
+{{ end -}}
+
 {{ if eq .os "darwin" -}}
 {{   if not .meta.isRootNode -}}
 .config/marimo
@@ -21,6 +25,7 @@
 {{ else -}}
 
 {{   if eq .os "nixos" -}}
+.ssh
 .config/fish/config.fish
 .config/systemd
 {{   else -}}
