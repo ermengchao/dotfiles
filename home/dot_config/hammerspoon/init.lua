@@ -1,7 +1,7 @@
 require("hs.ipc")
 
 local reloadAppearance = hs.loadSpoon("ReloadAppearance")
-local lockGopassAgeAgent = hs.loadSpoon("LockGopassAgeAgent")
+local lockAuthAgents = hs.loadSpoon("LockAuthAgents")
 local switchInputSource = hs.loadSpoon("SwitchInputSource")
 local openScreenSaver = hs.loadSpoon("OpenScreenSaver")
 local toggleAppearance = hs.loadSpoon("ToggleAppearance")
@@ -14,7 +14,7 @@ toggleAppearance.hotkeyModifiers = { "fn", "ctrl" }
 toggleAppearance.hotkeyKey = "t"
 
 reloadAppearance:start()
-lockGopassAgeAgent:start()
+lockAuthAgents:start()
 switchInputSource:start()
 openScreenSaver:start()
 toggleAppearance:start()

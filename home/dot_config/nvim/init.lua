@@ -50,6 +50,25 @@ vim.schedule(function() vim.opt.clipboard = 'unnamedplus' end)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+local template_dir = vim.fn.stdpath("config") .. "/templates/"
+
+local function insert_template(name)
+    local path = template_dir .. name
+
+    vim.cmd("0read " .. vim.fn.fnameescape(path))
+    vim.cmd("normal! gg")
+end
+
+-- Flake
+vim.keymap.set("n", "<leader>tf", function()
+    insert_template("flake.nix")
+end, { desc = "Insert Flake template" })
+
+-- Python
+vim.keymap.set("n", "<leader>tp", function()
+    insert_template("python.py")
+end, { desc = "Insert Python template" })
+
 ---- Clear highlights on search when pressing <Esc> in normal mode ----
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 

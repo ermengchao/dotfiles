@@ -2,7 +2,9 @@
   "route": {
     "auto_detect_interface": true,
     "default_http_client": "ruleset-via-proxy",
-    "default_domain_resolver": "doh-cloudflare",
+    "default_domain_resolver": {
+      "server": "doh-cloudflare"
+    },
     "final": "🐟 Final"
   }
 }

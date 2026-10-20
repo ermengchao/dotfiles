@@ -1,0 +1,8 @@
+{
+  "doubleEscapeAction": "none",
+  "packages": [
+    "npm:pi-vimmode",
+    "npm:pi-btw",
+    "npm:pi-subagents"
+  ]
+}

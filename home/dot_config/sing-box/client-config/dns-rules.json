@@ -2,9 +2,36 @@
   "dns": {
     "rules": [
       {
+        "domain_regex": [
+          "^.+\\.proxy\\.er-meng\\.com$"
+        ],
+        "query_type": "A",
+        "action": "predefined",
+        "answer": [
+          "*.proxy.er-meng.com. 60 IN A 18.177.110.208"
+        ]
+      },
+      {
+        "domain_regex": [
+          "^.+\\.proxy\\.er-meng\\.com$"
+        ],
+        "query_type": "AAAA",
+        "action": "predefined"
+      },
+      {
         "preferred_by": "dns-hosts",
         "action": "route",
         "server": "dns-hosts"
+      },
+      {
+        "preferred_by": "dns-tailnet",
+        "action": "route",
+        "server": "dns-tailnet"
+      },
+      {
+        "domain_suffix": "taileee60e.ts.net",
+        "action": "route",
+        "server": "dns-tailnet"
       },
       {
         "domain_suffix": [
@@ -12,33 +39,69 @@
           "local"
         ],
         "action": "route",
-        "server": "dns-dhcp"
-      },
-      {
-        "domain_suffix": [
-          "pool.ntp.org",
-          "time.apple.com"
-        ],
-        "action": "route",
-        "server": "doh-cloudflare"
-      },
-      {
-        "domain_suffix": [
-          "taileee60e.ts.net"
-        ],
-        "action": "route",
         "server": "dns-local"
       },
       {
-        "domain_suffix": [
-          "proxy.er-meng.com"
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "clash_mode": "direct"
+          },
+          {
+            "rule_set": [
+              "china_max_dns",
+              "direct_chao"
+            ]
+          }
         ],
         "action": "route",
-        "server": "dns-aliyun-bootstrap"
+        "server": "doh-aliyun"
       },
       {
+        "clash_mode": "direct",
+        "action": "route",
+        "server": "doh-cloudflare-direct"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "domain": [
+              "gslb.itv.jsinfo.net"
+            ],
+            "domain_regex": [
+              "^xbox\\..+\\.microsoft\\.com$",
+              "^.*proxy\\.er-meng\\.com$"
+            ],
+            "domain_suffix": [
+              "xboxlive.com",
+              "stun.playstation.net",
+              "srv.nintendo.net",
+              "battlenet.com.cn",
+              "battlenet.com",
+              "blzstatic.cn",
+              "battle.net"
+            ]
+          },
+          {
+            "rule_set": [
+              "china_max_dns",
+              "direct_chao"
+            ]
+          }
+        ],
+        "action": "route",
+        "server": "doh-aliyun"
+      },
+      {
+        "domain": [
+          "gslb.itv.jsinfo.net"
+        ],
         "domain_regex": [
-          "^xbox\\.[^.]+\\.microsoft\\.com$"
+          "^xbox\\..+\\.microsoft\\.com$",
+          "^.*proxy\\.er-meng\\.com$"
         ],
         "domain_suffix": [
           "xboxlive.com",
@@ -53,72 +116,6 @@
         "server": "doh-cloudflare"
       },
       {
-        "clash_mode": "direct",
-        "action": "route",
-        "server": "doh-cloudflare"
-      },
-      {
-        "clash_mode": "global",
-        "action": "route",
-        "server": "dns-fakeip"
-      },
-      {
-        "rule_set": [
-          "geosite-cn",
-          "direct_chao",
-          "direct",
-          "download"
-        ],
-        "action": "route",
-        "server": "dns-local"
-      },
-      {
-        "action": "evaluate",
-        "server": "dns-local"
-      },
-      {
-        "match_response": true,
-        "rule_set": [
-          "apple",
-          "china_max",
-          "lan"
-        ],
-        "action": "respond"
-      },
-      {
-        "rule_set": [
-          "claude",
-          "gemini",
-          "disney",
-          "hbo_usa",
-          "tiktok",
-          "youtube_music",
-          "developer",
-          "apple_proxy",
-          "github"
-        ],
-        "action": "route",
-        "server": "dns-fakeip"
-      },
-      {
-        "match_response": true,
-        "rule_set": [
-          "copilot",
-          "openai",
-          "game_chao",
-          "game",
-          "netflix",
-          "spotify",
-          "youtube",
-          "proxy_chao",
-          "amazon_cloud",
-          "google",
-          "global"
-        ],
-        "action": "route",
-        "server": "dns-fakeip"
-      },
-      {
         "inbound": [
           "socks-in",
           "http-in",
@@ -129,7 +126,16 @@
           "AAAA"
         ],
         "action": "route",
-        "server": "dns-fakeip"
+        "server": "dns-fakeip",
+        "rewrite_ttl": 30
+      },
+      {
+        "rule_set": [
+          "china_max_dns",
+          "direct_chao"
+        ],
+        "action": "route",
+        "server": "doh-aliyun"
       }
     ]
   }

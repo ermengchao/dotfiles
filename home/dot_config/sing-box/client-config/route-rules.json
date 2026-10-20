@@ -2,6 +2,17 @@
   "route": {
     "rules": [
       {
+        "ip_cidr": [
+          "10.10.10.65/32"
+        ],
+        "action": "reject",
+        "method": "drop"
+      },
+      {
+        "port": 53,
+        "action": "hijack-dns"
+      },
+      {
         "action": "sniff"
       },
       {
@@ -9,38 +20,54 @@
         "action": "hijack-dns"
       },
       {
-        "domain_suffix": [
-          "local",
-          "taileee60e.ts.net",
-          "tailscale.io",
-          "crashlytics.com"
+        "domain_regex": [
+          "^.+\\.proxy\\.er-meng\\.com$"
+        ],
+        "action": "route-options",
+        "override_address": "18.177.110.208"
+      },
+      {
+        "domain": "homeassistant.local",
+        "action": "route-options",
+        "override_address": "10.10.10.17"
+      },
+      {
+        "preferred_by": "Tailnet",
+        "outbound": "Tailnet"
+      },
+      {
+        "clash_mode": "direct",
+        "outbound": "🟢 Direct"
+      },
+      {
+        "clash_mode": "global",
+        "outbound": "🌐 Proxy"
+      },
+      {
+        "source_ip_cidr": [
+          "10.10.10.17/32"
         ],
         "outbound": "🟢 Direct"
       },
       {
-        "ip_cidr": [
-          "100.64.0.0/10",
-          "fd7a:115c:a1e0::/48"
-        ],
+        "domain": "dns.alidns.com",
         "outbound": "🟢 Direct"
       },
       {
-        "ip_cidr": [
-          "17.0.0.0/8"
-        ],
-        "outbound": "🟢 Direct"
+        "domain": "cloudflare-dns.com",
+        "outbound": "🌐 Proxy"
       },
       {
-        "ip_is_private": true,
+        "domain_suffix": "er-meng.com",
         "outbound": "🟢 Direct"
       },
       {
         "rule_set": "advertising",
-        "outbound": "📺 AD"
+        "action": "reject"
       },
       {
-        "rule_set": "geosite-cn",
-        "outbound": "🟢 Direct"
+        "rule_set": "ai_chao",
+        "outbound": "🧠 AI"
       },
       {
         "rule_set": "claude",
@@ -60,27 +87,44 @@
       },
       {
         "rule_set": "direct_chao",
+        "action": "resolve",
+        "server": "doh-aliyun"
+      },
+      {
+        "rule_set": "direct_chao",
         "outbound": "🟢 Direct"
       },
       {
-        "rule_set": "direct",
-        "outbound": "🟢 Direct"
-      },
-      {
-        "rule_set": "apple",
-        "outbound": "🟢 Direct"
-      },
-      {
-        "rule_set": "apple_proxy",
-        "outbound": "🌐 Proxy"
-      },
-      {
-        "rule_set": "china_max",
-        "outbound": "🟢 Direct"
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "download"
+          },
+          {
+            "rule_set": "china_max_dns"
+          }
+        ],
+        "action": "resolve",
+        "server": "doh-aliyun"
       },
       {
         "rule_set": "download",
         "outbound": "🟢 Direct"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "lan"
+          },
+          {
+            "rule_set": "china_max_dns"
+          }
+        ],
+        "action": "resolve",
+        "server": "doh-aliyun"
       },
       {
         "rule_set": "lan",
@@ -127,15 +171,15 @@
         "outbound": "🌐 Proxy"
       },
       {
-        "rule_set": "developer",
-        "outbound": "🌐 Proxy"
-      },
-      {
         "rule_set": "amazon_cloud",
         "outbound": "🌐 Proxy"
       },
       {
-        "rule_set": "google",
+        "rule_set": "apple_proxy",
+        "outbound": "🌐 Proxy"
+      },
+      {
+        "rule_set": "developer",
         "outbound": "🌐 Proxy"
       },
       {
@@ -143,7 +187,11 @@
         "outbound": "🌐 Proxy"
       },
       {
-        "rule_set": "global",
+        "rule_set": "google",
+        "outbound": "🌐 Proxy"
+      },
+      {
+        "rule_set": "icloud_private_relay",
         "outbound": "🌐 Proxy"
       },
       {
@@ -151,9 +199,43 @@
         "outbound": "🌐 Proxy"
       },
       {
+        "rule_set": "reject_chao",
+        "action": "reject"
+      },
+      {
+        "rule_set": [
+          "china_max_dns",
+          "direct_chao"
+        ],
         "action": "resolve",
-        "server": "doh-cloudflare",
-        "strategy": "prefer_ipv4"
+        "server": "doh-aliyun"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": [
+              "china_max_dns",
+              "direct_chao"
+            ],
+            "invert": true
+          }
+        ],
+        "action": "resolve",
+        "server": "doh-cloudflare"
+      },
+      {
+        "rule_set": "apple",
+        "outbound": "🟢 Direct"
+      },
+      {
+        "rule_set": "china_max",
+        "outbound": "🟢 Direct"
+      },
+      {
+        "rule_set": "global",
+        "outbound": "🌐 Proxy"
       },
       {
         "rule_set": "geoip-cn",

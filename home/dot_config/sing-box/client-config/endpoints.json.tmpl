@@ -1,0 +1,16 @@
+{{ $enableTailscale := false -}}
+{{ if $enableTailscale -}}
+{
+  "endpoints": [
+    {
+      "type": "tailscale",
+      "tag": "Tailnet",
+      "state_directory": "/var/cache/sing-box/tailscale",
+      "system_interface": false,
+      "domain_resolver": "dns-local"
+    }
+  ]
+}
+{{ else -}}
+{}
+{{ end -}}

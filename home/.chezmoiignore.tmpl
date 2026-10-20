@@ -15,12 +15,10 @@
 .config/qbittorrent
 .config/rtp2httpd
 .config/sing-box
-.config/snell-server
 .config/systemd
 .config/transmission
 .config/wayvnc
 .local/bin/chezmoi-apply-root
-.local/bin/snell-server
 .local/share/subscriptions
 
 {{ else -}}
@@ -32,7 +30,6 @@
 {{   else -}}
 
 {{     if not .meta.isProxyServer  -}}
-.config/snell-server
 .local/share/subscriptions
 {{     end -}}
 

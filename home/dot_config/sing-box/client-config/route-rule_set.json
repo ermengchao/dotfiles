@@ -2,184 +2,228 @@
   "route": {
     "rule_set": [
       {
-        "tag": "geoip-cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
-      },
-      {
-        "tag": "geosite-cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
-      },
-      {
         "tag": "advertising",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Advertising/Advertising.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Advertising/Advertising.srs",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "ai_chao",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/ermengchao/proxy_rule_script/main/rule/Sing%20Box/AI/AI.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "claude",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Claude/Claude.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Claude/Claude.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "copilot",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Copilot/Copilot.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Copilot/Copilot.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "gemini",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Gemini/Gemini.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Gemini/Gemini.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "openai",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/OpenAI/OpenAI.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/OpenAI/OpenAI.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "direct_chao",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Direct/Direct.srs"
-      },
-      {
-        "tag": "apple",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Apple/Apple.srs"
-      },
-      {
-        "tag": "china_max",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/ChinaMax/ChinaMax.srs"
-      },
-      {
-        "tag": "direct",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Direct/Direct.srs"
+        "url": "https://raw.githubusercontent.com/ermengchao/proxy_rule_script/main/rule/Sing%20Box/Direct/Direct.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "download",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Download/Download.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Download/Download.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "lan",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Lan/Lan.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Lan/Lan.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "game_chao",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Game/Game.srs"
+        "url": "https://raw.githubusercontent.com/ermengchao/proxy_rule_script/main/rule/Sing%20Box/Game/Game.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "game",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Game/Game.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Game/Game.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "disney",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Disney/Disney.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Disney/Disney.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "netflix",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Netflix/Netflix.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Netflix/Netflix.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "hbo_usa",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/HBOUSA/HBOUSA.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/HBOUSA/HBOUSA.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "spotify",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Spotify/Spotify.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Spotify/Spotify.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "tiktok",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/TikTok/TikTok.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/TikTok/TikTok.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "youtube",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/YouTube/YouTube.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/YouTube/YouTube.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "youtube_music",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/YouTubeMusic/YouTubeMusic.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/YouTubeMusic/YouTubeMusic.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "proxy_chao",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Proxy/Proxy.srs"
+        "url": "https://raw.githubusercontent.com/ermengchao/proxy_rule_script/main/rule/Sing%20Box/Proxy/Proxy.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "amazon_cloud",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/AmazonCloud/AmazonCloud.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/AmazonCloud/AmazonCloud.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "apple_proxy",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/AppleProxy/AppleProxy.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/AppleProxy/AppleProxy.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "developer",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Developer/Developer.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Developer/Developer.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "github",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/GitHub/GitHub.srs"
-      },
-      {
-        "tag": "global",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Global/Global.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/GitHub/GitHub.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "google",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Google/Google.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Google/Google.srs",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "icloud_private_relay",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/iCloudPrivateRelay/iCloudPrivateRelay.srs",
+        "update_interval": "1d"
       },
       {
         "tag": "siri",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Siri/Siri.srs"
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Siri/Siri.srs",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "reject_chao",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/ermengchao/proxy_rule_script/main/rule/Sing%20Box/Reject/Reject.srs",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "apple",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Apple/Apple.srs",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "china_max",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/ChinaMax/ChinaMax.srs",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "global",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/Global/Global.srs",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "update_interval": "1d"
+      },
+      {
+        "tag": "china_max_dns",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/senshinya/singbox_ruleset/main/rule/ChinaMaxNoIP/ChinaMaxNoIP.srs",
+        "update_interval": "1d"
       }
     ]
   }

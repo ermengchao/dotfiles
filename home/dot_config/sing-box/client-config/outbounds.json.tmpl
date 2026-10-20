@@ -5,13 +5,8 @@
       "type": "direct"
     },
     {
-      "tag": "🔴 Reject",
-      "type": "block"
-    },
-    {
       "tag": "🌐 Proxy",
       "type": "selector",
-      "default": "✨ Auto",
       "outbounds": [
         "✨ Auto",
         "🇯🇵 Japan 01",
@@ -19,8 +14,10 @@
         "🇯🇵 Japan 03",
         "🇯🇵 Japan 04",
         "🇯🇵 Japan 05",
-        "🇯🇵 Japan 06"
-      ]
+        "🇯🇵 Japan 06",
+        "🇯🇵 Japan 07"
+      ],
+      "default": "✨ Auto"
     },
     {
       "tag": "✨ Auto",
@@ -31,48 +28,50 @@
         "🇯🇵 Japan 03",
         "🇯🇵 Japan 04",
         "🇯🇵 Japan 05",
-        "🇯🇵 Japan 06"
+        "🇯🇵 Japan 06",
+        "🇯🇵 Japan 07"
       ],
-      "url": "https://www.gstatic.com/generate_204",
+      "url": "http://www.google.com/generate_204",
       "interval": "300s"
     },
     {
       "tag": "🇯🇵 Japan 01",
       "type": "shadowsocks",
       "server": "apne1-01.proxy.er-meng.com",
-      "domain_resolver": "dns-aliyun-bootstrap",
+      "domain_resolver": "dns-local",
       "server_port": {{ .ports.proxy.shadowsocks }},
       "method": "2022-blake3-aes-128-gcm",
-      "password": {{ gopass "proxy/shadowsocks" | quote }},
-      "network": "tcp",
-      "multiplex": {
-        "enabled": true
-      }
+      "password": {{ gopass "proxy/shadowsocks" | quote }}
     },
     {
       "tag": "🇯🇵 Japan 02",
-      "type": "trojan",
+      "type": "vmess",
       "server": "apne1-01.proxy.er-meng.com",
-      "domain_resolver": "dns-aliyun-bootstrap",
-      "server_port": {{ .ports.proxy.trojan }},
-      "password": {{ gopass "proxy/trojan" | quote }},
+      "server_port": 443,
+      "domain_resolver": "dns-local",
+      "uuid": {{ gopass "proxy/vmess" | quote }},
+      "security": "auto",
+      "alter_id": 0,
+      "tcp_fast_open": true,
       "tls": {
         "enabled": true,
         "server_name": "apne1-01.proxy.er-meng.com"
       },
-      "multiplex": {
-        "enabled": true
+      "transport": {
+        "type": "ws",
+        "path": "/{{ gopass "proxy/vmess" }}",
+        "headers": {
+          "Host": "apne1-01.proxy.er-meng.com"
+        }
       }
     },
     {
       "tag": "🇯🇵 Japan 03",
-      "type": "hysteria2",
+      "type": "trojan",
       "server": "apne1-01.proxy.er-meng.com",
-      "domain_resolver": "dns-aliyun-bootstrap",
-      "server_port": {{ .ports.proxy.hysteria2 }},
-      "up_mbps": 100,
-      "down_mbps": 100,
-      "password": {{ gopass "proxy/hysteria2" | quote }},
+      "domain_resolver": "dns-local",
+      "server_port": {{ .ports.proxy.trojan }},
+      "password": {{ gopass "proxy/trojan" | quote }},
       "tls": {
         "enabled": true,
         "server_name": "apne1-01.proxy.er-meng.com"
@@ -80,9 +79,19 @@
     },
     {
       "tag": "🇯🇵 Japan 04",
+      "type": "snell",
+      "server": "apne1-01.proxy.er-meng.com",
+      "domain_resolver": "dns-local",
+      "server_port": {{ .ports.proxy.snell }},
+      "version": 6,
+      "psk": {{ gopass "proxy/snell" | quote }},
+      "reuse": true
+    },
+    {
+      "tag": "🇯🇵 Japan 05",
       "type": "tuic",
       "server": "apne1-01.proxy.er-meng.com",
-      "domain_resolver": "dns-aliyun-bootstrap",
+      "domain_resolver": "dns-local",
       "server_port": {{ .ports.proxy.tuic }},
       "uuid": {{ gopass "proxy/tuic" | quote }},
       "password": {{ gopass "proxy/tuic" | quote }},
@@ -97,10 +106,22 @@
       }
     },
     {
-      "tag": "🇯🇵 Japan 05",
+      "tag": "🇯🇵 Japan 06",
+      "type": "hysteria2",
+      "server": "apne1-01.proxy.er-meng.com",
+      "domain_resolver": "dns-local",
+      "server_port": {{ .ports.proxy.hysteria2 }},
+      "password": {{ gopass "proxy/hysteria2" | quote }},
+      "tls": {
+        "enabled": true,
+        "server_name": "apne1-01.proxy.er-meng.com"
+      }
+    },
+    {
+      "tag": "🇯🇵 Japan 07",
       "type": "anytls",
       "server": "apne1-01.proxy.er-meng.com",
-      "domain_resolver": "dns-aliyun-bootstrap",
+      "domain_resolver": "dns-local",
       "server_port": {{ .ports.proxy.anytls }},
       "password": {{ gopass "proxy/anytls" | quote }},
       "tls": {
@@ -109,73 +130,61 @@
       }
     },
     {
-      "tag": "🇯🇵 Japan 06",
-      "type": "shadowsocks",
-      "method": "2022-blake3-aes-128-gcm",
-      "password": {{ gopass "proxy/shadowsocks" | quote }},
-      "multiplex": {
-        "enabled": true
-      },
-      "detour": "🇯🇵 Japan 06 ShadowTLS"
-    },
-    {
-      "tag": "🇯🇵 Japan 06 ShadowTLS",
-      "type": "shadowtls",
-      "server": "apne1-01.proxy.er-meng.com",
-      "domain_resolver": "dns-aliyun-bootstrap",
-      "server_port": {{ .ports.proxy.shadowtls }},
-      "version": 3,
-      "password": {{ gopass "proxy/shadowtls" | quote }},
-      "tls": {
-        "enabled": true,
-        "server_name": "apne1-01.proxy.er-meng.com"
-      }
-    },
-    {
-      "tag": "📺 AD",
-      "type": "selector",
-      "default": "🔴 Reject",
-      "outbounds": [
-        "🌐 Proxy",
-        "🟢 Direct",
-        "🔴 Reject"
-      ]
-    },
-    {
       "tag": "🧠 AI",
       "type": "selector",
-      "default": "🌐 Proxy",
       "outbounds": [
         "🌐 Proxy",
         "🟢 Direct"
-      ]
+      ],
+      "default": "🌐 Proxy"
     },
     {
       "tag": "🎮 Game",
       "type": "selector",
-      "default": "🌐 Proxy",
       "outbounds": [
         "🌐 Proxy",
         "🟢 Direct"
-      ]
+      ],
+      "default": "🌐 Proxy"
     },
     {
       "tag": "🎥 Media",
       "type": "selector",
-      "default": "🌐 Proxy",
       "outbounds": [
         "🌐 Proxy",
         "🟢 Direct"
-      ]
+      ],
+      "default": "🌐 Proxy"
     },
     {
       "tag": "🐟 Final",
       "type": "selector",
-      "default": "🌐 Proxy",
       "outbounds": [
         "🌐 Proxy",
         "🟢 Direct"
-      ]
+      ],
+      "default": "🌐 Proxy"
+    },
+    {
+      "tag": "Mac mini",
+      "type": "snell",
+      "version": 6,
+      "server": "mac-mini.taileee60e.ts.net",
+      "server_port": {{ .ports.proxy.snell }},
+      "psk": {{ gopass "proxy/snell" | quote }},
+      "mode": "default",
+      "reuse": true,
+      "detour": "Tailnet",
+      "domain_resolver": "dns-tailnet"
+    },
+    {
+      "tag": "🚪 ExitNode",
+      "type": "selector",
+      "outbounds": [
+        "Tailnet",
+        "Mac mini"
+      ],
+      "default": "Tailnet"
     }
   ]
 }

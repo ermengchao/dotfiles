@@ -87,6 +87,14 @@
       }
     },
     {
+      "tag": "inbounds-snell",
+      "type": "snell",
+      "version": 6,
+      "listen": "::",
+      "listen_port": {{ .ports.proxy.snell }},
+      "psk": {{ gopass "proxy/snell" | quote }},
+    },
+    {
       "tag": "inbounds-naive",
       "type": "naive",
       "listen": "::",

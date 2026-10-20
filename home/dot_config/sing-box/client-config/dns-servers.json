@@ -3,39 +3,49 @@
     "servers": [
       {
         "tag": "dns-hosts",
-        "type": "hosts"
+        "type": "hosts",
+        "predefined": {
+          "homeassistant.local": "10.10.10.17"
+        }
       },
       {
         "tag": "dns-local",
         "type": "local"
       },
       {
-        "tag": "dns-dhcp",
-        "type": "dhcp"
+        "tag": "dns-tailnet",
+        "type": "tailscale",
+        "endpoint": "Tailnet"
       },
       {
         "tag": "dns-fakeip",
         "type": "fakeip",
         "inet4_range": "198.18.0.0/15",
-        "inet6_range": "fc00::/18"
+        "inet6_range": "fdfe::/18"
       },
       {
         "tag": "doh-cloudflare",
         "type": "https",
         "server": "cloudflare-dns.com",
         "path": "/dns-query",
-        "domain_resolver": "dns-cloudflare-bootstrap",
+        "domain_resolver": "dns-local",
         "detour": "🌐 Proxy"
       },
       {
-        "tag": "dns-cloudflare-bootstrap",
-        "type": "udp",
-        "server": "1.1.1.1"
+        "tag": "doh-cloudflare-direct",
+        "type": "https",
+        "server": "cloudflare-dns.com",
+        "path": "/dns-query",
+        "domain_resolver": "dns-local",
+        "detour": "🟢 Direct"
       },
       {
-        "tag": "dns-aliyun-bootstrap",
-        "type": "udp",
-        "server": "223.5.5.5"
+        "tag": "doh-aliyun",
+        "type": "https",
+        "server": "dns.alidns.com",
+        "path": "/dns-query",
+        "domain_resolver": "dns-local",
+        "detour": "🟢 Direct"
       }
     ]
   }

@@ -10,11 +10,28 @@ gopass config age.agent-enabled true > /dev/null
 gopass config age.agent-timeout {{ .agentTimeout }} > /dev/null
 
 {{   if .meta.isRootNode -}}
-if not test -s ~/.config/gopass/age/identities
-    printf "‼️ Gopass age identity file not found. Import your native age identity with 'gopass age identities add' before applying.\n"
-    exit 1
+set -l KEYRING_IDENTITY $XDG_CONFIG_DIR/gopass/age/keyring-identity.txt
+{{     if eq .os "darwin" -}}
+if not test -f $KEYRING_IDENTITY
+    age-plugin-se keygen \
+        --access-control any-biometry \
+        --recipient-type tag \
+        -o $KEYRING_IDENTITY
 end
 
+gopass config age.keyring-identities $KEYRING_IDENTITY > /dev/null
+gopass config age.keyring-recipients (age-plugin-se recipients --recipient-type tag -i "$KEYRING_IDENTITY") > /dev/null
+{{     else -}}
+if not test -f $KEYRING_IDENTITY
+    age-plugin-tpm keygen \
+        --access-control any-biometry \
+        --recipient-type tag \
+        -o $KEYRING_IDENTITY
+end
+
+gopass config age.keyring-identities $KEYRING_IDENTITY > /dev/null
+gopass config age.keyring-recipients (age-plugin-tpm recipients --recipient-type tag -i "$KEYRING_IDENTITY") > /dev/null
+{{     end -}}
 gopass config core.autopush true > /dev/null
 gopass config core.autosync true > /dev/null
 {{   else -}}
@@ -25,6 +42,7 @@ end
 
 gopass config core.autopush false > /dev/null
 gopass config core.autosync false > /dev/null
+
 gopass config age.ssh-key-path "$HOME/.ssh" > /dev/null
 set -gx GOPASS_SSH_DIR ~/.ssh
 {{   end -}}

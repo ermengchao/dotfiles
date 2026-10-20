@@ -8,8 +8,9 @@
       "interface_name": "sing-box",
       "stack": "mixed",
       "auto_route": true,
-      "auto_redirect": true,
-      "strict_route": true,
+      "auto_redirect": {{ eq .chezmoi.os "linux" }},
+      "strict_route": false,
+      "dns_mode": "hijack",
       "address": [
         "172.18.0.1/30",
         "fdfe:dcba:9876::1/126"
@@ -24,26 +25,35 @@
         "8000::/1"
       ],
       "route_exclude_address": [
-        "192.168.0.0/16",
-        "224.0.0.0/4",
-        "fc00::/7",
-        "100.64.0.0/10",
-        "fd7a:115c:a1e0::/48"
-      ],
-      "exclude_interface": [
-        "Tailscale",
-        "tailscale0"
+        "224.0.0.0/4"
       ],
       "platform": {
         "http_proxy": {
           "enabled": true,
-          "server": "0.0.0.0",
+          "server": "127.0.0.1",
           "server_port": {{ .ports.proxy.http }},
-          "bypass_domain": [],
+          "bypass_domain": [
+            "127.0.0.1",
+            "192.168.0.0/16",
+            "10.0.0.0/8",
+            "172.16.0.0/12",
+            "100.64.0.0/10",
+            "fd7a:115c:a1e0::/48",
+            "17.0.0.0/8",
+            "169.254.0.0/16",
+            "0.0.0.0",
+            "localhost",
+            "*.local",
+            "*.taileee60e.ts.net",
+            "*.tailscale.io",
+            "*.crashlytics.com"
+          ],
           "match_domain": []
         }
       }
     }
   ]
 }
+{{ else -}}
+{}
 {{ end -}}

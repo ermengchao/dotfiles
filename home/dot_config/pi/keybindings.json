@@ -1,0 +1,13 @@
+{
+ "tui.editor.historyPrevious": "up",
+ "tui.editor.historyNext": "down",
+ "tui.altScreen.lineUp": "ctrl+k",
+ "tui.altScreen.lineDown": "ctrl+j",
+ "app.editor.external": "alt+e",
+ "app.clipboard.pasteImage": "super+v",
+ "app.model.cycleForward": "",
+ "app.tools.expand": "alt+o",
+ "app.message.copy": "ctrl+x",
+ "app.message.followUp": "enter",
+ "app.message.dequeue": "escape"
+}
