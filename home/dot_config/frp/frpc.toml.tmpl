@@ -1,6 +1,9 @@
 serverAddr = "iptv.app.er-meng.com"
 serverPort = {{ .ports.frp.server }}
 
+log.to = "console"
+log.level = "info"
+
 [auth]
 method = "token"
 token = {{ gopass "frp/token" | quote }}
