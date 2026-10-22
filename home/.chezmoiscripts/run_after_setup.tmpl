@@ -1,8 +1,12 @@
 #!/usr/bin/env fish
 
 {{ if eq .os "darwin" -}}
-sudo ln -s "/System/Library/CoreServices/Applications" "/Applications/CoreServices"
-sudo ln -s "/Applications/Xcode.app/Contents/Applications" "/Applications/Developer Tools"
+if not test -e "/Applications/CoreServices"; and not test -L "/Applications/CoreServices"
+    sudo ln -sn "/System/Library/CoreServices/Applications" "/Applications/CoreServices"
+end
+if not test -e "/Applications/Developer Tools"; and not test -L "/Applications/Developer Tools"
+    sudo ln -sn "/Applications/Xcode.app/Contents/Applications" "/Applications/Developer Tools"
+end
 
 if test -d "/Applications/.Karabiner-VirtualHIDDevice-Manager.app"; and test -d "/Applications/Karabiner-Elements.app"
     sudo mkdir -p "/Applications/Karabiner-Elements.app/Contents/Applications"

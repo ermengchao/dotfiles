@@ -1,0 +1,13 @@
+serverAddr = "iptv.app.er-meng.com"
+serverPort = {{ .ports.frp.server }}
+
+[auth]
+method = "token"
+token = {{ gopass "frp/token" | quote }}
+
+[[proxies]]
+name = "iptv"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = {{ .ports.rtp2httpd }}
+remotePort = {{ .ports.frp.iptv }}

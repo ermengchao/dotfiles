@@ -3,7 +3,9 @@
 {{ end -}}
 
 {{ if eq .os "darwin" -}}
-{{   if not .meta.isRootNode -}}
+{{   if .meta.isRootNode -}}
+.config/frp
+{{   else -}}
 .config/marimo
 {{   end -}}
 
