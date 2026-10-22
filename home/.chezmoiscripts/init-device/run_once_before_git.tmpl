@@ -2,13 +2,7 @@
 
 {{ if ne .os "nixos" -}}
 cd {{ .chezmoi.workingTree }}
-if not string match -q "dotfiles" (git remote | string trim)
-    printf "🧑‍💻 Setting dotfiles repo...\n"
 
-    git remote add dotfiles {{ .gitHostUrl }}/{{ .fullname }}/dotfiles.git > /dev/null
-    git fetch --quiet dotfiles
-    git branch --set-upstream-to=dotfiles/main main > /dev/null
-
-    printf "✅ Done.\n"
-end
+git fetch --quiet origin
+git branch --set-upstream-to=origin/main main > /dev/null
 {{ end -}}
