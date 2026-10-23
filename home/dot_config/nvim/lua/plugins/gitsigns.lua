@@ -4,13 +4,39 @@ vim.pack.add {{
 }}
 
 require('gitsigns').setup {
+  auto_attach = true,
+  attach_to_untracked = false,
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil,
+
   signs = {
     add = { text = '+' },
     change = { text = '~' },
     delete = { text = '_' },
     topdelete = { text = '‾' },
     changedelete = { text = '~' },
+    -- untracked = { text = '?' },
   },
+  signcolumn = true,
+  numhl      = true,
+  linehl     = false,
+  word_diff  = false,
+
+  -- Blame
+  current_line_blame = false,
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = 'right_align',
+    delay = 1000,
+    ignore_whitespace = false,
+    virt_text_priority = 100,
+    use_focus = true,
+  },
+  current_line_blame_formatter = '<author>, <author_time:%R> - <summary>',
+  blame_formatter = nil,
+
+  -- Keymapping
   on_attach = function(bufnr)
     local gitsigns = require 'gitsigns'
 
@@ -53,4 +79,12 @@ require('gitsigns').setup {
     map('n', '<leader>tw', gitsigns.toggle_word_diff, { desc = '[T]oggle git intra-line [w]ord diff' })
     map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
   end,
+
+  -- Preview
+  preview_config = {
+    style = 'minimal',
+    relative = 'cursor',
+    row = 0,
+    col = 1
+  },
 }
