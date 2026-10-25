@@ -1,6 +1,6 @@
 git:
-  pagers:
-    - pager: delta --paging=never --features=catppuccin-latte
+  diffRenderers:
+    - command: delta --paging=never --features=catppuccin-latte
       colorArg: always
 gui:
   theme:
@@ -29,6 +29,5 @@ gui:
       - '#d20f39'
     defaultFgColor:
       - '#4c4f69'
-
-  authorColors:
-    '*': '#7287fd'
+    authorColors:
+      '*': '#7287fd'

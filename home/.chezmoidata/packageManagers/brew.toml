@@ -77,6 +77,8 @@ casks = [
   "betterdisplay",
   "chatgpt",
   "cleanmymac",
+  "codex",
+  "codexbar",
   "downie",
   "font-symbols-only-nerd-font",
   "font-sf-compact",

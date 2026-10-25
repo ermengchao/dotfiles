@@ -47,7 +47,7 @@ reference_highlighting = true
 default_width = "compact"
 theme = "system"
 default_table_page_size = 10
-code_editor_font_size = 14
+code_editor_font_size = 13
 
 [formatting]
 line_length = 79
