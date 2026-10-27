@@ -9,7 +9,7 @@ Type=notify
 PIDFile=/run/smbd.pid
 LimitNOFILE=16384
 EnvironmentFile=-/etc/sysconfig/samba
-ExecStart=/usr/bin/smbd --foreground --no-process-group $SMBDOPTIONS -s /home/chao/.config/samba/smb.conf
+ExecStart=/usr/bin/smbd --foreground --no-process-group $SMBDOPTIONS -s /etc/samba/smb.conf
 ExecReload=/bin/kill -HUP $MAINPID
 LimitCORE=infinity
 Environment=KRB5CCNAME=FILE:/run/samba/krb5cc_samba

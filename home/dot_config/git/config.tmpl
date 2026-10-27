@@ -1,3 +1,8 @@
+{{- $helper := "!op plugin run -- gh auth git-credential" -}}
+{{- if or (env "OP_SERVICE_ACCOUNT_TOKEN") (env "OP_SESSION") -}}
+{{- $helper = "!env GH_TOKEN='op://Development/GitHub Personal Access Token/token' op run --no-masking -- gh auth git-credential" -}}
+{{- end -}}
+
 [user]
   name = {{ .fullname }}
   email = {{ .email }}
@@ -18,11 +23,11 @@
   clean = git-lfs clean -- %f
 [pull]
 	rebase = true
-[credential "https://github.com"]
-	helper = 
-	helper = "!gh auth git-credential"
-[credential "https://gist.github.com"]
-	helper = 
-	helper = "!gh auth git-credential"
 [include]
   path = {{ env "XDG_CONFIG_HOME" }}/git/delta.gitconfig
+[credential "https://github.com"]
+	helper = 
+	helper = {{ $helper | quote }}
+[credential "https://gist.github.com"]
+	helper = 
+	helper = {{ $helper | quote }}

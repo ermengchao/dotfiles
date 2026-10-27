@@ -7,11 +7,6 @@ Host orb
   UserKnownHostsFile ~/.orbstack/ssh/known_hosts
   ProxyCommand '/Applications/OrbStack.app/Contents/Frameworks/OrbStack Helper.app/Contents/MacOS/OrbStack Helper' ssh-proxy-fdpass 501
   ProxyUseFdpass yes
-
-{{   if .meta.isRootNode -}}
-Host *
-  IdentityAgent {{ .chezmoi.homeDir }}/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
-{{   end -}}
 {{ end -}}
 
 Host apne*-*
@@ -23,6 +18,7 @@ Host * !*.*
   User chao
 
 Host *
+  IdentityAgent SSH_AUTH_SOCK
   ServerAliveInterval 60
   ServerAliveCountMax 3
   TCPKeepAlive yes

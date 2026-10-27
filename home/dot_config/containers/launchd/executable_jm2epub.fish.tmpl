@@ -11,7 +11,7 @@ function create_container
     command container image pull ghcr.io/ermengchao/jm2epub >/dev/null; or return 1
     command container create \
         --name $container_name \
-        --env 'JM2EPUB_API_KEY={{ gopass "jm2epub/api_key" }}' \
+        --env 'JM2EPUB_API_KEY={{ onepasswordRead "op://Development/JM2EPUB/api key" }}' \
         --env 'PORT={{ .ports.jm2epub }}' \
         --publish '[::]:{{ .ports.jm2epub }}:{{ .ports.jm2epub }}' \
         ghcr.io/ermengchao/jm2epub

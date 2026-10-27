@@ -9,7 +9,7 @@ ContainerName = jm2epub
 Image = ghcr.io/ermengchao/jm2epub
 AutoUpdate = registry
 
-Environment = JM2EPUB_API_KEY={{ gopass "jm2epub/api_key" }}
+Environment = JM2EPUB_API_KEY={{ onepasswordRead "op://Development/JM2EPUB/api key" }}
 Environment = PORT={{ .ports.jm2epub }}
 
 Network = bridge

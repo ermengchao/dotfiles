@@ -13,10 +13,10 @@ enablePrometheus = true
 addr = "0.0.0.0"
 port = {{ .ports.frp.web_server }}
 user = "chao"
-password = {{ gopass "chao/password" | quote }}
+password = {{ onepasswordRead "op://Development/chao/password" | quote }}
 tls.certFile = "server.crt"
 tls.keyFile = "server.key"
 
 [auth]
 method = "token"
-token = {{ gopass "frp/token" | quote }}
+token = {{ onepasswordRead "op://Development/FRP/token" | quote }}

@@ -4,14 +4,6 @@
 {{ $dependencies := .dependencies -}}
 {{ $missingDependencies := list -}}
 
-{{   if .meta.isRootNode -}}
-{{     if eq .os "darwin" -}}
-{{       $dependencies = append $dependencies "age-plugin-se" -}}
-{{     else -}}
-{{       $dependencies = append $dependencies "age-plugin-tpm" -}}
-{{     end -}}
-{{   end -}}
-
 {{ range $dependency := $dependencies -}}
 {{   if not (lookPath $dependency) -}}
 {{ warnf "Missing required dependency before chezmoi apply: %s" $dependency -}}

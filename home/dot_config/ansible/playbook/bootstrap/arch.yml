@@ -3,16 +3,12 @@
   hosts: arch
   become: true
 
-  vars_prompt:
-    - name: gopass_age_password
-      prompt: "请输入 gopass age 解锁密码"
-      private: true
-
   vars:
     normal_user: "{{ ansible_user }}"
     normal_user_home: "/home/{{ normal_user }}"
     chezmoi_hostname: "arch"
     chezmoi_pretty_hostname: "Arch"
+    op_service_account_token: "{{ lookup('ansible.builtin.env', 'OP_SERVICE_ACCOUNT_TOKEN') }}"
     user_env:
       HOME: "{{ normal_user_home }}"
       USER: "{{ normal_user }}"
@@ -22,6 +18,7 @@
       XDG_STATE_HOME: "{{ normal_user_home }}/.local/state"
       XDG_CACHE_HOME: "{{ normal_user_home }}/.cache"
       GIT_TERMINAL_PROMPT: "0"
+      OP_SERVICE_ACCOUNT_TOKEN: "{{ op_service_account_token }}"
 
   pre_tasks:
     - name: Ensure target is Arch Linux
@@ -30,6 +27,14 @@
           - ansible_facts["distribution"] == "Archlinux"
         fail_msg: "This playbook only supports Arch Linux."
         success_msg: "Arch Linux detected."
+
+    - name: Require 1Password service account authentication
+      assert:
+        that:
+          - op_service_account_token is string
+          - op_service_account_token | trim | length > 0
+        fail_msg: "Set OP_SERVICE_ACCOUNT_TOKEN on the Ansible controller, or provide op_service_account_token through Ansible Vault."
+        quiet: true
 
   tasks:
     - name: Disable IPv6 temporarily
@@ -46,37 +51,29 @@
           - chezmoi
           - age
           - git
-          - gopass
         state: present
         update_cache: true
 
     - name: Run chezmoi init
+      no_log: true
       become: true
       become_user: "{{ normal_user }}"
       command: >
         chezmoi --source {{ normal_user_home }}/.local/share/chezmoi --force --no-tty init ermengchao
         --promptString "💥 Hostname={{ chezmoi_hostname }},👀 Pretty hostname={{ chezmoi_pretty_hostname }}"
         --promptMultichoice "📦 Package manager=pacman/paru"
-        --promptBool "🧩 Minimal installation=true,🌐 Whether a proxy server=true"
+        --promptBool "☘️ Root device=false,🌐 Whether a proxy server=true"
       environment: "{{ user_env }}"
       args:
         creates: "{{ normal_user_home }}/.local/share/chezmoi"
-
-    - name: Copy key.txt to chezmoi's source dir
-      become: true
-      become_user: "{{ normal_user }}"
-      copy:
-        src: '{{ lookup("env", "XDG_DATA_HOME") }}/chezmoi/key.txt'
-        dest: "{{ normal_user_home }}/.local/share/chezmoi/key.txt"
-        mode: "0600"
 
     - name: Run chezmoi apply
       no_log: true
       become: true
       become_user: "{{ normal_user }}"
       command: >
-        chezmoi --source {{ normal_user_home }}/.local/share/chezmoi --force --no-tty apply
-      environment: "{{ user_env | combine({'GOPASS_AGE_PASSWORD': gopass_age_password}) }}"
+        chezmoi --source {{ normal_user_home }}/.local/share/chezmoi --force --no-tty apply --init
+      environment: "{{ user_env }}"
 
     - name: Reload system systemd daemon
       systemd:

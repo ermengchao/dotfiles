@@ -1,15 +1,62 @@
 #!/usr/bin/env fish
 
 {{ if ne .os "nixos" }}
+set -gx USER_CONFIG_HOME {{ env "XDG_CONFIG_HOME" | quote }}
+
+# Authenticate in root's own op configuration, independently of the caller.
+if test (id -u) -eq 0
+    set -gx HOME /root
+    set -gx XDG_CONFIG_HOME /root/.config
+    set -gx XDG_DATA_HOME /root/.local/share
+    set -gx XDG_STATE_HOME /root/.local/state
+    set -gx XDG_CACHE_HOME /root/.cache
+    set -gx OP_CONFIG_DIR /root/.config/op
+    set -gx OP_BIOMETRIC_UNLOCK_ENABLED false
+
+    if not type -q op
+        printf '1Password CLI (op) must be installed before applying root configuration.\n' >&2
+        exit 1
+    end
+
+    if not set -q OP_SERVICE_ACCOUNT_TOKEN; or test -z "$OP_SERVICE_ACCOUNT_TOKEN"
+        if not test -t 0
+            printf 'Interactive 1Password authentication requires a terminal. For unattended use, set OP_SERVICE_ACCOUNT_TOKEN.\n' >&2
+            exit 1
+        end
+
+        set -l accounts (command op account list --format=json)
+        or exit $status
+
+        set -l session
+        if string match --quiet --regex '\{' -- $accounts
+            set session (command op signin --raw)
+            or exit $status
+        else
+            set session (command op account add --signin --raw)
+            or exit $status
+        end
+
+        if test -z "$session"
+            printf '1Password did not return a session token.\n' >&2
+            exit 1
+        end
+        set -gx OP_SESSION "$session"
+    end
+
+    exec chezmoi apply \
+        --init \
+        --source {{ .paths.rootSourceDir | quote }} \
+        --destination / \
+        $argv
+end
+
 set -l env_args \
     HOME=/root \
     XDG_CONFIG_HOME=/root/.config \
     XDG_DATA_HOME=/root/.local/share \
     XDG_STATE_HOME=/root/.local/state \
     XDG_CACHE_HOME=/root/.cache \
-    GOPASS_MOUNTS_PATH=(/usr/bin/env gopass config mounts.path | string replace -r '^~' {{ .chezmoi.homeDir | quote }}) \
-    SSH_KEY_PATH="{{ .chezmoi.homeDir }}/.ssh" \
-    GOPASS_AGE_PASSWORD={{ gopass "chao/password" }}
+    USER_CONFIG_HOME=$USER_CONFIG_HOME
 
 {{   if eq .chezmoi.version.builtBy "Homebrew" -}}
 set -a env_args \
@@ -17,9 +64,19 @@ set -a env_args \
     PATH={{ env "HOMEBREW_PREFIX" }}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 {{   end -}}
 
-sudo /usr/bin/env $env_args chezmoi apply \
-    --init \
-    --source {{ .paths.rootSourceDir }} \
-    --destination / \
-    $argv
+# Preserve names only: token values must not become command-line arguments.
+set -l preserve_env
+for name in OP_SERVICE_ACCOUNT_TOKEN OP_ACCOUNT
+    if set -q $name; and test -n "$$name"
+        set -a preserve_env $name
+    end
+end
+
+set -l sudo_args
+if test (count $preserve_env) -gt 0
+    set -a sudo_args --preserve-env=(string join , -- $preserve_env)
+end
+
+set -l fish_path (command -s fish)
+sudo $sudo_args /usr/bin/env $env_args "$fish_path" --no-config (status filename) $argv
 {{ end -}}

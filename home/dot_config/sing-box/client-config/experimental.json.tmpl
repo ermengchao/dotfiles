@@ -7,7 +7,7 @@
     },
     "clash_api": {
       "external_controller": "[::]:{{ .ports.clash_api }}",
-      "secret": {{ gopass "chao/password" | quote }},
+      "secret": {{ onepasswordRead "op://Development/chao/password" | quote }},
       "default_mode": "rule",
       "access_control_allow_origin": [
         "*"

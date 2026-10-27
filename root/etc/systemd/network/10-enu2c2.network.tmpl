@@ -16,7 +16,7 @@ SendHostname=no
 UseRoutes=no
 UseDNS=no
 UseNTP=no
-SendOption=60:string:{{ gopass "iptv/option60" | replaceAllRegex "([0-9a-f]{2})" "\\x$1" }}
+SendOption=60:string:{{ onepasswordRead "op://Development/IPTV/home/option60" | replaceAllRegex "([0-9a-f]{2})" "\\x$1" }}
 
 [Route]
 Destination=224.0.0.0/4

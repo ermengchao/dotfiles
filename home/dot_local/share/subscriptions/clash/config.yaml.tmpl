@@ -23,7 +23,7 @@ bind-address: "*"
 port: {{ .ports.proxy.http }}
 socks-port: {{ .ports.proxy.socks }}
 external-controller: 0.0.0.0:{{ .ports.clash_api }}
-secret: {{ gopass "chao/password" | quote }}
+secret: {{ onepasswordRead "op://Development/chao/password" | quote }}
 external-ui: ./ui
 external-ui-url: https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip
 external-controller-cors:
@@ -117,14 +117,14 @@ proxies:
     server: apne1-01.proxy.er-meng.com
     port: {{ .ports.proxy.shadowsocks }}
     cipher: 2022-blake3-aes-128-gcm
-    password: {{ gopass "proxy/shadowsocks" | quote }}
+    password: {{ onepasswordRead "op://Development/Proxy/shadowsocks/password" | quote }}
     udp: true
 
   - name: "🇯🇵 Japan 02"
     type: vmess
     server: apne1-01.proxy.er-meng.com
     port: 443
-    uuid: {{ gopass "proxy/vmess" | quote }}
+    uuid: {{ onepasswordRead "op://Development/Proxy/vmess/password" | quote }}
     alterId: 0
     cipher: auto
     udp: true
@@ -133,7 +133,7 @@ proxies:
     tfo: true
     network: ws
     ws-opts:
-      path: /{{ gopass "proxy/vmess" }}
+      path: /{{ onepasswordRead "op://Development/Proxy/vmess/password" }}
       headers:
         Host: apne1-01.proxy.er-meng.com
 
@@ -141,7 +141,7 @@ proxies:
     type: trojan
     server: apne1-01.proxy.er-meng.com
     port: {{ .ports.proxy.trojan }}
-    password: {{ gopass "proxy/trojan" | quote }}
+    password: {{ onepasswordRead "op://Development/Proxy/trojan/password" | quote }}
     sni: apne1-01.proxy.er-meng.com
     udp: true
 
@@ -149,7 +149,7 @@ proxies:
     type: snell
     server: apne1-01.proxy.er-meng.com
     port: {{ .ports.proxy.snell }}
-    psk: {{ gopass "proxy/snell" | quote }}
+    psk: {{ onepasswordRead "op://Development/Proxy/snell/password" | quote }}
     version: 5
     reuse: true
     udp: true
@@ -158,8 +158,8 @@ proxies:
     type: tuic
     server: apne1-01.proxy.er-meng.com
     port: {{ .ports.proxy.tuic }}
-    uuid: {{ gopass "proxy/tuic" | quote }}
-    password: {{ gopass "proxy/tuic" | quote }}
+    uuid: {{ onepasswordRead "op://Development/Proxy/tuic/password" | quote }}
+    password: {{ onepasswordRead "op://Development/Proxy/tuic/password" | quote }}
     sni: apne1-01.proxy.er-meng.com
     alpn:
       - h3
@@ -171,14 +171,14 @@ proxies:
     type: hysteria2
     server: apne1-01.proxy.er-meng.com
     port: {{ .ports.proxy.hysteria2 }}
-    password: {{ gopass "proxy/hysteria2" | quote }}
+    password: {{ onepasswordRead "op://Development/Proxy/hysteria2/password" | quote }}
     sni: apne1-01.proxy.er-meng.com
 
   - name: "🇯🇵 Japan 07"
     type: anytls
     server: apne1-01.proxy.er-meng.com
     port: {{ .ports.proxy.anytls }}
-    password: {{ gopass "proxy/anytls" | quote }}
+    password: {{ onepasswordRead "op://Development/Proxy/anytls/password" | quote }}
     sni: apne1-01.proxy.er-meng.com
     udp: true
 

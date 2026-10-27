@@ -13,7 +13,7 @@ UserNS = keep-id
 
 Environment = UMASK=022
 Environment = USER=chao
-Environment = PASS={{ gopass "chao/password" }}
+Environment = PASS={{ onepasswordRead "op://Development/chao/password" }}
 Environment = TZ={{ template "getSystemTimezone" . }}
 Environment = PEERPORT={{ .ports.transmission.peer }}
 

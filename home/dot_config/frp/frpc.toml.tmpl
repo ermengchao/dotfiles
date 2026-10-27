@@ -6,7 +6,7 @@ log.level = "info"
 
 [auth]
 method = "token"
-token = {{ gopass "frp/token" | quote }}
+token = {{ onepasswordRead "op://Development/FRP/token" | quote }}
 
 [[proxies]]
 name = "iptv"

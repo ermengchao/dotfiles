@@ -1,3 +1,7 @@
+{{- $userConfigHome := env "USER_CONFIG_HOME" -}}
+{{- if not $userConfigHome -}}
+{{- fail "USER_CONFIG_HOME is required; use chezmoi apply-root" -}}
+{{- end -}}
 [Unit]
 Description=sing-box service
 Documentation=https://sing-box.sagernet.org
@@ -5,9 +9,9 @@ After=network.target nss-lookup.target network-online.target
 
 [Service]
 {{ if eq .chezmoi.version.builtBy "Homebrew" -}}
-ExecStart={{ env "HOMEBREW_PREFIX" }}/bin/sing-box -D /var/lib/sing-box -C /home/chao/.config/sing-box run
+ExecStart={{ env "HOMEBREW_PREFIX" }}/bin/sing-box -D /var/lib/sing-box -C {{ printf "%s/sing-box" $userConfigHome | quote }} run
 {{ else -}}
-ExecStart=/usr/bin/sing-box -D /var/lib/sing-box -C /home/chao/.config/sing-box run
+ExecStart=/usr/bin/sing-box -D /var/lib/sing-box -C {{ printf "%s/sing-box" $userConfigHome | quote }} run
 {{ end -}}
 
 User=sing-box

@@ -11,7 +11,9 @@ set current_hostname (scutil --get HostName)
 set current_pretty_hostname (scutil --get ComputerName)
 {{   else -}}
 set current_hostname (hostnamectl hostname)
+or exit $status
 set current_pretty_hostname (hostnamectl hostname --pretty)
+or exit $status
 {{   end -}}
 
 # Set hostname
@@ -26,6 +28,7 @@ if test "$current_hostname" != "$configured_hostname"
     {{ else -}}
     sudo hostnamectl set-hostname --static $configured_hostname
     {{ end -}}
+    or exit $status
 
     printf "✅ Done.\n"
 end
@@ -42,6 +45,7 @@ if test "$current_pretty_hostname" != "$configured_pretty_hostname"
     {{ else -}}
     sudo hostnamectl set-hostname --pretty $configured_pretty_hostname
     {{ end -}}
+    or exit $status
 
     printf "✅ Done.\n"
 end

@@ -25,4 +25,5 @@ packages = [
 
 packages = [
   "bun-bin",
+  "sing-box",
 ]

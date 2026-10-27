@@ -14,7 +14,7 @@ function create_container
     command container create \
         --name $container_name \
         --env SYNCCLIPBOARD_USERNAME=chao \
-        --env 'SYNCCLIPBOARD_PASSWORD={{ gopass "chao/password" }}' \
+        --env 'SYNCCLIPBOARD_PASSWORD={{ onepasswordRead "op://Development/chao/password" }}' \
         --publish '[::]:{{ .ports.syncclipboard_server }}:5033' \
         --volume '{{ env "XDG_DATA_HOME" }}/syncclipboard-server:/app/data' \
         docker.io/jericx/syncclipboard-server:latest

@@ -10,8 +10,6 @@ alias xcode "open -a Xcode.app"
 {{   if eq .chezmoi.version.builtBy "Homebrew" -}}
 brew shellenv fish | source
 {{   end -}}
-ssh-agent -c | source > /dev/null
-
 abbr sc systemctl
 abbr scu "systemctl --user"
 
@@ -31,6 +29,10 @@ end
 
 if type -q mise
     mise activate fish | source
+end
+
+if type -q op; and test -r "$XDG_CONFIG_HOME/op/plugins.sh"
+    cat {{ env "XDG_CONFIG_HOME" }}/op/plugins.sh | source > /dev/null
 end
 
 if type -q zoxide

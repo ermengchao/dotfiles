@@ -4,6 +4,6 @@ port={{ .ports.vnc }}
 
 enable_auth=true
 username={{ .username }}
-password={{ gopass "chao/password" }}
+password={{ onepasswordRead "op://Development/chao/password" }}
 relax_encryption=true
 allow_broken_crypto=true

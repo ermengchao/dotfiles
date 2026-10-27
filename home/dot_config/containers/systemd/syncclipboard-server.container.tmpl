@@ -10,7 +10,7 @@ Image = docker.io/jericx/syncclipboard-server:latest
 AutoUpdate = registry
 
 Environment = SYNCCLIPBOARD_USERNAME=chao
-Environment = SYNCCLIPBOARD_PASSWORD={{ gopass "chao/password" }}
+Environment = SYNCCLIPBOARD_PASSWORD={{ onepasswordRead "op://Development/chao/password" }}
 
 Network = bridge
 PublishPort = 0.0.0.0:{{ .ports.syncclipboard_server }}:5033

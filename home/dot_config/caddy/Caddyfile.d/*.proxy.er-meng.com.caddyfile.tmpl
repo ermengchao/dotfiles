@@ -1,6 +1,6 @@
 https://{{ .meta.hostname }}.proxy.er-meng.com {
 	@vmess_ws {
-		path /{{ gopass "proxy/vmess" }}*
+		path /{{ onepasswordRead "op://Development/Proxy/vmess/password" }}*
 		header Upgrade websocket
 	}
 	reverse_proxy @vmess_ws http://127.0.0.1:{{ .ports.proxy.vmess }} {

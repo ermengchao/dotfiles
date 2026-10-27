@@ -32,7 +32,6 @@ brews = [
   "git-delta",
   "git-lfs",
   "glow",
-  "gopass",
   "hwatch",
   "imagemagick",
   "iperf3",
@@ -48,7 +47,6 @@ brews = [
   "openssh",
   "opentofu",
   "pandoc",
-  "pinentry-mac",
   "poppler",
   "posting",
   "pkgconf",
@@ -89,12 +87,13 @@ casks = [
   "hammerspoon",
   "karabiner-elements",
   "notion",
-  "secretive",
   "sf-symbols",
   "stats",
   "surge",
   "tailscale-app",
-  "whatcable"
+  "whatcable",
+  "1password",
+  "1password-cli",
 ]
 
 [[packageManagers.brew.darwin.mas]]
@@ -189,10 +188,8 @@ brews = [
   "git",
   "git-delta",
   "git-lfs",
-  "gopass",
   "mise",
   "neovim",
-  "pinentry-mac",
   "ripgrep",
   "tlrc",
   "tmux",
@@ -221,6 +218,8 @@ casks = [
   "stats",
   "surge",
   "tailscale-app",
+  "1password",
+  "1password-cli",
 ]
 
 [[packageManagers.brew.minimal.darwin.mas]]
@@ -264,7 +263,6 @@ brews = [
   "git",
   "git-delta",
   "git-lfs",
-  "gopass",
   "hwatch",
   "imagemagick",
   "iperf3",
@@ -273,7 +271,6 @@ brews = [
   "mise",
   "neovim",
   "nmap",
-  "pinentry",
   "poppler",
   "resvg",
   "ripgrep",
@@ -295,6 +292,7 @@ casks = [
   "font-fira-mono-nerd-font",
   "font-inter",
   "font-sarasa-gothic",
+  "1password-cli",
 ]
 
 [packageManagers.brew.minimal.linux]
@@ -304,6 +302,7 @@ brews = [
   "bat",
   "bottom",
   "bun",
+  "caddy",
   "chezmoi",
   "eza",
   "fastfetch",
@@ -315,12 +314,11 @@ brews = [
   "git",
   "git-delta",
   "git-lfs",
-  "gopass",
   "mise",
   "neovim",
-  "pinentry",
   "ripgrep",
   "rustup",
+  "sing-box",
   "tlrc",
   "tmux",
   "tree-sitter-cli",
@@ -331,4 +329,6 @@ brews = [
   "7zip",
 ]
 
-casks = []
+casks = [
+  "1password-cli",
+]

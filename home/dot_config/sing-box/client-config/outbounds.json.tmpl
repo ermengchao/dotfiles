@@ -41,7 +41,7 @@
       "domain_resolver": "dns-local",
       "server_port": {{ .ports.proxy.shadowsocks }},
       "method": "2022-blake3-aes-128-gcm",
-      "password": {{ gopass "proxy/shadowsocks" | quote }}
+      "password": {{ onepasswordRead "op://Development/Proxy/shadowsocks/password" | quote }}
     },
     {
       "tag": "🇯🇵 Japan 02",
@@ -49,7 +49,7 @@
       "server": "apne1-01.proxy.er-meng.com",
       "server_port": 443,
       "domain_resolver": "dns-local",
-      "uuid": {{ gopass "proxy/vmess" | quote }},
+      "uuid": {{ onepasswordRead "op://Development/Proxy/vmess/password" | quote }},
       "security": "auto",
       "alter_id": 0,
       "tcp_fast_open": true,
@@ -59,7 +59,7 @@
       },
       "transport": {
         "type": "ws",
-        "path": "/{{ gopass "proxy/vmess" }}",
+        "path": "/{{ onepasswordRead "op://Development/Proxy/vmess/password" }}",
         "headers": {
           "Host": "apne1-01.proxy.er-meng.com"
         }
@@ -71,7 +71,7 @@
       "server": "apne1-01.proxy.er-meng.com",
       "domain_resolver": "dns-local",
       "server_port": {{ .ports.proxy.trojan }},
-      "password": {{ gopass "proxy/trojan" | quote }},
+      "password": {{ onepasswordRead "op://Development/Proxy/trojan/password" | quote }},
       "tls": {
         "enabled": true,
         "server_name": "apne1-01.proxy.er-meng.com"
@@ -84,7 +84,7 @@
       "domain_resolver": "dns-local",
       "server_port": {{ .ports.proxy.snell }},
       "version": 6,
-      "psk": {{ gopass "proxy/snell" | quote }},
+      "psk": {{ onepasswordRead "op://Development/Proxy/snell/password" | quote }},
       "reuse": true
     },
     {
@@ -93,8 +93,8 @@
       "server": "apne1-01.proxy.er-meng.com",
       "domain_resolver": "dns-local",
       "server_port": {{ .ports.proxy.tuic }},
-      "uuid": {{ gopass "proxy/tuic" | quote }},
-      "password": {{ gopass "proxy/tuic" | quote }},
+      "uuid": {{ onepasswordRead "op://Development/Proxy/tuic/password" | quote }},
+      "password": {{ onepasswordRead "op://Development/Proxy/tuic/password" | quote }},
       "congestion_control": "bbr",
       "zero_rtt_handshake": false,
       "tls": {
@@ -111,7 +111,7 @@
       "server": "apne1-01.proxy.er-meng.com",
       "domain_resolver": "dns-local",
       "server_port": {{ .ports.proxy.hysteria2 }},
-      "password": {{ gopass "proxy/hysteria2" | quote }},
+      "password": {{ onepasswordRead "op://Development/Proxy/hysteria2/password" | quote }},
       "tls": {
         "enabled": true,
         "server_name": "apne1-01.proxy.er-meng.com"
@@ -123,7 +123,7 @@
       "server": "apne1-01.proxy.er-meng.com",
       "domain_resolver": "dns-local",
       "server_port": {{ .ports.proxy.anytls }},
-      "password": {{ gopass "proxy/anytls" | quote }},
+      "password": {{ onepasswordRead "op://Development/Proxy/anytls/password" | quote }},
       "tls": {
         "enabled": true,
         "server_name": "apne1-01.proxy.er-meng.com"
@@ -171,7 +171,7 @@
       "version": 6,
       "server": "mac-mini.taileee60e.ts.net",
       "server_port": {{ .ports.proxy.snell }},
-      "psk": {{ gopass "proxy/snell" | quote }},
+      "psk": {{ onepasswordRead "op://Development/Proxy/snell/password" | quote }},
       "mode": "default",
       "reuse": true,
       "detour": "Tailnet",

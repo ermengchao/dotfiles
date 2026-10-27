@@ -1,6 +1,4 @@
 {{ if not .meta.isRootNode }}
-{{ include (printf "%s/.ssh/id_ed25519.pub" (env "HOME")) }}
-
 {{ range .rootNodeIdentities -}}
 {{ . }}
 {{ end -}}

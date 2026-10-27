@@ -2,7 +2,10 @@
 
 {{ if ne .os "nixos" -}}
 cd {{ .chezmoi.workingTree }}
+or exit $status
 
 git fetch --quiet origin
+or exit $status
 git branch --set-upstream-to=origin/main main > /dev/null
+or exit $status
 {{ end -}}

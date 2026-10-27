@@ -16,7 +16,7 @@ function create_container
     command container create \
         --name $container_name \
         --env USER=chao \
-        --env 'PASS={{ gopass "chao/password" }}' \
+        --env 'PASS={{ onepasswordRead "op://Development/chao/password" }}' \
         --env 'TZ={{ template "getSystemTimezone" . }}' \
         --env 'PEERPORT={{ .ports.transmission.peer }}' \
         --publish '[::]:{{ .ports.transmission.rpc }}:{{ .ports.transmission.rpc }}' \

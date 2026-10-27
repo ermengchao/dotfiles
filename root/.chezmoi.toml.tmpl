@@ -9,6 +9,9 @@ XDG_CONFIG_HOME = "/root/.config"
 XDG_DATA_HOME = "/root/.local/share"
 XDG_STATE_HOME = "/root/.local/state"
 
+[onepassword]
+mode = {{ if env "OP_SERVICE_ACCOUNT_TOKEN" }}"service"{{ else }}"account"{{ end }}
+
 [data]
 username = "chao"
 

@@ -12,7 +12,11 @@ set brew_path /home/linuxbrew/.linuxbrew/bin/brew
 if not test -x $brew_path
     printf "🍺 Homebrew not found. Installing homebrew...\n"
 
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    set -l installer "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    or exit $status
+
+    /bin/bash -c "$installer"
+    or exit $status
 
     printf "ℹ️ Sourcing homebrew shell env...\n"
 
@@ -31,20 +35,27 @@ if not type -q paru
     set -x RUSTUP_HOME ~/.local/share/rustup
 
     sudo pacman -S --needed --noconfirm base-devel rustup > /dev/null
+    or exit $status
 
     if test -d $paru_path/.git
         git -C $paru_path pull --ff-only
+        or exit $status
     else if test -e $paru_path
         printf "❌ $paru_path exists but is not a Git repository.\n"
         exit 1
     else
         mkdir -p (path dirname $paru_path)
+        or exit $status
         git clone https://aur.archlinux.org/paru.git $paru_path > /dev/null
+        or exit $status
     end
 
     cd $paru_path
+    or exit $status
     rustup default stable > /dev/null
+    or exit $status
     makepkg -si --noconfirm > /dev/null 2> /dev/null
+    or exit $status
 
     printf "✅ Done.\n"
 end
@@ -59,6 +70,7 @@ end
 printf "📦 Adding the flathub repositor...\n"
 
 flatpak remote-add --user --if-not-exists flathub "https://dl.flathub.org/repo/flathub.flatpakrepo"
+or exit $status
 
 printf "✅ Done.\n"
 {{   end -}}

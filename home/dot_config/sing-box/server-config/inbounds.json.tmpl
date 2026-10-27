@@ -9,7 +9,7 @@
       "detour": "inbounds-shadowsocks",
       "users": [
         {
-          "password": {{ gopass "proxy/shadowtls" | quote }}
+          "password": {{ onepasswordRead "op://Development/Proxy/shadowtls/password" | quote }}
         }
       ],
       "handshake": {
@@ -25,7 +25,7 @@
       "listen_port": {{ .ports.proxy.shadowsocks }},
       "network": "tcp",
       "method": "2022-blake3-aes-128-gcm",
-      "password": {{ gopass "proxy/shadowsocks" | quote }},
+      "password": {{ onepasswordRead "op://Development/Proxy/shadowsocks/password" | quote }},
       "multiplex": {
         "enabled": true
       }
@@ -39,13 +39,13 @@
       "proxy_protocol": false,
       "users": [
         {
-          "uuid": {{ gopass "proxy/vmess" | quote }},
+          "uuid": {{ onepasswordRead "op://Development/Proxy/vmess/password" | quote }},
           "alterId": 0
         }
       ],
       "transport": {
         "type": "ws",
-        "path": "/{{ gopass "proxy/vmess" }}",
+        "path": "/{{ onepasswordRead "op://Development/Proxy/vmess/password" }}",
         "max_early_data": 2560,
         "early_data_header_name": "Sec-WebSocket-Protocol"
       },
@@ -67,7 +67,7 @@
       "users": [
         {
           "name": "chao",
-          "password": {{ gopass "proxy/trojan" | quote }}
+          "password": {{ onepasswordRead "op://Development/Proxy/trojan/password" | quote }}
         }
       ],
       "tls": {
@@ -75,10 +75,10 @@
         "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
         "acme": {
           "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
-          "email": {{ gopass "cloudflare/email" | quote }},
+          "email": {{ onepasswordRead "op://Development/Cloudflare/email" | quote }},
           "dns01_challenge": {
             "provider": "cloudflare",
-            "api_token": {{ gopass "cloudflare/token" | quote }}
+            "api_token": {{ onepasswordRead "op://Development/Cloudflare/token" | quote }}
           }
         }
       },
@@ -92,7 +92,7 @@
       "version": 6,
       "listen": "::",
       "listen_port": {{ .ports.proxy.snell }},
-      "psk": {{ gopass "proxy/snell" | quote }},
+      "psk": {{ onepasswordRead "op://Development/Proxy/snell/password" | quote }}
     },
     {
       "tag": "inbounds-naive",
@@ -102,7 +102,7 @@
       "users": [
         {
           "username": "chao",
-          "password": {{ gopass "proxy/naive" | quote }}
+          "password": {{ onepasswordRead "op://Development/Proxy/naive/password" | quote }}
         }
       ],
       "tls": {
@@ -110,10 +110,10 @@
         "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
         "acme": {
           "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
-          "email": {{ gopass "cloudflare/email" | quote }},
+          "email": {{ onepasswordRead "op://Development/Cloudflare/email" | quote }},
           "dns01_challenge": {
             "provider": "cloudflare",
-            "api_token": {{ gopass "cloudflare/token" | quote }}
+            "api_token": {{ onepasswordRead "op://Development/Cloudflare/token" | quote }}
           }
         }
       }
@@ -125,8 +125,8 @@
       "listen_port": {{ .ports.proxy.tuic }},
       "users": [
         {
-          "uuid": {{ gopass "proxy/tuic" | quote }},
-          "password": {{ gopass "proxy/tuic" | quote }}
+          "uuid": {{ onepasswordRead "op://Development/Proxy/tuic/password" | quote }},
+          "password": {{ onepasswordRead "op://Development/Proxy/tuic/password" | quote }}
         }
       ],
       "congestion_control": "bbr",
@@ -139,10 +139,10 @@
         "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
         "acme": {
           "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
-          "email": {{ gopass "cloudflare/email" | quote }},
+          "email": {{ onepasswordRead "op://Development/Cloudflare/email" | quote }},
           "dns01_challenge": {
             "provider": "cloudflare",
-            "api_token": {{ gopass "cloudflare/token" | quote }}
+            "api_token": {{ onepasswordRead "op://Development/Cloudflare/token" | quote }}
           }
         }
       }
@@ -154,7 +154,7 @@
       "listen_port": {{ .ports.proxy.anytls }},
       "users": [
         {
-          "password": {{ gopass "proxy/anytls" | quote }}
+          "password": {{ onepasswordRead "op://Development/Proxy/anytls/password" | quote }}
         }
       ],
       "padding_scheme": [],
@@ -163,10 +163,10 @@
         "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
         "acme": {
           "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
-          "email": {{ gopass "cloudflare/email" | quote }},
+          "email": {{ onepasswordRead "op://Development/Cloudflare/email" | quote }},
           "dns01_challenge": {
             "provider": "cloudflare",
-            "api_token": {{ gopass "cloudflare/token" | quote }}
+            "api_token": {{ onepasswordRead "op://Development/Cloudflare/token" | quote }}
           }
         }
       }
@@ -181,7 +181,7 @@
       "users": [
         {
           "name": "chao",
-          "password": {{ gopass "proxy/hysteria2" | quote }}
+          "password": {{ onepasswordRead "op://Development/Proxy/hysteria2/password" | quote }}
         }
       ],
       "tls": {
@@ -189,10 +189,10 @@
         "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
         "acme": {
           "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
-          "email": {{ gopass "cloudflare/email" | quote }},
+          "email": {{ onepasswordRead "op://Development/Cloudflare/email" | quote }},
           "dns01_challenge": {
             "provider": "cloudflare",
-            "api_token": {{ gopass "cloudflare/token" | quote }}
+            "api_token": {{ onepasswordRead "op://Development/Cloudflare/token" | quote }}
           }
         }
       }

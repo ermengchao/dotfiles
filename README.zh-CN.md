@@ -102,6 +102,14 @@ SSH 登录授权与密码库解密授权分别维护：`authorized_keys` 中的 
 
 可以将这套流程理解为：leaf 节点提交“身份”，root 节点“授权”身份。已经能够解密并修改密码库的 leaf 节点，在技术上也可以为新的 recipient 重新加密密码库，但我的原则是统一由 root 节点授权新节点。这是工作流约定，并非 `age` 加密机制强制施加的权限限制。
 
+#### 更新：迁移到 1Password
+
+以上记录的是此前基于 `gopass` 和 Apple“密码”App 的工作流。最终，我还是选择使用 `1Password` 替代 `gopass`。对于原先由 Apple“密码”App 承担的职责，我也计划在验证实际使用体验后，将其中一部分迁移到 `1Password`。
+
+相比 `gopass`，`1Password` 的生态更庞大，可参考的社区解决方案也更多。此外，它还提供 SSH agent 和多种 shell 插件等对开发者友好的功能。综合来看，这些优势让它更适合我的工作流，即使需要额外支付订阅费用，也值得使用。
+
+模板现通过 chezmoi 的 `onepasswordRead` 函数读取 `Development` 密码库中的字段。执行 apply 前，需要安装 `op`，并以运行 chezmoi 的用户身份完成认证；Linux 上将 CLI 安装作为前置条件。`chezmoi apply-root` 通过变量名向 `sudo` 显式保留 `OP_SERVICE_ACCOUNT_TOKEN` 和可选的 `OP_ACCOUNT`。没有 service account token 时，脚本要求可用的终端，并使用 root 独立的 `/root/.config/op` 配置交互登录，首次使用时添加账号。Root 的 chezmoi 配置据此选择 `service` 或 `account` 模式。Rclone 的 iCloud Drive remote 暂时停用，待 1Password 中补齐凭据后再启用；R2 remote 继续保留。
+
 ### 如何在 NixOS 上管理 dotfiles？
 
 NixOS 是一个独特的 Linux 发行版，使用可复现的配置管理系统。`Home Manager` 提供用于管理用户环境的 Nix 模块，也涵盖 dotfiles。不过，考虑到以下问题，我仍然选择在 NixOS 上使用 `chezmoi`：

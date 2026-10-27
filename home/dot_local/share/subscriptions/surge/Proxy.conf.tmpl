@@ -11,9 +11,9 @@ geoip-maxmind-url = https://github.com/Hackl0us/GeoIP2-CN/raw/release/Country.mm
 always-real-ip = *.taileee60e.ts.net, xbox.*.microsoft.com, *.xboxlive.com, *.stun.playstation.net, *.srv.nintendo.net, *.battlenet.com.cn, *.battlenet.com, *.blzstatic.cn, *.battle.net, *proxy.er-meng.com
 skip-proxy = 127.0.0.1, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12, 100.64.0.0/10, fd7a:115c:a1e0::/48, 17.0.0.0/8, 169.254.0.0/16, 0.0.0.0, localhost, *.local, *.taileee60e.ts.net, *.tailscale.io, *.crashlytics.com
 exclude-simple-hostnames = true
-external-controller-access = {{ gopass "chao/password" }}@0.0.0.0:{{ .ports.yacd }}
+external-controller-access = {{ onepasswordRead "op://Development/chao/password" }}@0.0.0.0:{{ .ports.yacd }}
 http-api-web-dashboard = true
-http-api = {{ gopass "chao/password" }}@0.0.0.0:{{ .ports.clash_api }}
+http-api = {{ onepasswordRead "op://Development/chao/password" }}@0.0.0.0:{{ .ports.clash_api }}
 http-api-tls = false
 
 # DNS
@@ -50,13 +50,13 @@ internet-test-url = http://apple.com/
 [Proxy]
 🟢 Direct = direct
 🔴 Reject = reject
-🇯🇵 Japan 01 = ss, apne1-01.proxy.er-meng.com, {{ .ports.proxy.shadowsocks }}, encrypt-method=2022-blake3-aes-128-gcm, password={{ gopass "proxy/shadowsocks" | quote }}
-🇯🇵 Japan 02 = vmess, apne1-01.proxy.er-meng.com, 443, username={{ gopass "proxy/vmess" | quote }}, ws=true, ws-path=/{{ gopass "proxy/vmess" }}, ws-headers=Host:"apne1-01.proxy.er-meng.com", vmess-aead=true, tls=true, tfo=true, sni=apne1-01.proxy.er-meng.com
-🇯🇵 Japan 03 = trojan, apne1-01.proxy.er-meng.com, {{ .ports.proxy.trojan }}, username=chao, password={{ gopass "proxy/trojan" | quote }}
-🇯🇵 Japan 04 = snell, apne1-01.proxy.er-meng.com, {{ .ports.proxy.snell }}, psk={{ gopass "proxy/snell" | quote }}, version=5, reuse=true
-🇯🇵 Japan 05 = tuic-v5, apne1-01.proxy.er-meng.com, {{ .ports.proxy.tuic }}, password={{ gopass "proxy/tuic" | quote }}, uuid={{ gopass "proxy/tuic" | quote }}, sni=apne1-01.proxy.er-meng.com, alpn=h3
-🇯🇵 Japan 06 = hysteria2, apne1-01.proxy.er-meng.com, {{ .ports.proxy.hysteria2 }}, password={{ gopass "proxy/hysteria2" | quote }}
-🇯🇵 Japan 07 = anytls, apne1-01.proxy.er-meng.com, {{ .ports.proxy.anytls }}, password={{ gopass "proxy/anytls" | quote }}
+🇯🇵 Japan 01 = ss, apne1-01.proxy.er-meng.com, {{ .ports.proxy.shadowsocks }}, encrypt-method=2022-blake3-aes-128-gcm, password={{ onepasswordRead "op://Development/Proxy/shadowsocks/password" | quote }}
+🇯🇵 Japan 02 = vmess, apne1-01.proxy.er-meng.com, 443, username={{ onepasswordRead "op://Development/Proxy/vmess/password" | quote }}, ws=true, ws-path=/{{ onepasswordRead "op://Development/Proxy/vmess/password" }}, ws-headers=Host:"apne1-01.proxy.er-meng.com", vmess-aead=true, tls=true, tfo=true, sni=apne1-01.proxy.er-meng.com
+🇯🇵 Japan 03 = trojan, apne1-01.proxy.er-meng.com, {{ .ports.proxy.trojan }}, username=chao, password={{ onepasswordRead "op://Development/Proxy/trojan/password" | quote }}
+🇯🇵 Japan 04 = snell, apne1-01.proxy.er-meng.com, {{ .ports.proxy.snell }}, psk={{ onepasswordRead "op://Development/Proxy/snell/password" | quote }}, version=5, reuse=true
+🇯🇵 Japan 05 = tuic-v5, apne1-01.proxy.er-meng.com, {{ .ports.proxy.tuic }}, password={{ onepasswordRead "op://Development/Proxy/tuic/password" | quote }}, uuid={{ onepasswordRead "op://Development/Proxy/tuic/password" | quote }}, sni=apne1-01.proxy.er-meng.com, alpn=h3
+🇯🇵 Japan 06 = hysteria2, apne1-01.proxy.er-meng.com, {{ .ports.proxy.hysteria2 }}, password={{ onepasswordRead "op://Development/Proxy/hysteria2/password" | quote }}
+🇯🇵 Japan 07 = anytls, apne1-01.proxy.er-meng.com, {{ .ports.proxy.anytls }}, password={{ onepasswordRead "op://Development/Proxy/anytls/password" | quote }}
 
 [Proxy Group]
 🌐 Proxy = select, "✨ Auto", "🇯🇵 Japan 01", "🇯🇵 Japan 02", "🇯🇵 Japan 03", "🇯🇵 Japan 04", "🇯🇵 Japan 05", "🇯🇵 Japan 06", "🇯🇵 Japan 07"

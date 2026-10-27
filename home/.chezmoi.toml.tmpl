@@ -11,10 +11,6 @@ progress = true
 [add]
 secrets = "error"
 
-# [age]
-# identity = "{{ .chezmoi.homeDir }}/.ssh/id_ed25519"
-# recipientsFile = "{{ .chezmoi.homeDir }}/.ssh/id_ed25519.pub"
-
 [docker]
 command = "podman"
 
@@ -37,6 +33,9 @@ autoPush = true
 [interpreters]
 [interpreters.fish]
 command = "fish"
+
+[onepassword]
+mode = {{ if env "OP_SERVICE_ACCOUNT_TOKEN" }}"service"{{ else }}"account"{{ end }}
 
 [pinentry]
 {{ if eq $os "darwin" -}}

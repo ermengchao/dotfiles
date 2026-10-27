@@ -102,6 +102,14 @@ SSH login authorization and secret-store decryption authorization are maintained
 
 In this workflow, a leaf node submits its “identity,” and a root node “authorizes” it. A leaf node that can already decrypt and modify the store could technically re-encrypt it for another recipient, but my policy is to perform all new-node authorizations on root nodes. This is a workflow convention, not a restriction enforced by `age` encryption.
 
+#### Update: Moving to 1Password
+
+The sections above describe my earlier workflow with `gopass` and Apple's Passwords app. In the end, I chose `1Password` to replace `gopass`. After validating the experience, I also plan to move some of the responsibilities previously handled by Apple's Passwords app to `1Password`.
+
+Compared with `gopass`, `1Password` has a larger ecosystem and more community solutions to draw on. It also offers developer-friendly features such as an SSH agent and a range of shell plugins. Taken together, these benefits make the additional subscription cost worthwhile for my workflow.
+
+Templates now read fields from the `Development` vault with chezmoi's `onepasswordRead` function. Install `op` and authenticate it as the user running chezmoi before applying; on Linux, CLI installation is a prerequisite. `chezmoi apply-root` preserves `OP_SERVICE_ACCOUNT_TOKEN` and the optional `OP_ACCOUNT` by name across `sudo`. Without a service account token, it requires a terminal and signs in using root's separate `/root/.config/op` configuration, adding an account on first use. Root's chezmoi configuration selects `service` or `account` mode accordingly. Rclone's iCloud Drive remote is temporarily disabled until its credentials are configured in 1Password; its R2 remote remains enabled.
+
 ### How to manage dotfiles on NixOS?
 
 NixOS is a unique Linux distribution that uses reproducible configuration to manage the system. `Home Manager` provides Nix modules for managing user environments, including dotfiles. However, given the following drawbacks, I decided to keep using `chezmoi` on NixOS:
