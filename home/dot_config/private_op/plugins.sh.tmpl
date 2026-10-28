@@ -1,0 +1,8 @@
+{{ if or (env "OP_SERVICE_ACCOUNT_TOKEN") (env "OP_SESSION") -}}
+alias gh="env GH_TOKEN='op://Development/GitHub Personal Access Token/token' op run -- gh"
+alias aws="env AWS_ACCESS_KEY_ID='op://Development/AWS Access Key/access key id' AWS_SECRET_ACCESS_KEY='op://Development/AWS Access Key/secret access key' op run -- aws"
+{{ else -}}
+export OP_PLUGIN_ALIASES_SOURCED=1
+alias gh="op plugin run -- gh"
+alias aws="op plugin run -- aws"
+{{ end -}}
