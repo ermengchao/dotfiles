@@ -1,5 +1,8 @@
 {
-    "global": { "show_in_menu_bar": false },
+    "global": {
+        "show_in_menu_bar": false,
+        "enable_cgeventtap_fallback": true
+    },
     "profiles": [
         {
             "name": "Default",
@@ -8,6 +11,37 @@
         {
             "complex_modifications": {
                 "rules": [
+                    {
+                        "description": "Map F3 to control+option+command+B and F4 to control+option+shift+command+B",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "f3",
+                                    "modifiers": { "optional": ["caps_lock"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "b",
+                                        "modifiers": ["left_control", "left_option", "left_command"]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "f4",
+                                    "modifiers": { "optional": ["caps_lock"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "b",
+                                        "modifiers": ["left_control", "left_option", "left_shift", "left_command"]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
                     {
                         "description": "Change caps_lock to globe+control if pressed with other keys, post caps_lock if pressed alone",
                         "manipulators": [
