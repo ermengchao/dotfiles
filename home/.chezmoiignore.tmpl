@@ -1,7 +1,3 @@
-{{ if .meta.isRootNode -}}
-.ssh/authorized_keys
-{{ end -}}
-
 {{ if eq .os "darwin" -}}
 {{   if .meta.isRootNode -}}
 .config/frp

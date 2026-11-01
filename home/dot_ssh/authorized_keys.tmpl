@@ -1,4 +1,8 @@
-{{ if not .meta.isRootNode }}
+{{ if eq .os "darwin" -}}
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL4o3X18NL6qbqAas5ld/4EfHMToji7Xq7qsZKjlMITR Shortcuts on iPad mini
+{{ end -}}
+
+{{ if not .meta.isRootNode -}}
 {{ range .rootNodeIdentities -}}
 {{ . }}
 {{ end -}}
