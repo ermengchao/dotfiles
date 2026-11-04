@@ -5,14 +5,10 @@
     },
     "profiles": [
         {
-            "name": "Default",
-            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
-        },
-        {
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Map F3 to control+option+command+B and F4 to control+option+shift+command+B",
+                        "description": "Map F3 to control+option+shift+command+H and F4 to control+option+shift+command+B",
                         "manipulators": [
                             {
                                 "type": "basic",
@@ -22,8 +18,8 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "b",
-                                        "modifiers": ["left_control", "left_option", "left_command"]
+                                        "key_code": "h",
+                                        "modifiers": ["left_control", "left_option", "left_shift", "left_command"]
                                     }
                                 ]
                             },

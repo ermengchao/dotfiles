@@ -106,7 +106,6 @@
   "general": {
     "thread": true,
     "processingTimeout": 5000,
-    "preRun": "clear",
     "detectVersion": true
   },
   "modules": [

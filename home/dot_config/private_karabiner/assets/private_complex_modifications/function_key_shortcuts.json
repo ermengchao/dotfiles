@@ -1,0 +1,54 @@
+{
+  "title": "Function Key Shortcuts",
+  "rules": [
+    {
+      "description": "Map F3 to control+option+shift+command+H and F4 to control+option+shift+command+B",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f3",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "h",
+              "modifiers": [
+                "left_control",
+                "left_option",
+                "left_shift",
+                "left_command"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f4",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "b",
+              "modifiers": [
+                "left_control",
+                "left_option",
+                "left_shift",
+                "left_command"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
