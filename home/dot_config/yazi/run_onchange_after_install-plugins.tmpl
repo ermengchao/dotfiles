@@ -1,0 +1,23 @@
+#!/usr/bin/env fish
+
+{{ if ne .os "nixos" -}}
+if type -q ya
+  set -l registered_packages (
+    string match --regex --groups-only -- '^\s+(\S+)' (ya pkg list)
+    or exit $status
+  )
+
+  {{ range concat .yazi.plugins .yazi.flavors }}
+  if contains -- {{ . | quote }} $registered_packages
+    ya pkg upgrade {{ . | quote }} > /dev/null
+    or exit $status
+  else
+    ya pkg add {{ . | quote }} > /dev/null
+    or exit $status
+  end
+  {{ end }}
+else
+  chezmoi execute-template '{{ "{{ warnf \"Missing required dependency for Yazi packages: %s (skipping)\" \"ya\" }}" }}'
+  exit 0
+end
+{{ end -}}

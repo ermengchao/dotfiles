@@ -1,0 +1,5 @@
+[yazi]
+flavors = [
+  "yazi-rs/flavors:catppuccin-latte",
+  "yazi-rs/flavors:catppuccin-mocha",
+]

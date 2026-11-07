@@ -2,12 +2,11 @@
 
 {{ if ne .os "nixos" -}}
 if type -q fisher
-    printf "📦 Checking for updates for fish plugins...\n"
-    fisher update > /dev/null
-
-    printf "✅ Done.\n"
+  {{ range .fish.plugins -}}
+  fisher install {{ . }} > /dev/null
+  {{ end -}}
 else
-    printf "‼️ Fisher is not installed. Skip installing.\n"
+  chezmoi execute-template '{{ "{{ warnf \"Missing required dependency for Fish plugins: %s (skipping)\" \"fisher\" }}" }}'
 end
 {{ end -}}
 

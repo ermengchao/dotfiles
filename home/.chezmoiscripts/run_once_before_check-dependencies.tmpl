@@ -6,7 +6,7 @@
 
 {{ range $dependency := $dependencies -}}
 {{   if not (lookPath $dependency) -}}
-{{ warnf "Missing required dependency before chezmoi apply: %s" $dependency -}}
+{{ warnf "Missing required dependency before chezmoi apply: %s (skipping)" $dependency -}}
 {{ $missingDependencies = append $missingDependencies $dependency -}}
 {{   end -}}
 {{ end -}}

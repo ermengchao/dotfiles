@@ -1,0 +1,6 @@
+[fish]
+plugins = [
+  "patrickf1/fzf.fish",
+  "ilancosman/tide@v6",
+  "catppuccin/fish",
+]

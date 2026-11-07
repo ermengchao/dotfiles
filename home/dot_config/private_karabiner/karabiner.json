@@ -39,7 +39,7 @@
                         ]
                     },
                     {
-                        "description": "Change caps_lock to globe+control if pressed with other keys, post caps_lock if pressed alone",
+                        "description": "Caps Lock sends fn+control with other keys, Caps Lock when tapped, and toggles Caps Lock when held for 500 ms",
                         "manipulators": [
                             {
                                 "from": {
@@ -47,8 +47,8 @@
                                     "modifiers": { "optional": ["any"] }
                                 },
                                 "parameters": {
-                                    "basic.to_if_alone_timeout_milliseconds": 250,
-                                    "basic.to_if_held_down_threshold_milliseconds": 250
+                                    "basic.to_if_alone_timeout_milliseconds": 500,
+                                    "basic.to_if_held_down_threshold_milliseconds": 500
                                 },
                                 "to": [
                                     {
@@ -60,8 +60,7 @@
                                 "to_if_alone": [{ "key_code": "caps_lock" }],
                                 "to_if_held_down": [
                                     {
-                                        "key_code": "left_control",
-                                        "modifiers": ["fn"]
+                                        "shell_command": "/usr/bin/open -g hammerspoon://caps-lock-toggle"
                                     }
                                 ],
                                 "type": "basic"

@@ -1,0 +1,9 @@
+[yazi]
+plugins = [
+  "yazi-rs/plugins:smart-enter",
+  "yazi-rs/plugins:smart-paste",
+  "yazi-rs/plugins:git",
+  "yazi-rs/plugins:mount",
+  "yazi-rs/plugins:smart-filter",
+  "yazi-rs/plugins:piper",
+]
