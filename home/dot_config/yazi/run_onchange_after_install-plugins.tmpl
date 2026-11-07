@@ -2,22 +2,24 @@
 
 {{ if ne .os "nixos" -}}
 if type -q ya
+  set -l package_listing (ya pkg list 2> /dev/null)
+  or exit $status
+
   set -l registered_packages (
-    string match --regex --groups-only -- '^\s+(\S+)' (ya pkg list)
-    or exit $status
+    string match --regex --groups-only -- '^\s+(\S+)' $package_listing
   )
 
   {{ range concat .yazi.plugins .yazi.flavors }}
   if contains -- {{ . | quote }} $registered_packages
-    ya pkg upgrade {{ . | quote }} > /dev/null
+    ya pkg upgrade {{ . | quote }} > /dev/null 2>&1
     or exit $status
   else
-    ya pkg add {{ . | quote }} > /dev/null
+    ya pkg add {{ . | quote }} > /dev/null 2>&1
     or exit $status
   end
   {{ end }}
 else
   chezmoi execute-template '{{ "{{ warnf \"Missing required dependency for Yazi packages: %s (skipping)\" \"ya\" }}" }}'
-  exit 0
 end
+exit 0
 {{ end -}}
