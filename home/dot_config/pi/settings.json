@@ -1,5 +1,25 @@
 {
+  "$schema": "https://pi.dev/schemas/settings.schema.json",
+  "defaultThinkingLevel": "high",
+  "cacheWarming": "idle",
+  "showCacheMissNotices": true,
+  "retry.maxRetries": 5,
+
   "doubleEscapeAction": "none",
+  "editorPaddingX": 1,
+  "markdown.codeBlockIndent": "  ",
+  "markdown.mermaid": "streaming",
+  "terminal.showTerminalProgress": true,
+
+  "npmCommand": ["bun"],
+
+  "defaultTools": [
+    "+grep",
+    "+find",
+    "+ls",
+    "+codemode"
+  ],
+
   "packages": [
     "npm:pi-vimmode",
     "npm:pi-btw",
