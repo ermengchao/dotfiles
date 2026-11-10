@@ -1,0 +1,15 @@
+{
+  "components": {
+    "editor": {
+      "enabled": true,
+      "style": "opencode-copy-friendly"
+    },
+    "footer": {
+      "style": "starship"
+    },
+    "userMessages": {
+      "enabled": true,
+      "style": "framed-copy-friendly"
+    }
+  }
+}

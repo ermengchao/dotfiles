@@ -5,13 +5,17 @@
   "showCacheMissNotices": true,
   "retry.maxRetries": 5,
 
+  "lightTheme": "catppuccin-latte",
+  "darkTheme": "catppuccin-mocha",
   "doubleEscapeAction": "none",
   "editorPaddingX": 1,
   "markdown.codeBlockIndent": "  ",
   "markdown.mermaid": "streaming",
   "terminal.showTerminalProgress": true,
 
-  "npmCommand": ["bun"],
+  "npmCommand": [
+    "bun"
+  ],
 
   "defaultTools": [
     "+grep",
@@ -21,8 +25,17 @@
   ],
 
   "packages": [
-    "npm:pi-vimmode",
+    "npm:pi-ask-user",
     "npm:pi-btw",
-    "npm:pi-subagents"
-  ]
+    "npm:catppuccin-pi-theme",
+    "npm:pi-rtk-optimizer",
+    "npm:pi-subagents",
+    "npm:pi-vim-editor",
+    "npm:pi-web-access",
+    "npm:pi-zentui"
+  ],
+
+  "vimEditor": {
+    "indicator": "none"
+  }
 }

@@ -3,7 +3,7 @@
   "app.clipboard.pasteImage": "super+v",
   "app.editor.external": "alt+e",
   "app.message.copy": "super+c",
-  "app.message.followUp": "enter",
+  "app.message.followUp": "alt+enter",
   "app.message.dequeue": "escape",
   "app.model.select": "alt+m",
   "app.model.cycleForward": [],

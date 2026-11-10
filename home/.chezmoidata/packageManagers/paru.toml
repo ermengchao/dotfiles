@@ -16,6 +16,8 @@ drivers = [
 packages = [
   "bun-bin",
   "google-chrome",
+  "pi-coding-agent-bin",
+  "rtk",
   "sesh",
   "sing-box",
   "tlrc",
