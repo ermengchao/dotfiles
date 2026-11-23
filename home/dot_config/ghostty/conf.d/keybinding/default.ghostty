@@ -7,3 +7,8 @@ keybind = "global:ctrl+backquote=toggle_quick_terminal"
 keybind = "super+enter=unbind"
 # keybind = "performable:command+c=copy_to_clipboard:plain"
 keybind = "command+r=text:\x1b\x12"
+
+keybind = super+k=goto_split:up
+keybind = super+j=goto_split:down
+keybind = super+h=goto_split:left
+keybind = super+l=goto_split:right

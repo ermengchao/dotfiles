@@ -20,6 +20,16 @@ export NODE_ENV=development
 command1 && command2
 ```
 
+## Shell session reuse
+
+- Default to one persistent PTY shell per chat and sandbox/permission scope when the execution tools support it. Reuse that shell for subsequent shell requests.
+- In Codex, start the shell itself with `exec_command` and `tty: true`, keep it running, and send subsequent commands through `write_stdin` using the returned `session_id`. Starting each command with `tty: true` creates separate sessions.
+- Serialize commands within a shared shell. Use additional sessions when concurrency, long-running foreground tasks, or interactive programs require them, and track their session IDs separately.
+- Set the working directory and environment deliberately, accounting for state retained by previous commands. Identify each command's completion and exit status before sending the next command.
+- Run related 1Password CLI and Shell Plugin operations in the same PTY, using the user's configured wrappers or explicit `op plugin run -- <command>`. Authorization can still expire or be revoked.
+- Keep sessions with different sandbox or permission scopes separate. A retained elevated shell does not authorize additional actions; follow the approval requirements for each action.
+- If a shell exits or becomes unusable, create a replacement and restore only the required state. Do not automatically replay commands that may have changed state. If persistent sessions are unavailable, use one-shot execution and briefly explain the limitation when relevant.
+
 ## Tooling preferences
 
 Use the following tools by default:
