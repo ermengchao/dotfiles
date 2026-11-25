@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/runkids/skillshare/main/schemas/config.schema.json
+follow_source_links: true
+
+sources:
+  skills: {{ env "XDG_CONFIG_HOME" }}/skillshare/skills
+  agents: {{ env "XDG_CONFIG_HOME" }}/skillshare/agents
+
+mode: merge
+
+targets:
+  codex:
+    skills:
+      path: {{ env "XDG_CONFIG_HOME" }}/codex/skills
+  pi:
+    skills:
+      path: {{ env "XDG_CONFIG_HOME" }}/pi/skills
+
+ignore:
+  - .DS_Store
+  - .git/
+  - __pycache__/
+
+audit:
+  block_threshold: CRITICAL
+
+extras:
+  - name: instructions
+    file: AGENTS.md
+    targets:
+      - path: {{ env "XDG_CONFIG_HOME" }}/codex
+        mode: merge
+      - path: {{ env "XDG_CONFIG_HOME" }}/pi
+        mode: merge
