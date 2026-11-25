@@ -1,8 +1,8 @@
 vim.pack.add({
   {
     name = "hex",
-    src = "https://github.com/RaafatTurki/hex.nvim",
-  },
+    src = "https://github.com/RaafatTurki/hex.nvim"
+  }
 })
 
 local hex = require("hex")

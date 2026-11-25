@@ -1,8 +1,8 @@
 vim.pack.add({
   {
-    name = 'catppuccin',
-    src = 'https://github.com/catppuccin/nvim',
-  },
+    name = "catppuccin",
+    src = "https://github.com/catppuccin/nvim"
+  }
 })
 
 require("catppuccin").setup({

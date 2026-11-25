@@ -1,10 +1,9 @@
 vim.pack.add({
   {
-    name = 'codesnap',
-    src = 'https://github.com/mistricky/codesnap.nvim',
-    version = 'v2.0.5',
-  },
-}, { load = true })
+    name = "codesnap",
+    src = "https://github.com/mistricky/codesnap.nvim"
+  }
+})
 
 local codesnap = require('codesnap')
 local codesnap_static = require('codesnap.static')

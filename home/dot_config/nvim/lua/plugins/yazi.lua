@@ -1,9 +1,17 @@
 vim.g.loaded_netrwPlugin = 1
 
 vim.pack.add({
-  { name = 'yazi.nvim', src = 'https://github.com/mikavilpas/yazi.nvim' },
-  { name = 'plenary', src = 'https://github.com/nvim-lua/plenary.nvim' },
-}, { load = true })
+  {
+    name = "yazi.nvim",
+    src = "https://github.com/mikavilpas/yazi.nvim"
+  },
+  {
+    name = "plenary",
+    src = "https://github.com/nvim-lua/plenary.nvim"
+  }
+}, {
+  load = true
+})
 
 require('yazi').setup {
   open_for_directories = true,

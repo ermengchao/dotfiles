@@ -1,11 +1,31 @@
 vim.pack.add({
-  { name = 'nvim-dap', src = 'https://github.com/mfussenegger/nvim-dap' },
-  { name = 'nvim-dap-ui', src = 'https://github.com/rcarriga/nvim-dap-ui' },
-  { name = 'nvim-nio', src = 'https://github.com/nvim-neotest/nvim-nio' },
-  { name = 'mason', src = 'https://github.com/mason-org/mason.nvim' },
-  { name = 'mason-nvim-dap', src = 'https://github.com/jay-babu/mason-nvim-dap.nvim' },
-  { name = 'nvim-dap-go', src = 'https://github.com/leoluz/nvim-dap-go' },
-}, { load = true })
+  {
+    name = "nvim-dap",
+    src = "https://github.com/mfussenegger/nvim-dap"
+  },
+  {
+    name = "nvim-dap-ui",
+    src = "https://github.com/rcarriga/nvim-dap-ui"
+  },
+  {
+    name = "nvim-nio",
+    src = "https://github.com/nvim-neotest/nvim-nio"
+  },
+  {
+    name = "mason",
+    src = "https://github.com/mason-org/mason.nvim"
+  },
+  {
+    name = "mason-nvim-dap",
+    src = "https://github.com/jay-babu/mason-nvim-dap.nvim"
+  },
+  {
+    name = "nvim-dap-go",
+    src = "https://github.com/leoluz/nvim-dap-go"
+  }
+}, {
+  load = true
+})
 
 local dap = require 'dap'
 local dapui = require 'dapui'

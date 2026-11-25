@@ -1,7 +1,9 @@
-vim.pack.add {{
-  name = 'gitsigns',
-  src = 'https://github.com/lewis6991/gitsigns.nvim',
-}}
+vim.pack.add({
+  {
+    name = "gitsigns",
+    src = "https://github.com/lewis6991/gitsigns.nvim"
+  }
+})
 
 require('gitsigns').setup {
   auto_attach = true,

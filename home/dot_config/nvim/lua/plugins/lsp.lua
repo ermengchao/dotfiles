@@ -1,10 +1,27 @@
 vim.pack.add({
-  { name = 'nvim-lspconfig', src = 'https://github.com/neovim/nvim-lspconfig' },
-  { name = 'mason', src = 'https://github.com/mason-org/mason.nvim' },
-  { name = 'mason-lspconfig', src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
-  { name = 'mason-tool-installer', src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
-  { name = 'fidget', src = 'https://github.com/j-hui/fidget.nvim' },
-}, { load = true })
+  {
+    name = "nvim-lspconfig",
+    src = "https://github.com/neovim/nvim-lspconfig"
+  },
+  {
+    name = "mason",
+    src = "https://github.com/mason-org/mason.nvim"
+  },
+  {
+    name = "mason-lspconfig",
+    src = "https://github.com/mason-org/mason-lspconfig.nvim"
+  },
+  {
+    name = "mason-tool-installer",
+    src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
+  },
+  {
+    name = "fidget",
+    src = "https://github.com/j-hui/fidget.nvim"
+  }
+}, {
+  load = true
+})
 
 require('mason').setup {}
 require('mason-lspconfig').setup {}

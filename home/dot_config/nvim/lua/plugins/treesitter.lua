@@ -1,17 +1,9 @@
-vim.api.nvim_create_autocmd('PackChanged', {
-  group = vim.api.nvim_create_augroup('user-treesitter-pack-hook', { clear = true }),
-  callback = function(ev)
-    if ev.data.spec.name ~= 'nvim-treesitter' then return end
-    if ev.data.kind ~= 'install' and ev.data.kind ~= 'update' then return end
-    if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
-    pcall(vim.cmd, 'TSUpdate')
-  end,
+vim.pack.add({
+  {
+    name = "nvim-treesitter",
+    src = "https://github.com/nvim-treesitter/nvim-treesitter"
+  }
 })
-
-vim.pack.add {{
-  name = 'nvim-treesitter',
-  src = 'https://github.com/nvim-treesitter/nvim-treesitter',
-}}
 
 local parsers = {
   'bash',

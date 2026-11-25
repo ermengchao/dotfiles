@@ -1,7 +1,9 @@
-vim.pack.add {{
-  name = 'mini.nvim',
-  src = 'https://github.com/nvim-mini/mini.nvim',
-}}
+vim.pack.add({
+  {
+    name = "mini.nvim",
+    src = "https://github.com/nvim-mini/mini.nvim"
+  }
+})
 
 require('mini.ai').setup {
   mappings = {

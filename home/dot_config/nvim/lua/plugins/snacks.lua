@@ -1,6 +1,11 @@
 vim.pack.add({
-  { name = 'snacks', src = 'https://github.com/folke/snacks.nvim' },
-}, { load = true })
+  {
+    name = "snacks",
+    src = "https://github.com/folke/snacks.nvim"
+  }
+}, {
+  load = true
+})
 
 require('snacks').setup {
   dashboard = {

@@ -1,19 +1,27 @@
-vim.api.nvim_create_autocmd('PackChanged', {
-  group = vim.api.nvim_create_augroup('user-telescope-pack-hook', { clear = true }),
-  callback = function(ev)
-    if ev.data.spec.name ~= 'telescope-fzf-native' then return end
-    if ev.data.kind ~= 'install' and ev.data.kind ~= 'update' then return end
-    if vim.fn.executable('make') == 1 then vim.system({ 'make' }, { cwd = ev.data.path }):wait() end
-  end,
-})
-
 vim.pack.add({
-  { name = 'telescope', src = 'https://github.com/nvim-telescope/telescope.nvim' },
-  { name = 'plenary', src = 'https://github.com/nvim-lua/plenary.nvim' },
-  { name = 'telescope-fzf-native', src = 'https://github.com/nvim-telescope/telescope-fzf-native.nvim' },
-  { name = 'telescope-ui-select', src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
-  { name = 'nvim-web-devicons', src = 'https://github.com/nvim-tree/nvim-web-devicons' },
-}, { load = true })
+  {
+    name = "telescope",
+    src = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  {
+    name = "plenary",
+    src = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  {
+    name = "telescope-fzf-native",
+    src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+  },
+  {
+    name = "telescope-ui-select",
+    src = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+  },
+  {
+    name = "nvim-web-devicons",
+    src = "https://github.com/nvim-tree/nvim-web-devicons"
+  }
+}, {
+  load = true
+})
 
 local telescope = require 'telescope'
 local builtin = require 'telescope.builtin'

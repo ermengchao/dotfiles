@@ -1,3 +1,5 @@
+require('plugins.pack_hooks')
+
 require('plugins.autopairs')
 require('plugins.blink')
 require('plugins.catppuccin')

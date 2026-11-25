@@ -1,7 +1,15 @@
 vim.pack.add({
-  { name = 'noice', src = 'https://github.com/folke/noice.nvim' },
-  { name = 'nui', src = 'https://github.com/MunifTanjim/nui.nvim' },
-}, { load = true })
+  {
+    name = "noice",
+    src = "https://github.com/folke/noice.nvim"
+  },
+  {
+    name = "nui",
+    src = "https://github.com/MunifTanjim/nui.nvim"
+  }
+}, {
+  load = true
+})
 
 require('noice').setup {
   cmdline = {

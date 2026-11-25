@@ -1,7 +1,9 @@
-vim.pack.add {{
-  name = 'nvim-lint',
-  src = 'https://github.com/mfussenegger/nvim-lint',
-}}
+vim.pack.add({
+  {
+    name = "nvim-lint",
+    src = "https://github.com/mfussenegger/nvim-lint"
+  }
+})
 
 local lint = require 'lint'
 
