@@ -15,8 +15,6 @@ vim.pack.add({
     name = "nui",
     src = "https://github.com/MunifTanjim/nui.nvim"
   }
-}, {
-  load = true
 })
 
 require('neo-tree').setup {

@@ -19,8 +19,6 @@ vim.pack.add({
     name = "nvim-web-devicons",
     src = "https://github.com/nvim-tree/nvim-web-devicons"
   }
-}, {
-  load = true
 })
 
 local telescope = require 'telescope'

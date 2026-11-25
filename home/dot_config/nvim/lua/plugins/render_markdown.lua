@@ -11,8 +11,6 @@ vim.pack.add({
     name = "mini.nvim",
     src = "https://github.com/nvim-mini/mini.nvim"
   }
-}, {
-  load = true
 })
 
 require('render-markdown').setup {

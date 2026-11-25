@@ -23,8 +23,6 @@ vim.pack.add({
     name = "nvim-dap-go",
     src = "https://github.com/leoluz/nvim-dap-go"
   }
-}, {
-  load = true
 })
 
 local dap = require 'dap'

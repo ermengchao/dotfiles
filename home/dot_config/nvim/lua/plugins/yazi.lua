@@ -9,8 +9,6 @@ vim.pack.add({
     name = "plenary",
     src = "https://github.com/nvim-lua/plenary.nvim"
   }
-}, {
-  load = true
 })
 
 require('yazi').setup {

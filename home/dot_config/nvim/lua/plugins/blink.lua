@@ -3,8 +3,6 @@ vim.pack.add({
     name = "blink.lib",
     src = "https://github.com/saghen/blink.lib"
   }
-}, {
-  load = true
 })
 
 vim.pack.add({
