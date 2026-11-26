@@ -36,7 +36,6 @@
       "listen": "::",
       "listen_port": {{ .ports.proxy.vmess }},
       "tcp_fast_open": true,
-      "proxy_protocol": false,
       "users": [
         {
           "uuid": {{ onepasswordRead "op://Development/Proxy/vmess/password" | quote }},
@@ -73,7 +72,8 @@
       "tls": {
         "enabled": true,
         "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
-        "acme": {
+        "certificate_provider": {
+          "type": "acme",
           "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
           "email": {{ onepasswordRead "op://Development/Cloudflare/email" | quote }},
           "dns01_challenge": {
@@ -108,7 +108,8 @@
       "tls": {
         "enabled": true,
         "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
-        "acme": {
+        "certificate_provider": {
+          "type": "acme",
           "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
           "email": {{ onepasswordRead "op://Development/Cloudflare/email" | quote }},
           "dns01_challenge": {
@@ -137,7 +138,8 @@
           "h3"
         ],
         "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
-        "acme": {
+        "certificate_provider": {
+          "type": "acme",
           "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
           "email": {{ onepasswordRead "op://Development/Cloudflare/email" | quote }},
           "dns01_challenge": {
@@ -161,7 +163,8 @@
       "tls": {
         "enabled": true,
         "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
-        "acme": {
+        "certificate_provider": {
+          "type": "acme",
           "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
           "email": {{ onepasswordRead "op://Development/Cloudflare/email" | quote }},
           "dns01_challenge": {
@@ -187,7 +190,8 @@
       "tls": {
         "enabled": true,
         "server_name": "{{ .meta.hostname }}.proxy.er-meng.com",
-        "acme": {
+        "certificate_provider": {
+          "type": "acme",
           "domain": "{{ .meta.hostname }}.proxy.er-meng.com",
           "email": {{ onepasswordRead "op://Development/Cloudflare/email" | quote }},
           "dns01_challenge": {
