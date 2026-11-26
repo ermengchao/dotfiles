@@ -1,4 +1,4 @@
-function is_dark_mode
+function _is_dark_mode
     if set -q SSH_CONNECTION; and set -q IS_DARK_MODE
         switch $IS_DARK_MODE
             case true
@@ -8,7 +8,7 @@ function is_dark_mode
         end
     end
 
-    {{ if eq .os "darwin" -}}
+    {{ if eq .chezmoi.os "darwin" -}}
     if test "$(defaults read -g AppleInterfaceStyle 2> /dev/null)" = Dark
         set -Ux IS_DARK_MODE true
         return 0

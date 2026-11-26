@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-{{ if eq .os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" -}}
 if not test -e "/Applications/CoreServices"; and not test -L "/Applications/CoreServices"
     sudo ln -sn "/System/Library/CoreServices/Applications" "/Applications/CoreServices"
 end

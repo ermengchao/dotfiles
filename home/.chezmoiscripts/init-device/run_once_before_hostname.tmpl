@@ -1,12 +1,12 @@
 #!/usr/bin/env fish
 
-{{ if ne .os "nixos" -}}
+{{ if eq .chezmoi.os "darwin" "linux" -}}
 set configured_hostname {{ .meta.hostname | quote }}
 set configured_pretty_hostname {{ .meta.prettyHostname | quote }}
 set current_hostname ""
 set current_pretty_hostname ""
 
-{{   if eq .os "darwin" -}}
+{{   if eq .chezmoi.os "darwin" -}}
 set current_hostname (scutil --get HostName)
 set current_pretty_hostname (scutil --get ComputerName)
 {{   else -}}
@@ -23,7 +23,7 @@ if test "$current_hostname" != "$configured_hostname"
 
     printf "🧑‍💻 Setting hostname...\n"
 
-    {{ if eq .os "darwin" -}}
+    {{ if eq .chezmoi.os "darwin" -}}
     sudo scutil --set HostName $configured_hostname
     {{ else -}}
     sudo hostnamectl set-hostname --static $configured_hostname
@@ -40,7 +40,7 @@ if test "$current_pretty_hostname" != "$configured_pretty_hostname"
 
     printf "🧑‍💻 Setting pretty hostname...\n"
 
-    {{ if eq .os "darwin" -}}
+    {{ if eq .chezmoi.os "darwin" -}}
     sudo scutil --set ComputerName $configured_pretty_hostname
     {{ else -}}
     sudo hostnamectl set-hostname --pretty $configured_pretty_hostname

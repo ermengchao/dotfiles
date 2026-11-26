@@ -3,7 +3,7 @@
 ;
 ; [Service]
 ; Type=simple
-; ExecStart=/usr/bin/env fish -c 'is_dark_mode; gsettings monitor org.gnome.desktop.interface color-scheme | while read -l event; is_dark_mode; end'
+; ExecStart=/usr/bin/env fish -c '_is_dark_mode; gsettings monitor org.gnome.desktop.interface color-scheme | while read -l event; _is_dark_mode; end'
 ; Restart=on-failure
 ; RestartSec=1
 ;

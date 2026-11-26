@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-{{ if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "nixos") -}}
+{{ if eq .chezmoi.os "linux" -}}
 if type -q sing-box
     if {{ .meta.isProxyServer }}
         printf "🧑‍💻 Updating DNS record for sing-box...\n"

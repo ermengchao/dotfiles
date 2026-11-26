@@ -1,4 +1,4 @@
-{{ if eq .os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" -}}
 {{   if .meta.isRootNode -}}
 .config/frp
 {{   else -}}
@@ -21,21 +21,14 @@
 
 {{ else -}}
 
-{{   if eq .os "nixos" -}}
-.ssh
-.config/fish/config.fish
-.config/systemd
-{{   else -}}
-
-{{     if not .meta.isProxyServer  -}}
+{{   if not .meta.isProxyServer -}}
 .local/share/subscriptions
-{{     end -}}
+{{   end -}}
 
-{{     if not .meta.isRootNode -}}
+{{   if not .meta.isRootNode -}}
 .config/ghostty
 .config/marimo
 .config/wayvnc
-{{     end -}}
 {{   end -}}
 
 Applications/

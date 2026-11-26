@@ -1,6 +1,5 @@
 #!/usr/bin/env fish
 
-{{ if ne .os "nixos" -}}
 {{ range .meta.packageManager -}}
 {{ $packageMap := index $.packageManagers . }}{{ if not $.meta.isRootNode }}{{ $packageMap = index $.packageManagers . "minimal" }}{{ end -}}
 
@@ -46,6 +45,4 @@ or exit $status
 {{ end -}}
 
 {{   end -}}
-{{ end -}}
-
 {{ end -}}

@@ -10,7 +10,7 @@ English | [简体中文](README.zh-CN.md)
 
 According to [chezmoi's design](<https://www.chezmoi.io/user-guide/frequently-asked-questions/design/#can-i-use-chezmoi-to-manage-files-outside-my-home-directory>), `chezmoi` is primarily a user-scoped dotfiles manager. Files outside the user's home directory are therefore kept in this repository under a separate `root` source tree and deployed explicitly.
 
-On Linux distributions other than NixOS, the executable template `home/dot_local/bin/executable_chezmoi-apply-root.tmpl` installs the external command `chezmoi-apply-root`. Running `chezmoi apply-root` starts a `chezmoi` process with `sudo`, using the following paths:
+On Linux, the executable template `home/dot_local/bin/executable_chezmoi-apply-root.tmpl` installs the external command `chezmoi-apply-root`. Running `chezmoi apply-root` starts a `chezmoi` process with `sudo`, using the following paths:
 
 - `--source`: `{{ .chezmoi.workingTree }}/root`
 - `--destination`: `/`
@@ -94,7 +94,7 @@ In my own setup, I never need to SSH into root nodes. Each node maintains one id
 - **Leaf nodes** first generate an SSH key pair and submit only the public key to a root node. The root node runs `gopass recipients add` to add that public key as a recipient and re-encrypt the store. Once the leaf node pulls the updated store, it can decrypt the secrets with its locally retained SSH private key. Both halves of the key pair remain on the leaf node; the private key does not need to be transferred for authorization.
 - **Root nodes** bootstrap access to the `gopass` store using the recovery key stored on a physical security key. With that initial decryption capability, a root node can authorize its own native `age` identity as a recipient and re-encrypt the store, then use that identity for everyday access.
 
-On `chezmoi`-managed leaf nodes, `home/dot_ssh/authorized_keys.tmpl` generates `~/.ssh/authorized_keys` as a regular file. It includes the leaf node's own `id_ed25519.pub` and the root client public keys listed in `home/.chezmoidata/rootNodeIdentities.toml`. NixOS currently excludes `.ssh` from `chezmoi` management.
+On `chezmoi`-managed leaf nodes, `home/dot_ssh/authorized_keys.tmpl` generates `~/.ssh/authorized_keys` as a regular file. It includes the leaf node's own `id_ed25519.pub` and the root client public keys listed in `home/.chezmoidata/rootNodeIdentities.toml`.
 
 Mac root nodes authenticate through `Secretive`'s SSH agent using their own login keys. Their public keys are deployed to leaf nodes through `chezmoi`; their private keys cannot be exported and are not distributed through `gopass`. The leaf's Ed25519 private key stays on the leaf for `gopass` decryption, so root clients no longer need a copy of it to log in.
 
@@ -109,12 +109,3 @@ The sections above describe my earlier workflow with `gopass` and Apple's Passwo
 Compared with `gopass`, `1Password` has a larger ecosystem and more community solutions to draw on. It also offers developer-friendly features such as an SSH agent and a range of shell plugins. Taken together, these benefits make the additional subscription cost worthwhile for my workflow.
 
 Templates now read fields from the `Development` vault with chezmoi's `onepasswordRead` function. Install `op` and authenticate it as the user running chezmoi before applying; on Linux, CLI installation is a prerequisite. `chezmoi apply-root` preserves `OP_SERVICE_ACCOUNT_TOKEN` and the optional `OP_ACCOUNT` by name across `sudo`. Without a service account token, it requires a terminal and signs in using root's separate `/root/.config/op` configuration, adding an account on first use. Root's chezmoi configuration selects `service` or `account` mode accordingly. Rclone's iCloud Drive remote is temporarily disabled until its credentials are configured in 1Password; its R2 remote remains enabled.
-
-### How to manage dotfiles on NixOS?
-
-NixOS is a unique Linux distribution that uses reproducible configuration to manage the system. `Home Manager` provides Nix modules for managing user environments, including dotfiles. However, given the following drawbacks, I decided to keep using `chezmoi` on NixOS:
-
-1. Not all packages have corresponding `Home Manager` modules. Managing some configurations through modules and others manually can make the workflow feel inconsistent.
-2. Using `Home Manager` as my only package manager would require installing Nix first on other Linux distributions, such as Arch and Fedora. Maintaining two package management workflows is also inconvenient.
-
-I therefore use `Home Manager` only to manage which packages are installed, while `chezmoi` manages my dotfiles. Since NixOS is declarative, I also avoid `run_*` scripts for system setup on NixOS and use declarative NixOS or `Home Manager` configuration instead.

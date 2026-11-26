@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-{{ if ne .os "nixos" }}
+{{ if eq .chezmoi.os "linux" }}
 set -gx USER_CONFIG_HOME {{ env "XDG_CONFIG_HOME" | quote }}
 
 # Authenticate in root's own op configuration, independently of the caller.

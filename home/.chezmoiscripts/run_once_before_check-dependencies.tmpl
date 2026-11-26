@@ -1,6 +1,5 @@
 #!/usr/bin/env fish
 
-{{ if ne .os "nixos" -}}
 {{ $dependencies := .dependencies -}}
 {{ $missingDependencies := list -}}
 
@@ -14,4 +13,3 @@
 {{   if gt (len $missingDependencies) 0 -}}
 exit 1
 {{   end -}}
-{{ end -}}

@@ -1,9 +1,8 @@
 #!/usr/bin/env fish
 
-{{ if ne .os "nixos" -}}
 {{ range .meta.packageManager -}}
 {{   if eq . "brew" -}}
-{{     if eq $.os "darwin" -}}
+{{     if eq $.chezmoi.os "darwin" -}}
 set brew_path /opt/homebrew/bin/brew
 {{     else -}}
 set brew_path /home/linuxbrew/.linuxbrew/bin/brew
@@ -74,5 +73,4 @@ or exit $status
 
 printf "✅ Done.\n"
 {{   end -}}
-{{ end -}}
 {{ end -}}

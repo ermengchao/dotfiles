@@ -1,4 +1,4 @@
-function toggle_hud
+function toggle-hud
     if test (count $argv) -eq 0
         /bin/launchctl getenv MTL_HUD_ENABLED
         return

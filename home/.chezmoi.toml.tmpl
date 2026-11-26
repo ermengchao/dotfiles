@@ -38,7 +38,7 @@ command = "fish"
 mode = {{ if env "OP_SERVICE_ACCOUNT_TOKEN" }}"service"{{ else }}"account"{{ end }}
 
 [pinentry]
-{{ if eq $os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" -}}
 command = "pinentry-mac"
 {{ else -}}
 command = "pinentry"
@@ -61,16 +61,12 @@ os = {{ $os | quote }}
 scriptDelay = 1
 
 [data.meta]
-{{ if eq $os "nixos" -}}
-hostname = {{ .chezmoi.hostname | toToml }}
-{{ else -}}
 hostname = {{ promptStringOnce . "meta.hostname" "💥 Hostname" $.chezmoi.hostname | toToml }}
 prettyHostname = {{ promptStringOnce . "meta.prettyHostname" "👀 Pretty hostname" | toToml }}
 isRootNode = {{ promptBoolOnce . "meta.isRootNode" "☘️ Root device" false | toToml }}
 {{ $packageManagerList := list "brew" "apt" "dnf" "flatpak" "pacman" "paru" -}}
 packageManager = {{ promptMultichoiceOnce . "meta.packageManager" "📦 Package manager" $packageManagerList | toToml }}
 isProxyServer = {{ promptBoolOnce . "meta.isProxyServer" "🌐 Whether a proxy server" false | toToml }}
-{{ end -}}
 
 [data.paths]
 rootSourceDir = "{{ .chezmoi.workingTree }}/root"

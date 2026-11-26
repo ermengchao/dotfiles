@@ -10,7 +10,7 @@
 
 根据 [chezmoi 的设计原则](https://www.chezmoi.io/user-guide/frequently-asked-questions/design/#can-i-use-chezmoi-to-manage-files-outside-my-home-directory)，`chezmoi` 主要用于管理用户级的 dotfiles。因此，家目录之外的文件存放在仓库中独立的 `root` 源目录下，并通过专门的命令部署。
 
-在 NixOS 之外的 Linux 发行版上，可执行模板 `home/dot_local/bin/executable_chezmoi-apply-root.tmpl` 会安装外部命令 `chezmoi-apply-root`。运行 `chezmoi apply-root` 时，该命令通过 `sudo` 启动一个 `chezmoi` 进程，使用以下路径：
+在 Linux 上，可执行模板 `home/dot_local/bin/executable_chezmoi-apply-root.tmpl` 会安装外部命令 `chezmoi-apply-root`。运行 `chezmoi apply-root` 时，该命令通过 `sudo` 启动一个 `chezmoi` 进程，使用以下路径：
 
 - `--source`：`{{ .chezmoi.workingTree }}/root`
 - `--destination`：`/`
@@ -94,7 +94,7 @@ flowchart TD
 - **Leaf 节点**首先生成 SSH 密钥对，只将公钥提交给 root 节点。Root 节点运行 `gopass recipients add`，将该公钥加入 recipient 列表，并重新加密密码库。Leaf 节点拉取更新后的密码库，即可使用保留在本地的 SSH 私钥解密。公钥和私钥都保存在 leaf 节点上，授权过程无需传输私钥。
 - **Root 节点**使用保存在物理安全密钥中的 recovery 密钥，获得 `gopass` 密码库的初始解密权限。获得这一能力后，再将自身的原生 `age` identity 对应的 recipient 加入密码库并重新加密，之后使用该 identity 进行日常访问。
 
-对于由 `chezmoi` 管理 SSH 配置的 leaf 节点，`home/dot_ssh/authorized_keys.tmpl` 会将 `~/.ssh/authorized_keys` 生成为普通文件，内容包括 leaf 本机的 `id_ed25519.pub`，以及 `home/.chezmoidata/rootNodeIdentities.toml` 中登记的 root 客户端公钥。NixOS 当前将 `.ssh` 排除在 `chezmoi` 管理范围之外。
+对于由 `chezmoi` 管理 SSH 配置的 leaf 节点，`home/dot_ssh/authorized_keys.tmpl` 会将 `~/.ssh/authorized_keys` 生成为普通文件，内容包括 leaf 本机的 `id_ed25519.pub`，以及 `home/.chezmoidata/rootNodeIdentities.toml` 中登记的 root 客户端公钥。
 
 Mac root 节点通过 `Secretive` 的 SSH 代理，使用自己的登录密钥认证。公钥由 `chezmoi` 部署到 leaf 节点；私钥无法导出，也不通过 `gopass` 分发。Leaf 的 Ed25519 私钥保留在 leaf 本机，用于 `gopass` 解密，root 客户端无需取得它的副本即可登录。
 
@@ -109,12 +109,3 @@ SSH 登录授权与密码库解密授权分别维护：`authorized_keys` 中的 
 相比 `gopass`，`1Password` 的生态更庞大，可参考的社区解决方案也更多。此外，它还提供 SSH agent 和多种 shell 插件等对开发者友好的功能。综合来看，这些优势让它更适合我的工作流，即使需要额外支付订阅费用，也值得使用。
 
 模板现通过 chezmoi 的 `onepasswordRead` 函数读取 `Development` 密码库中的字段。执行 apply 前，需要安装 `op`，并以运行 chezmoi 的用户身份完成认证；Linux 上将 CLI 安装作为前置条件。`chezmoi apply-root` 通过变量名向 `sudo` 显式保留 `OP_SERVICE_ACCOUNT_TOKEN` 和可选的 `OP_ACCOUNT`。没有 service account token 时，脚本要求可用的终端，并使用 root 独立的 `/root/.config/op` 配置交互登录，首次使用时添加账号。Root 的 chezmoi 配置据此选择 `service` 或 `account` 模式。Rclone 的 iCloud Drive remote 暂时停用，待 1Password 中补齐凭据后再启用；R2 remote 继续保留。
-
-### 如何在 NixOS 上管理 dotfiles？
-
-NixOS 是一个独特的 Linux 发行版，使用可复现的配置管理系统。`Home Manager` 提供用于管理用户环境的 Nix 模块，也涵盖 dotfiles。不过，考虑到以下问题，我仍然选择在 NixOS 上使用 `chezmoi`：
-
-1. 并非所有软件包都有对应的 `Home Manager` 模块。一部分配置通过模块管理，另一部分手动管理，容易让工作流产生割裂感。
-2. 如果只使用 `Home Manager` 管理软件包，就需要先在 Arch、Fedora 等其他 Linux 发行版上安装 Nix。维护两套软件包管理工作流也不方便。
-
-因此，我只用 `Home Manager` 管理需要安装的软件包，dotfiles 仍由 `chezmoi` 管理。另外，NixOS 采用声明式配置，我会避免通过 `run_*` 脚本进行系统初始化，而是使用声明式的 NixOS 或 `Home Manager` 配置。

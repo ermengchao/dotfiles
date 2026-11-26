@@ -1,4 +1,4 @@
-{{- if eq .os "darwin" -}}
+{{- if eq .chezmoi.os "darwin" -}}
 {{- $localtime := output "readlink" "/etc/localtime" | trim -}}
 {{- regexReplaceAll "^.*/zoneinfo/" $localtime "" -}}
 {{- else -}}

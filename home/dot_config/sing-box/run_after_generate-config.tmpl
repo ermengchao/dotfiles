@@ -1,6 +1,5 @@
 #!/usr/bin/env fish
 
-{{ if ne .os "nixos" -}}
 if type -q sing-box
     cd $XDG_CONFIG_HOME/sing-box
 
@@ -16,4 +15,3 @@ if type -q sing-box
         sing-box merge config.json -C $config_dir
     end
 end
-{{ end -}}

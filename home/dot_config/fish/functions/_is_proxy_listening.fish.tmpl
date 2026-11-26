@@ -1,8 +1,4 @@
-function is_proxy_listening
-    if {{ eq .os "nixos" }}
-        return 1
-    end
-
+function _is_proxy_listening
     for port in {{ .ports.proxy.http }} {{ .ports.proxy.socks }}
         set -l connections (command curl -q \
             --noproxy '*' \

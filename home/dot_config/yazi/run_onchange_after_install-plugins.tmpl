@@ -1,6 +1,5 @@
 #!/usr/bin/env fish
 
-{{ if ne .os "nixos" -}}
 if type -q ya
   set -l package_listing (ya pkg list 2> /dev/null)
   or exit $status
@@ -22,4 +21,3 @@ else
   chezmoi execute-template '{{ "{{ warnf \"Missing required dependency for Yazi packages: %s (skipping)\" \"ya\" }}" }}'
 end
 exit 0
-{{ end -}}
